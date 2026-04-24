@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 🖤</title>
+
+<style>
+body{
+  margin:0;
+  font-family: 'Courier New', monospace;
+  background: radial-gradient(circle, #1a001f, black);
+  color:white;
+  text-align:center;
+}
+
+section{display:none; padding:40px;}
+#lock{display:flex; height:100vh; justify-content:center; align-items:center; flex-direction:column;}
+#main{display:none;}
+
+.btn{
+  padding:12px 25px;
+  background:#ff4da6;
+  border:none;
+  border-radius:25px;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 0 15px #ff4da6;
+}
+
+.candle{
+  width:12px; height:40px; background:white;
+  display:inline-block; margin:5px; position:relative;
+}
+.flame{
+  width:12px; height:12px;
+  background:orange; border-radius:50%;
+  position:absolute; top:-10px;
+  animation:flicker .2s infinite alternate;
+}
+@keyframes flicker{
+  from{transform:scale(1);}
+  to{transform:scale(1.4);}
+}
+
+.heart{
+  position:fixed;
+  color:pink;
+  animation:float 3s linear forwards;
+}
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(-200px); opacity:0;}
+}
+
+#cat{
+  position:fixed;
+  bottom:10px;
+  left:0;
+  width:70px;
+  animation:walk 12s linear infinite;
+}
+@keyframes walk{
+  0%{left:0;}
+  100%{left:100%;}
+}
+
+#gameArea{
+  height:200px;
+  border:1px solid white;
+  position:relative;
+  margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="lock">
+  <h2>Open at 12:00 🖤</h2>
+  <button class="btn" id="enterBtn">Enter</button>
+</div>
+
+<div id="main">
+
+<section id="landing">
+  <h1>Happy Birthday to my handsome Lebanese 🖤</h1>
+  <button class="btn" id="startBtn">Start</button>
+</section>
+
+<section id="cake">
+  <h2>Make a wish 🎂</h2>
+  <div id="candles">
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+    <div class="candle"><div class="flame"></div></div>
+  </div>
+  <br><br>
+  <button class="btn" id="blowBtn">Blow Candles</button>
+</section>
+
+<section id="message">
+  <h2>💌</h2>
+  <p id="text"></p>
+  <button class="btn" id="nextBtn">Next</button>
+</section>
+
+<section id="game">
+  <h2>Catch hearts 💖 (<span id="score">0</span>)</h2>
+  <div id="gameArea"></div>
+  <button class="btn" id="finalBtn">Next</button>
+</section>
+
+<section id="final">
+  <h2>You mean more than you know 🖤</h2>
+  <button class="btn" id="surpriseBtn">One more surprise</button>
+</section>
+
+</div>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4f6b3c0d3b.mp3">
+</audio>
+
+<button id="musicBtn" class="btn" style="position:fixed; top:10px; right:10px;">🎶</button>
+
+<img id="cat" src="https://media.tenor.com/2roX3uxz_68AAAAi/cat-pixel.gif">
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+// elements
+const lock = document.getElementById("lock");
+const main = document.getElementById("main");
+
+// navigation
+function show(id){
+  document.querySelectorAll("section").forEach(s=>s.style.display="none");
+  document.getElementById(id).style.display="block";
+}
+
+// ENTER FIX
+document.getElementById("enterBtn").addEventListener("click", ()=>{
+  lock.style.display="none";
+  main.style.display="block";
+  show("landing");
+});
+
+// start
+document.getElementById("startBtn").onclick = ()=>show("cake");
+
+// blow candles
+document.getElementById("blowBtn").onclick = ()=>{
+  document.querySelectorAll(".flame").forEach(f=>f.remove());
+  for(let i=0;i<30;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerText="💖";
+    h.style.left=Math.random()*100+"%";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  }
+  setTimeout(()=>show("message"),1200);
+};
+
+// typing
+let msg="I don’t say this often… but you really matter to me. You make everything feel better, and I’m really glad you exist 🖤";
+let i=0;
+function type(){
+  if(i<msg.length){
+    document.getElementById("text").innerHTML+=msg[i++];
+    setTimeout(type,30);
+  }
+}
+type();
+
+document.getElementById("nextBtn").onclick = ()=>show("game");
+document.getElementById("finalBtn").onclick = ()=>show("final");
+
+document.getElementById("surpriseBtn").onclick = ()=>{
+  alert("I made this just for you… 🖤");
+};
+
+// music
+let playing=false;
+document.getElementById("musicBtn").onclick = ()=>{
+  let m=document.getElementById("music");
+  if(!playing){m.play(); playing=true;}
+  else{m.pause(); playing=false;}
+};
+
+// cat
+document.getElementById("cat").onclick = ()=>alert("meow 🐱💖");
+
+// game
+let score=0;
+setInterval(()=>{
+  let heart=document.createElement("div");
+  heart.innerText="💖";
+  heart.style.position="absolute";
+  heart.style.left=Math.random()*90+"%";
+  heart.style.top=Math.random()*150+"px";
+  heart.onclick=()=>{
+    score++;
+    document.getElementById("score").innerText=score;
+    heart.remove();
+  };
+  document.getElementById("gameArea").appendChild(heart);
+  setTimeout(()=>heart.remove(),2000);
+},800);
+
+});
+</script>
+
+</body>
+</html>
