@@ -2,239 +2,175 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Nimisha 🎂</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Don't Click No</title>
 
 <style>
 body {
-  margin: 0;
-  background: radial-gradient(circle at top, #1a0010, #000);
-  color: white;
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a0000, #000000);
+    font-family: 'Courier New', monospace;
+    color: #ff2b2b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
-.screen {
-  display: none;
-  text-align: center;
-  max-width: 360px;
-  animation: fade 0.5s ease;
+/* Flicker effect */
+body::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,0,0,0.05);
+    animation: flicker 0.15s infinite;
+    pointer-events: none;
 }
-.active { display: block; }
+
+@keyframes flicker {
+    0% {opacity: 0.05;}
+    50% {opacity: 0.1;}
+    100% {opacity: 0.05;}
+}
+
+.container {
+    text-align: center;
+    position: relative;
+}
 
 h1 {
-  color: #ff2e63;
-  text-shadow: 0 0 15px #ff2e63;
+    font-size: 28px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #ff0000;
 }
 
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  margin-top: 10px;
-}
-
+/* Buttons */
 button {
-  margin: 10px;
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  background: #ff2e63;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 0 10px #ff2e63;
-  transition: 0.2s;
+    padding: 12px 25px;
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
 }
 
-button:hover { transform: scale(1.05); }
-
-/* chibi svg */
-.chibi {
-  width: 140px;
-  margin-top: 20px;
-  animation: float 2.5s infinite ease-in-out;
+#yesBtn {
+    background: #111;
+    color: #00ff99;
+    border: 1px solid #00ff99;
 }
 
-@keyframes float {
-  0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-10px);}
+#noBtn {
+    background: #300000;
+    color: #ff4d4d;
+    position: absolute;
+    border: 1px solid #ff0000;
+    box-shadow: 0 0 10px #ff0000;
 }
 
-@keyframes fade {
-  from {opacity:0; transform: scale(0.95);}
-  to {opacity:1; transform: scale(1);}
+/* Chibi + bubble */
+#chibiBox {
+    position: absolute;
+    top: -240px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
 }
 
-.shake {
-  animation: shake 0.3s;
+#chibiImg {
+    width: 160px;
+    display: none;
+    animation: shake 0.3s;
 }
 
+/* Dialogue bubble horror style */
+#bubble {
+    display: none;
+    background: black;
+    color: #ff2b2b;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    border: 1px solid red;
+    box-shadow: 0 0 10px red;
+    animation: glitch 0.3s;
+}
+
+/* Glitch text */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+    100% { transform: translate(0); }
+}
+
+/* Chibi shake */
 @keyframes shake {
-  0% {transform: translateX(0);}
-  50% {transform: translateX(6px);}
-  100% {transform: translateX(0);}
-}
-
-/* warning text */
-#warning {
-  color: #ff4da6;
-  margin-top: 10px;
-  min-height: 20px;
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+    75% { transform: translateX(-2px); }
+    100% { transform: translateX(0); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1 -->
-<div id="screen1" class="screen active">
-  <h1>Access Required</h1>
-  <p>Enter the date we first met</p>
-  <input type="text" id="dateInput" placeholder="DDMMYYYY">
-  <br>
-  <button onclick="checkDate()">Unlock</button>
-  <p id="errorText"></p>
+<div class="container">
 
-  <div id="chibi1" class="chibi"></div>
-</div>
+    <h1>Will you still press NO?</h1>
 
-<!-- SCREEN 2 -->
-<div id="screen2" class="screen">
-  <h1>Happy birthday my kitty</h1>
+    <div id="chibiBox">
+        <div id="bubble"></div>
+        <img id="chibiImg" src="chibi15.png">
+    </div>
 
-  <p>
-    Look who is getting older<br><br>
-    My kitty is 19 now<br><br>
-    I prepared 19 special things just for you<br><br>
-    Wanna see?
-  </p>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
 
-  <p style="font-size:12px;color:#aaa;">(try clicking NO first)</p>
-
-  <div id="chibi2" class="chibi"></div>
-
-  <div id="warning"></div>
-
-  <br>
-  <button onclick="yesClicked()">Yes</button>
-  <button id="noBtn" onclick="noClicked()">No</button>
-</div>
-
-<!-- SCREEN 3 -->
-<div id="screen3" class="screen">
-  <h1>Hmm</h1>
-  <p id="entryText"></p>
-
-  <div id="chibi3" class="chibi"></div>
 </div>
 
 <script>
-const correctDate = "19102024";
-let noCount = 0;
+let count = 0;
 
-/* chibi generator */
-function face(type){
-  if(type==="neutral"){
-    return `<svg viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="45" fill="#ffd1dc"/>
-      <circle cx="35" cy="45" r="5"/>
-      <circle cx="65" cy="45" r="5"/>
-      <line x1="40" y1="65" x2="60" y2="65" stroke="black" stroke-width="2"/>
-    </svg>`;
-  }
-  if(type==="tease"){
-    return `<svg viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="45" fill="#ffc0cb"/>
-      <circle cx="35" cy="45" r="5"/>
-      <circle cx="65" cy="45" r="5"/>
-      <path d="M40 65 Q60 75 70 60" stroke="black" fill="none" stroke-width="2"/>
-    </svg>`;
-  }
-  if(type==="laugh"){
-    return `<svg viewBox="0 0 100 100">
-      <circle cx="50" cy="50" r="45" fill="#ffb6c1"/>
-      <circle cx="35" cy="45" r="5"/>
-      <circle cx="65" cy="45" r="5"/>
-      <ellipse cx="50" cy="65" rx="15" ry="8" fill="black"/>
-    </svg>`;
-  }
-}
+const noBtn = document.getElementById("noBtn");
+const chibi = document.getElementById("chibiImg");
+const bubble = document.getElementById("bubble");
 
-document.getElementById("chibi1").innerHTML = face("neutral");
-document.getElementById("chibi2").innerHTML = face("tease");
-document.getElementById("chibi3").innerHTML = face("laugh");
+const states = [
+    { img: "chibi15.png", text: "Don't touch that again." },
+    { img: "chibi21.png", text: "You really want to test this?" },
+    { img: "chibi23.png", text: "I told you not to." },
+    { img: "chibi49.png", text: "Still going? Interesting." },
+    { img: "chibi20.png", text: "You won't catch it." }
+];
 
-/* screen switch */
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
+noBtn.addEventListener("click", () => {
+    count++;
 
-/* typing */
-function typeText(el,text){
-  let i=0;
-  el.innerHTML="";
-  function t(){
-    if(i<text.length){
-      el.innerHTML+=text[i++];
-      setTimeout(t,30);
-    }
-  }
-  t();
-}
+    let s = states[Math.min(count - 1, states.length - 1)];
 
-/* date check */
-function checkDate(){
-  let input=document.getElementById("dateInput");
-  let error=document.getElementById("errorText");
+    chibi.src = s.img;
+    chibi.style.display = "block";
 
-  if(input.value===correctDate){
-    showScreen("screen2");
-  } else {
-    error.innerText="You don’t even remember?";
-    input.classList.add("shake");
-    setTimeout(()=>input.classList.remove("shake"),300);
-  }
-}
+    bubble.innerText = s.text;
+    bubble.style.display = "block";
 
-/* NO logic */
-function noClicked(){
-  const warn=document.getElementById("warning");
-  const btn=document.getElementById("noBtn");
-
-  noCount++;
-
-  if(noCount===1){
-    warn.innerText="Don't you dare click NO again.";
-  } else {
-    warn.innerText="Still trying?";
-    btn.style.position="absolute";
-    btn.style.top=Math.random()*80+"%";
-    btn.style.left=Math.random()*80+"%";
-  }
-}
-
-/* hover move AFTER first click */
-document.getElementById("noBtn").addEventListener("mouseover",()=>{
-  if(noCount>=1){
-    const btn=document.getElementById("noBtn");
-    btn.style.position="absolute";
-    btn.style.top=Math.random()*80+"%";
-    btn.style.left=Math.random()*80+"%";
-  }
+    moveButton();
 });
 
-/* YES */
-function yesClicked(){
-  showScreen("screen3");
+function moveButton() {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
 
-  typeText(
-    document.getElementById("entryText"),
-    "Looks like you couldn't wait\n\nWell... I couldn't wait for your reaction either\n\nLet's begin"
-  );
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 }
 </script>
 
