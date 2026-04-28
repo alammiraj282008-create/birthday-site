@@ -2,214 +2,216 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You 🖤</title>
+<title>Nimisha 🎂</title>
 
 <style>
-body{
-  margin:0;
-  font-family: 'Courier New', monospace;
-  background: radial-gradient(circle, #1a001f, black);
-  color:white;
-  text-align:center;
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #1a0010, #000);
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
 }
 
-section{display:none; padding:40px;}
-#lock{display:flex; height:100vh; justify-content:center; align-items:center; flex-direction:column;}
-#main{display:none;}
+/* screens */
+.screen {
+  display: none;
+  text-align: center;
+  max-width: 360px;
+  animation: fade 0.5s ease;
+}
+.active { display: block; }
 
-.btn{
-  padding:12px 25px;
-  background:#ff4da6;
-  border:none;
-  border-radius:25px;
-  color:white;
-  cursor:pointer;
-  box-shadow:0 0 15px #ff4da6;
-}
-
-.candle{
-  width:12px; height:40px; background:white;
-  display:inline-block; margin:5px; position:relative;
-}
-.flame{
-  width:12px; height:12px;
-  background:orange; border-radius:50%;
-  position:absolute; top:-10px;
-  animation:flicker .2s infinite alternate;
-}
-@keyframes flicker{
-  from{transform:scale(1);}
-  to{transform:scale(1.4);}
+/* neon text */
+h1 {
+  color: #ff2e63;
+  text-shadow: 0 0 15px #ff2e63;
 }
 
-.heart{
-  position:fixed;
-  color:pink;
-  animation:float 3s linear forwards;
-}
-@keyframes float{
-  from{transform:translateY(0);}
-  to{transform:translateY(-200px); opacity:0;}
+/* input */
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
 }
 
-#cat{
-  position:fixed;
-  bottom:10px;
-  left:0;
-  width:70px;
-  animation:walk 12s linear infinite;
-}
-@keyframes walk{
-  0%{left:0;}
-  100%{left:100%;}
+/* buttons */
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #ff2e63;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ff2e63;
+  transition: 0.2s;
 }
 
-#gameArea{
-  height:200px;
-  border:1px solid white;
-  position:relative;
-  margin-top:20px;
+button:hover {
+  transform: scale(1.05);
+}
+
+/* animations */
+@keyframes fade {
+  from {opacity:0; transform: scale(0.95);}
+  to {opacity:1; transform: scale(1);}
+}
+
+.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% {transform: translateX(0);}
+  50% {transform: translateX(6px);}
+  100% {transform: translateX(0);}
+}
+
+/* floating emoji */
+.emoji {
+  font-size: 50px;
+  margin-top: 20px;
+  animation: float 2.5s infinite ease-in-out;
+}
+
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-10px);}
 }
 </style>
 </head>
 
 <body>
 
-<div id="lock">
-  <h2>Open at 12:00 🖤</h2>
-  <button class="btn" id="enterBtn">Enter</button>
+<!-- SCREEN 1: PASSWORD -->
+<div id="screen1" class="screen active">
+  <h1>Access Required 🔐</h1>
+  <p>Enter the date we first met 👀</p>
+  <input type="text" id="dateInput" placeholder="DDMMYYYY">
+  <br>
+  <button onclick="checkDate()">Unlock</button>
+  <p id="errorText"></p>
+
+  <div class="emoji">😼</div>
 </div>
 
-<div id="main">
+<!-- SCREEN 2: CHOICE -->
+<div id="screen2" class="screen">
+  <h1>Happy birthday my kitty 🐱</h1>
 
-<section id="landing">
-  <h1>Happy Birthday to my handsome Lebanese 🖤</h1>
-  <button class="btn" id="startBtn">Start</button>
-</section>
+  <p>
+    Look who is getting older 😏<br><br>
+    My kitty is 19 now.<br><br>
+    I prepared 19 special things just for you…<br><br>
+    Wanna see?
+  </p>
 
-<section id="cake">
-  <h2>Make a wish 🎂</h2>
-  <div id="candles">
-    <div class="candle"><div class="flame"></div></div>
-    <div class="candle"><div class="flame"></div></div>
-    <div class="candle"><div class="flame"></div></div>
-  </div>
-  <br><br>
-  <button class="btn" id="blowBtn">Blow Candles</button>
-</section>
+  <p style="font-size:12px;color:#aaa;">(try clicking NO first 😈)</p>
 
-<section id="message">
-  <h2>💌</h2>
-  <p id="text"></p>
-  <button class="btn" id="nextBtn">Next</button>
-</section>
+  <div class="emoji">😏</div>
 
-<section id="game">
-  <h2>Catch hearts 💖 (<span id="score">0</span>)</h2>
-  <div id="gameArea"></div>
-  <button class="btn" id="finalBtn">Next</button>
-</section>
-
-<section id="final">
-  <h2>You mean more than you know 🖤</h2>
-  <button class="btn" id="surpriseBtn">One more surprise</button>
-</section>
-
+  <br>
+  <button onclick="yesClicked()">Yes</button>
+  <button id="noBtn" onclick="noClicked()">No</button>
 </div>
 
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_4f6b3c0d3b.mp3">
-</audio>
+<!-- SCREEN 3: ENTRY -->
+<div id="screen3" class="screen">
+  <h1>Hmm 😌</h1>
+  <p id="entryText"></p>
 
-<button id="musicBtn" class="btn" style="position:fixed; top:10px; right:10px;">🎶</button>
-
-<img id="cat" src="https://media.tenor.com/2roX3uxz_68AAAAi/cat-pixel.gif">
+  <div class="emoji">😂</div>
+</div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function(){
+const correctDate = "19102024";
+let noCount = 0;
 
-// elements
-const lock = document.getElementById("lock");
-const main = document.getElementById("main");
-
-// navigation
-function show(id){
-  document.querySelectorAll("section").forEach(s=>s.style.display="none");
-  document.getElementById(id).style.display="block";
+/* screen switch */
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-// ENTER FIX
-document.getElementById("enterBtn").addEventListener("click", ()=>{
-  lock.style.display="none";
-  main.style.display="block";
-  show("landing");
-});
-
-// start
-document.getElementById("startBtn").onclick = ()=>show("cake");
-
-// blow candles
-document.getElementById("blowBtn").onclick = ()=>{
-  document.querySelectorAll(".flame").forEach(f=>f.remove());
-  for(let i=0;i<30;i++){
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerText="💖";
-    h.style.left=Math.random()*100+"%";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),3000);
+/* typing effect */
+function typeText(el, text, speed=35) {
+  let i = 0;
+  el.innerHTML = "";
+  function t() {
+    if (i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(t, speed);
+    }
   }
-  setTimeout(()=>show("message"),1200);
-};
+  t();
+}
 
-// typing
-let msg="I don’t say this often… but you really matter to me. You make everything feel better, and I’m really glad you exist 🖤";
-let i=0;
-function type(){
-  if(i<msg.length){
-    document.getElementById("text").innerHTML+=msg[i++];
-    setTimeout(type,30);
+/* DATE CHECK */
+function checkDate() {
+  const input = document.getElementById("dateInput");
+  const error = document.getElementById("errorText");
+
+  if (input.value === correctDate) {
+    showScreen("screen2");
+  } else {
+    const roasts = [
+      "You don’t even know? 😭",
+      "Wow Nimisha… that’s bad 💀",
+      "Fake memory detected 🚫",
+      "Try properly 😒",
+      "I expected better 😏"
+    ];
+
+    error.innerText = roasts[Math.floor(Math.random() * roasts.length)];
+    input.classList.add("shake");
+    setTimeout(() => input.classList.remove("shake"), 300);
   }
 }
-type();
 
-document.getElementById("nextBtn").onclick = ()=>show("game");
-document.getElementById("finalBtn").onclick = ()=>show("final");
+/* NO BUTTON CHAOS */
+function noClicked() {
+  const btn = document.getElementById("noBtn");
 
-document.getElementById("surpriseBtn").onclick = ()=>{
-  alert("I made this just for you… 🖤");
-};
+  const lines = [
+    "Oh attitude huh 😏",
+    "You really pressed NO? 💀",
+    "Wrong option 😂",
+    "This button isn’t for you",
+    "Pick YES."
+  ];
 
-// music
-let playing=false;
-document.getElementById("musicBtn").onclick = ()=>{
-  let m=document.getElementById("music");
-  if(!playing){m.play(); playing=true;}
-  else{m.pause(); playing=false;}
-};
+  alert(lines[noCount % lines.length]);
+  noCount++;
 
-// cat
-document.getElementById("cat").onclick = ()=>alert("meow 🐱💖");
+  btn.style.position = "absolute";
+  btn.style.top = Math.random() * 80 + "%";
+  btn.style.left = Math.random() * 80 + "%";
+}
 
-// game
-let score=0;
-setInterval(()=>{
-  let heart=document.createElement("div");
-  heart.innerText="💖";
-  heart.style.position="absolute";
-  heart.style.left=Math.random()*90+"%";
-  heart.style.top=Math.random()*150+"px";
-  heart.onclick=()=>{
-    score++;
-    document.getElementById("score").innerText=score;
-    heart.remove();
-  };
-  document.getElementById("gameArea").appendChild(heart);
-  setTimeout(()=>heart.remove(),2000);
-},800);
-
+/* also dodge on hover */
+document.getElementById("noBtn").addEventListener("mouseover", () => {
+  const btn = document.getElementById("noBtn");
+  btn.style.position = "absolute";
+  btn.style.top = Math.random() * 80 + "%";
+  btn.style.left = Math.random() * 80 + "%";
 });
+
+/* YES CLICK */
+function yesClicked() {
+  showScreen("screen3");
+
+  typeText(
+    document.getElementById("entryText"),
+    "Looks like you couldn’t wait 😌\n\nWell… I couldn’t wait for your reaction either.\n\nLet’s begin..."
+  );
+}
 </script>
 
 </body>
