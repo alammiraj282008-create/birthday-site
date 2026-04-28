@@ -17,7 +17,6 @@ body {
   overflow: hidden;
 }
 
-/* screens */
 .screen {
   display: none;
   text-align: center;
@@ -26,13 +25,11 @@ body {
 }
 .active { display: block; }
 
-/* neon text */
 h1 {
   color: #ff2e63;
   text-shadow: 0 0 15px #ff2e63;
 }
 
-/* input */
 input {
   padding: 10px;
   border-radius: 10px;
@@ -40,7 +37,6 @@ input {
   margin-top: 10px;
 }
 
-/* buttons */
 button {
   margin: 10px;
   padding: 10px 20px;
@@ -53,11 +49,20 @@ button {
   transition: 0.2s;
 }
 
-button:hover {
-  transform: scale(1.05);
+button:hover { transform: scale(1.05); }
+
+/* chibi svg */
+.chibi {
+  width: 140px;
+  margin-top: 20px;
+  animation: float 2.5s infinite ease-in-out;
 }
 
-/* animations */
+@keyframes float {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-10px);}
+}
+
 @keyframes fade {
   from {opacity:0; transform: scale(0.95);}
   to {opacity:1; transform: scale(1);}
@@ -73,143 +78,162 @@ button:hover {
   100% {transform: translateX(0);}
 }
 
-/* floating emoji */
-.emoji {
-  font-size: 50px;
-  margin-top: 20px;
-  animation: float 2.5s infinite ease-in-out;
-}
-
-@keyframes float {
-  0%,100% {transform: translateY(0);}
-  50% {transform: translateY(-10px);}
+/* warning text */
+#warning {
+  color: #ff4da6;
+  margin-top: 10px;
+  min-height: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1: PASSWORD -->
+<!-- SCREEN 1 -->
 <div id="screen1" class="screen active">
-  <h1>Access Required 🔐</h1>
-  <p>Enter the date we first met 👀</p>
+  <h1>Access Required</h1>
+  <p>Enter the date we first met</p>
   <input type="text" id="dateInput" placeholder="DDMMYYYY">
   <br>
   <button onclick="checkDate()">Unlock</button>
   <p id="errorText"></p>
 
-  <div class="emoji">😼</div>
+  <div id="chibi1" class="chibi"></div>
 </div>
 
-<!-- SCREEN 2: CHOICE -->
+<!-- SCREEN 2 -->
 <div id="screen2" class="screen">
-  <h1>Happy birthday my kitty 🐱</h1>
+  <h1>Happy birthday my kitty</h1>
 
   <p>
-    Look who is getting older 😏<br><br>
-    My kitty is 19 now.<br><br>
-    I prepared 19 special things just for you…<br><br>
+    Look who is getting older<br><br>
+    My kitty is 19 now<br><br>
+    I prepared 19 special things just for you<br><br>
     Wanna see?
   </p>
 
-  <p style="font-size:12px;color:#aaa;">(try clicking NO first 😈)</p>
+  <p style="font-size:12px;color:#aaa;">(try clicking NO first)</p>
 
-  <div class="emoji">😏</div>
+  <div id="chibi2" class="chibi"></div>
+
+  <div id="warning"></div>
 
   <br>
   <button onclick="yesClicked()">Yes</button>
   <button id="noBtn" onclick="noClicked()">No</button>
 </div>
 
-<!-- SCREEN 3: ENTRY -->
+<!-- SCREEN 3 -->
 <div id="screen3" class="screen">
-  <h1>Hmm 😌</h1>
+  <h1>Hmm</h1>
   <p id="entryText"></p>
 
-  <div class="emoji">😂</div>
+  <div id="chibi3" class="chibi"></div>
 </div>
 
 <script>
 const correctDate = "19102024";
 let noCount = 0;
 
+/* chibi generator */
+function face(type){
+  if(type==="neutral"){
+    return `<svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#ffd1dc"/>
+      <circle cx="35" cy="45" r="5"/>
+      <circle cx="65" cy="45" r="5"/>
+      <line x1="40" y1="65" x2="60" y2="65" stroke="black" stroke-width="2"/>
+    </svg>`;
+  }
+  if(type==="tease"){
+    return `<svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#ffc0cb"/>
+      <circle cx="35" cy="45" r="5"/>
+      <circle cx="65" cy="45" r="5"/>
+      <path d="M40 65 Q60 75 70 60" stroke="black" fill="none" stroke-width="2"/>
+    </svg>`;
+  }
+  if(type==="laugh"){
+    return `<svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#ffb6c1"/>
+      <circle cx="35" cy="45" r="5"/>
+      <circle cx="65" cy="45" r="5"/>
+      <ellipse cx="50" cy="65" rx="15" ry="8" fill="black"/>
+    </svg>`;
+  }
+}
+
+document.getElementById("chibi1").innerHTML = face("neutral");
+document.getElementById("chibi2").innerHTML = face("tease");
+document.getElementById("chibi3").innerHTML = face("laugh");
+
 /* screen switch */
-function showScreen(id) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
 }
 
-/* typing effect */
-function typeText(el, text, speed=35) {
-  let i = 0;
-  el.innerHTML = "";
-  function t() {
-    if (i < text.length) {
-      el.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(t, speed);
+/* typing */
+function typeText(el,text){
+  let i=0;
+  el.innerHTML="";
+  function t(){
+    if(i<text.length){
+      el.innerHTML+=text[i++];
+      setTimeout(t,30);
     }
   }
   t();
 }
 
-/* DATE CHECK */
-function checkDate() {
-  const input = document.getElementById("dateInput");
-  const error = document.getElementById("errorText");
+/* date check */
+function checkDate(){
+  let input=document.getElementById("dateInput");
+  let error=document.getElementById("errorText");
 
-  if (input.value === correctDate) {
+  if(input.value===correctDate){
     showScreen("screen2");
   } else {
-    const roasts = [
-      "You don’t even know? 😭",
-      "Wow Nimisha… that’s bad 💀",
-      "Fake memory detected 🚫",
-      "Try properly 😒",
-      "I expected better 😏"
-    ];
-
-    error.innerText = roasts[Math.floor(Math.random() * roasts.length)];
+    error.innerText="You don’t even remember?";
     input.classList.add("shake");
-    setTimeout(() => input.classList.remove("shake"), 300);
+    setTimeout(()=>input.classList.remove("shake"),300);
   }
 }
 
-/* NO BUTTON CHAOS */
-function noClicked() {
-  const btn = document.getElementById("noBtn");
+/* NO logic */
+function noClicked(){
+  const warn=document.getElementById("warning");
+  const btn=document.getElementById("noBtn");
 
-  const lines = [
-    "Oh attitude huh 😏",
-    "You really pressed NO? 💀",
-    "Wrong option 😂",
-    "This button isn’t for you",
-    "Pick YES."
-  ];
-
-  alert(lines[noCount % lines.length]);
   noCount++;
 
-  btn.style.position = "absolute";
-  btn.style.top = Math.random() * 80 + "%";
-  btn.style.left = Math.random() * 80 + "%";
+  if(noCount===1){
+    warn.innerText="Don't you dare click NO again.";
+  } else {
+    warn.innerText="Still trying?";
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*80+"%";
+    btn.style.left=Math.random()*80+"%";
+  }
 }
 
-/* also dodge on hover */
-document.getElementById("noBtn").addEventListener("mouseover", () => {
-  const btn = document.getElementById("noBtn");
-  btn.style.position = "absolute";
-  btn.style.top = Math.random() * 80 + "%";
-  btn.style.left = Math.random() * 80 + "%";
+/* hover move AFTER first click */
+document.getElementById("noBtn").addEventListener("mouseover",()=>{
+  if(noCount>=1){
+    const btn=document.getElementById("noBtn");
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*80+"%";
+    btn.style.left=Math.random()*80+"%";
+  }
 });
 
-/* YES CLICK */
-function yesClicked() {
+/* YES */
+function yesClicked(){
   showScreen("screen3");
 
   typeText(
     document.getElementById("entryText"),
-    "Looks like you couldn’t wait 😌\n\nWell… I couldn’t wait for your reaction either.\n\nLet’s begin..."
+    "Looks like you couldn't wait\n\nWell... I couldn't wait for your reaction either\n\nLet's begin"
   );
 }
 </script>
