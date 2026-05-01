@@ -2,176 +2,280 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Don't Click No</title>
+<title>Nimisha 🎂</title>
 
 <style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at center, #1a0000, #000000);
-    font-family: 'Courier New', monospace;
-    color: #ff2b2b;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+body{
+  margin:0;
+  background:black;
+  color:white;
+  font-family:sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
 }
 
-/* Flicker effect */
-body::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,0,0,0.05);
-    animation: flicker 0.15s infinite;
-    pointer-events: none;
+.container{
+  text-align:center;
+  max-width:350px;
 }
 
-@keyframes flicker {
-    0% {opacity: 0.05;}
-    50% {opacity: 0.1;}
-    100% {opacity: 0.05;}
+h1{
+  color:#ff2e63;
+  text-shadow:0 0 15px #ff2e63;
 }
 
-.container {
-    text-align: center;
-    position: relative;
+button{
+  margin:10px;
+  padding:10px 20px;
+  background:#ff2e63;
+  border:none;
+  border-radius:20px;
+  color:white;
+  cursor:pointer;
 }
 
-h1 {
-    font-size: 28px;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px #ff0000;
+/* keypad */
+.row{
+  display:flex;
+  justify-content:center;
+}
+.row button{
+  width:60px;
+  height:60px;
+  margin:5px;
+  border-radius:50%;
+  background:#222;
+  box-shadow:0 0 10px #ff2e63;
 }
 
-/* Buttons */
-button {
-    padding: 12px 25px;
-    margin: 10px;
-    font-size: 18px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
+/* boxes */
+.box{
+  display:inline-block;
+  width:80px;
+  height:80px;
+  margin:10px;
+  background:#222;
+  border:2px solid #ff2e63;
+  border-radius:10px;
+  line-height:80px;
+  cursor:pointer;
 }
 
-#yesBtn {
-    background: #111;
-    color: #00ff99;
-    border: 1px solid #00ff99;
+/* roses */
+#roseScene{
+  display:none;
+  text-align:center;
 }
 
-#noBtn {
-    background: #300000;
-    color: #ff4d4d;
-    position: absolute;
-    border: 1px solid #ff0000;
-    box-shadow: 0 0 10px #ff0000;
+#bouquet{
+  position:relative;
+  width:200px;
+  height:200px;
+  margin:20px auto;
 }
 
-/* Chibi + bubble */
-#chibiBox {
-    position: absolute;
-    top: -240px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
+.rose{
+  width:20px;
+  height:20px;
+  background:#4da6ff;
+  border-radius:50%;
+  position:absolute;
+  animation:grow 1s ease forwards;
+  box-shadow:0 0 10px #4da6ff;
 }
 
-#chibiImg {
-    width: 160px;
-    display: none;
-    animation: shake 0.3s;
-}
-
-/* Dialogue bubble horror style */
-#bubble {
-    display: none;
-    background: black;
-    color: #ff2b2b;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    border: 1px solid red;
-    box-shadow: 0 0 10px red;
-    animation: glitch 0.3s;
-}
-
-/* Glitch text */
-@keyframes glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(2px, -2px); }
-    60% { transform: translate(-1px, 1px); }
-    80% { transform: translate(1px, -1px); }
-    100% { transform: translate(0); }
-}
-
-/* Chibi shake */
-@keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    50% { transform: translateX(4px); }
-    75% { transform: translateX(-2px); }
-    100% { transform: translateX(0); }
+@keyframes grow{
+  from{transform:scale(0);}
+  to{transform:scale(1);}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- LOCK SCREEN -->
+<div id="lockScreen" class="container">
 
-    <h1>Will you still press NO?</h1>
+  <h1>Enter passcode</h1>
+  <div id="dots" style="font-size:30px; letter-spacing:10px;">____</div>
 
-    <div id="chibiBox">
-        <div id="bubble"></div>
-        <img id="chibiImg" src="chibi15.png">
+  <div id="keypad">
+    <div class="row">
+      <button onclick="press(1)">1</button>
+      <button onclick="press(2)">2</button>
+      <button onclick="press(3)">3</button>
     </div>
+    <div class="row">
+      <button onclick="press(4)">4</button>
+      <button onclick="press(5)">5</button>
+      <button onclick="press(6)">6</button>
+    </div>
+    <div class="row">
+      <button onclick="press(7)">7</button>
+      <button onclick="press(8)">8</button>
+      <button onclick="press(9)">9</button>
+    </div>
+    <div class="row">
+      <button onclick="clearInput()">⌫</button>
+      <button onclick="press(0)">0</button>
+      <button onclick="clearAll()">C</button>
+    </div>
+  </div>
 
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
+  <p id="hint" style="color:gray;">hint: think properly</p>
+</div>
+
+<!-- MAIN FLOW -->
+<div id="app" class="container" style="display:none;">
+
+<h1 id="title">...</h1>
+<p id="text">So you actually remember</p>
+
+<button onclick="next()">Continue</button>
+<div id="extra"></div>
 
 </div>
 
+<!-- ROSE SCENE -->
+<div id="roseScene">
+  <h1 style="color:#4da6ff;">Not everyone gets this</h1>
+  <div id="bouquet"></div>
+  <p id="roseText"></p>
+  <button onclick="back()">Continue</button>
+</div>
+
 <script>
-let count = 0;
 
-const noBtn = document.getElementById("noBtn");
-const chibi = document.getElementById("chibiImg");
-const bubble = document.getElementById("bubble");
+/* PASSWORD */
+let inputCode="";
+const correctCode="19102024";
 
-const states = [
-    { img: "chibi15.png", text: "Don't touch that again." },
-    { img: "chibi21.png", text: "You really want to test this?" },
-    { img: "chibi23.png", text: "I told you not to." },
-    { img: "chibi49.png", text: "Still going? Interesting." },
-    { img: "chibi20.png", text: "You won't catch it." }
-];
+function press(num){
+  if(inputCode.length>=8) return;
+  inputCode+=num;
+  updateDots();
 
-noBtn.addEventListener("click", () => {
-    count++;
-
-    let s = states[Math.min(count - 1, states.length - 1)];
-
-    chibi.src = s.img;
-    chibi.style.display = "block";
-
-    bubble.innerText = s.text;
-    bubble.style.display = "block";
-
-    moveButton();
-});
-
-function moveButton() {
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 60);
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+  if(inputCode.length===8){
+    checkCode();
+  }
 }
+
+function updateDots(){
+  let d="";
+  for(let i=0;i<inputCode.length;i++) d+="● ";
+  document.getElementById("dots").innerText=d;
+}
+
+function clearInput(){
+  inputCode=inputCode.slice(0,-1);
+  updateDots();
+}
+
+function clearAll(){
+  inputCode="";
+  updateDots();
+}
+
+function checkCode(){
+  if(inputCode===correctCode){
+    document.getElementById("lockScreen").style.display="none";
+    document.getElementById("app").style.display="block";
+  } else {
+    let lines=[
+      "Wrong.",
+      "Try again.",
+      "You forgot?",
+      "That’s bad"
+    ];
+    document.getElementById("hint").innerText =
+      lines[Math.floor(Math.random()*lines.length)];
+    inputCode="";
+    updateDots();
+  }
+}
+
+/* FLOW */
+let step=0;
+
+function next(){
+
+  const flow=[
+    ["Wait","Let me check"],
+    ["Oh","It is you"],
+    ["Nimisha","Still the same"],
+    ["19?","That’s crazy"],
+    ["Anyway","I made something for you"]
+  ];
+
+  if(step < flow.length){
+    document.getElementById("title").innerText=flow[step][0];
+    document.getElementById("text").innerText=flow[step][1];
+    step++;
+    return;
+  }
+
+  /* BOX STEP */
+  if(step===flow.length){
+    document.getElementById("title").innerText="Pick one";
+    document.getElementById("text").innerText="Choose a box";
+
+    document.getElementById("extra").innerHTML=`
+      <div class="box" onclick="pickBox()">1</div>
+      <div class="box" onclick="pickBox()">2</div>
+      <div class="box" onclick="pickBox()">3</div>
+    `;
+    step++;
+  }
+}
+
+/* BOX → ROSE */
+function pickBox(){
+  document.getElementById("app").style.display="none";
+  document.getElementById("roseScene").style.display="block";
+
+  let b=document.getElementById("bouquet");
+  b.innerHTML="";
+
+  for(let i=0;i<15;i++){
+    let r=document.createElement("div");
+    r.className="rose";
+
+    r.style.left=80+Math.cos(i)*60+"px";
+    r.style.top=80+Math.sin(i)*60+"px";
+
+    b.appendChild(r);
+  }
+
+  typeRose();
+}
+
+function typeRose(){
+  let text="Blue roses.\nNot common.\nJust like you.\nDon’t overthink it.";
+  let i=0;
+  let el=document.getElementById("roseText");
+  el.innerHTML="";
+
+  function t(){
+    if(i<text.length){
+      el.innerHTML+=text[i++];
+      setTimeout(t,30);
+    }
+  }
+  t();
+}
+
+function back(){
+  document.getElementById("roseScene").style.display="none";
+  document.getElementById("app").style.display="block";
+
+  document.getElementById("title").innerText="Hmm";
+  document.getElementById("text").innerText="That was one of them";
+  document.getElementById("extra").innerHTML="";
+}
+
 </script>
 
 </body>
