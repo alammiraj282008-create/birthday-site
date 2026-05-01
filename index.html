@@ -2,94 +2,289 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Nimisha 🎂</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nimisha 🎂 Happy Birthday!</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body{
   margin:0;
-  background:black;
-  color:white;
-  font-family:sans-serif;
+  background: url('https://cdn.pixplet.com/assets/images/artistic-celebration-003.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color:#e8d5b7;
+  font-family:'Segoe UI', 'Poppins', sans-serif;
   display:flex;
   justify-content:center;
   align-items:center;
   height:100vh;
   overflow:hidden;
+  position:relative;
+}
+
+/* Darker overlay for readability - more dramatic */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.85) 100%);
+  z-index: 0;
+}
+
+.container, #roseScene {
+  position: relative;
+  z-index: 1;
 }
 
 .container{
   text-align:center;
-  max-width:350px;
+  max-width:380px;
+  background: rgba(10,8,15,0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 50px;
+  border: 1px solid rgba(255,215,0,0.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255,215,0,0.2);
+  padding: 30px 25px 35px;
+  transition: all 0.3s ease;
 }
 
+/* Gold glam text */
 h1{
-  color:#ff2e63;
-  text-shadow:0 0 15px #ff2e63;
+  font-size: 28px;
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 20px rgba(255,215,0,0.5);
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  font-weight: bold;
 }
 
-button{
-  margin:10px;
-  padding:10px 20px;
-  background:#ff2e63;
-  border:none;
-  border-radius:20px;
-  color:white;
-  cursor:pointer;
+/* Dots display - elegant */
+#dots{
+  font-size: 36px;
+  letter-spacing: 12px;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255,215,0,0.6);
+  font-weight: bold;
+  background: rgba(0,0,0,0.5);
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 50px;
+  margin: 15px auto;
+  width: fit-content;
+  border: 1px solid rgba(255,215,0,0.3);
 }
 
-/* keypad */
+/* Keypad styling - premium dark feel */
+#keypad {
+  margin: 25px 0 15px;
+}
+
 .row{
   display:flex;
   justify-content:center;
-}
-.row button{
-  width:60px;
-  height:60px;
-  margin:5px;
-  border-radius:50%;
-  background:#222;
-  box-shadow:0 0 10px #ff2e63;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-/* boxes */
+.row button{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
+  border: 1.5px solid rgba(255,215,0,0.4);
+  color: #FFD700;
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: all 0.2s ease;
+  font-family: monospace;
+}
+
+.row button:hover{
+  transform: translateY(-2px);
+  background: linear-gradient(145deg, #252540, #15152a);
+  border-color: rgba(255,215,0,0.8);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5), 0 0 12px rgba(255,215,0,0.4);
+}
+
+.row button:active{
+  transform: translateY(1px);
+}
+
+/* Special keys styling */
+.row button:first-child:active, 
+.row button:last-child:active {
+  background: linear-gradient(145deg, #2a1a1a, #1a0f0f);
+}
+
+/* Hint text */
+#hint{
+  color: rgba(255,215,0,0.7);
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-style: italic;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255,215,0,0.3);
+}
+
+/* Continue button */
+button:not(.row button) {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 40px;
+  color: #1a1a2e;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+button:not(.row button):hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+  background: linear-gradient(135deg, #FFE44D, #FFB347);
+}
+
+/* Gift boxes - elegant */
 .box{
   display:inline-block;
-  width:80px;
-  height:80px;
-  margin:10px;
-  background:#222;
-  border:2px solid #ff2e63;
-  border-radius:10px;
-  line-height:80px;
-  cursor:pointer;
+  width: 90px;
+  height: 90px;
+  margin: 12px 8px;
+  background: linear-gradient(145deg, #1e1e2e, #12121c);
+  border: 2px solid #FFD700;
+  border-radius: 20px;
+  line-height: 90px;
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  color: #FFD700;
 }
 
-/* roses */
+.box:hover{
+  transform: translateY(-8px) scale(1.02);
+  border-color: #FFA500;
+  box-shadow: 0 15px 30px rgba(255,215,0,0.3);
+  background: linear-gradient(145deg, #2a2a3e, #18182a);
+}
+
+/* Rose scene matching theme */
 #roseScene{
   display:none;
   text-align:center;
+  background: rgba(10,8,15,0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 50px;
+  border: 1px solid rgba(255,215,0,0.5);
+  padding: 30px 25px;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+#roseScene h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 #bouquet{
   position:relative;
-  width:200px;
-  height:200px;
-  margin:20px auto;
+  width: 220px;
+  height: 220px;
+  margin: 20px auto;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(255,215,0,0.2);
 }
 
 .rose{
-  width:20px;
-  height:20px;
-  background:#4da6ff;
-  border-radius:50%;
+  width: 22px;
+  height: 22px;
+  background: radial-gradient(circle, #7ec8ff, #2e6bb0);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(45deg);
   position:absolute;
-  animation:grow 1s ease forwards;
-  box-shadow:0 0 10px #4da6ff;
+  animation: grow 0.6s ease forwards;
+  box-shadow: 0 0 12px #4da6ff;
 }
 
 @keyframes grow{
-  from{transform:scale(0);}
-  to{transform:scale(1);}
+  from{
+    transform: scale(0) rotate(45deg);
+    opacity: 0;
+  }
+  to{
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+#roseText{
+  font-size: 17px;
+  line-height: 1.8;
+  white-space: pre-line;
+  margin: 25px;
+  color: #e8d5b7;
+  background: rgba(0,0,0,0.4);
+  padding: 15px;
+  border-radius: 30px;
+  border-left: 3px solid #FFD700;
+}
+
+/* App text styles */
+#title {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+#text {
+  font-size: 18px;
+  margin: 20px 0;
+  color: #d4c5a0;
+}
+
+/* Animations */
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(255,215,0,0.3); }
+  100% { box-shadow: 0 0 20px rgba(255,215,0,0.6); }
+}
+
+.container {
+  animation: glow 2s infinite alternate;
+}
+
+/* Responsive */
+@media (max-width: 450px) {
+  .row button {
+    width: 60px;
+    height: 60px;
+    font-size: 22px;
+  }
+  .box {
+    width: 75px;
+    height: 75px;
+    line-height: 75px;
+    font-size: 24px;
+  }
+  .container {
+    max-width: 340px;
+    padding: 20px 15px;
+  }
 }
 </style>
 </head>
@@ -99,8 +294,8 @@ button{
 <!-- LOCK SCREEN -->
 <div id="lockScreen" class="container">
 
-  <h1>Enter passcode</h1>
-  <div id="dots" style="font-size:30px; letter-spacing:10px;">____</div>
+  <h1>✨ ENTER PASSCODE ✨</h1>
+  <div id="dots">____</div>
 
   <div id="keypad">
     <div class="row">
@@ -125,7 +320,7 @@ button{
     </div>
   </div>
 
-  <p id="hint" style="color:gray;">hint: think properly</p>
+  <p id="hint">💫 hint: think properly 💫</p>
 </div>
 
 <!-- MAIN FLOW -->
@@ -134,147 +329,164 @@ button{
 <h1 id="title">...</h1>
 <p id="text">So you actually remember</p>
 
-<button onclick="next()">Continue</button>
+<button onclick="next()">✦ CONTINUE ✦</button>
 <div id="extra"></div>
 
 </div>
 
 <!-- ROSE SCENE -->
 <div id="roseScene">
-  <h1 style="color:#4da6ff;">Not everyone gets this</h1>
+  <h1>💙 NOT EVERYONE GETS THIS 💙</h1>
   <div id="bouquet"></div>
   <p id="roseText"></p>
-  <button onclick="back()">Continue</button>
+  <button onclick="back()">◀ BACK</button>
 </div>
 
 <script>
 
-/* PASSWORD */
-let inputCode="";
-const correctCode="19102024";
+/* PASSWORD - SAME AS BEFORE */
+let inputCode = "";
+const correctCode = "19102024";
 
-function press(num){
-  if(inputCode.length>=8) return;
-  inputCode+=num;
+function press(num) {
+  if (inputCode.length >= 8) return;
+  inputCode += num;
   updateDots();
 
-  if(inputCode.length===8){
-    checkCode();
+  if (inputCode.length === 8) {
+    setTimeout(checkCode, 100);
   }
 }
 
-function updateDots(){
-  let d="";
-  for(let i=0;i<inputCode.length;i++) d+="● ";
-  document.getElementById("dots").innerText=d;
-}
-
-function clearInput(){
-  inputCode=inputCode.slice(0,-1);
-  updateDots();
-}
-
-function clearAll(){
-  inputCode="";
-  updateDots();
-}
-
-function checkCode(){
-  if(inputCode===correctCode){
-    document.getElementById("lockScreen").style.display="none";
-    document.getElementById("app").style.display="block";
+function updateDots() {
+  let d = "";
+  if (inputCode.length === 0) {
+    d = "____";
   } else {
-    let lines=[
-      "Wrong.",
-      "Try again.",
-      "You forgot?",
-      "That’s bad"
+    for (let i = 0; i < inputCode.length; i++) d += "● ";
+  }
+  document.getElementById("dots").innerText = d;
+}
+
+function clearInput() {
+  inputCode = inputCode.slice(0, -1);
+  updateDots();
+}
+
+function clearAll() {
+  inputCode = "";
+  updateDots();
+}
+
+function checkCode() {
+  if (inputCode === correctCode) {
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  } else {
+    let lines = [
+      "❌ Wrong code... try again",
+      "💔 Not this time",
+      "🤔 Hmm... think harder",
+      "😅 One more try"
     ];
-    document.getElementById("hint").innerText =
-      lines[Math.floor(Math.random()*lines.length)];
-    inputCode="";
+    document.getElementById("hint").innerHTML = "✨ " + lines[Math.floor(Math.random() * lines.length)] + " ✨";
+    inputCode = "";
     updateDots();
   }
 }
 
 /* FLOW */
-let step=0;
+let step = 0;
 
-function next(){
-
-  const flow=[
-    ["Wait","Let me check"],
-    ["Oh","It is you"],
-    ["Nimisha","Still the same"],
-    ["19?","That’s crazy"],
-    ["Anyway","I made something for you"]
+function next() {
+  const flow = [
+    ["Wait...", "Let me check who this is... 🕵️"],
+    ["Oh wow!", "It IS you! 🎉✨"],
+    ["Nimisha...", "Still the same amazing person! 💫"],
+    ["19?", "That's crazy how time flies! 🕰️💛"],
+    ["Anyway...", "I made something special for you! 🎁"]
   ];
 
-  if(step < flow.length){
-    document.getElementById("title").innerText=flow[step][0];
-    document.getElementById("text").innerText=flow[step][1];
+  if (step < flow.length) {
+    document.getElementById("title").innerHTML = flow[step][0];
+    document.getElementById("text").innerText = flow[step][1];
     step++;
     return;
   }
 
-  /* BOX STEP */
-  if(step===flow.length){
-    document.getElementById("title").innerText="Pick one";
-    document.getElementById("text").innerText="Choose a box";
+  if (step === flow.length) {
+    document.getElementById("title").innerHTML = "🎁 PICK A GIFT 🎁";
+    document.getElementById("text").innerText = "Choose a box carefully...";
 
-    document.getElementById("extra").innerHTML=`
-      <div class="box" onclick="pickBox()">1</div>
-      <div class="box" onclick="pickBox()">2</div>
-      <div class="box" onclick="pickBox()">3</div>
+    document.getElementById("extra").innerHTML = `
+      <div class="box" onclick="pickBox(1)">🎀<br>1</div>
+      <div class="box" onclick="pickBox(2)">🎈<br>2</div>
+      <div class="box" onclick="pickBox(3)">💝<br>3</div>
     `;
     step++;
   }
 }
 
 /* BOX → ROSE */
-function pickBox(){
-  document.getElementById("app").style.display="none";
-  document.getElementById("roseScene").style.display="block";
+function pickBox(boxNumber) {
+  document.getElementById("app").style.display = "none";
+  document.getElementById("roseScene").style.display = "block";
 
-  let b=document.getElementById("bouquet");
-  b.innerHTML="";
+  let b = document.getElementById("bouquet");
+  b.innerHTML = "";
 
-  for(let i=0;i<15;i++){
-    let r=document.createElement("div");
-    r.className="rose";
+  // Create 16 roses in a beautiful circular pattern
+  for (let i = 0; i < 16; i++) {
+    let r = document.createElement("div");
+    r.className = "rose";
 
-    r.style.left=80+Math.cos(i)*60+"px";
-    r.style.top=80+Math.sin(i)*60+"px";
+    let angle = (i / 16) * Math.PI * 2;
+    let radius = 75;
+    let center = 110;
+    let x = center + Math.cos(angle) * radius;
+    let y = center + Math.sin(angle) * radius;
+
+    r.style.left = x + "px";
+    r.style.top = y + "px";
+    r.style.animationDelay = (i * 0.04) + "s";
 
     b.appendChild(r);
   }
 
-  typeRose();
+  let messages = {
+    1: "💙 Blue roses.\n\nRare and mysterious.\nJust like you.\n\nSpecial and unique!\n💙",
+    2: "🌹 Not red, but blue.\n\nUnique, unforgettable.\nThat's exactly YOU!\n\n✨🌟✨",
+    3: "✨ Something magical.\n\nFor someone special.\n\nHAPPY BIRTHDAY NIMISHA!\n\n🎂💙✨"
+  };
+
+  typeRose(messages[boxNumber]);
 }
 
-function typeRose(){
-  let text="Blue roses.\nNot common.\nJust like you.\nDon’t overthink it.";
-  let i=0;
-  let el=document.getElementById("roseText");
-  el.innerHTML="";
+function typeRose(message) {
+  let i = 0;
+  let el = document.getElementById("roseText");
+  el.innerHTML = "";
 
-  function t(){
-    if(i<text.length){
-      el.innerHTML+=text[i++];
-      setTimeout(t,30);
+  function t() {
+    if (i < message.length) {
+      el.innerHTML += message[i++];
+      setTimeout(t, 35);
     }
   }
   t();
 }
 
-function back(){
-  document.getElementById("roseScene").style.display="none";
-  document.getElementById("app").style.display="block";
+function back() {
+  document.getElementById("roseScene").style.display = "none";
+  document.getElementById("app").style.display = "block";
 
-  document.getElementById("title").innerText="Hmm";
-  document.getElementById("text").innerText="That was one of them";
-  document.getElementById("extra").innerHTML="";
+  document.getElementById("title").innerHTML = "💭 Hmm...";
+  document.getElementById("text").innerHTML = "That was just the beginning...";
+  document.getElementById("extra").innerHTML = "";
 }
+
+// Initialize
+updateDots();
 
 </script>
 
