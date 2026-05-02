@@ -24,7 +24,7 @@ body{
   position:relative;
 }
 
-/* Darker overlay for readability - more dramatic */
+/* Darker overlay for readability */
 body::before {
   content: "";
   position: absolute;
@@ -43,7 +43,7 @@ body::before {
 
 .container{
   text-align:center;
-  max-width:380px;
+  max-width: 400px;
   background: rgba(10,8,15,0.85);
   backdrop-filter: blur(12px);
   border-radius: 50px;
@@ -55,18 +55,50 @@ body::before {
 
 /* Gold glam text */
 h1{
-  font-size: 28px;
+  font-size: 26px;
   background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   text-shadow: 0 0 20px rgba(255,215,0,0.5);
   letter-spacing: 1px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   font-weight: bold;
 }
 
-/* Dots display - elegant */
+/* Teasing message styling */
+.tease-message {
+  background: rgba(255,215,0,0.1);
+  border-left: 3px solid #FFD700;
+  border-right: 3px solid #FFD700;
+  padding: 10px 15px;
+  margin: 15px 0;
+  border-radius: 20px;
+  font-size: 14px;
+  color: #FFD700;
+  font-style: italic;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+/* GIF styling */
+.gif-container {
+  margin: 10px auto;
+  text-align: center;
+}
+
+.teasing-gif {
+  max-width: 120px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255,215,0,0.4);
+  border: 2px solid #FFD700;
+}
+
+/* Dots display */
 #dots{
   font-size: 36px;
   letter-spacing: 12px;
@@ -82,7 +114,7 @@ h1{
   border: 1px solid rgba(255,215,0,0.3);
 }
 
-/* Keypad styling - premium dark feel */
+/* Keypad styling */
 #keypad {
   margin: 25px 0 15px;
 }
@@ -120,16 +152,10 @@ h1{
   transform: translateY(1px);
 }
 
-/* Special keys styling */
-.row button:first-child:active, 
-.row button:last-child:active {
-  background: linear-gradient(145deg, #2a1a1a, #1a0f0f);
-}
-
 /* Hint text */
 #hint{
   color: rgba(255,215,0,0.7);
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 1px;
   font-style: italic;
   margin-top: 20px;
@@ -158,7 +184,7 @@ button:not(.row button):hover {
   background: linear-gradient(135deg, #FFE44D, #FFB347);
 }
 
-/* Gift boxes - elegant */
+/* Gift boxes */
 .box{
   display:inline-block;
   width: 90px;
@@ -183,7 +209,7 @@ button:not(.row button):hover {
   background: linear-gradient(145deg, #2a2a3e, #18182a);
 }
 
-/* Rose scene matching theme */
+/* Rose scene */
 #roseScene{
   display:none;
   text-align:center;
@@ -246,18 +272,6 @@ button:not(.row button):hover {
   border-left: 3px solid #FFD700;
 }
 
-/* App text styles */
-#title {
-  font-size: 32px;
-  margin-bottom: 15px;
-}
-
-#text {
-  font-size: 18px;
-  margin: 20px 0;
-  color: #d4c5a0;
-}
-
 /* Animations */
 @keyframes glow {
   0% { box-shadow: 0 0 5px rgba(255,215,0,0.3); }
@@ -285,6 +299,9 @@ button:not(.row button):hover {
     max-width: 340px;
     padding: 20px 15px;
   }
+  .teasing-gif {
+    max-width: 90px;
+  }
 }
 </style>
 </head>
@@ -295,6 +312,17 @@ button:not(.row button):hover {
 <div id="lockScreen" class="container">
 
   <h1>✨ ENTER PASSCODE ✨</h1>
+  
+  <!-- Teasing GIF -->
+  <div class="gif-container">
+    <img class="teasing-gif" src="https://media1.tenor.com/m/-mGQEeygOlIAAAAC/teasing-tongue.gif" alt="teasing gif">
+  </div>
+  
+  <!-- Teasing hint message -->
+  <div class="tease-message">
+    😏 I know you're not smart enough to guess the code, Princess... 💅
+  </div>
+  
   <div id="dots">____</div>
 
   <div id="keypad">
@@ -320,7 +348,7 @@ button:not(.row button):hover {
     </div>
   </div>
 
-  <p id="hint">💫 hint: think properly 💫</p>
+  <p id="hint">💫 hint: the day we first talked... 💫</p>
 </div>
 
 <!-- MAIN FLOW -->
@@ -344,9 +372,9 @@ button:not(.row button):hover {
 
 <script>
 
-/* PASSWORD - SAME AS BEFORE */
+/* PASSWORD - Day we first talked */
 let inputCode = "";
-const correctCode = "19102024";
+const correctCode = "19102024"; // October 19, 2024 - the day you two first talked
 
 function press(num) {
   if (inputCode.length >= 8) return;
@@ -384,10 +412,11 @@ function checkCode() {
     document.getElementById("app").style.display = "block";
   } else {
     let lines = [
-      "❌ Wrong code... try again",
-      "💔 Not this time",
-      "🤔 Hmm... think harder",
-      "😅 One more try"
+      "❌ Wrong code, Princess... try again 👸",
+      "💔 Not today, smarty pants",
+      "🤔 Hmm... maybe you're not as clever as I thought 😏",
+      "😅 One more try... or should I just tell you?",
+      "🙄 Really? That's your guess? Nope!"
     ];
     document.getElementById("hint").innerHTML = "✨ " + lines[Math.floor(Math.random() * lines.length)] + " ✨";
     inputCode = "";
@@ -401,9 +430,9 @@ let step = 0;
 function next() {
   const flow = [
     ["Wait...", "Let me check who this is... 🕵️"],
-    ["Oh wow!", "It IS you! 🎉✨"],
+    ["Oh wow!", "You actually remembered! 🎉✨"],
     ["Nimisha...", "Still the same amazing person! 💫"],
-    ["19?", "That's crazy how time flies! 🕰️💛"],
+    ["19 October 2024...", "The day everything changed 💛"],
     ["Anyway...", "I made something special for you! 🎁"]
   ];
 
@@ -416,7 +445,7 @@ function next() {
 
   if (step === flow.length) {
     document.getElementById("title").innerHTML = "🎁 PICK A GIFT 🎁";
-    document.getElementById("text").innerText = "Choose a box carefully...";
+    document.getElementById("text").innerText = "Choose a box carefully, Princess...";
 
     document.getElementById("extra").innerHTML = `
       <div class="box" onclick="pickBox(1)">🎀<br>1</div>
@@ -456,7 +485,7 @@ function pickBox(boxNumber) {
   let messages = {
     1: "💙 Blue roses.\n\nRare and mysterious.\nJust like you.\n\nSpecial and unique!\n💙",
     2: "🌹 Not red, but blue.\n\nUnique, unforgettable.\nThat's exactly YOU!\n\n✨🌟✨",
-    3: "✨ Something magical.\n\nFor someone special.\n\nHAPPY BIRTHDAY NIMISHA!\n\n🎂💙✨"
+    3: "✨ Something magical.\n\nFor someone special.\n\nHAPPY BIRTHDAY NIMISHA!\n\nLove, 💙\n🎂✨"
   };
 
   typeRose(messages[boxNumber]);
