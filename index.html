@@ -24,7 +24,6 @@ body{
   position:relative;
 }
 
-/* Darker overlay for readability */
 body::before {
   content: "";
   position: absolute;
@@ -36,14 +35,14 @@ body::before {
   z-index: 0;
 }
 
-.container, #roseScene {
+.container, #roseScene, #birthdayLayer {
   position: relative;
   z-index: 1;
 }
 
-.container{
+.container, #birthdayLayer {
   text-align:center;
-  max-width: 400px;
+  max-width: 450px;
   background: rgba(10,8,15,0.85);
   backdrop-filter: blur(12px);
   border-radius: 50px;
@@ -53,7 +52,6 @@ body::before {
   transition: all 0.3s ease;
 }
 
-/* Gold glam text */
 h1{
   font-size: 26px;
   background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
@@ -66,7 +64,6 @@ h1{
   font-weight: bold;
 }
 
-/* Teasing message styling */
 .tease-message {
   background: rgba(255,215,0,0.1);
   border-left: 3px solid #FFD700;
@@ -85,20 +82,18 @@ h1{
   100% { opacity: 1; }
 }
 
-/* GIF styling */
 .gif-container {
   margin: 10px auto;
   text-align: center;
 }
 
-.teasing-gif {
+.teasing-gif, .angry-gif, .pat-gif {
   max-width: 120px;
   border-radius: 20px;
   box-shadow: 0 0 15px rgba(255,215,0,0.4);
   border: 2px solid #FFD700;
 }
 
-/* Dots display */
 #dots{
   font-size: 36px;
   letter-spacing: 12px;
@@ -114,7 +109,6 @@ h1{
   border: 1px solid rgba(255,215,0,0.3);
 }
 
-/* Keypad styling */
 #keypad {
   margin: 25px 0 15px;
 }
@@ -152,7 +146,6 @@ h1{
   transform: translateY(1px);
 }
 
-/* Hint text */
 #hint{
   color: rgba(255,215,0,0.7);
   font-size: 13px;
@@ -163,50 +156,74 @@ h1{
   border-top: 1px dashed rgba(255,215,0,0.3);
 }
 
-/* Continue button */
-button:not(.row button) {
-  background: linear-gradient(135deg, #FFD700, #FFA500);
-  border: none;
-  padding: 12px 30px;
-  border-radius: 40px;
-  color: #1a1a2e;
-  font-weight: bold;
+/* Birthday Layer Styles */
+#birthdayLayer {
+  display: none;
+}
+
+.message-box {
+  background: rgba(0,0,0,0.5);
+  padding: 20px;
+  border-radius: 30px;
+  margin: 20px 0;
+  line-height: 1.8;
   font-size: 16px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 25px 0;
+  position: relative;
+  min-height: 80px;
+}
+
+.yes-btn {
+  background: linear-gradient(135deg, #00c853, #009624);
+  border: none;
+  padding: 15px 35px;
+  border-radius: 50px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
   cursor: pointer;
-  margin-top: 20px;
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 10;
 }
 
-button:not(.row button):hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(255,215,0,0.4);
-  background: linear-gradient(135deg, #FFE44D, #FFB347);
-}
-
-/* Gift boxes */
-.box{
-  display:inline-block;
-  width: 90px;
-  height: 90px;
-  margin: 12px 8px;
-  background: linear-gradient(145deg, #1e1e2e, #12121c);
-  border: 2px solid #FFD700;
-  border-radius: 20px;
-  line-height: 90px;
-  cursor: pointer;
-  font-size: 28px;
+.no-btn {
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+  border: none;
+  padding: 15px 35px;
+  border-radius: 50px;
+  color: white;
   font-weight: bold;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-  color: #FFD700;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 10;
 }
 
-.box:hover{
-  transform: translateY(-8px) scale(1.02);
-  border-color: #FFA500;
-  box-shadow: 0 15px 30px rgba(255,215,0,0.3);
-  background: linear-gradient(145deg, #2a2a3e, #18182a);
+.no-btn:hover {
+  transform: scale(0.95);
+}
+
+.teasy-text {
+  color: #FF6B6B;
+  font-size: 14px;
+  margin-top: 15px;
+  animation: shake 0.5s ease;
+  font-style: italic;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
 }
 
 /* Rose scene */
@@ -221,11 +238,6 @@ button:not(.row button):hover {
   max-width: 400px;
   margin: auto;
   box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-}
-
-#roseScene h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
 }
 
 #bouquet{
@@ -272,35 +284,28 @@ button:not(.row button):hover {
   border-left: 3px solid #FFD700;
 }
 
-/* Animations */
 @keyframes glow {
   0% { box-shadow: 0 0 5px rgba(255,215,0,0.3); }
   100% { box-shadow: 0 0 20px rgba(255,215,0,0.6); }
 }
 
-.container {
+.container, #birthdayLayer {
   animation: glow 2s infinite alternate;
 }
 
-/* Responsive */
 @media (max-width: 450px) {
   .row button {
     width: 60px;
     height: 60px;
     font-size: 22px;
   }
-  .box {
-    width: 75px;
-    height: 75px;
-    line-height: 75px;
-    font-size: 24px;
-  }
-  .container {
+  .container, #birthdayLayer {
     max-width: 340px;
     padding: 20px 15px;
   }
-  .teasing-gif {
-    max-width: 90px;
+  .yes-btn, .no-btn {
+    padding: 12px 25px;
+    font-size: 16px;
   }
 }
 </style>
@@ -310,15 +315,12 @@ button:not(.row button):hover {
 
 <!-- LOCK SCREEN -->
 <div id="lockScreen" class="container">
-
   <h1>✨ ENTER PASSCODE ✨</h1>
   
-  <!-- Teasing GIF -->
   <div class="gif-container">
     <img class="teasing-gif" src="https://media1.tenor.com/m/-mGQEeygOlIAAAAC/teasing-tongue.gif" alt="teasing gif">
   </div>
   
-  <!-- Teasing hint message -->
   <div class="tease-message">
     😏 I know you're not smart enough to guess the code, Princess... 💅
   </div>
@@ -351,15 +353,34 @@ button:not(.row button):hover {
   <p id="hint">💫 hint: the day we first talked... 💫</p>
 </div>
 
+<!-- BIRTHDAY LAYER (NEW) -->
+<div id="birthdayLayer" class="container">
+  <div class="gif-container">
+    <img id="birthdayGif" class="teasing-gif" src="https://media1.tenor.com/m/-mGQEeygOlIAAAAC/teasing-tongue.gif" alt="gif">
+  </div>
+  
+  <div class="message-box">
+    <h1>🎂 HAPPY BIRTHDAY MY QUEEN BUDDY! 🎂</h1>
+    <p>You're 19 now... TOO OLD! 👵</p>
+    <p>You should be in an old age home, you knoww... 🙄</p>
+    <p>But anyways... you're still beautiful, miss! 💛</p>
+    <p style="color:#FFD700; margin-top: 15px;">✨ Now... want to see your cake? ✨</p>
+  </div>
+  
+  <div class="button-group">
+    <button class="yes-btn" onclick="sayYes()">YES 🎂</button>
+    <button class="no-btn" onclick="sayNo()">NO 😤</button>
+  </div>
+  
+  <div id="teasyMessage" style="min-height: 60px;"></div>
+</div>
+
 <!-- MAIN FLOW -->
 <div id="app" class="container" style="display:none;">
-
-<h1 id="title">...</h1>
-<p id="text">So you actually remember</p>
-
-<button onclick="next()">✦ CONTINUE ✦</button>
-<div id="extra"></div>
-
+  <h1 id="title">...</h1>
+  <p id="text">So you actually remember</p>
+  <button onclick="next()">✦ CONTINUE ✦</button>
+  <div id="extra"></div>
 </div>
 
 <!-- ROSE SCENE -->
@@ -372,15 +393,30 @@ button:not(.row button):hover {
 
 <script>
 
-/* PASSWORD - Day we first talked */
+/* PASSWORD */
 let inputCode = "";
-const correctCode = "19102024"; // October 19, 2024 - the day you two first talked
+const correctCode = "19102024";
+
+let noClickCount = 0;
+let yesSize = 1;
+
+const teasyMessages = [
+  "🙄 Don't be a baby, click YES!",
+  "😏 Scared of cake? Really?",
+  "🤨 You know you want to say YES...",
+  "😤 STOP being stubborn, Princess!",
+  "💅 Just click YES already...",
+  "👵 Too old for attitude! Say YES!",
+  "🤪 Your loss, grandma!",
+  "😈 I can do this all day...",
+  "🎂 CAKE! CAKE! CAKE!",
+  "💛 Say YES or I'll keep teasing you!"
+];
 
 function press(num) {
   if (inputCode.length >= 8) return;
   inputCode += num;
   updateDots();
-
   if (inputCode.length === 8) {
     setTimeout(checkCode, 100);
   }
@@ -409,7 +445,8 @@ function clearAll() {
 function checkCode() {
   if (inputCode === correctCode) {
     document.getElementById("lockScreen").style.display = "none";
-    document.getElementById("app").style.display = "block";
+    document.getElementById("birthdayLayer").style.display = "block";
+    resetButtons();
   } else {
     let lines = [
       "❌ Wrong code, Princess... try again 👸",
@@ -422,6 +459,90 @@ function checkCode() {
     inputCode = "";
     updateDots();
   }
+}
+
+function resetButtons() {
+  noClickCount = 0;
+  yesSize = 1;
+  const yesBtn = document.querySelector('.yes-btn');
+  const noBtn = document.querySelector('.no-btn');
+  if (yesBtn) {
+    yesBtn.style.transform = `scale(${yesSize})`;
+  }
+  if (noBtn) {
+    noBtn.style.position = 'relative';
+    noBtn.style.top = '0px';
+    noBtn.style.left = '0px';
+  }
+  document.getElementById('teasyMessage').innerHTML = '';
+}
+
+function sayNo() {
+  noClickCount++;
+  
+  // Show angry GIF
+  const gifImg = document.getElementById('birthdayGif');
+  gifImg.src = "https://media1.tenor.com/m/7W9E3sZkBaIAAAAC/angry-stomp.gif";
+  setTimeout(() => {
+    gifImg.src = "https://media1.tenor.com/m/-mGQEeygOlIAAAAC/teasing-tongue.gif";
+  }, 1500);
+  
+  // Show teasy message
+  const randomMessage = teasyMessages[Math.floor(Math.random() * teasyMessages.length)];
+  const teasyDiv = document.getElementById('teasyMessage');
+  teasyDiv.innerHTML = `<div class="teasy-text">${randomMessage} 😜</div>`;
+  
+  // Move NO button to random position
+  const noBtn = document.querySelector('.no-btn');
+  const buttonGroup = document.querySelector('.button-group');
+  const maxX = buttonGroup.clientWidth - noBtn.clientWidth - 20;
+  const maxY = 50;
+  
+  const randomX = Math.random() * maxX;
+  const randomY = (Math.random() - 0.5) * maxY;
+  
+  noBtn.style.position = 'relative';
+  noBtn.style.left = randomX + 'px';
+  noBtn.style.top = randomY + 'px';
+  
+  // Make YES button bigger
+  yesSize += 0.15;
+  const yesBtn = document.querySelector('.yes-btn');
+  yesBtn.style.transform = `scale(${yesSize})`;
+  yesBtn.style.transition = 'all 0.3s ease';
+  
+  // Shake effect on NO button
+  noBtn.style.transform = 'scale(0.95)';
+  setTimeout(() => {
+    if (noBtn) noBtn.style.transform = 'scale(1)';
+  }, 200);
+}
+
+function sayYes() {
+  // Show patting GIF
+  const gifImg = document.getElementById('birthdayGif');
+  gifImg.src = "https://media1.tenor.com/m/MfQ9DvOYhyIAAAAC/pat-pat-head-pat.gif";
+  
+  // Show success message
+  const messageBox = document.querySelector('.message-box');
+  messageBox.innerHTML = `
+    <h1 style="color:#00c853;">✨ That's my good girl! ✨</h1>
+    <div class="gif-container" style="margin: 15px 0;">
+      <img class="pat-gif" src="https://media1.tenor.com/m/MfQ9DvOYhyIAAAAC/pat-pat-head-pat.gif" alt="patting gif" style="max-width: 150px;">
+    </div>
+    <p style="font-size: 18px; color:#FFD700;">🎉 You made the right choice! 🎉</p>
+    <p>Now let's see what's inside... 💙</p>
+  `;
+  
+  // Hide buttons
+  const buttonGroup = document.querySelector('.button-group');
+  buttonGroup.style.display = 'none';
+  
+  // After 2 seconds, move to cake/roses
+  setTimeout(() => {
+    document.getElementById("birthdayLayer").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  }, 2500);
 }
 
 /* FLOW */
@@ -456,7 +577,6 @@ function next() {
   }
 }
 
-/* BOX → ROSE */
 function pickBox(boxNumber) {
   document.getElementById("app").style.display = "none";
   document.getElementById("roseScene").style.display = "block";
@@ -464,21 +584,17 @@ function pickBox(boxNumber) {
   let b = document.getElementById("bouquet");
   b.innerHTML = "";
 
-  // Create 16 roses in a beautiful circular pattern
   for (let i = 0; i < 16; i++) {
     let r = document.createElement("div");
     r.className = "rose";
-
     let angle = (i / 16) * Math.PI * 2;
     let radius = 75;
     let center = 110;
     let x = center + Math.cos(angle) * radius;
     let y = center + Math.sin(angle) * radius;
-
     r.style.left = x + "px";
     r.style.top = y + "px";
     r.style.animationDelay = (i * 0.04) + "s";
-
     b.appendChild(r);
   }
 
@@ -508,16 +624,14 @@ function typeRose(message) {
 function back() {
   document.getElementById("roseScene").style.display = "none";
   document.getElementById("app").style.display = "block";
-
   document.getElementById("title").innerHTML = "💭 Hmm...";
   document.getElementById("text").innerHTML = "That was just the beginning...";
   document.getElementById("extra").innerHTML = "";
 }
 
-// Initialize
 updateDots();
 
 </script>
 
 </body>
-</html>
+  </html>    
