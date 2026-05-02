@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>🎂 Happy Birthday Nimisha! 🎂</title>
+<title>🎂 Nimisha - Happy 19th Birthday! 🎂</title>
 <style>
 * {
   margin: 0;
@@ -12,6 +12,8 @@
 }
 
 body {
+  background: url('https://cdn.pixplet.com/assets/images/artistic-celebration-003.jpg') no-repeat center center fixed;
+  background-size: cover;
   font-family: 'Segoe UI', 'Poppins', 'Arial', sans-serif;
   min-height: 100vh;
   display: flex;
@@ -19,115 +21,6 @@ body {
   align-items: center;
   padding: 20px;
   position: relative;
-  overflow-x: hidden;
-}
-
-/* ANIMATED BALLOON BACKGROUND */
-.balloon-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  overflow: hidden;
-  background: linear-gradient(180deg, #0a0a2a 0%, #1a0a2e 50%, #2d1b4e 100%);
-}
-
-/* Floating Balloons */
-.balloon {
-  position: absolute;
-  bottom: -150px;
-  width: 60px;
-  height: 80px;
-  border-radius: 50%;
-  animation: floatUp 8s ease-in infinite;
-  opacity: 0.7;
-}
-
-.balloon::before {
-  content: "🎈";
-  position: absolute;
-  font-size: 50px;
-  top: 0;
-  left: 5px;
-}
-
-.balloon::after {
-  content: "";
-  position: absolute;
-  bottom: -15px;
-  left: 28px;
-  width: 2px;
-  height: 20px;
-  background: rgba(255,215,0,0.5);
-}
-
-@keyframes floatUp {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.7;
-  }
-  90% {
-    opacity: 0.7;
-  }
-  100% {
-    transform: translateY(-120vh) rotate(20deg);
-    opacity: 0;
-  }
-}
-
-/* Confetti */
-.confetti {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: gold;
-  position: absolute;
-  top: -10px;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-  }
-}
-
-/* Happy Birthday Banner */
-.hbd-banner {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 15;
-  text-align: center;
-  pointer-events: none;
-  background: rgba(0,0,0,0.6);
-  padding: 10px 25px;
-  border-radius: 50px;
-  backdrop-filter: blur(5px);
-  border: 2px solid gold;
-  white-space: nowrap;
-}
-
-.hbd-banner h2 {
-  background: linear-gradient(135deg, #FFD700, #FFA500, #FF6B6B);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-size: 20px;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(255,215,0,0.5);
-}
-
-@media (max-width: 500px) {
-  .hbd-banner h2 { font-size: 14px; }
-  .hbd-banner { padding: 6px 15px; white-space: nowrap; }
-  .balloon { transform: scale(0.7); }
 }
 
 /* Dark overlay for readability */
@@ -138,7 +31,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+  background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.85) 100%);
   z-index: 0;
   pointer-events: none;
 }
@@ -146,7 +39,7 @@ body::before {
 /* all main containers */
 .container, #roseScene, #birthdayLayer {
   position: relative;
-  z-index: 10;
+  z-index: 2;
   max-width: 480px;
   width: 90%;
   background: rgba(10, 8, 15, 0.92);
@@ -169,7 +62,7 @@ h1 {
   margin-bottom: 15px;
 }
 
-/* GIF container */
+/* GIF container - guaranteed to show */
 .gif-container {
   margin: 10px auto;
   text-align: center;
@@ -346,6 +239,7 @@ h1 {
   border-left: 4px solid gold;
 }
 
+/* extra */
 button {
   background: gold;
   border: none;
@@ -364,14 +258,6 @@ button:hover {
 </style>
 </head>
 <body>
-
-<!-- BALLOON BACKGROUND -->
-<div class="balloon-bg" id="balloonBg"></div>
-
-<!-- HAPPY BIRTHDAY BANNER -->
-<div class="hbd-banner">
-  <h2>🎈 HAPPY BIRTHDAY NIMISHA 🎈</h2>
-</div>
 
 <!-- LOCK SCREEN -->
 <div id="lockScreen" class="container">
@@ -392,7 +278,7 @@ button:hover {
   <p id="hint" style="color:#FFD700; margin-top: 15px;">💡 hint: the day we first talked (DDMMYYYY)</p>
 </div>
 
-<!-- BIRTHDAY LAYER -->
+<!-- BIRTHDAY LAYER (with teasing answer) -->
 <div id="birthdayLayer" class="container" style="display:none;">
   <div class="gif-container">
     <img id="birthdayGif" class="gif-img" src="https://media4.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif?cid=790b7611h3y05k7z4kab6zkg43jxxb6gbuhnq82j4z35ff3v&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="fun">
@@ -428,45 +314,7 @@ button:hover {
 </div>
 
 <script>
-// === CREATE BALLOONS BACKGROUND ===
-function createBalloons() {
-  const bg = document.getElementById('balloonBg');
-  const balloonColors = ['🔴', '🟡', '🟣', '🔵', '🟠', '🟢', '🎈'];
-  
-  for (let i = 0; i < 25; i++) {
-    const balloon = document.createElement('div');
-    balloon.className = 'balloon';
-    const randomEmoji = balloonColors[Math.floor(Math.random() * balloonColors.length)];
-    balloon.style.left = Math.random() * 100 + '%';
-    balloon.style.animationDuration = 6 + Math.random() * 8 + 's';
-    balloon.style.animationDelay = Math.random() * 10 + 's';
-    balloon.style.opacity = 0.3 + Math.random() * 0.5;
-    balloon.innerHTML = randomEmoji;
-    balloon.style.fontSize = 40 + Math.random() * 30 + 'px';
-    bg.appendChild(balloon);
-  }
-}
-
-// === CREATE CONFETTI ===
-function createConfetti() {
-  for (let i = 0; i < 50; i++) {
-    const confetti = document.createElement('div');
-    confetti.className = 'confetti';
-    confetti.style.left = Math.random() * 100 + '%';
-    confetti.style.width = (Math.random() * 6 + 4) + 'px';
-    confetti.style.height = (Math.random() * 6 + 4) + 'px';
-    confetti.style.background = `hsl(${Math.random() * 60 + 40}, 100%, 55%)`;
-    confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
-    confetti.style.animationDelay = Math.random() * 5 + 's';
-    document.body.appendChild(confetti);
-  }
-}
-
-// Start animations
-createBalloons();
-createConfetti();
-
-// === PASSWORD LOGIC ===
+// === PASSWORD (date we first talked: 19/10/2024)
 let inputCode = "";
 const correctCode = "19102024";
 let noClickCount = 0;
@@ -502,6 +350,7 @@ function checkCode() {
   if (inputCode === correctCode) {
     document.getElementById("lockScreen").style.display = "none";
     document.getElementById("birthdayLayer").style.display = "block";
+    // reset gif to teasing
     const gif = document.getElementById("birthdayGif");
     if(gif) gif.src = "https://media4.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif?cid=790b7611h3y05k7z4kab6zkg43jxxb6gbuhnq82j4z35ff3v&ep=v1_gifs_search&rid=giphy.gif&ct=g";
     resetButtons();
@@ -525,16 +374,20 @@ function resetButtons() {
 
 function sayNo() {
   noClickCount++;
+  // angry gif (guaranteed working)
   const gifImg = document.getElementById("birthdayGif");
   gifImg.src = "https://media2.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif?cid=790b7611hmk2h1sw7kvysobtvv0ze0vly4q7k2ot8hq6sn38&ep=v1_gifs_search&rid=giphy.gif&ct=g";
+  // after 1.2s back to teasing
   setTimeout(() => {
     if (document.getElementById("birthdayLayer").style.display === "block")
       gifImg.src = "https://media4.giphy.com/media/3o7abB06u9bNzA8LC8/giphy.gif?cid=790b7611h3y05k7z4kab6zkg43jxxb6gbuhnq82j4z35ff3v&ep=v1_gifs_search&rid=giphy.gif&ct=g";
   }, 1200);
   
+  // random teasing message
   const msg = teasyMessages[Math.floor(Math.random() * teasyMessages.length)];
   document.getElementById("teasyMessage").innerHTML = `<div class="teasy-text">${msg} 😜</div>`;
   
+  // Move NO button randomly
   const noBtn = document.querySelector('.no-btn');
   const parent = document.querySelector('.button-group');
   if (noBtn && parent) {
@@ -547,6 +400,7 @@ function sayNo() {
     noBtn.style.top = randY + "px";
   }
   
+  // YES button grows
   yesSize += 0.15;
   const yesBtn = document.querySelector('.yes-btn');
   if (yesBtn) {
@@ -554,6 +408,7 @@ function sayNo() {
     yesBtn.style.transition = "0.2s";
   }
   
+  // quick shake on No
   noBtn.style.transform = "scale(0.92)";
   setTimeout(() => { if(noBtn) noBtn.style.transform = "scale(1)"; }, 150);
 }
@@ -561,6 +416,7 @@ function sayNo() {
 function sayYes() {
   const gifImg = document.getElementById("birthdayGif");
   gifImg.src = "https://media1.tenor.com/m/MfQ9DvOYhyIAAAAC/pat-pat-head-pat.gif";
+  // show success message
   const msgBox = document.querySelector(".message-box");
   msgBox.innerHTML = `
     <h1 style="color:#66ff66;">✨ That's my good girl! ✨</h1>
@@ -577,7 +433,7 @@ function sayYes() {
   }, 2200);
 }
 
-// === FLOW AFTER YES ===
+// === flow after Yes
 let step = 0;
 function next() {
   const flow = [
