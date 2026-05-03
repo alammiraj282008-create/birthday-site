@@ -10,10 +10,11 @@
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
+  user-select: none; /* better for button chase */
 }
 
 body {
-  font-family: 'Segoe UI', 'Poppins', 'Arial', sans-serif;
+  font-family: 'Segoe UI', 'Poppins', 'System-ui', sans-serif;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -21,10 +22,10 @@ body {
   padding: 20px;
   position: relative;
   overflow-x: hidden;
-  background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3e 50%, #0a0a2a 100%);
+  background: radial-gradient(circle at 20% 30%, #0b0b2f, #030318);
 }
 
-/* Balloons background - kept same festive look */
+/* animated balloons */
 .balloon {
   position: fixed;
   bottom: -150px;
@@ -42,7 +43,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
-  color: #888;
+  color: rgba(255,215,0,0.6);
 }
 .balloon::after {
   content: "";
@@ -51,12 +52,12 @@ body {
   left: 50%;
   width: 2px;
   height: 20px;
-  background: linear-gradient(to bottom, #888, transparent);
+  background: linear-gradient(to bottom, gold, transparent);
   transform: translateX(-50%);
 }
 @keyframes floatUp {
   0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(-120vh) rotate(20deg); opacity: 0.3; }
+  100% { transform: translateY(-120vh) rotate(15deg); opacity: 0.2; }
 }
 .balloon:nth-child(1) { background: radial-gradient(circle at 30% 30%, #ff6b6b, #cc3333); left: 5%; animation-duration: 8s; }
 .balloon:nth-child(2) { background: radial-gradient(circle at 30% 30%, #ffd93d, #ffaa00); left: 15%; animation-duration: 10s; animation-delay: 2s; }
@@ -78,79 +79,68 @@ body {
 .balloon:nth-child(18) { background: radial-gradient(circle at 30% 30%, #d9f99d, #84cc16); left: 80%; animation-duration: 10.8s; animation-delay: 2.2s; }
 .balloon:nth-child(19) { background: radial-gradient(circle at 30% 30%, #bae6fd, #0ea5e9); left: 90%; animation-duration: 9.2s; animation-delay: 6.5s; }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
-  z-index: 0;
-  pointer-events: none;
-}
-
+/* glassmorphic containers */
 .container, #roseScene {
   position: relative;
   z-index: 2;
   max-width: 550px;
   width: 92%;
-  background: rgba(10, 8, 15, 0.94);
-  backdrop-filter: blur(16px);
-  border-radius: 60px;
-  border: 1px solid rgba(255, 215, 0, 0.7);
-  box-shadow: 0 25px 45px rgba(0,0,0,0.5), 0 0 30px rgba(255,215,0,0.25);
-  padding: 25px 20px;
-  transition: 0.3s;
+  background: rgba(12, 10, 28, 0.92);
+  backdrop-filter: blur(18px);
+  border-radius: 70px;
+  border: 1px solid rgba(255, 200, 50, 0.6);
+  box-shadow: 0 30px 50px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,215,0,0.2);
+  padding: 28px 20px;
+  transition: 0.2s;
   text-align: center;
   max-height: 90vh;
   overflow-y: auto;
 }
 
-h1 {
-  font-size: 26px;
-  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+h1, h2 {
+  font-weight: 700;
+  background: linear-gradient(135deg, #FFE6A3, #FFB347, #FFD966);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
 }
 
 .sticker-container {
-  margin: 10px auto;
+  margin: 8px auto;
   background: rgba(0,0,0,0.5);
   border-radius: 80px;
-  padding: 8px 20px;
+  padding: 6px 20px;
   display: inline-block;
-  border: 2px solid rgba(255,215,0,0.5);
-  animation: float 2s ease-in-out infinite;
+  border: 1px solid gold;
+  animation: float 2s infinite;
 }
-.sticker { font-size: 60px; display: inline-block; animation: bounce 1s ease infinite; }
+.sticker { font-size: 58px; display: inline-block; animation: bounce 0.9s infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
+@keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)}}
 
-@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-8px); } }
-@keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-@keyframes flameFlicker { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(0.95); } }
-
+/* teasing style */
 .tease-message {
-  background: rgba(255,215,0,0.12);
-  border-left: 3px solid #FFD700;
-  border-right: 3px solid #FFD700;
+  background: rgba(255,200,0,0.12);
+  border-left: 3px solid #FFD966;
+  border-right: 3px solid #FFD966;
   padding: 8px 12px;
-  margin: 10px 0;
-  border-radius: 40px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #FFD700;
+  margin: 12px 0;
+  border-radius: 60px;
+  font-size: 15px;
+  color: #FFE484;
 }
 
+/* passcode dots */
 #dots {
   font-size: 38px;
   letter-spacing: 12px;
-  color: #FFD700;
+  color: #FFD966;
   background: rgba(0,0,0,0.6);
   display: inline-block;
-  padding: 10px 25px;
-  border-radius: 60px;
+  padding: 8px 24px;
+  border-radius: 70px;
   margin: 12px auto;
   font-family: monospace;
 }
@@ -158,39 +148,67 @@ h1 {
 .row {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin-bottom: 15px;
+  gap: 18px;
+  margin: 12px 0;
   flex-wrap: wrap;
 }
 .row button {
   width: 70px;
   height: 70px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #1e1e32, #12121f);
-  border: 2px solid rgba(255,215,0,0.6);
-  color: #FFD700;
+  border-radius: 60px;
+  background: radial-gradient(circle at 30% 30%, #24243e, #0f0f1f);
+  border: 2px solid rgba(255,200,0,0.8);
+  color: #FFD966;
   font-size: 28px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.05s linear;
-  box-shadow: 0 5px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 6px 0 #00000055;
 }
-.row button:active { transform: translateY(2px); }
+.row button:active { transform: translateY(3px); }
 
+/* chasing no + growing yes */
 .button-group {
   display: flex;
   justify-content: center;
-  gap: 25px;
-  margin: 20px 0;
+  align-items: center;
+  gap: 30px;
+  margin: 25px 0;
   flex-wrap: wrap;
+  position: relative;
+  min-height: 80px;
 }
-.yes-btn { background: linear-gradient(135deg, #00c853, #009624); padding: 12px 32px; border-radius: 50px; border: none; color: white; font-weight: bold; font-size: 18px; cursor: pointer; }
-.no-btn { background: linear-gradient(135deg, #d32f2f, #b71c1c); padding: 12px 32px; border-radius: 50px; border: none; color: white; font-weight: bold; font-size: 18px; cursor: pointer; transition: all 0.1s ease; }
+.yes-btn {
+  background: linear-gradient(115deg, #00d26a, #00a142);
+  padding: 14px 32px;
+  border-radius: 100px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  z-index: 5;
+}
+.no-btn {
+  background: linear-gradient(115deg, #e63946, #b91c1c);
+  padding: 12px 28px;
+  border-radius: 100px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.08s linear;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+  position: relative;
+}
 
-/* Clean Cake Builder */
+/* cake styling fresh */
 .cake-preview {
-  background: rgba(0,0,0,0.3);
-  border-radius: 40px;
+  background: rgba(0,0,0,0.35);
+  border-radius: 48px;
   padding: 20px;
   margin: 15px 0;
 }
@@ -204,52 +222,52 @@ h1 {
   margin: 10px 0;
 }
 .cake-layer {
-  width: 220px;
-  height: 44px;
-  border-radius: 20px 20px 12px 12px;
-  transition: all 0.2s;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  width: 230px;
+  height: 46px;
+  border-radius: 24px 24px 16px 16px;
+  transition: 0.2s;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 .frosting {
-  width: 232px;
-  height: 20px;
-  border-radius: 28px 28px 14px 14px;
-  margin-bottom: 6px;
+  width: 242px;
+  height: 22px;
+  border-radius: 32px 32px 16px 16px;
+  margin-bottom: 8px;
   position: relative;
-  z-index: 1;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 .candle {
-  width: 14px;
-  height: 36px;
-  background: linear-gradient(135deg, #ff8888, #dd4444);
+  width: 16px;
+  height: 40px;
+  background: linear-gradient(145deg, #ffa5a5, #dd4a4a);
   position: absolute;
   bottom: 100%;
   transform: translateX(-50%);
-  border-radius: 4px 4px 2px 2px;
+  border-radius: 6px 6px 2px 2px;
 }
 .flame {
-  width: 12px;
-  height: 18px;
-  background: radial-gradient(circle, #ffcc44, #ff6600);
+  width: 14px;
+  height: 20px;
+  background: radial-gradient(circle, #ffdd77, #ff7700);
   position: absolute;
-  top: -16px;
+  top: -18px;
   left: 1px;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-  animation: flameFlicker 0.25s ease infinite;
+  border-radius: 50% 50% 40% 40%;
+  animation: flicker 0.2s infinite alternate;
 }
+@keyframes flicker { 0% { opacity: 0.9; transform: scaleY(1);} 100% { opacity: 1; transform: scaleY(1.08);} }
+
 .control-panel {
-  background: rgba(255,215,0,0.08);
-  border-radius: 40px;
+  background: rgba(255,210,0,0.08);
+  border-radius: 48px;
   padding: 15px;
-  margin: 10px 0;
 }
-.control-panel h3 { color: #FFD700; font-size: 16px; margin: 10px 0 5px; }
 .color-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   margin: 10px 0;
 }
 .color-swatch {
@@ -258,59 +276,55 @@ h1 {
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid gold;
-  transition: 0.1s;
-  box-shadow: 0 2px 8px black;
+  transition: 0.08s linear;
 }
-.color-swatch:hover { transform: scale(1.08); border-color: white; }
-.slider-label {
-  display: flex;
-  justify-content: space-between;
-  color: #FFD700;
-  margin: 8px 5px;
-}
-input[type="range"] { width: 100%; accent-color: #FFD700; }
 .action-btn {
-  background: linear-gradient(135deg, #FFD700, #FFA500);
+  background: linear-gradient(125deg, #FFD966, #FFB347);
   border: none;
-  padding: 12px 24px;
-  border-radius: 40px;
+  padding: 12px 22px;
+  border-radius: 60px;
   font-weight: bold;
-  margin: 8px;
+  margin: 10px 8px;
   cursor: pointer;
   font-size: 16px;
+  transition: 0.1s;
 }
-.voice-record {
-  background: rgba(255,255,255,0.1);
-  border-radius: 50px;
-  padding: 12px;
-  margin: 12px 0;
+.voice-card {
+  background: rgba(0,0,0,0.4);
+  border-radius: 48px;
+  padding: 16px;
+  margin: 15px 0;
 }
 .voice-btn {
-  background: #ff6b6b;
+  background: #f97316;
   padding: 10px 20px;
-  border-radius: 50px;
+  border-radius: 40px;
   color: white;
   border: none;
-  margin: 5px;
+  margin: 6px;
   cursor: pointer;
+  font-weight: bold;
 }
 .shake-notice {
-  background: rgba(255,215,0,0.2);
-  padding: 12px;
-  border-radius: 40px;
-  margin: 12px;
+  background: rgba(255,200,0,0.2);
+  padding: 10px;
+  border-radius: 60px;
   font-size: 14px;
-  color: #FFD700;
+  color: #FFE484;
+  margin: 12px;
 }
-.blow-out-anim { animation: blowOut 0.25s forwards; }
-@keyframes blowOut {
+.blow-out-anim {
+  animation: blowPop 0.2s forwards;
+}
+@keyframes blowPop {
   0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0) rotate(20deg); opacity: 0; visibility: hidden; }
+  100% { transform: scale(0) rotate(15deg); opacity: 0; visibility: hidden; }
 }
 </style>
 </head>
 <body>
 
+<!-- balloons x19 -->
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
@@ -318,9 +332,9 @@ input[type="range"] { width: 100%; accent-color: #FFD700; }
 
 <!-- LOCK SCREEN -->
 <div id="lockScreen" class="container">
-  <h1>🔐 BIRTHDAY VAULT 🔐</h1>
-  <div class="sticker-container"><div class="sticker">😏💅</div></div>
-  <div class="tease-message">✨ I know you are smart enough to guess the code, Princess... ✨</div>
+  <h1>🔐 BIRTHDAY TREASURE VAULT 🔐</h1>
+  <div class="sticker-container"><div class="sticker">👸💅</div></div>
+  <div class="tease-message">✨ Nimisha, only a genius can unlock this... ✨</div>
   <div id="dots">○○○○ ○○○○</div>
   <div id="keypad">
     <div class="row"><button data-num="1">1</button><button data-num="2">2</button><button data-num="3">3</button></div>
@@ -328,57 +342,52 @@ input[type="range"] { width: 100%; accent-color: #FFD700; }
     <div class="row"><button data-num="7">7</button><button data-num="8">8</button><button data-num="9">9</button></div>
     <div class="row"><button id="delBtn">⌫</button><button data-num="0">0</button><button id="clearBtn">C</button></div>
   </div>
-  <p style="color:#FFD700; margin-top: 12px;">💡 hint: the day we first talked (DDMMYYYY) 💡</p>
+  <p style="color:#FFD966; margin-top: 12px;">💡 hint: the day we first talked (DDMMYYYY) 💡</p>
 </div>
 
-<!-- BIRTHDAY LAYER with OLD AGE jokes -->
+<!-- BIRTHDAY JOKE LAYER with new message & chasing NO -->
 <div id="birthdayLayer" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">😜🎉</div></div>
+  <div class="sticker-container"><div class="sticker">😜🎀</div></div>
   <div class="message-box">
     <h1>🎂 HAPPY BIRTHDAY MY QUEEN BUDDY! 🎂</h1>
-    <p style="font-size: 18px; margin: 8px 0;">You're 19 now... TOO OLD! 👵</p>
+    <p style="font-size: 20px; margin: 8px 0; font-weight: bold; color: #FFB347;">You're 19 now... TOO OLD! 👵</p>
     <p style="margin: 5px 0;">You should be in an old age home, you knoww... 🙄</p>
-    <p style="margin: 5px 0;">But anyways... you're still beautiful, miss! 💛</p>
+    <p style="margin: 5px 0; background: rgba(255,215,0,0.1); border-radius: 40px; padding: 8px;">But anyways... you will always be my little kitten — gorgeous and cute! 💖🐱</p>
     <p style="color:#FFD700; margin-top: 12px;">✨ Now... want to see your cake? ✨</p>
   </div>
-  <div class="button-group">
+  <div class="button-group" id="chaseZone">
     <button class="yes-btn" id="yesCakeBtn">YES 🎂</button>
     <button class="no-btn" id="noCakeBtn">NO 😤</button>
   </div>
-  <div id="teasyMessage" style="color:#ffaa44; font-weight:bold; margin-top: 10px;"></div>
+  <div id="teasyMessage" style="color:#ffaa66; font-weight:bold; margin-top: 12px; min-height: 48px;"></div>
 </div>
 
-<!-- CLEAN CAKE BUILDER - FIXED & INTERACTIVE -->
+<!-- CAKE BUILDER with voice recording & human-like speech -->
 <div id="cakeBuilder" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">🎂✨</div></div>
-  <h1>✨ Decorate Your Cake! ✨</h1>
+  <div class="sticker-container"><div class="sticker">🍰✨</div></div>
+  <h1>🎨 Design Your Dream Cake 🎨</h1>
   <div class="cake-preview">
     <div id="cakeCanvas"></div>
   </div>
-  
   <div class="control-panel">
     <h3>📏 Layers: <span id="layerCount">2</span></h3>
-    <input type="range" id="layerSlider" min="1" max="5" value="2">
-    
+    <input type="range" id="layerSlider" min="1" max="5" value="2" style="width:100%">
     <h3>🎨 Layer Colors</h3>
     <div id="layerColorGrid" class="color-grid"></div>
-    
     <h3>🍰 Frosting</h3>
     <div id="frostingGrid" class="color-grid"></div>
-    
     <h3>🕯️ Candles: <span id="candleCount">3</span></h3>
-    <input type="range" id="candleSlider" min="0" max="9" value="3">
+    <input type="range" id="candleSlider" min="0" max="9" value="3" style="width:100%">
   </div>
-  
   <button class="action-btn" id="lightCandlesBtn">🎂 Light the Candles! 🔥</button>
   
-  <!-- Voice Recording Feature - YOUR VOICE -->
-  <div class="voice-record">
-    <p style="color:#FFD700;">🎤 Record Your Birthday Wish 🎤</p>
+  <!-- RECORD YOUR VOICE (makes it human) -->
+  <div class="voice-card">
+    <p style="color:#FFD966;">🎤 Record Your Real Voice 🎤</p>
     <button id="recordBtn" class="voice-btn">🎙️ Record Message</button>
-    <button id="playRecordBtn" class="voice-btn" style="background:#4d96ff;">🔊 Play My Voice</button>
+    <button id="playRecordBtn" class="voice-btn" style="background:#3b82f6;">🔊 Play My Voice</button>
     <audio id="userAudio" controls style="width:100%; margin-top:8px; display:none;"></audio>
-    <p id="voiceStatus" style="font-size:12px; color:#aaa;"></p>
+    <p id="voiceStatus" style="font-size:12px; opacity:0.8;"></p>
   </div>
   
   <div class="shake-notice" id="shakeNotice">📱 SHAKE YOUR PHONE to blow out the candles! 📱</div>
@@ -390,27 +399,27 @@ input[type="range"] { width: 100%; accent-color: #FFD700; }
   <div class="sticker-container"><div class="sticker">🎁💙</div></div>
   <h2>💌 A Special Gift For You 💌</h2>
   <p style="margin: 15px;">For the most amazing 19-year-old I know...</p>
-  <div style="background: rgba(255,215,0,0.2); border-radius: 30px; padding: 15px;">
+  <div style="background: rgba(255,215,0,0.2); border-radius: 40px; padding: 18px; line-height: 1.5;">
     🌟 You are magic. Every day you make the world brighter.<br>
     💛 Never forget how incredible you are.<br>
     🎂 May this year bring you joy, adventure, and all the cake!<br>
     ✨ Love you, buddy! ✨
   </div>
-  <button id="goToRosesBtn" style="margin-top: 15px; padding:12px 24px; border-radius:40px; background:#FFD700;">Continue to Roses 💙</button>
+  <button id="goToRosesBtn" style="margin-top: 20px; padding:12px 28px; border-radius:60px; background:#FFD966; font-weight:bold;">Continue to Roses 💙</button>
 </div>
 
-<!-- ROSES -->
-<div id="roseScene" style="display:none; max-width:500px; width:90%; margin:auto; text-align:center; background:rgba(10,8,15,0.94); backdrop-filter:blur(16px); border-radius:60px; padding:25px;">
+<!-- ROSES PART -->
+<div id="roseScene" style="display:none; max-width:500px; width:90%; margin:auto; text-align:center; background:rgba(12,10,28,0.94); backdrop-filter:blur(20px); border-radius:70px; padding:28px;">
   <h1>💙 NOT EVERYONE GETS THIS 💙</h1>
   <div id="bouquet" style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:20px 0;"></div>
-  <p id="roseText" style="color:#FFD700; margin:20px;"></p>
-  <button onclick="resetAndEnd()" style="background:#FFD700; padding:12px 28px; border-radius:40px; border:none;">✨ Finish ✨</button>
+  <p id="roseText" style="color:#FFD966; margin:20px;"></p>
+  <button onclick="resetAndEnd()" style="background:#FFB347; padding:12px 28px; border-radius:60px; border:none; font-weight:bold;">✨ Finish ✨</button>
 </div>
 
 <script>
-// ========== PASSCODE (Fixed) ==========
+// ========== PASSCODE LOGIC ==========
 let fullCode = "";
-const correctCode = "19102024";
+const correctCode = "19102024"; // DDMMYYYY
 
 function refreshDots() {
   const dotsDiv = document.getElementById("dots");
@@ -423,6 +432,7 @@ function refreshDots() {
     dotsDiv.innerText = str;
   }
 }
+
 function pressDigit(d) {
   if(fullCode.length < 8) {
     fullCode += d;
@@ -431,63 +441,108 @@ function pressDigit(d) {
       if(fullCode === correctCode) {
         document.getElementById("lockScreen").style.display = "none";
         document.getElementById("birthdayLayer").style.display = "block";
-        resetNoButton();
-      } else { alert("❌ Wrong code! Hint: DDMMYYYY of the day we first talked."); fullCode = ""; refreshDots(); }
+        resetYesNoChase();
+      } else { alert("❌ Wrong unlock! Hint: DDMMYYYY of day we first talked."); fullCode = ""; refreshDots(); }
     }
   }
 }
 function clearFull() { fullCode = ""; refreshDots(); }
 function deleteLast() { fullCode = fullCode.slice(0,-1); refreshDots(); }
 
-function initKeypad() {
-  document.querySelectorAll("#keypad button[data-num]").forEach(btn => {
-    btn.addEventListener("click", () => pressDigit(btn.getAttribute("data-num")));
-  });
-  document.getElementById("delBtn")?.addEventListener("click", deleteLast);
-  document.getElementById("clearBtn")?.addEventListener("click", clearFull);
-}
-
-// ========== NO BUTTON TEASING (with old age jokes) ==========
+// ========== CHASE NO BUTTON + YES GROWS ==========
 let noClickCount = 0;
 const teaseMessages = [
-  "😂 You can't say NO to cake!",
-  "👵 Too old to say no, grandma!",
-  "🍰 Just say YES, senior citizen!",
-  "🙄 Stop acting like you're 90!",
-  "💛 Click YES or I'll tell everyone your real age!",
-  "🎂 Old age home called, they want you back!",
-  "🤭 You know you want the cake...",
-  "✨ Be a good girl and press YES already!"
+  "😂 You can't escape the cake!",
+  "🤭 No means YES in birthday land!",
+  "👵 Too old to say no, granny!",
+  "🍰 Just click YES already, lazybones!",
+  "✨ my little kitten, be nice!",
+  "🎂 This button is getting tired of you 😼",
+  "💛 You know you want it...",
+  "👸 Princess Nimisha, click YES!"
 ];
-function resetNoButton() {
+
+function resetYesNoChase() {
   noClickCount = 0;
+  const yesBtn = document.getElementById("yesCakeBtn");
   const noBtn = document.getElementById("noCakeBtn");
-  if(noBtn) { noBtn.style.transform = ""; noBtn.style.opacity = "1"; noBtn.style.pointerEvents = "auto"; }
+  if(yesBtn) { yesBtn.style.transform = "scale(1)"; yesBtn.style.fontSize = "20px"; yesBtn.style.padding = "14px 32px"; }
+  if(noBtn) { noBtn.style.transform = "scale(1)"; noBtn.style.opacity = "1"; noBtn.style.pointerEvents = "auto"; noBtn.style.position = "relative"; }
+  const teaserDiv = document.getElementById("teasyMessage");
+  if(teaserDiv) teaserDiv.innerText = "";
 }
-function setupNoButton() {
+
+function setupChaseNo() {
   const noBtn = document.getElementById("noCakeBtn");
   const yesBtn = document.getElementById("yesCakeBtn");
+  const chaseContainer = document.getElementById("chaseZone");
   const teaserDiv = document.getElementById("teasyMessage");
-  noBtn.addEventListener("click", () => {
+
+  noBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     noClickCount++;
     teaserDiv.innerText = teaseMessages[noClickCount % teaseMessages.length];
-    if(noClickCount >= 4) {
-      noBtn.style.transform = "scale(0.6)";
-      noBtn.style.opacity = "0.5";
-      if(noClickCount >= 7) { noBtn.style.pointerEvents = "none"; teaserDiv.innerText = "OKAY FINE! You win... but click YES now 👑"; }
-    } else {
-      let scale = 1 - (noClickCount * 0.08);
-      noBtn.style.transform = `scale(${Math.max(0.5, scale)})`;
-    }
+    
+    // Shrink no button and reposition randomly
+    let scaleNo = Math.max(0.4, 1 - noClickCount * 0.09);
+    noBtn.style.transform = `scale(${scaleNo})`;
+    if(noClickCount >= 5) noBtn.style.opacity = "0.5";
+    if(noClickCount >= 8) noBtn.style.pointerEvents = "none";
+    
+    // Make YES button BIGGER each time
+    let newScale = 1 + (noClickCount * 0.12);
+    let newFont = 20 + (noClickCount * 2);
+    if(newFont > 44) newFont = 44;
+    yesBtn.style.transform = `scale(${newScale})`;
+    yesBtn.style.fontSize = `${newFont}px`;
+    yesBtn.style.padding = `${14 + noClickCount*2}px ${32 + noClickCount*3}px`;
+    
+    // random micro movement for No button (chase effect)
+    const maxX = 40, maxY = 25;
+    const randX = (Math.random() - 0.5) * maxX;
+    const randY = (Math.random() - 0.5) * maxY;
+    noBtn.style.position = "relative";
+    noBtn.style.left = `${randX}px`;
+    noBtn.style.top = `${randY}px`;
+    
+    if(noClickCount >= 10) teaserDiv.innerText = "👑 You're stubborn! But click YES now, princess!";
   });
+  
   yesBtn.addEventListener("click", () => {
     document.getElementById("birthdayLayer").style.display = "none";
     document.getElementById("cakeBuilder").style.display = "block";
     initCakeBuilder();
+    // play human voice if recorded, else I will use natural-sounding speech
+    playPersonalVoiceMessage();
   });
 }
 
-// ========== CAKE BUILDER (FIXED DIRECTION - NOT INVERTED) ==========
+// HUMAN VOICE MESSAGE: "Hey Nimmi ... if you're hearing this you acted as a good girl..."
+function playPersonalVoiceMessage() {
+  const audioEl = document.getElementById("userAudio");
+  if(audioEl && audioEl.src && audioEl.src !== "") {
+    // user recorded voice, play that
+    const playIt = new Audio(audioEl.src);
+    playIt.play().catch(e=>console.log);
+  } else {
+    // generate realistic speech with Web Speech API + more lively voice
+    const msg = new SpeechSynthesisUtterance();
+    msg.text = "Hey Nimmi! If you're hearing this, it means you acted as a good girl and clicked on YES option. Here is a cake for you! Although you can't eat it, see me so caring, you will not get diabetes. Happy birthday my princess! Don't you leave me by getting too old!";
+    msg.rate = 0.92;
+    msg.pitch = 1.1;
+    msg.volume = 1;
+    // try to pick a natural female voice if available
+    let voices = window.speechSynthesis.getVoices();
+    if(voices.length) {
+      const preferred = voices.find(v => v.name.includes("Samantha") || v.name.includes("Google UK Female") || v.name.includes("Female") || v.lang === 'en-US' && v.name.includes('Female'));
+      if(preferred) msg.voice = preferred;
+    }
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(msg);
+  }
+}
+
+// ========== CAKE BUILDER FULL ==========
 let layerColors = [];
 let frostingColor = "#fff5e0";
 let candleNum = 3;
@@ -500,7 +555,7 @@ function renderCake() {
   if(!canvas) return;
   canvas.innerHTML = "";
   const layerCount = parseInt(document.getElementById("layerSlider").value);
-  // Frosting on TOP (correct order)
+  // frosting on top
   const frostingDiv = document.createElement("div");
   frostingDiv.className = "frosting";
   frostingDiv.style.backgroundColor = frostingColor;
@@ -520,12 +575,11 @@ function renderCake() {
       const candle = document.createElement("div");
       candle.className = "candle";
       candle.style.left = `${(i+1) * (100/(candleNum+1))}%`;
-      candle.style.backgroundColor = "#888";
+      candle.style.backgroundColor = "#7f8c8d";
       frostingDiv.appendChild(candle);
     }
   }
   canvas.appendChild(frostingDiv);
-  // Layers from TOP to BOTTOM (correct visual)
   for(let i=layerCount-1; i>=0; i--) {
     const layer = document.createElement("div");
     layer.className = "cake-layer";
@@ -555,15 +609,15 @@ function renderColorPickers() {
   layerGrid.innerHTML = "";
   for(let i=0; i<layerCt; i++) {
     const label = document.createElement("div");
-    label.innerText = `Layer ${i+1}`;
-    label.style.color = "#FFD700";
-    label.style.fontSize = "12px";
-    label.style.width = "100%";
+    label.innerText = `✨ Layer ${i+1}`;
+    label.style.color = "#FFD966";
+    label.style.fontSize = "13px";
     layerGrid.appendChild(label);
     const subGrid = document.createElement("div");
     subGrid.style.display = "flex";
     subGrid.style.gap = "8px";
     subGrid.style.flexWrap = "wrap";
+    subGrid.style.marginBottom = "12px";
     layerColorOptions.forEach(col => {
       const swatch = document.createElement("div");
       swatch.className = "color-swatch";
@@ -584,19 +638,10 @@ function renderColorPickers() {
 }
 
 function lightCandles() {
-  if(candleNum === 0) { alert("Add some candles first! 🕯️"); return; }
+  if(candleNum === 0) { alert("Add candles first! 🕯️"); return; }
   candlesLit = true;
   renderCake();
-  // Play birthday message with your voice if recorded, else default speech
-  const voiceMsg = document.getElementById("userAudio")?.src;
-  if(voiceMsg && voiceMsg !== "") {
-    const audio = new Audio(voiceMsg);
-    audio.play().catch(e=>console.log);
-  } else {
-    const utterance = new SpeechSynthesisUtterance("Happy Birthday Nimisha! You're 19, gorgeous and amazing! Blow the candles!");
-    utterance.rate = 0.9;
-    window.speechSynthesis.speak(utterance);
-  }
+  playPersonalVoiceMessage();  // replay the sweet message when lighting
   document.getElementById("shakeNotice").innerHTML = "🎵 HAPPY BIRTHDAY NIMISHA! 🎵<br>📱 SHAKE YOUR PHONE TO BLOW OUT CANDLES! 📱";
 }
 
@@ -606,9 +651,8 @@ function blowOutCandles() {
   const flames = document.querySelectorAll(".flame");
   flames.forEach(f => f.classList.add("blow-out-anim"));
   setTimeout(() => renderCake(), 200);
-  document.getElementById("shakeNotice").innerHTML = "🎉 You blew the candles! Wish granted! 🎉";
+  document.getElementById("shakeNotice").innerHTML = "🎉 You blew the candles! Magical wish coming true! 🎉";
 }
-
 function setupShake() {
   let lastShake = 0;
   window.addEventListener('devicemotion', (e) => {
@@ -620,20 +664,18 @@ function setupShake() {
   });
   const fallback = document.createElement("button");
   fallback.innerText = "💨 Tap to Blow (if shake fails) 💨";
-  fallback.style.background = "#FFAA33";
+  fallback.style.background = "#FFA559";
   fallback.style.borderRadius = "50px";
   fallback.style.padding = "8px 16px";
-  fallback.style.margin = "8px";
   fallback.style.border = "none";
+  fallback.style.margin = "8px";
   fallback.onclick = () => { if(candlesLit) blowOutCandles(); };
   document.getElementById("shakeNotice").after(fallback);
 }
-
 function finishCake() {
   document.getElementById("cakeBuilder").style.display = "none";
   document.getElementById("giftReveal").style.display = "block";
 }
-
 function initCakeBuilder() {
   const count = parseInt(document.getElementById("layerSlider").value);
   layerColors = [];
@@ -651,13 +693,12 @@ function initCakeBuilder() {
   document.getElementById("finishCakeBtn").onclick = finishCake;
 }
 
-// VOICE RECORDER (Your voice)
+// VOICE RECORDER (human)
 let mediaRecorder, audioChunks = [];
 const recordBtn = document.getElementById("recordBtn");
 const playBtn = document.getElementById("playRecordBtn");
 const userAudio = document.getElementById("userAudio");
 const voiceStatus = document.getElementById("voiceStatus");
-
 if(recordBtn) {
   recordBtn.onclick = async () => {
     try {
@@ -670,12 +711,12 @@ if(recordBtn) {
         const url = URL.createObjectURL(audioBlob);
         userAudio.src = url;
         userAudio.style.display = "block";
-        voiceStatus.innerText = "✅ Your voice recorded! Click 'Play My Voice' to hear it on birthday!";
+        voiceStatus.innerText = "✅ Your lovely voice saved! Click 'Play My Voice' during birthday ✨";
         stream.getTracks().forEach(track => track.stop());
       };
       mediaRecorder.start();
-      voiceStatus.innerText = "🎙️ Recording... Click again to stop.";
-      recordBtn.innerText = "⏹️ Stop Recording";
+      voiceStatus.innerText = "🎙️ Recording... Click stop.";
+      recordBtn.innerText = "⏹️ Stop";
       recordBtn.onclick = () => {
         if(mediaRecorder && mediaRecorder.state === "recording") {
           mediaRecorder.stop();
@@ -683,12 +724,10 @@ if(recordBtn) {
           recordBtn.onclick = arguments.callee;
         }
       };
-    } catch(e) { alert("Microphone access needed for your voice!"); }
+    } catch(e) { alert("Allow mic to add your real voice!"); }
   };
 }
-if(playBtn) {
-  playBtn.onclick = () => { if(userAudio.src) userAudio.play(); else voiceStatus.innerText = "No recording yet! Press record first."; };
-}
+if(playBtn) { playBtn.onclick = () => { if(userAudio.src) userAudio.play(); else voiceStatus.innerText = "No recording yet. Press record first!"; }; }
 
 function goToRoses() {
   document.getElementById("giftReveal").style.display = "none";
@@ -698,26 +737,32 @@ function goToRoses() {
   bouquet.innerHTML = "";
   for(let i=1;i<=19;i++) {
     const card = document.createElement("div");
-    card.style.background = "rgba(255,255,240,0.1)";
-    card.style.borderRadius = "30px";
+    card.style.background = "rgba(255,240,200,0.15)";
+    card.style.borderRadius = "36px";
     card.style.padding = "10px";
     card.style.textAlign = "center";
     card.style.width = "80px";
-    card.innerHTML = `<div style="font-size:50px;">🌹</div><span>${i}</span>`;
+    card.innerHTML = `<div style="font-size:52px;">🌹</div><span style="color:#FFD966;">${i}</span>`;
     bouquet.appendChild(card);
   }
-  document.getElementById("roseText").innerHTML = "19 roses for your 19th birthday! You are rare and precious. 💙✨";
+  document.getElementById("roseText").innerHTML = "19 roses for your 19th birthday! You are rare and precious. My little kitten, stay with me. 💙✨";
 }
-function resetAndEnd() { alert("🎂 Happy 19th Birthday Nimisha! You're amazing! 🎂\n May this year be as sweet as cake!"); location.reload(); }
+function resetAndEnd() { alert("🎂 Happy 19th Birthday Nimisha! You're timeless & gorgeous! 🎂\nStay sweet, kitten!"); location.reload(); }
 
 window.onload = () => {
   initKeypad();
-  setupNoButton();
+  setupChaseNo();
   document.getElementById("goToRosesBtn")?.addEventListener("click", goToRoses);
   document.getElementById("layerSlider")?.addEventListener("input", updateLayers);
   document.getElementById("candleSlider")?.addEventListener("input", updateCandles);
 };
+function initKeypad() {
+  document.querySelectorAll("#keypad button[data-num]").forEach(btn => {
+    btn.addEventListener("click", () => pressDigit(btn.getAttribute("data-num")));
+  });
+  document.getElementById("delBtn")?.addEventListener("click", deleteLast);
+  document.getElementById("clearBtn")?.addEventListener("click", clearFull);
+}
 </script>
 </body>
 </html>
-```
