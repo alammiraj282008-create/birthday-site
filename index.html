@@ -121,16 +121,26 @@ body {
   border-radius: 50%;
   background: white;
   border: none;
-  color: #4b5563;
-  font-size: 28px;
-  font-weight: bold;
+  color: #1a2a3a;
+  font-size: 32px;
+  font-weight: 900;
   cursor: pointer;
   transition: 0.1s;
   box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+  text-shadow: 0 1px 1px rgba(255,255,255,0.5);
 }
 
 #lockScreen .row button:active {
   transform: scale(0.92);
+  background: #f0f0f0;
+}
+
+#lockScreen .row button#delBtn,
+#lockScreen .row button#clearBtn {
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e66;
+  background: #fff5e6;
 }
 
 h1, h2 {
@@ -168,15 +178,17 @@ h1, h2 {
 }
 
 #dots {
-  font-size: 34px;
-  letter-spacing: 10px;
-  color: white;
-  background: rgba(255,255,255,0.22);
+  font-size: 38px;
+  letter-spacing: 12px;
+  color: #1e2a3e;
+  background: rgba(255,255,255,0.45);
   display: inline-block;
   padding: 10px 22px;
-  border-radius: 20px;
+  border-radius: 30px;
   margin-bottom: 15px;
   font-family: monospace;
+  font-weight: bold;
+  text-shadow: 0 1px 0 white;
 }
 
 .row {
@@ -395,25 +407,24 @@ h1, h2 {
 <!-- BEAUTIFUL CUSTOM LOCK SCREEN WITH YOUR IMAGE -->
 <div id="lockScreen" style="background:#8fd3ff; border-radius:40px; border:4px solid rgba(255,255,255,0.4); max-width:420px; padding:25px 18px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
   <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:15px;">
-    <h1 style="color:white; font-size:28px; font-weight:800; margin:0;">Enter a passcode</h1>
+    <h1 style="color:white; font-size:28px; font-weight:800; margin:0; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Enter a passcode</h1>
   </div>
   <div style="display:flex; justify-content:center; margin-bottom:18px; position:relative;">
     <div style="background:white; padding:12px; border-radius:18px; transform:rotate(-3deg); box-shadow:0 10px 20px rgba(0,0,0,0.25); position:relative;">
-      <!-- YOUR IMAGE - CORRECT RAW GITHUB URL -->
       <img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" 
            style="width:190px; height:240px; object-fit:cover; border-radius:10px; display:block;">
       <div style="position:absolute; top:-12px; right:-12px; font-size:40px;">🎀</div>
       <div style="position:absolute; bottom:-25px; left:-18px; font-size:55px;">🧸</div>
     </div>
   </div>
-  <div id="dots" style="font-size:34px; letter-spacing:10px; color:white; background:rgba(255,255,255,0.22); display:inline-block; padding:10px 22px; border-radius:20px; margin-bottom:15px; font-family:monospace;">○○○○ ○○○○</div>
+  <div id="dots" style="font-size:38px; letter-spacing:12px; color:#1e2a3e; background:rgba(255,255,255,0.45); display:inline-block; padding:10px 22px; border-radius:30px; margin-bottom:15px; font-family:monospace; font-weight:bold;">○○○○ ○○○○</div>
   <div id="keypad">
     <div class="row"><button data-num="1">1</button><button data-num="2">2</button><button data-num="3">3</button></div>
     <div class="row"><button data-num="4">4</button><button data-num="5">5</button><button data-num="6">6</button></div>
     <div class="row"><button data-num="7">7</button><button data-num="8">8</button><button data-num="9">9</button></div>
     <div class="row"><button id="delBtn">⌫</button><button data-num="0">0</button><button id="clearBtn">✕</button></div>
   </div>
-  <p style="color:white; margin-top:16px; font-size:14px; font-weight:600; background:rgba(255,255,255,0.2); padding:10px; border-radius:16px;">💡 hint: the day we first talked (DDMMYYYY)</p>
+  <p style="color:white; margin-top:16px; font-size:14px; font-weight:600; background:rgba(255,255,255,0.25); padding:10px; border-radius:16px;">💡 hint: the day we first talked (DDMMYYYY)</p>
 </div>
 
 <div id="birthdayLayer" class="container" style="display:none;">
@@ -790,106 +801,170 @@ function setupShakeToBlow() {
   }
 }
 
-// ========== BLUE ROSE BOUQUET ==========
+// ========== BLUE ROSE BOUQUET - BEAUTIFUL ARRANGEMENT ==========
 function drawBlueRoseBouquet() {
   const canvas = document.getElementById("blueRoseCanvas");
   if(!canvas) return;
   const ctx = canvas.getContext("2d");
   const width = canvas.width = 480;
   const height = canvas.height = 400;
+  
+  // Background
   const grad = ctx.createLinearGradient(0, 0, 0, height);
   grad.addColorStop(0, "#0a1628");
   grad.addColorStop(1, "#020617");
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, width, height);
-  ctx.save();
+  
+  // Wrapping paper (bouquet wrapper)
   ctx.beginPath();
-  ctx.moveTo(width/2 - 70, height - 50);
-  ctx.quadraticCurveTo(width/2, height - 30, width/2 + 70, height - 50);
-  ctx.lineTo(width/2 + 55, height - 15);
-  ctx.quadraticCurveTo(width/2, height - 5, width/2 - 55, height - 15);
+  ctx.moveTo(width/2 - 85, height - 45);
+  ctx.quadraticCurveTo(width/2, height - 25, width/2 + 85, height - 45);
+  ctx.lineTo(width/2 + 70, height - 10);
+  ctx.quadraticCurveTo(width/2, height + 5, width/2 - 70, height - 10);
   ctx.fillStyle = "#1e3a5f";
   ctx.fill();
   ctx.beginPath();
-  ctx.moveTo(width/2 - 50, height - 42);
-  ctx.quadraticCurveTo(width/2, height - 25, width/2 + 50, height - 42);
+  ctx.moveTo(width/2 - 65, height - 38);
+  ctx.quadraticCurveTo(width/2, height - 22, width/2 + 65, height - 38);
   ctx.fillStyle = "#0f2b44";
   ctx.fill();
-  const roseCenters = [];
-  for(let i = 0; i < 19; i++) {
-    let x, y;
-    if(i < 7) { x = width/2 - 50 + (i * 18); y = height - 85 - Math.floor(i/3)*12; }
-    else if(i < 14) { x = width/2 - 60 + ((i-7) * 19); y = height - 130 - Math.floor((i-7)/3)*10; }
-    else { x = width/2 - 45 + ((i-14) * 16); y = height - 175 - Math.floor((i-14)/2)*8; }
-    roseCenters.push({x: x + (Math.sin(i)*3), y: y + (Math.cos(i*2)*2)});
-  }
+  
+  // Ribbon
   ctx.beginPath();
+  ctx.moveTo(width/2 - 20, height - 28);
+  ctx.lineTo(width/2, height - 15);
+  ctx.lineTo(width/2 + 20, height - 28);
+  ctx.fillStyle = "#fbbf24";
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(width/2, height - 15);
+  ctx.lineTo(width/2, height - 5);
   ctx.lineWidth = 3;
+  ctx.strokeStyle = "#fbbf24";
+  ctx.stroke();
+  
+  // Stems - arranged in a bouquet arc
+  const stemBaseX = width/2;
+  const stemBaseY = height - 38;
+  
+  // Create positions for 19 roses in a beautiful dome/bouquet shape
+  const rosePositions = [];
+  for(let i = 0; i < 19; i++) {
+    let angle, radius, x, y;
+    if(i < 7) {
+      // Top center cluster
+      angle = -0.3 + (i / 7) * 0.6;
+      radius = 55;
+      x = stemBaseX + Math.sin(angle) * radius * 0.8;
+      y = stemBaseY - 95 + Math.cos(angle) * radius * 0.6;
+    } else if(i < 14) {
+      // Middle ring
+      angle = -0.5 + ((i-7) / 7) * 1.0;
+      radius = 75;
+      x = stemBaseX + Math.sin(angle) * radius;
+      y = stemBaseY - 70 + Math.cos(angle) * radius * 0.7;
+    } else {
+      // Outer bottom ring (filler flowers)
+      angle = -0.7 + ((i-14) / 5) * 1.4;
+      radius = 92;
+      x = stemBaseX + Math.sin(angle) * radius;
+      y = stemBaseY - 45 + Math.cos(angle) * radius * 0.6;
+    }
+    // Add slight random variation for natural look
+    x += (Math.random() - 0.5) * 6;
+    y += (Math.random() - 0.5) * 5;
+    rosePositions.push({x, y});
+  }
+  
+  // Draw stems
+  ctx.beginPath();
+  ctx.lineWidth = 2.5;
   ctx.strokeStyle = "#2d6a4f";
-  for(let i = 0; i < roseCenters.length; i++) {
+  for(let i = 0; i < rosePositions.length; i++) {
     ctx.beginPath();
-    ctx.moveTo(roseCenters[i].x, roseCenters[i].y);
-    ctx.lineTo(roseCenters[i].x + (i%2===0? -8 : 8), height - 45);
+    ctx.moveTo(stemBaseX + (Math.random() - 0.5) * 15, stemBaseY);
+    ctx.lineTo(rosePositions[i].x, rosePositions[i].y);
     ctx.stroke();
+    // Draw small leaves
+    const midX = (stemBaseX + rosePositions[i].x) / 2;
+    const midY = (stemBaseY + rosePositions[i].y) / 2;
     ctx.fillStyle = "#40916c";
     ctx.beginPath();
-    ctx.ellipse(roseCenters[i].x + (i%2===0? -12 : 12), roseCenters[i].y + 12, 6, 3, i, 0, Math.PI*2);
+    ctx.ellipse(midX + (Math.random() - 0.5) * 10, midY + 5, 5, 3, 0.5, 0, Math.PI*2);
     ctx.fill();
   }
-  for(let i = 0; i < roseCenters.length; i++) {
-    const x = roseCenters[i].x;
-    const y = roseCenters[i].y;
-    const size = 17 + (Math.sin(i) * 1.5);
+  
+  // Draw each blue rose
+  for(let i = 0; i < rosePositions.length; i++) {
+    const x = rosePositions[i].x;
+    const y = rosePositions[i].y;
+    const size = 14 + (Math.sin(i) * 1.8);
+    
+    ctx.shadowColor = "rgba(59,130,246,0.5)";
+    ctx.shadowBlur = 6;
+    
+    // Outer petals
     for(let p = 0; p < 6; p++) {
-      const angle = (p * 60 + i * 15) * Math.PI/180;
-      const rad = size * 0.8;
+      const angle = (p * 60 + i * 25) * Math.PI/180;
+      const rad = size * 0.85;
       const px = x + Math.cos(angle) * rad;
       const py = y + Math.sin(angle) * rad * 0.7;
       ctx.beginPath();
-      ctx.ellipse(px, py, size*0.55, size*0.45, angle, 0, Math.PI*2);
-      const blueGrad = ctx.createRadialGradient(px-2, py-2, 2, px, py, size*0.6);
+      ctx.ellipse(px, py, size*0.6, size*0.5, angle, 0, Math.PI*2);
+      const blueGrad = ctx.createRadialGradient(px-2, py-2, 2, px, py, size*0.7);
       blueGrad.addColorStop(0, "#3b82f6");
       blueGrad.addColorStop(0.5, "#2563eb");
       blueGrad.addColorStop(1, "#1e3a8a");
       ctx.fillStyle = blueGrad;
       ctx.fill();
     }
+    // Inner petals
     for(let p = 0; p < 5; p++) {
-      const angle = (p * 72 + i * 20) * Math.PI/180;
-      const rad = size * 0.5;
+      const angle = (p * 72 + i * 30) * Math.PI/180;
+      const rad = size * 0.55;
       const px = x + Math.cos(angle) * rad;
       const py = y + Math.sin(angle) * rad * 0.6;
       ctx.beginPath();
-      ctx.ellipse(px, py, size*0.4, size*0.32, angle, 0, Math.PI*2);
+      ctx.ellipse(px, py, size*0.45, size*0.38, angle, 0, Math.PI*2);
       ctx.fillStyle = "#60a5fa";
       ctx.fill();
     }
+    // Center
     ctx.beginPath();
-    ctx.arc(x, y, size*0.25, 0, Math.PI*2);
+    ctx.arc(x, y, size*0.28, 0, Math.PI*2);
     ctx.fillStyle = "#1e40af";
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(x-1, y-1, size*0.1, 0, Math.PI*2);
+    ctx.arc(x-1, y-1, size*0.12, 0, Math.PI*2);
     ctx.fillStyle = "#93c5fd";
     ctx.fill();
   }
-  for(let i = 0; i < 30; i++) {
-    ctx.fillStyle = `rgba(255,255,200,${0.3+Math.random()*0.5})`;
+  
+  ctx.shadowBlur = 0;
+  
+  // Sparkles and dewdrops
+  for(let i = 0; i < 40; i++) {
+    ctx.fillStyle = `rgba(255,255,200,${0.3+Math.random()*0.6})`;
     ctx.beginPath();
-    ctx.arc(width/2 - 100 + Math.random() * 200, height/2 - 50 + Math.random() * 150, 1+Math.random()*2, 0, Math.PI*2);
+    ctx.arc(width/2 - 100 + Math.random() * 200, height/2 - 60 + Math.random() * 150, 1+Math.random()*2.5, 0, Math.PI*2);
     ctx.fill();
   }
-  ctx.font = "bold 14px 'Segoe UI'";
+  
+  // Title text
+  ctx.font = "bold 15px 'Segoe UI'";
   ctx.fillStyle = "#FBBF24";
   ctx.shadowBlur = 4;
-  ctx.fillText("✨ 19 Rare Blue Roses ✨", width/2-75, height-18);
-  ctx.restore();
+  ctx.fillText("✨ 19 Rare Blue Roses ✨", width/2-85, height-12);
+  ctx.font = "italic 12px 'Segoe UI'";
+  ctx.fillStyle = "#93c5fd";
+  ctx.fillText("For you, my queen", width/2-60, height-2);
 }
 
 window.goToRoses = function() {
   document.getElementById("giftReveal").style.display = "none";
   document.getElementById("roseScene").style.display = "block";
-  document.getElementById("roseText").innerHTML = "💙 Nineteen hand-drawn blue roses for your nineteen wondrous years 💙<br><span style='font-size:14px;'>Blue roses symbolize mystery, dreams, and the impossible — just like you, my one-of-a-kind queen. 🌹💙✨</span>";
+  document.getElementById("roseText").innerHTML = "💙 Beautifully arranged blue roses just for you 💙<br><span style='font-size:14px;'>Each rose represents a year of your magical journey. You are as rare and precious as these blooms. 🌹💙✨</span>";
   setTimeout(() => { drawBlueRoseBouquet(); }, 50);
 };
 
