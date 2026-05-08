@@ -81,9 +81,12 @@ body {
 .balloon:nth-child(17) { background: radial-gradient(circle at 30% 30%, #fbcfe8, #ec4899); left: 70%; animation-duration: 8.2s; animation-delay: 5.5s; }
 .balloon:nth-child(18) { background: radial-gradient(circle at 30% 30%, #d9f99d, #84cc16); left: 80%; animation-duration: 10.8s; animation-delay: 2.2s; }
 .balloon:nth-child(19) { background: radial-gradient(circle at 30% 30%, #bae6fd, #0ea5e9); left: 90%; animation-duration: 9.2s; animation-delay: 6.5s; }
+.balloon:nth-child(20) { background: radial-gradient(circle at 30% 30%, #ffb3ba, #ff6b6b); left: 12%; animation-duration: 8.3s; animation-delay: 3.2s; }
+.balloon:nth-child(21) { background: radial-gradient(circle at 30% 30%, #c9e4ff, #6bcb77); left: 48%; animation-duration: 9.7s; animation-delay: 1.2s; }
+.balloon:nth-child(22) { background: radial-gradient(circle at 30% 30%, #fbcfe8, #ff6bcb); left: 82%; animation-duration: 11.3s; animation-delay: 4.8s; }
 
 /* glassmorphic containers for screens after unlock */
-.container, #roseScene {
+.container, #roseScene, #memoryCardScene {
   position: relative;
   z-index: 2;
   max-width: 550px;
@@ -387,6 +390,15 @@ h1, h2 {
   font-size: 18px;
   cursor: pointer;
 }
+
+/* Memory Card Scene Special Styling */
+#memoryCardScene {
+  background: #f8e7ef;
+  backdrop-filter: none;
+  border: 4px solid #ffd6e7;
+  padding: 25px 18px;
+  overflow: hidden;
+}
 </style>
 </head>
 <body>
@@ -394,7 +406,8 @@ h1, h2 {
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
-<div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
+<div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
+<div class="balloon"></div><div class="balloon"></div>
 
 <div id="goodGirlPopup" class="good-girl-overlay">
   <div class="good-girl-card">
@@ -404,7 +417,7 @@ h1, h2 {
   </div>
 </div>
 
-<!-- BEAUTIFUL CUSTOM LOCK SCREEN WITH YOUR IMAGE -->
+<!-- BEAUTIFUL CUSTOM LOCK SCREEN -->
 <div id="lockScreen" style="background:#8fd3ff; border-radius:40px; border:4px solid rgba(255,255,255,0.4); max-width:420px; padding:25px 18px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
   <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:15px;">
     <h1 style="color:white; font-size:28px; font-weight:800; margin:0; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Enter a passcode</h1>
@@ -486,11 +499,60 @@ h1, h2 {
   <button id="goToRosesBtn" style="margin-top: 20px; padding:12px 28px; border-radius:60px; background:#FFD966; font-weight:bold;">Continue to Roses 💙</button>
 </div>
 
-<div id="roseScene" style="display:none; max-width:550px; width:92%; margin:auto; text-align:center; background:rgba(12,10,28,0.94); backdrop-filter:blur(20px); border-radius:70px; padding:28px;">
+<div id="roseScene" class="container" style="display:none;">
   <h1>💙 NOT EVERYONE GETS THIS 💙</h1>
-  <canvas id="blueRoseCanvas" width="480" height="400" style="width:100%; max-width:480px; height:auto; margin:15px auto; display:block; border-radius:40px; background: radial-gradient(circle at 30% 20%, #0a1628, #020617); box-shadow: 0 0 30px rgba(59,130,246,0.3);"></canvas>
+  <canvas id="blueRoseCanvas" width="500" height="420" style="width:100%; max-width:500px; height:auto; margin:15px auto; display:block; border-radius:40px; background: radial-gradient(circle at 30% 20%, #0a1628, #020617); box-shadow: 0 0 30px rgba(59,130,246,0.3);"></canvas>
   <p id="roseText" style="color:#FFD966; margin:20px; font-size:16px;"></p>
-  <button onclick="resetAndEnd()" style="background:#FFB347; padding:12px 28px; border-radius:60px; border:none; font-weight:bold; cursor:pointer;">✨ Finish ✨</button>
+  <button id="continueToMemoryBtn" style="background:#FFB347; padding:12px 28px; border-radius:60px; border:none; font-weight:bold; cursor:pointer; margin-top:10px;">✨ Continue to Memory Card ✨</button>
+</div>
+
+<!-- MEMORY CARD SCENE -->
+<div id="memoryCardScene" class="container" style="display:none; max-width:520px; width:92%; margin:auto; text-align:center; background:#f8e7ef; border-radius:50px; padding:25px 18px; border:4px solid #ffd6e7; position:relative; overflow:hidden;">
+
+  <div style="position:absolute; top:-90px; left:-80px; width:220px; height:220px; background:#d85c7a; border-radius:45% 55% 70% 30%; opacity:0.95;"></div>
+  <div style="position:absolute; bottom:-100px; right:-80px; width:220px; height:220px; background:#d85c7a; border-radius:60% 40% 30% 70%; opacity:0.95;"></div>
+
+  <h2 style="position:relative; z-index:2; color:white; font-size:32px; font-weight:900; margin-bottom:22px; text-shadow:0 4px 12px rgba(0,0,0,0.3);">
+    Bcz she deserves best surprise ❤️
+  </h2>
+
+  <div style="position:relative; z-index:2; background:#f6d8e6; border-radius:35px; padding:28px 18px 38px; width:92%; margin:auto; box-shadow:0 14px 32px rgba(0,0,0,0.2); border:3px solid rgba(255,255,255,0.8);">
+
+    <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); font-size:46px;">🎀</div>
+    <div style="position:absolute; left:-24px; top:90px; font-size:60px; transform:rotate(-12deg);">🧸</div>
+
+    <div style="color:#3d2d2d; font-size:20px; font-weight:700; line-height:1.6; margin-top:34px; margin-bottom:30px;">
+      You are seen, you are<br>
+      heard, and you are<br>
+      loved, no matter what.<br>
+      If you ever feel<br>
+      unloved, remember<br>
+      that my love for you is<br>
+      boundless and endless!
+    </div>
+
+    <div style="background:#efbfd2; border-radius:0 0 26px 26px; height:150px; position:relative; overflow:hidden; margin-top:12px;">
+      <div style="position:absolute; width:100%; height:100%; background:linear-gradient(135deg,#efbfd2 50%, #e4a7c0 50%); clip-path:polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);"></div>
+
+      <!-- LEFT HEART -->
+      <div style="position:absolute; left:95px; top:28px; width:80px; height:80px; background:white; clip-path:path('M40 72 C-18 38 8 -12 40 12 C72 -12 98 38 40 72 Z'); overflow:hidden; border:4px solid #f7d9e5; box-shadow:0 5px 14px rgba(0,0,0,0.22);">
+        <img src="https://placehold.co/80x80/FFB6C1/white?text=💙" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+
+      <!-- RIGHT HEART -->
+      <div style="position:absolute; right:95px; top:28px; width:80px; height:80px; background:white; clip-path:path('M40 72 C-18 38 8 -12 40 12 C72 -12 98 38 40 72 Z'); overflow:hidden; border:4px solid #f7d9e5; box-shadow:0 5px 14px rgba(0,0,0,0.22);">
+        <img src="https://placehold.co/80x80/FFB6C1/white?text=✨" style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    </div>
+  </div>
+
+  <p style="position:relative; z-index:2; margin-top:24px; color:#fff; font-weight:800; background:rgba(0,0,0,0.18); display:inline-block; padding:11px 24px; border-radius:40px; backdrop-filter:blur(5px); font-size:16px;">
+    💖 Forever yours 💖
+  </p>
+
+  <button onclick="location.reload()" style="margin-top:24px; background:#ff8fb1; padding:13px 34px; border:none; border-radius:60px; font-weight:bold; font-size:18px; color:white; cursor:pointer; box-shadow:0 10px 20px rgba(0,0,0,0.2);">
+    ✨ Finish ✨
+  </button>
 </div>
 
 <script>
@@ -548,14 +610,9 @@ function initKeypad() {
 // ========== CHASE NO BUTTON ==========
 let noClickCount = 0;
 const teaseMessages = [
-  "😂 You can't escape the cake!",
-  "🤭 No means YES in birthday land!",
-  "👵 Too old to say no, granny!",
-  "🍰 Just click YES already, lazybones!",
-  "✨ my little kitten, be nice!",
-  "🎂 This button is getting tired of you 😼",
-  "💛 You know you want it...",
-  "👸 Princess Nimisha, click YES!"
+  "😂 You can't escape the cake!", "🤭 No means YES in birthday land!", "👵 Too old to say no, granny!",
+  "🍰 Just click YES already, lazybones!", "✨ my little kitten, be nice!", "🎂 This button is getting tired of you 😼",
+  "💛 You know you want it...", "👸 Princess Nimisha, click YES!"
 ];
 
 function resetYesNoChase() {
@@ -801,110 +858,101 @@ function setupShakeToBlow() {
   }
 }
 
-// ========== BLUE ROSE BOUQUET - BEAUTIFUL ARRANGEMENT ==========
-function drawBlueRoseBouquet() {
+// ========== FULL BOUQUET - 50 BLUE ROSES CENTERED ==========
+function drawFullBouquet() {
   const canvas = document.getElementById("blueRoseCanvas");
   if(!canvas) return;
   const ctx = canvas.getContext("2d");
-  const width = canvas.width = 480;
-  const height = canvas.height = 400;
+  const width = canvas.width = 500;
+  const height = canvas.height = 420;
   
-  // Background
   const grad = ctx.createLinearGradient(0, 0, 0, height);
   grad.addColorStop(0, "#0a1628");
   grad.addColorStop(1, "#020617");
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, width, height);
   
-  // Wrapping paper (bouquet wrapper)
   ctx.beginPath();
-  ctx.moveTo(width/2 - 85, height - 45);
-  ctx.quadraticCurveTo(width/2, height - 25, width/2 + 85, height - 45);
-  ctx.lineTo(width/2 + 70, height - 10);
-  ctx.quadraticCurveTo(width/2, height + 5, width/2 - 70, height - 10);
+  ctx.moveTo(width/2 - 100, height - 55);
+  ctx.quadraticCurveTo(width/2, height - 30, width/2 + 100, height - 55);
+  ctx.lineTo(width/2 + 85, height - 15);
+  ctx.quadraticCurveTo(width/2, height + 8, width/2 - 85, height - 15);
   ctx.fillStyle = "#1e3a5f";
   ctx.fill();
   ctx.beginPath();
-  ctx.moveTo(width/2 - 65, height - 38);
-  ctx.quadraticCurveTo(width/2, height - 22, width/2 + 65, height - 38);
+  ctx.moveTo(width/2 - 80, height - 48);
+  ctx.quadraticCurveTo(width/2, height - 28, width/2 + 80, height - 48);
   ctx.fillStyle = "#0f2b44";
   ctx.fill();
   
-  // Ribbon
   ctx.beginPath();
-  ctx.moveTo(width/2 - 20, height - 28);
-  ctx.lineTo(width/2, height - 15);
-  ctx.lineTo(width/2 + 20, height - 28);
+  ctx.moveTo(width/2 - 25, height - 35);
+  ctx.lineTo(width/2, height - 18);
+  ctx.lineTo(width/2 + 25, height - 35);
   ctx.fillStyle = "#fbbf24";
   ctx.fill();
   ctx.beginPath();
-  ctx.moveTo(width/2, height - 15);
+  ctx.moveTo(width/2, height - 18);
   ctx.lineTo(width/2, height - 5);
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 3.5;
   ctx.strokeStyle = "#fbbf24";
   ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(width/2, height - 12, 6, 0, Math.PI*2);
+  ctx.fillStyle = "#f59e0b";
+  ctx.fill();
   
-  // Stems - arranged in a bouquet arc
-  const stemBaseX = width/2;
-  const stemBaseY = height - 38;
-  
-  // Create positions for 19 roses in a beautiful dome/bouquet shape
-  const rosePositions = [];
-  for(let i = 0; i < 19; i++) {
-    let angle, radius, x, y;
-    if(i < 7) {
-      // Top center cluster
-      angle = -0.3 + (i / 7) * 0.6;
-      radius = 55;
-      x = stemBaseX + Math.sin(angle) * radius * 0.8;
-      y = stemBaseY - 95 + Math.cos(angle) * radius * 0.6;
-    } else if(i < 14) {
-      // Middle ring
-      angle = -0.5 + ((i-7) / 7) * 1.0;
-      radius = 75;
-      x = stemBaseX + Math.sin(angle) * radius;
-      y = stemBaseY - 70 + Math.cos(angle) * radius * 0.7;
-    } else {
-      // Outer bottom ring (filler flowers)
-      angle = -0.7 + ((i-14) / 5) * 1.4;
-      radius = 92;
-      x = stemBaseX + Math.sin(angle) * radius;
-      y = stemBaseY - 45 + Math.cos(angle) * radius * 0.6;
-    }
-    // Add slight random variation for natural look
-    x += (Math.random() - 0.5) * 6;
-    y += (Math.random() - 0.5) * 5;
-    rosePositions.push({x, y});
+  const centerX = width/2;
+  const centerY = height/2 - 15;
+  const positions = [];
+  for(let i = 0; i < 10; i++) {
+    let angle = -0.4 + (i / 9) * 0.8;
+    let radius = 45;
+    let x = centerX + Math.sin(angle) * radius * 0.7;
+    let y = centerY - 70 + Math.cos(angle) * radius * 0.5;
+    positions.push({x, y, size: 12});
+  }
+  for(let i = 0; i < 18; i++) {
+    let angle = -0.6 + (i / 17) * 1.2;
+    let radius = 70;
+    let x = centerX + Math.sin(angle) * radius;
+    let y = centerY - 45 + Math.cos(angle) * radius * 0.6;
+    positions.push({x, y, size: 13});
+  }
+  for(let i = 0; i < 22; i++) {
+    let angle = -0.85 + (i / 21) * 1.7;
+    let radius = 95;
+    let x = centerX + Math.sin(angle) * radius;
+    let y = centerY - 20 + Math.cos(angle) * radius * 0.55;
+    positions.push({x, y, size: 14});
+  }
+  for(let p of positions) {
+    p.x += (Math.random() - 0.5) * 6;
+    p.y += (Math.random() - 0.5) * 5;
   }
   
-  // Draw stems
   ctx.beginPath();
-  ctx.lineWidth = 2.5;
+  ctx.lineWidth = 2.2;
   ctx.strokeStyle = "#2d6a4f";
-  for(let i = 0; i < rosePositions.length; i++) {
+  for(let i = 0; i < positions.length; i++) {
     ctx.beginPath();
-    ctx.moveTo(stemBaseX + (Math.random() - 0.5) * 15, stemBaseY);
-    ctx.lineTo(rosePositions[i].x, rosePositions[i].y);
+    ctx.moveTo(centerX + (Math.random() - 0.5) * 20, height - 40);
+    ctx.lineTo(positions[i].x, positions[i].y);
     ctx.stroke();
-    // Draw small leaves
-    const midX = (stemBaseX + rosePositions[i].x) / 2;
-    const midY = (stemBaseY + rosePositions[i].y) / 2;
+    const midX = (centerX + positions[i].x) / 2;
+    const midY = (height - 40 + positions[i].y) / 2;
     ctx.fillStyle = "#40916c";
     ctx.beginPath();
-    ctx.ellipse(midX + (Math.random() - 0.5) * 10, midY + 5, 5, 3, 0.5, 0, Math.PI*2);
+    ctx.ellipse(midX + (Math.random() - 0.5) * 8, midY + 3, 4.5, 2.5, 0.5, 0, Math.PI*2);
     ctx.fill();
   }
   
-  // Draw each blue rose
-  for(let i = 0; i < rosePositions.length; i++) {
-    const x = rosePositions[i].x;
-    const y = rosePositions[i].y;
-    const size = 14 + (Math.sin(i) * 1.8);
-    
-    ctx.shadowColor = "rgba(59,130,246,0.5)";
-    ctx.shadowBlur = 6;
-    
-    // Outer petals
+  for(let i = 0; i < positions.length; i++) {
+    const x = positions[i].x;
+    const y = positions[i].y;
+    const size = positions[i].size + (Math.sin(i) * 1.2);
+    ctx.shadowColor = "rgba(59,130,246,0.4)";
+    ctx.shadowBlur = 5;
     for(let p = 0; p < 6; p++) {
       const angle = (p * 60 + i * 25) * Math.PI/180;
       const rad = size * 0.85;
@@ -919,7 +967,6 @@ function drawBlueRoseBouquet() {
       ctx.fillStyle = blueGrad;
       ctx.fill();
     }
-    // Inner petals
     for(let p = 0; p < 5; p++) {
       const angle = (p * 72 + i * 30) * Math.PI/180;
       const rad = size * 0.55;
@@ -930,7 +977,6 @@ function drawBlueRoseBouquet() {
       ctx.fillStyle = "#60a5fa";
       ctx.fill();
     }
-    // Center
     ctx.beginPath();
     ctx.arc(x, y, size*0.28, 0, Math.PI*2);
     ctx.fillStyle = "#1e40af";
@@ -942,38 +988,43 @@ function drawBlueRoseBouquet() {
   }
   
   ctx.shadowBlur = 0;
-  
-  // Sparkles and dewdrops
-  for(let i = 0; i < 40; i++) {
-    ctx.fillStyle = `rgba(255,255,200,${0.3+Math.random()*0.6})`;
+  for(let i = 0; i < 60; i++) {
+    ctx.fillStyle = `rgba(255,255,200,${0.2 + Math.random() * 0.6})`;
     ctx.beginPath();
-    ctx.arc(width/2 - 100 + Math.random() * 200, height/2 - 60 + Math.random() * 150, 1+Math.random()*2.5, 0, Math.PI*2);
+    ctx.arc(centerX - 100 + Math.random() * 200, centerY - 60 + Math.random() * 150, 1 + Math.random() * 2.5, 0, Math.PI*2);
     ctx.fill();
   }
   
-  // Title text
-  ctx.font = "bold 15px 'Segoe UI'";
+  ctx.font = "bold 16px 'Segoe UI'";
   ctx.fillStyle = "#FBBF24";
   ctx.shadowBlur = 4;
-  ctx.fillText("✨ 19 Rare Blue Roses ✨", width/2-85, height-12);
+  ctx.fillText("✨ 50 Rare Blue Roses ✨", width/2-100, height-8);
   ctx.font = "italic 12px 'Segoe UI'";
   ctx.fillStyle = "#93c5fd";
-  ctx.fillText("For you, my queen", width/2-60, height-2);
+  ctx.fillText("A full bouquet of love for you", width/2-85, height+5);
 }
 
+// Navigation functions
 window.goToRoses = function() {
   document.getElementById("giftReveal").style.display = "none";
   document.getElementById("roseScene").style.display = "block";
-  document.getElementById("roseText").innerHTML = "💙 Beautifully arranged blue roses just for you 💙<br><span style='font-size:14px;'>Each rose represents a year of your magical journey. You are as rare and precious as these blooms. 🌹💙✨</span>";
-  setTimeout(() => { drawBlueRoseBouquet(); }, 50);
+  document.getElementById("roseText").innerHTML = "💙 A magnificent bouquet of 50 blue roses, beautifully arranged just for you 💙<br><span style='font-size:13px;'>Each rose represents all the love, joy, and beauty you bring into this world. You are as rare and precious as these blooms. 🌹💙✨</span>";
+  setTimeout(() => { drawFullBouquet(); }, 50);
 };
 
+function showMemoryCard() {
+  document.getElementById("roseScene").style.display = "none";
+  document.getElementById("memoryCardScene").style.display = "block";
+}
+
 function resetAndEnd() {
-  alert("✨ Thank you for celebrating with me! Happy Birthday Nimisha! 🎂💖");
   location.reload();
 }
 
+// Event listeners
 document.getElementById("goToRosesBtn")?.addEventListener("click", () => { window.goToRoses(); });
+document.getElementById("continueToMemoryBtn")?.addEventListener("click", () => { showMemoryCard(); });
+window.showMemoryCard = showMemoryCard;
 window.resetAndEnd = resetAndEnd;
 
 document.addEventListener("DOMContentLoaded", () => {
