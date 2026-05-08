@@ -785,7 +785,7 @@ function setupShakeToBlow() {
   }
 }
 
-// Roses scene
+// ========== BLUE ROSE BOUQUET (UPDATED) ==========
 function resetAndEnd() {
   alert("✨ Thank you for celebrating with me! Happy Birthday Nimisha! 🎂💖");
   location.reload();
@@ -795,16 +795,30 @@ window.goToRoses = function() {
   const bouquetDiv = document.getElementById("bouquet");
   if(bouquetDiv) {
     bouquetDiv.innerHTML = "";
+    // Create 19 beautiful blue roses 🌹💙
     for(let i=0; i<19; i++) {
       const rose = document.createElement("span");
-      rose.style.fontSize = "42px";
+      rose.style.fontSize = "44px";
       rose.style.display = "inline-block";
       rose.style.animation = "bounce 0.7s infinite";
       rose.style.margin = "5px";
-      rose.innerText = "🌹";
+      rose.style.filter = "drop-shadow(0 0 4px #3b82f6)";
+      rose.innerText = "💙";
+      rose.title = "Blue Rose of Mystery & Love";
       bouquetDiv.appendChild(rose);
     }
-    document.getElementById("roseText").innerText = "💙 19 beautiful roses for 19 beautiful years. You are rare, you are loved. 💙";
+    // Add some special blue rose emojis mixed in for variety
+    const specialRoses = ["🦋", "💙", "🌹", "💎", "✨"];
+    for(let i=0; i<5; i++) {
+      const accent = document.createElement("span");
+      accent.style.fontSize = "36px";
+      accent.style.display = "inline-block";
+      accent.style.margin = "5px";
+      accent.style.animation = "float 2s infinite";
+      accent.innerText = specialRoses[i % specialRoses.length];
+      bouquetDiv.appendChild(accent);
+    }
+    document.getElementById("roseText").innerHTML = "💙 19 rare Blue Roses for 19 beautiful years 💙<br>Blue roses symbolize mystery, dreams, and the impossible — just like you, my one-of-a-kind queen. 🌹💙✨";
   }
   document.getElementById("giftReveal").style.display = "none";
   document.getElementById("roseScene").style.display = "block";
