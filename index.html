@@ -459,7 +459,7 @@ h1, h2 {
 </div>
 
 <script>
-// ========== PASSCODE LOGIC ==========
+// ========== PASSCODE LOGIC (FIXED DIAL MECHANISM) ==========
 let fullCode = "";
 const correctCode = "19102024";
 
@@ -484,12 +484,39 @@ function pressDigit(d) {
         document.getElementById("lockScreen").style.display = "none";
         document.getElementById("birthdayLayer").style.display = "block";
         resetYesNoChase();
-      } else { alert("❌ Wrong unlock! Hint: DDMMYYYY of day we first talked."); fullCode = ""; refreshDots(); }
+      } else { 
+        alert("❌ Wrong unlock! Hint: DDMMYYYY of day we first talked."); 
+        fullCode = ""; 
+        refreshDots(); 
+      }
     }
   }
 }
 function clearFull() { fullCode = ""; refreshDots(); }
 function deleteLast() { fullCode = fullCode.slice(0,-1); refreshDots(); }
+
+// Attach keypad event listeners correctly
+function initKeypad() {
+  // Number buttons
+  document.querySelectorAll('[data-num]').forEach(btn => {
+    btn.removeEventListener('click', numHandler);
+    btn.addEventListener('click', numHandler);
+  });
+  function numHandler(e) {
+    const num = e.currentTarget.getAttribute('data-num');
+    if(num !== null) pressDigit(num);
+  }
+  const delBtn = document.getElementById("delBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  if(delBtn) {
+    delBtn.removeEventListener('click', deleteLast);
+    delBtn.addEventListener('click', deleteLast);
+  }
+  if(clearBtn) {
+    clearBtn.removeEventListener('click', clearFull);
+    clearBtn.addEventListener('click', clearFull);
+  }
+}
 
 // ========== CHASE NO BUTTON + YES GROWS ==========
 let noClickCount = 0;
@@ -540,34 +567,44 @@ function setupChaseNo() {
   const yesBtn = document.getElementById("yesCakeBtn");
   const teaserDiv = document.getElementById("teasyMessage");
 
-  noBtn.addEventListener("click", (e) => {
+  if(!noBtn || !yesBtn) return;
+  // Remove old listeners to avoid duplicates
+  const newNoBtn = noBtn.cloneNode(true);
+  const newYesBtn = yesBtn.cloneNode(true);
+  noBtn.parentNode.replaceChild(newNoBtn, noBtn);
+  yesBtn.parentNode.replaceChild(newYesBtn, yesBtn);
+  
+  const finalNoBtn = document.getElementById("noCakeBtn");
+  const finalYesBtn = document.getElementById("yesCakeBtn");
+  
+  finalNoBtn.addEventListener("click", (e) => {
     e.preventDefault();
     noClickCount++;
     teaserDiv.innerText = teaseMessages[noClickCount % teaseMessages.length];
     
     let scaleNo = Math.max(0.4, 1 - noClickCount * 0.09);
-    noBtn.style.transform = `scale(${scaleNo})`;
-    if(noClickCount >= 5) noBtn.style.opacity = "0.5";
-    if(noClickCount >= 8) noBtn.style.pointerEvents = "none";
+    finalNoBtn.style.transform = `scale(${scaleNo})`;
+    if(noClickCount >= 5) finalNoBtn.style.opacity = "0.5";
+    if(noClickCount >= 8) finalNoBtn.style.pointerEvents = "none";
     
     let newScale = 1 + (noClickCount * 0.12);
     let newFont = 20 + (noClickCount * 2);
     if(newFont > 44) newFont = 44;
-    yesBtn.style.transform = `scale(${newScale})`;
-    yesBtn.style.fontSize = `${newFont}px`;
-    yesBtn.style.padding = `${14 + noClickCount*2}px ${32 + noClickCount*3}px`;
+    finalYesBtn.style.transform = `scale(${newScale})`;
+    finalYesBtn.style.fontSize = `${newFont}px`;
+    finalYesBtn.style.padding = `${14 + noClickCount*2}px ${32 + noClickCount*3}px`;
     
     const maxX = 40, maxY = 25;
     const randX = (Math.random() - 0.5) * maxX;
     const randY = (Math.random() - 0.5) * maxY;
-    noBtn.style.position = "relative";
-    noBtn.style.left = `${randX}px`;
-    noBtn.style.top = `${randY}px`;
+    finalNoBtn.style.position = "relative";
+    finalNoBtn.style.left = `${randX}px`;
+    finalNoBtn.style.top = `${randY}px`;
     
     if(noClickCount >= 10) teaserDiv.innerText = "👑 You're stubborn! But click YES now, princess!";
   });
   
-  yesBtn.addEventListener("click", () => {
+  finalYesBtn.addEventListener("click", () => {
     showGoodGirlMessage();
   });
 }
@@ -687,4 +724,100 @@ function renderColorPickers() {
     subGrid.style.flexWrap = "wrap";
     subGrid.style.marginBottom = "12px";
     layerColorOptions.forEach(col => {
-      const sw
+      const sw = document.createElement("div");
+      sw.className = "color-swatch";
+      sw.style.backgroundColor = col;
+      sw.addEventListener("click", () => { layerColors[i] = col; renderCake(); });
+      subGrid.appendChild(sw);
+    });
+    layerGrid.appendChild(subGrid);
+  }
+  frostingGrid.innerHTML = "";
+  frostingOptions.forEach(col => {
+    const sw = document.createElement("div");
+    sw.className = "color-swatch";
+    sw.style.backgroundColor = col;
+    sw.addEventListener("click", () => { frostingColor = col; renderCake(); });
+    frostingGrid.appendChild(sw);
+  });
+}
+
+function initCakeBuilder() {
+  const layerSlider = document.getElementById("layerSlider");
+  const candleSlider = document.getElementById("candleSlider");
+  layerColors = ["#ff6b6b", "#ffd93d"];
+  frostingColor = "#fff5e0";
+  candleNum = 3;
+  candlesLit = false;
+  if(layerSlider) { layerSlider.value = "2"; layerSlider.oninput = () => { updateLayers(); candlesLit = false; renderCake(); }; }
+  if(candleSlider) { candleSlider.value = "3"; candleSlider.oninput = () => { updateCandles(); candlesLit = false; renderCake(); }; }
+  updateLayers();
+  document.getElementById("lightCandlesBtn").onclick = () => { candlesLit = true; renderCake(); if(userAudio && userAudio.src) userAudio.play(); };
+  document.getElementById("finishCakeBtn").onclick = () => {
+    document.getElementById("cakeBuilder").style.display = "none";
+    document.getElementById("giftReveal").style.display = "block";
+  };
+  setupShakeToBlow();
+}
+
+function setupShakeToBlow() {
+  if (window.DeviceMotionEvent) {
+    let lastShake = 0;
+    window.addEventListener('devicemotion', (e) => {
+      const acc = e.accelerationIncludingGravity;
+      if (!acc) return;
+      const magnitude = Math.abs(acc.x) + Math.abs(acc.y) + Math.abs(acc.z);
+      const now = Date.now();
+      if (magnitude > 35 && now - lastShake > 800) {
+        lastShake = now;
+        if (candlesLit) {
+          candlesLit = false;
+          renderCake();
+          const notice = document.getElementById("shakeNotice");
+          if(notice) notice.innerText = "💨 You blew out the candles! 🕯️✨";
+          setTimeout(() => { if(notice) notice.innerText = "📱 SHAKE YOUR PHONE to blow out the candles! 📱"; }, 2000);
+        }
+      }
+    });
+  } else {
+    const noticeDiv = document.getElementById("shakeNotice");
+    if(noticeDiv) noticeDiv.innerText = "🎈 Blow on mic or click 'Light Candles' to test! 🎈";
+  }
+}
+
+// Roses scene
+function resetAndEnd() {
+  alert("✨ Thank you for celebrating with me! Happy Birthday Nimisha! 🎂💖");
+  location.reload();
+}
+
+window.goToRoses = function() {
+  const bouquetDiv = document.getElementById("bouquet");
+  if(bouquetDiv) {
+    bouquetDiv.innerHTML = "";
+    for(let i=0; i<19; i++) {
+      const rose = document.createElement("span");
+      rose.style.fontSize = "42px";
+      rose.style.display = "inline-block";
+      rose.style.animation = "bounce 0.7s infinite";
+      rose.style.margin = "5px";
+      rose.innerText = "🌹";
+      bouquetDiv.appendChild(rose);
+    }
+    document.getElementById("roseText").innerText = "💙 19 beautiful roses for 19 beautiful years. You are rare, you are loved. 💙";
+  }
+  document.getElementById("giftReveal").style.display = "none";
+  document.getElementById("roseScene").style.display = "block";
+};
+
+document.getElementById("goToRosesBtn")?.addEventListener("click", () => { window.goToRoses(); });
+window.resetAndEnd = resetAndEnd;
+
+// Initialize all
+document.addEventListener("DOMContentLoaded", () => {
+  initKeypad();
+  setupChaseNo();
+});
+</script>
+</body>
+</html>
