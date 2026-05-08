@@ -22,7 +22,10 @@ body {
   padding: 20px;
   position: relative;
   overflow-x: hidden;
-  background: radial-gradient(circle at 20% 30%, #0b0b2f, #030318);
+  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1400&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 /* animated balloons */
@@ -79,7 +82,7 @@ body {
 .balloon:nth-child(18) { background: radial-gradient(circle at 30% 30%, #d9f99d, #84cc16); left: 80%; animation-duration: 10.8s; animation-delay: 2.2s; }
 .balloon:nth-child(19) { background: radial-gradient(circle at 30% 30%, #bae6fd, #0ea5e9); left: 90%; animation-duration: 9.2s; animation-delay: 6.5s; }
 
-/* glassmorphic containers */
+/* glassmorphic containers for screens after unlock */
 .container, #roseScene {
   position: relative;
   z-index: 2;
@@ -95,6 +98,39 @@ body {
   text-align: center;
   max-height: 90vh;
   overflow-y: auto;
+}
+
+/* LOCK SCREEN CUSTOM STYLES - Beautiful Blue Theme */
+#lockScreen {
+  background: #8fd3ff;
+  border-radius: 40px;
+  border: 4px solid rgba(255,255,255,0.4);
+  max-width: 420px;
+  padding: 25px 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  backdrop-filter: none;
+}
+
+#lockScreen .row {
+  gap: 14px;
+}
+
+#lockScreen .row button {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  color: #4b5563;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.1s;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+}
+
+#lockScreen .row button:active {
+  transform: scale(0.92);
 }
 
 h1, h2 {
@@ -132,14 +168,14 @@ h1, h2 {
 }
 
 #dots {
-  font-size: 38px;
-  letter-spacing: 12px;
-  color: #FFD966;
-  background: rgba(0,0,0,0.6);
+  font-size: 34px;
+  letter-spacing: 10px;
+  color: white;
+  background: rgba(255,255,255,0.22);
   display: inline-block;
-  padding: 8px 24px;
-  border-radius: 70px;
-  margin: 12px auto;
+  padding: 10px 22px;
+  border-radius: 20px;
+  margin-bottom: 15px;
   font-family: monospace;
 }
 
@@ -150,20 +186,6 @@ h1, h2 {
   margin: 12px 0;
   flex-wrap: wrap;
 }
-.row button {
-  width: 70px;
-  height: 70px;
-  border-radius: 60px;
-  background: radial-gradient(circle at 30% 30%, #24243e, #0f0f1f);
-  border: 2px solid rgba(255,200,0,0.8);
-  color: #FFD966;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.05s linear;
-  box-shadow: 0 6px 0 #00000055;
-}
-.row button:active { transform: translateY(3px); }
 
 .button-group {
   display: flex;
@@ -309,13 +331,6 @@ h1, h2 {
   color: #FFE484;
   margin: 12px;
 }
-.blow-out-anim {
-  animation: blowPop 0.2s forwards;
-}
-@keyframes blowPop {
-  0% { transform: scale(1); opacity: 1; }
-  100% { transform: scale(0) rotate(15deg); opacity: 0; visibility: hidden; }
-}
 
 .good-girl-overlay {
   position: fixed;
@@ -377,18 +392,26 @@ h1, h2 {
   </div>
 </div>
 
-<div id="lockScreen" class="container">
-  <h1>🔐 BIRTHDAY TREASURE VAULT 🔐</h1>
-  <div class="sticker-container"><div class="sticker">👸💅</div></div>
-  <div class="tease-message">✨ Nimisha, only a genius can unlock this... ✨</div>
-  <div id="dots">○○○○ ○○○○</div>
+<!-- BEAUTIFUL CUSTOM LOCK SCREEN -->
+<div id="lockScreen" style="background:#8fd3ff; border-radius:40px; border:4px solid rgba(255,255,255,0.4); max-width:420px; padding:25px 18px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
+  <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:15px;">
+    <h1 style="color:white; font-size:28px; font-weight:800; margin:0;">Enter a passcode</h1>
+  </div>
+  <div style="display:flex; justify-content:center; margin-bottom:18px; position:relative;">
+    <div style="background:white; padding:12px; border-radius:18px; transform:rotate(-3deg); box-shadow:0 10px 20px rgba(0,0,0,0.25); position:relative;">
+      <img src="https://placehold.co/190x240/FFB6C1/white?text=Nimisha+💙" style="width:190px; height:240px; object-fit:cover; border-radius:10px; display:block;">
+      <div style="position:absolute; top:-12px; right:-12px; font-size:40px;">🎀</div>
+      <div style="position:absolute; bottom:-25px; left:-18px; font-size:55px;">🧸</div>
+    </div>
+  </div>
+  <div id="dots" style="font-size:34px; letter-spacing:10px; color:white; background:rgba(255,255,255,0.22); display:inline-block; padding:10px 22px; border-radius:20px; margin-bottom:15px; font-family:monospace;">○○○○ ○○○○</div>
   <div id="keypad">
     <div class="row"><button data-num="1">1</button><button data-num="2">2</button><button data-num="3">3</button></div>
     <div class="row"><button data-num="4">4</button><button data-num="5">5</button><button data-num="6">6</button></div>
     <div class="row"><button data-num="7">7</button><button data-num="8">8</button><button data-num="9">9</button></div>
-    <div class="row"><button id="delBtn">⌫</button><button data-num="0">0</button><button id="clearBtn">C</button></div>
+    <div class="row"><button id="delBtn">⌫</button><button data-num="0">0</button><button id="clearBtn">✕</button></div>
   </div>
-  <p style="color:#FFD966; margin-top: 12px;">💡 hint: the day we first talked (DDMMYYYY) 💡</p>
+  <p style="color:white; margin-top:16px; font-size:14px; font-weight:600; background:rgba(255,255,255,0.2); padding:10px; border-radius:16px;">💡 hint: the day we first talked (DDMMYYYY)</p>
 </div>
 
 <div id="birthdayLayer" class="container" style="display:none;">
@@ -425,7 +448,6 @@ h1, h2 {
   </div>
   <button class="action-btn" id="lightCandlesBtn">🎂 Light the Candles! 🔥</button>
   
-  <!-- VOICE RECORDING RESTORED (exactly as original) -->
   <div class="voice-card">
     <p style="color:#FFD966;">🎤 Record Your Birthday Wish 🎤</p>
     <button id="recordBtn" class="voice-btn">🎙️ Record Message</button>
@@ -451,15 +473,15 @@ h1, h2 {
   <button id="goToRosesBtn" style="margin-top: 20px; padding:12px 28px; border-radius:60px; background:#FFD966; font-weight:bold;">Continue to Roses 💙</button>
 </div>
 
-<div id="roseScene" style="display:none; max-width:500px; width:90%; margin:auto; text-align:center; background:rgba(12,10,28,0.94); backdrop-filter:blur(20px); border-radius:70px; padding:28px;">
+<div id="roseScene" style="display:none; max-width:550px; width:92%; margin:auto; text-align:center; background:rgba(12,10,28,0.94); backdrop-filter:blur(20px); border-radius:70px; padding:28px;">
   <h1>💙 NOT EVERYONE GETS THIS 💙</h1>
-  <div id="bouquet" style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:20px 0;"></div>
-  <p id="roseText" style="color:#FFD966; margin:20px;"></p>
-  <button onclick="resetAndEnd()" style="background:#FFB347; padding:12px 28px; border-radius:60px; border:none; font-weight:bold;">✨ Finish ✨</button>
+  <canvas id="blueRoseCanvas" width="480" height="400" style="width:100%; max-width:480px; height:auto; margin:15px auto; display:block; border-radius:40px; background: radial-gradient(circle at 30% 20%, #0a1628, #020617); box-shadow: 0 0 30px rgba(59,130,246,0.3);"></canvas>
+  <p id="roseText" style="color:#FFD966; margin:20px; font-size:16px;"></p>
+  <button onclick="resetAndEnd()" style="background:#FFB347; padding:12px 28px; border-radius:60px; border:none; font-weight:bold; cursor:pointer;">✨ Finish ✨</button>
 </div>
 
 <script>
-// ========== PASSCODE LOGIC (FIXED DIAL MECHANISM) ==========
+// ========== PASSCODE LOGIC ==========
 let fullCode = "";
 const correctCode = "19102024";
 
@@ -485,7 +507,7 @@ function pressDigit(d) {
         document.getElementById("birthdayLayer").style.display = "block";
         resetYesNoChase();
       } else { 
-        alert("❌ Wrong unlock! Hint: DDMMYYYY of day we first talked."); 
+        alert("❌ Wrong passcode! Hint: DDMMYYYY of day we first talked."); 
         fullCode = ""; 
         refreshDots(); 
       }
@@ -495,10 +517,8 @@ function pressDigit(d) {
 function clearFull() { fullCode = ""; refreshDots(); }
 function deleteLast() { fullCode = fullCode.slice(0,-1); refreshDots(); }
 
-// Attach keypad event listeners correctly
 function initKeypad() {
-  // Number buttons
-  document.querySelectorAll('[data-num]').forEach(btn => {
+  document.querySelectorAll('#lockScreen [data-num]').forEach(btn => {
     btn.removeEventListener('click', numHandler);
     btn.addEventListener('click', numHandler);
   });
@@ -508,17 +528,11 @@ function initKeypad() {
   }
   const delBtn = document.getElementById("delBtn");
   const clearBtn = document.getElementById("clearBtn");
-  if(delBtn) {
-    delBtn.removeEventListener('click', deleteLast);
-    delBtn.addEventListener('click', deleteLast);
-  }
-  if(clearBtn) {
-    clearBtn.removeEventListener('click', clearFull);
-    clearBtn.addEventListener('click', clearFull);
-  }
+  if(delBtn) { delBtn.removeEventListener('click', deleteLast); delBtn.addEventListener('click', deleteLast); }
+  if(clearBtn) { clearBtn.removeEventListener('click', clearFull); clearBtn.addEventListener('click', clearFull); }
 }
 
-// ========== CHASE NO BUTTON + YES GROWS ==========
+// ========== CHASE NO BUTTON ==========
 let noClickCount = 0;
 const teaseMessages = [
   "😂 You can't escape the cake!",
@@ -566,50 +580,39 @@ function setupChaseNo() {
   const noBtn = document.getElementById("noCakeBtn");
   const yesBtn = document.getElementById("yesCakeBtn");
   const teaserDiv = document.getElementById("teasyMessage");
-
   if(!noBtn || !yesBtn) return;
-  // Remove old listeners to avoid duplicates
   const newNoBtn = noBtn.cloneNode(true);
   const newYesBtn = yesBtn.cloneNode(true);
   noBtn.parentNode.replaceChild(newNoBtn, noBtn);
   yesBtn.parentNode.replaceChild(newYesBtn, yesBtn);
-  
   const finalNoBtn = document.getElementById("noCakeBtn");
   const finalYesBtn = document.getElementById("yesCakeBtn");
-  
   finalNoBtn.addEventListener("click", (e) => {
     e.preventDefault();
     noClickCount++;
     teaserDiv.innerText = teaseMessages[noClickCount % teaseMessages.length];
-    
     let scaleNo = Math.max(0.4, 1 - noClickCount * 0.09);
     finalNoBtn.style.transform = `scale(${scaleNo})`;
     if(noClickCount >= 5) finalNoBtn.style.opacity = "0.5";
     if(noClickCount >= 8) finalNoBtn.style.pointerEvents = "none";
-    
     let newScale = 1 + (noClickCount * 0.12);
     let newFont = 20 + (noClickCount * 2);
     if(newFont > 44) newFont = 44;
     finalYesBtn.style.transform = `scale(${newScale})`;
     finalYesBtn.style.fontSize = `${newFont}px`;
     finalYesBtn.style.padding = `${14 + noClickCount*2}px ${32 + noClickCount*3}px`;
-    
     const maxX = 40, maxY = 25;
     const randX = (Math.random() - 0.5) * maxX;
     const randY = (Math.random() - 0.5) * maxY;
     finalNoBtn.style.position = "relative";
     finalNoBtn.style.left = `${randX}px`;
     finalNoBtn.style.top = `${randY}px`;
-    
     if(noClickCount >= 10) teaserDiv.innerText = "👑 You're stubborn! But click YES now, princess!";
   });
-  
-  finalYesBtn.addEventListener("click", () => {
-    showGoodGirlMessage();
-  });
+  finalYesBtn.addEventListener("click", () => { showGoodGirlMessage(); });
 }
 
-// ========== VOICE RECORDER (RESTORED) ==========
+// ========== VOICE RECORDER ==========
 let mediaRecorder, audioChunks = [];
 const recordBtn = document.getElementById("recordBtn");
 const playBtn = document.getElementById("playRecordBtn");
@@ -648,7 +651,7 @@ if(playBtn) {
   playBtn.onclick = () => { if(userAudio.src) userAudio.play(); else voiceStatus.innerText = "No recording yet! Press record first."; };
 }
 
-// ========== CAKE BUILDER (WITH VOICE PLAY ON CANDLE LIGHT) ==========
+// ========== CAKE BUILDER ==========
 let layerColors = [];
 let frostingColor = "#fff5e0";
 let candleNum = 3;
@@ -785,49 +788,117 @@ function setupShakeToBlow() {
   }
 }
 
-// ========== BLUE ROSE BOUQUET (UPDATED) ==========
+// ========== BLUE ROSE BOUQUET ==========
+function drawBlueRoseBouquet() {
+  const canvas = document.getElementById("blueRoseCanvas");
+  if(!canvas) return;
+  const ctx = canvas.getContext("2d");
+  const width = canvas.width = 480;
+  const height = canvas.height = 400;
+  const grad = ctx.createLinearGradient(0, 0, 0, height);
+  grad.addColorStop(0, "#0a1628");
+  grad.addColorStop(1, "#020617");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, width, height);
+  ctx.save();
+  ctx.beginPath();
+  ctx.moveTo(width/2 - 70, height - 50);
+  ctx.quadraticCurveTo(width/2, height - 30, width/2 + 70, height - 50);
+  ctx.lineTo(width/2 + 55, height - 15);
+  ctx.quadraticCurveTo(width/2, height - 5, width/2 - 55, height - 15);
+  ctx.fillStyle = "#1e3a5f";
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(width/2 - 50, height - 42);
+  ctx.quadraticCurveTo(width/2, height - 25, width/2 + 50, height - 42);
+  ctx.fillStyle = "#0f2b44";
+  ctx.fill();
+  const roseCenters = [];
+  for(let i = 0; i < 19; i++) {
+    let x, y;
+    if(i < 7) { x = width/2 - 50 + (i * 18); y = height - 85 - Math.floor(i/3)*12; }
+    else if(i < 14) { x = width/2 - 60 + ((i-7) * 19); y = height - 130 - Math.floor((i-7)/3)*10; }
+    else { x = width/2 - 45 + ((i-14) * 16); y = height - 175 - Math.floor((i-14)/2)*8; }
+    roseCenters.push({x: x + (Math.sin(i)*3), y: y + (Math.cos(i*2)*2)});
+  }
+  ctx.beginPath();
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = "#2d6a4f";
+  for(let i = 0; i < roseCenters.length; i++) {
+    ctx.beginPath();
+    ctx.moveTo(roseCenters[i].x, roseCenters[i].y);
+    ctx.lineTo(roseCenters[i].x + (i%2===0? -8 : 8), height - 45);
+    ctx.stroke();
+    ctx.fillStyle = "#40916c";
+    ctx.beginPath();
+    ctx.ellipse(roseCenters[i].x + (i%2===0? -12 : 12), roseCenters[i].y + 12, 6, 3, i, 0, Math.PI*2);
+    ctx.fill();
+  }
+  for(let i = 0; i < roseCenters.length; i++) {
+    const x = roseCenters[i].x;
+    const y = roseCenters[i].y;
+    const size = 17 + (Math.sin(i) * 1.5);
+    for(let p = 0; p < 6; p++) {
+      const angle = (p * 60 + i * 15) * Math.PI/180;
+      const rad = size * 0.8;
+      const px = x + Math.cos(angle) * rad;
+      const py = y + Math.sin(angle) * rad * 0.7;
+      ctx.beginPath();
+      ctx.ellipse(px, py, size*0.55, size*0.45, angle, 0, Math.PI*2);
+      const blueGrad = ctx.createRadialGradient(px-2, py-2, 2, px, py, size*0.6);
+      blueGrad.addColorStop(0, "#3b82f6");
+      blueGrad.addColorStop(0.5, "#2563eb");
+      blueGrad.addColorStop(1, "#1e3a8a");
+      ctx.fillStyle = blueGrad;
+      ctx.fill();
+    }
+    for(let p = 0; p < 5; p++) {
+      const angle = (p * 72 + i * 20) * Math.PI/180;
+      const rad = size * 0.5;
+      const px = x + Math.cos(angle) * rad;
+      const py = y + Math.sin(angle) * rad * 0.6;
+      ctx.beginPath();
+      ctx.ellipse(px, py, size*0.4, size*0.32, angle, 0, Math.PI*2);
+      ctx.fillStyle = "#60a5fa";
+      ctx.fill();
+    }
+    ctx.beginPath();
+    ctx.arc(x, y, size*0.25, 0, Math.PI*2);
+    ctx.fillStyle = "#1e40af";
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(x-1, y-1, size*0.1, 0, Math.PI*2);
+    ctx.fillStyle = "#93c5fd";
+    ctx.fill();
+  }
+  for(let i = 0; i < 30; i++) {
+    ctx.fillStyle = `rgba(255,255,200,${0.3+Math.random()*0.5})`;
+    ctx.beginPath();
+    ctx.arc(width/2 - 100 + Math.random() * 200, height/2 - 50 + Math.random() * 150, 1+Math.random()*2, 0, Math.PI*2);
+    ctx.fill();
+  }
+  ctx.font = "bold 14px 'Segoe UI'";
+  ctx.fillStyle = "#FBBF24";
+  ctx.shadowBlur = 4;
+  ctx.fillText("✨ 19 Rare Blue Roses ✨", width/2-75, height-18);
+  ctx.restore();
+}
+
+window.goToRoses = function() {
+  document.getElementById("giftReveal").style.display = "none";
+  document.getElementById("roseScene").style.display = "block";
+  document.getElementById("roseText").innerHTML = "💙 Nineteen hand-drawn blue roses for your nineteen wondrous years 💙<br><span style='font-size:14px;'>Blue roses symbolize mystery, dreams, and the impossible — just like you, my one-of-a-kind queen. 🌹💙✨</span>";
+  setTimeout(() => { drawBlueRoseBouquet(); }, 50);
+};
+
 function resetAndEnd() {
   alert("✨ Thank you for celebrating with me! Happy Birthday Nimisha! 🎂💖");
   location.reload();
 }
 
-window.goToRoses = function() {
-  const bouquetDiv = document.getElementById("bouquet");
-  if(bouquetDiv) {
-    bouquetDiv.innerHTML = "";
-    // Create 19 beautiful blue roses 🌹💙
-    for(let i=0; i<19; i++) {
-      const rose = document.createElement("span");
-      rose.style.fontSize = "44px";
-      rose.style.display = "inline-block";
-      rose.style.animation = "bounce 0.7s infinite";
-      rose.style.margin = "5px";
-      rose.style.filter = "drop-shadow(0 0 4px #3b82f6)";
-      rose.innerText = "💙";
-      rose.title = "Blue Rose of Mystery & Love";
-      bouquetDiv.appendChild(rose);
-    }
-    // Add some special blue rose emojis mixed in for variety
-    const specialRoses = ["🦋", "💙", "🌹", "💎", "✨"];
-    for(let i=0; i<5; i++) {
-      const accent = document.createElement("span");
-      accent.style.fontSize = "36px";
-      accent.style.display = "inline-block";
-      accent.style.margin = "5px";
-      accent.style.animation = "float 2s infinite";
-      accent.innerText = specialRoses[i % specialRoses.length];
-      bouquetDiv.appendChild(accent);
-    }
-    document.getElementById("roseText").innerHTML = "💙 19 rare Blue Roses for 19 beautiful years 💙<br>Blue roses symbolize mystery, dreams, and the impossible — just like you, my one-of-a-kind queen. 🌹💙✨";
-  }
-  document.getElementById("giftReveal").style.display = "none";
-  document.getElementById("roseScene").style.display = "block";
-};
-
 document.getElementById("goToRosesBtn")?.addEventListener("click", () => { window.goToRoses(); });
 window.resetAndEnd = resetAndEnd;
 
-// Initialize all
 document.addEventListener("DOMContentLoaded", () => {
   initKeypad();
   setupChaseNo();
