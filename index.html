@@ -302,6 +302,107 @@ body {
   .photo-frame { width: 110px; height: 140px; }
 }
 
+/* ===== THOUGHT BUBBLES ===== */
+.photo-zone {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 6px;
+  z-index: 3;
+}
+.thought-bubble {
+  position: absolute;
+  background: rgba(248, 168, 168, 0.82);
+  border: 1.5px solid rgba(210, 110, 110, 0.45);
+  border-radius: 20px;
+  padding: 8px 13px;
+  font-size: 12px;
+  font-weight: 600;
+  font-style: italic;
+  color: #5c1010;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(200, 80, 80, 0.15);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  white-space: nowrap;
+  /* hidden by default, fade in one by one */
+  opacity: 0;
+}
+/* tiny dot tails */
+.thought-bubble::before,
+.thought-bubble::after {
+  content: "";
+  position: absolute;
+  background: rgba(248, 168, 168, 0.8);
+  border-radius: 50%;
+  border: 1px solid rgba(210,110,110,0.4);
+}
+/* bubble 1 — top left of photo */
+.tb1 {
+  top: 0px;
+  left: 4%;
+  animation: tbAppear1 14s ease-in-out infinite;
+}
+.tb1::before { width:9px; height:9px; bottom:-12px; right:-4px; }
+.tb1::after  { width:5px; height:5px; bottom:-22px; right:10px; }
+
+/* bubble 2 — top right of photo */
+.tb2 {
+  top: 10px;
+  right: 4%;
+  animation: tbAppear2 14s ease-in-out infinite;
+}
+.tb2::before { width:9px; height:9px; bottom:-12px; left:-4px; }
+.tb2::after  { width:5px; height:5px; bottom:-22px; left:10px; }
+
+/* bubble 3 — far left mid-height */
+.tb3 {
+  top: 60px;
+  left: 0%;
+  animation: tbAppear3 14s ease-in-out infinite;
+}
+.tb3::before { width:9px; height:9px; bottom:-12px; right:10px; }
+.tb3::after  { width:5px; height:5px; bottom:-22px; right:22px; }
+
+/* bubble 4 — far right mid-height */
+.tb4 {
+  top: 72px;
+  right: 0%;
+  animation: tbAppear4 14s ease-in-out infinite;
+}
+.tb4::before { width:9px; height:9px; bottom:-12px; left:10px; }
+.tb4::after  { width:5px; height:5px; bottom:-22px; left:22px; }
+
+/* each bubble: fade in → float → fade out, staggered so they never all show at once */
+@keyframes tbAppear1 {
+  0%,8%        { opacity:0; transform: translateY(6px) rotate(-1deg); }
+  14%,30%      { opacity:1; transform: translateY(0px) rotate(-1deg); }
+  34%,36%      { opacity:1; transform: translateY(-8px) rotate(1deg); }
+  42%,100%     { opacity:0; transform: translateY(-14px) rotate(1deg); }
+}
+@keyframes tbAppear2 {
+  0%,28%       { opacity:0; transform: translateY(6px) rotate(1deg); }
+  34%,50%      { opacity:1; transform: translateY(0px) rotate(1deg); }
+  54%,56%      { opacity:1; transform: translateY(-8px) rotate(-1deg); }
+  62%,100%     { opacity:0; transform: translateY(-14px) rotate(-1deg); }
+}
+@keyframes tbAppear3 {
+  0%,48%       { opacity:0; transform: translateY(6px) rotate(0.5deg); }
+  54%,68%      { opacity:1; transform: translateY(0px) rotate(0.5deg); }
+  72%,74%      { opacity:1; transform: translateY(-7px) rotate(-0.5deg); }
+  80%,100%     { opacity:0; transform: translateY(-14px) rotate(-0.5deg); }
+}
+@keyframes tbAppear4 {
+  0%,66%       { opacity:0; transform: translateY(6px) rotate(-0.8deg); }
+  72%,86%      { opacity:1; transform: translateY(0px) rotate(-0.8deg); }
+  90%,92%      { opacity:1; transform: translateY(-8px) rotate(0.8deg); }
+  98%,100%     { opacity:0; transform: translateY(-14px) rotate(0.8deg); }
+}
+
 h1, h2 {
   font-weight: 700;
   background: linear-gradient(135deg, #FFE6A3, #FFB347, #FFD966);
@@ -457,12 +558,30 @@ h1, h2 {
 <div id="lockScreen">
   <div class="ls-title">Enter passcode</div>
 
-  <div class="photo-frame">
-    <img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" alt="Nimisha">
-    <div class="photo-bow">🎀</div>
+  <!-- Photo + thought bubbles zone -->
+  <div class="photo-zone">
+
+    <!-- Bubble 1 · top-left · appears first -->
+    <div class="thought-bubble tb1">omg is he up to<br>something?? 🫣💗</div>
+
+    <!-- Bubble 2 · top-right · appears second -->
+    <div class="thought-bubble tb2">19?! I'm basically<br>a grandma 😭👵🏻</div>
+
+    <!-- Bubble 3 · mid-left · appears third -->
+    <div class="thought-bubble tb3">why does he know<br>me so well 😩🥺</div>
+
+    <!-- Bubble 4 · mid-right · appears last -->
+    <div class="thought-bubble tb4">not me already<br>blushing 🙈💕</div>
+
+    <!-- Photo frame, centered -->
+    <div class="photo-frame" style="position:relative; z-index:4; flex-shrink:0; margin:0; align-self:flex-end;">
+      <img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" alt="Nimisha">
+      <div class="photo-bow">🎀</div>
+    </div>
+
   </div>
 
-  <div class="dots-row" id="dotsRow">
+  <div class="dots-row" id="dotsRow" style="margin-top:4px;">
     <div class="dot" id="d0"></div>
     <div class="dot" id="d1"></div>
     <div class="dot" id="d2"></div>
