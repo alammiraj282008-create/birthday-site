@@ -85,7 +85,7 @@ body {
 .balloon:nth-child(21) { background: radial-gradient(circle at 30% 30%, #c9e4ff, #6bcb77); left: 48%; animation-duration: 9.7s; animation-delay: 1.2s; }
 .balloon:nth-child(22) { background: radial-gradient(circle at 30% 30%, #fbcfe8, #ff6bcb); left: 82%; animation-duration: 11.3s; animation-delay: 4.8s; }
 
-/* glassmorphic containers for screens after unlock */
+/* glassmorphic containers */
 .container, #roseScene, #memoryCardScene {
   position: relative;
   z-index: 2;
@@ -103,47 +103,203 @@ body {
   overflow-y: auto;
 }
 
-/* LOCK SCREEN CUSTOM STYLES - Beautiful Blue Theme */
+/* ===== NEW INTERACTIVE LOCK SCREEN ===== */
 #lockScreen {
-  background: #8fd3ff;
-  border-radius: 40px;
-  border: 4px solid rgba(255,255,255,0.4);
-  max-width: 420px;
-  padding: 25px 18px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-  backdrop-filter: none;
+  position: relative;
+  z-index: 2;
+  max-width: 400px;
+  width: 92%;
+  background: linear-gradient(160deg, #f3d0e8 0%, #d98ec8 40%, #9b59a8 100%);
+  border-radius: 44px;
+  border: 3px solid rgba(255,255,255,0.45);
+  padding: 28px 22px 24px;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
+  text-align: center;
+  overflow: hidden;
 }
-
-#lockScreen .row {
-  gap: 14px;
-}
-
-#lockScreen .row button {
-  width: 68px;
-  height: 68px;
+#lockScreen::before {
+  content: "";
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 200px; height: 200px;
+  background: rgba(255,200,240,0.15);
   border-radius: 50%;
-  background: white;
+  pointer-events: none;
+}
+#lockScreen::after {
+  content: "";
+  position: absolute;
+  bottom: -80px; right: -60px;
+  width: 240px; height: 240px;
+  background: rgba(200,150,220,0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.ls-title {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 8px rgba(0,0,50,0.2);
+  letter-spacing: 0.3px;
+  position: relative;
+  z-index: 1;
+}
+.photo-frame {
+  margin: 0 auto 18px;
+  width: 130px; height: 160px;
+  background: #fff;
+  border-radius: 18px;
+  transform: rotate(-3deg);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  border: 3px solid rgba(255,255,255,0.9);
+  z-index: 1;
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+.photo-bow {
+  position: absolute; top: -10px; right: -10px;
+  font-size: 32px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+.dots-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin: 0 auto 6px;
+  background: rgba(255,255,255,0.38);
+  border-radius: 24px;
+  padding: 10px 20px;
+  width: fit-content;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.12);
+  position: relative; z-index: 1;
+}
+.dot {
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  border: 2px solid rgba(120,50,130,0.4);
+  background: rgba(255,255,255,0.3);
+  transition: all 0.18s cubic-bezier(0.34,1.4,0.64,1);
+  position: relative; overflow: hidden;
+}
+.dot.filled {
+  background: #7b2f8a;
+  border-color: #7b2f8a;
+  transform: scale(1.2);
+  box-shadow: 0 0 0 3px rgba(123,47,138,0.22);
+}
+.dot.filled::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.45), transparent 70%);
+  border-radius: 50%;
+}
+.dot-gap { width: 8px; }
+.ls-error {
+  color: #fff3cd;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 20px;
+  margin: 4px 0 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  position: relative; z-index: 1;
+}
+.ls-error.show { opacity: 1; }
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 auto;
+  max-width: 290px;
+  position: relative; z-index: 1;
+}
+.key {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
   border: none;
   color: #1a2a3a;
-  font-size: 32px;
-  font-weight: 900;
-  cursor: pointer;
-  transition: 0.1s;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.18);
-  text-shadow: 0 1px 1px rgba(255,255,255,0.5);
-}
-
-#lockScreen .row button:active {
-  transform: scale(0.92);
-  background: #f0f0f0;
-}
-
-#lockScreen .row button#delBtn,
-#lockScreen .row button#clearBtn {
   font-size: 28px;
-  font-weight: bold;
-  color: #2c3e66;
-  background: #fff5e6;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.18), 0 8px 16px rgba(0,0,0,0.14);
+  transition: transform 0.08s, box-shadow 0.08s, background 0.08s;
+  position: relative; overflow: hidden;
+  min-width: 72px; min-height: 72px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.key::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.55), transparent 65%);
+  pointer-events: none;
+}
+.key .sub {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #9c6aaa;
+  margin-top: -2px;
+}
+.key.pressed {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.12);
+  background: rgba(235,245,255,0.98);
+}
+.key.ripple::before {
+  content: "";
+  position: absolute;
+  width: 0; height: 0;
+  background: rgba(180,80,200,0.22);
+  border-radius: 50%;
+  left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  animation: lsRipple 0.4s ease-out forwards;
+}
+@keyframes lsRipple { to { width: 130px; height: 130px; opacity: 0; } }
+.key-del, .key-clr {
+  background: rgba(245,220,240,0.95) !important;
+  font-size: 22px !important;
+  color: #6b2080 !important;
+}
+.key-del.pressed, .key-clr.pressed {
+  background: rgba(235,200,230,0.98) !important;
+}
+.ls-hint {
+  margin-top: 16px;
+  color: rgba(255,255,255,0.92);
+  font-size: 13px; font-weight: 500;
+  background: rgba(255,255,255,0.18);
+  border-radius: 18px;
+  padding: 10px 16px;
+  line-height: 1.4;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+  position: relative; z-index: 1;
+}
+.ls-success {
+  position: absolute; inset: 0;
+  border-radius: 44px;
+  background: linear-gradient(135deg, rgba(0,200,100,0.92), rgba(0,140,65,0.92));
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.35s;
+  z-index: 20;
+}
+.ls-success.show { opacity: 1; pointer-events: all; }
+.ls-success .stext { color: #fff; font-size: 26px; font-weight: 800; margin-top: 10px; }
+@keyframes dotShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
+.dots-row.shake { animation: dotShake 0.4s ease; }
+@media (max-width: 400px) {
+  #lockScreen { border-radius: 32px; padding: 20px 14px 18px; }
+  .key { min-width: 60px; min-height: 60px; font-size: 24px; }
+  .keypad-grid { gap: 9px; max-width: 240px; }
+  .photo-frame { width: 110px; height: 140px; }
 }
 
 h1, h2 {
@@ -169,229 +325,109 @@ h1, h2 {
 @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
 @keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)}}
 
-.tease-message {
-  background: rgba(255,200,0,0.12);
-  border-left: 3px solid #FFD966;
-  border-right: 3px solid #FFD966;
-  padding: 8px 12px;
-  margin: 12px 0;
-  border-radius: 60px;
-  font-size: 15px;
-  color: #FFE484;
-}
-
 #dots {
-  font-size: 38px;
-  letter-spacing: 12px;
-  color: #1e2a3e;
-  background: rgba(255,255,255,0.45);
-  display: inline-block;
-  padding: 10px 22px;
-  border-radius: 30px;
-  margin-bottom: 15px;
-  font-family: monospace;
-  font-weight: bold;
-  text-shadow: 0 1px 0 white;
+  font-size: 38px; letter-spacing: 12px; color: #1e2a3e;
+  background: rgba(255,255,255,0.45); display: inline-block;
+  padding: 10px 22px; border-radius: 30px; margin-bottom: 15px;
+  font-family: monospace; font-weight: bold;
 }
 
 .row {
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-  margin: 12px 0;
-  flex-wrap: wrap;
+  display: flex; justify-content: center; gap: 18px;
+  margin: 12px 0; flex-wrap: wrap;
 }
 
 .button-group {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
-  margin: 25px 0;
-  flex-wrap: wrap;
-  position: relative;
-  min-height: 80px;
+  display: flex; justify-content: center; align-items: center;
+  gap: 30px; margin: 25px 0; flex-wrap: wrap;
+  position: relative; min-height: 80px;
 }
 .yes-btn {
   background: linear-gradient(115deg, #00d26a, #00a142);
-  padding: 14px 32px;
-  border-radius: 100px;
-  border: none;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  cursor: pointer;
+  padding: 14px 32px; border-radius: 100px; border: none;
+  color: white; font-weight: bold; font-size: 20px; cursor: pointer;
   transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-  z-index: 5;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2); z-index: 5;
 }
 .no-btn {
   background: linear-gradient(115deg, #e63946, #b91c1c);
-  padding: 12px 28px;
-  border-radius: 100px;
-  border: none;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  cursor: pointer;
+  padding: 12px 28px; border-radius: 100px; border: none;
+  color: white; font-weight: bold; font-size: 18px; cursor: pointer;
   transition: all 0.08s linear;
-  box-shadow: 0 5px 12px rgba(0,0,0,0.3);
-  position: relative;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.3); position: relative;
 }
 
 .cake-preview {
-  background: rgba(0,0,0,0.35);
-  border-radius: 48px;
-  padding: 20px;
-  margin: 15px 0;
+  background: rgba(0,0,0,0.35); border-radius: 48px;
+  padding: 20px; margin: 15px 0;
 }
 #cakeCanvas {
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin: 10px 0;
+  min-height: 280px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 6px; margin: 10px 0;
 }
 .cake-layer {
-  width: 230px;
-  height: 46px;
-  border-radius: 24px 24px 16px 16px;
-  transition: 0.2s;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+  width: 230px; height: 46px; border-radius: 24px 24px 16px 16px;
+  transition: 0.2s; box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 .frosting {
-  width: 242px;
-  height: 22px;
-  border-radius: 32px 32px 16px 16px;
-  margin-bottom: 8px;
-  position: relative;
-  z-index: 2;
+  width: 242px; height: 22px; border-radius: 32px 32px 16px 16px;
+  margin-bottom: 8px; position: relative; z-index: 2;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 .candle {
-  width: 16px;
-  height: 40px;
+  width: 16px; height: 40px;
   background: linear-gradient(145deg, #ffa5a5, #dd4a4a);
-  position: absolute;
-  bottom: 100%;
+  position: absolute; bottom: 100%;
   transform: translateX(-50%);
   border-radius: 6px 6px 2px 2px;
 }
 .flame {
-  width: 14px;
-  height: 20px;
+  width: 14px; height: 20px;
   background: radial-gradient(circle, #ffdd77, #ff7700);
-  position: absolute;
-  top: -18px;
-  left: 1px;
+  position: absolute; top: -18px; left: 1px;
   border-radius: 50% 50% 40% 40%;
   animation: flicker 0.2s infinite alternate;
 }
 @keyframes flicker { 0% { opacity: 0.9; transform: scaleY(1);} 100% { opacity: 1; transform: scaleY(1.08);} }
 
-.control-panel {
-  background: rgba(255,210,0,0.08);
-  border-radius: 48px;
-  padding: 15px;
-}
-.color-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin: 10px 0;
-}
-.color-swatch {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid gold;
-  transition: 0.08s linear;
-}
+.control-panel { background: rgba(255,210,0,0.08); border-radius: 48px; padding: 15px; }
+.color-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 10px 0; }
+.color-swatch { width: 48px; height: 48px; border-radius: 50%; cursor: pointer; border: 2px solid gold; transition: 0.08s linear; }
 .action-btn {
   background: linear-gradient(125deg, #FFD966, #FFB347);
-  border: none;
-  padding: 12px 22px;
-  border-radius: 60px;
-  font-weight: bold;
-  margin: 10px 8px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.1s;
+  border: none; padding: 12px 22px; border-radius: 60px;
+  font-weight: bold; margin: 10px 8px; cursor: pointer;
+  font-size: 16px; transition: 0.1s;
 }
-.voice-card {
-  background: rgba(0,0,0,0.4);
-  border-radius: 48px;
-  padding: 16px;
-  margin: 15px 0;
-}
+.voice-card { background: rgba(0,0,0,0.4); border-radius: 48px; padding: 16px; margin: 15px 0; }
 .voice-btn {
-  background: #f97316;
-  padding: 10px 20px;
-  border-radius: 40px;
-  color: white;
-  border: none;
-  margin: 6px;
-  cursor: pointer;
-  font-weight: bold;
+  background: #f97316; padding: 10px 20px; border-radius: 40px;
+  color: white; border: none; margin: 6px; cursor: pointer; font-weight: bold;
 }
 .shake-notice {
-  background: rgba(255,200,0,0.2);
-  padding: 10px;
-  border-radius: 60px;
-  font-size: 14px;
-  color: #FFE484;
-  margin: 12px;
+  background: rgba(255,200,0,0.2); padding: 10px; border-radius: 60px;
+  font-size: 14px; color: #FFE484; margin: 12px;
 }
 
 .good-girl-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.2s;
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+  z-index: 1000; display: flex; align-items: center; justify-content: center;
+  visibility: hidden; opacity: 0; transition: 0.2s;
 }
 .good-girl-card {
   background: linear-gradient(145deg, #1e1a3a, #0f0c28);
-  border-radius: 70px;
-  padding: 30px 25px;
-  max-width: 340px;
-  text-align: center;
-  border: 2px solid #FFD966;
-  box-shadow: 0 25px 40px rgba(0,0,0,0.5);
-  transform: scale(0.8);
-  transition: transform 0.2s ease;
+  border-radius: 70px; padding: 30px 25px; max-width: 340px; text-align: center;
+  border: 2px solid #FFD966; box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+  transform: scale(0.8); transition: transform 0.2s ease;
 }
-.good-girl-card p {
-  font-size: 24px;
-  color: #FFE484;
-  font-weight: bold;
-  margin: 15px 0;
-}
+.good-girl-card p { font-size: 24px; color: #FFE484; font-weight: bold; margin: 15px 0; }
 .good-girl-card button {
-  background: #FFB347;
-  border: none;
-  padding: 10px 28px;
-  border-radius: 60px;
-  font-weight: bold;
-  margin-top: 10px;
-  font-size: 18px;
-  cursor: pointer;
+  background: #FFB347; border: none; padding: 10px 28px;
+  border-radius: 60px; font-weight: bold; margin-top: 10px;
+  font-size: 18px; cursor: pointer;
 }
 
-/* Memory Card Scene Special Styling */
 #memoryCardScene {
   background: #f8e7ef;
   backdrop-filter: none;
@@ -417,29 +453,53 @@ h1, h2 {
   </div>
 </div>
 
-<!-- BEAUTIFUL CUSTOM LOCK SCREEN -->
-<div id="lockScreen" style="background:#8fd3ff; border-radius:40px; border:4px solid rgba(255,255,255,0.4); max-width:420px; padding:25px 18px; box-shadow:0 20px 40px rgba(0,0,0,0.4);">
-  <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:15px;">
-    <h1 style="color:white; font-size:28px; font-weight:800; margin:0; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">Enter a passcode</h1>
+<!-- ===== INTERACTIVE LOCK SCREEN ===== -->
+<div id="lockScreen">
+  <div class="ls-title">Enter passcode</div>
+
+  <div class="photo-frame">
+    <img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" alt="Nimisha">
+    <div class="photo-bow">🎀</div>
   </div>
-  <div style="display:flex; justify-content:center; margin-bottom:18px; position:relative;">
-    <div style="background:white; padding:12px; border-radius:18px; transform:rotate(-3deg); box-shadow:0 10px 20px rgba(0,0,0,0.25); position:relative;">
-      <img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" 
-           style="width:190px; height:240px; object-fit:cover; border-radius:10px; display:block;">
-      <div style="position:absolute; top:-12px; right:-12px; font-size:40px;">🎀</div>
-      <div style="position:absolute; bottom:-25px; left:-18px; font-size:55px;">🧸</div>
-    </div>
+
+  <div class="dots-row" id="dotsRow">
+    <div class="dot" id="d0"></div>
+    <div class="dot" id="d1"></div>
+    <div class="dot" id="d2"></div>
+    <div class="dot" id="d3"></div>
+    <div class="dot-gap"></div>
+    <div class="dot" id="d4"></div>
+    <div class="dot" id="d5"></div>
+    <div class="dot" id="d6"></div>
+    <div class="dot" id="d7"></div>
   </div>
-  <div id="dots" style="font-size:38px; letter-spacing:12px; color:#1e2a3e; background:rgba(255,255,255,0.45); display:inline-block; padding:10px 22px; border-radius:30px; margin-bottom:15px; font-family:monospace; font-weight:bold;">○○○○ ○○○○</div>
-  <div id="keypad">
-    <div class="row"><button data-num="1">1</button><button data-num="2">2</button><button data-num="3">3</button></div>
-    <div class="row"><button data-num="4">4</button><button data-num="5">5</button><button data-num="6">6</button></div>
-    <div class="row"><button data-num="7">7</button><button data-num="8">8</button><button data-num="9">9</button></div>
-    <div class="row"><button id="delBtn">⌫</button><button data-num="0">0</button><button id="clearBtn">✕</button></div>
+
+  <div class="ls-error" id="lsError">Wrong passcode! Hint: DDMMYYYY</div>
+
+  <div class="keypad-grid" id="keypadGrid">
+    <button class="key" data-n="1"><span>1</span><span class="sub"></span></button>
+    <button class="key" data-n="2"><span>2</span><span class="sub">ABC</span></button>
+    <button class="key" data-n="3"><span>3</span><span class="sub">DEF</span></button>
+    <button class="key" data-n="4"><span>4</span><span class="sub">GHI</span></button>
+    <button class="key" data-n="5"><span>5</span><span class="sub">JKL</span></button>
+    <button class="key" data-n="6"><span>6</span><span class="sub">MNO</span></button>
+    <button class="key" data-n="7"><span>7</span><span class="sub">PQRS</span></button>
+    <button class="key" data-n="8"><span>8</span><span class="sub">TUV</span></button>
+    <button class="key" data-n="9"><span>9</span><span class="sub">WXYZ</span></button>
+    <button class="key key-clr" id="lsClrBtn">✕</button>
+    <button class="key" data-n="0"><span>0</span><span class="sub">+</span></button>
+    <button class="key key-del" id="lsDelBtn">⌫</button>
   </div>
-  <p style="color:white; margin-top:16px; font-size:14px; font-weight:600; background:rgba(255,255,255,0.25); padding:10px; border-radius:16px;">💡 hint: the day we first talked (DDMMYYYY)</p>
+
+  <div class="ls-hint">💡 Hint: the day we first talked (DDMMYYYY)</div>
+
+  <div class="ls-success" id="lsSuccess">
+    <div style="font-size:64px">🎂</div>
+    <div class="stext">Welcome! ✨</div>
+  </div>
 </div>
 
+<!-- BIRTHDAY LAYER -->
 <div id="birthdayLayer" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">😜🎀</div></div>
   <div class="message-box">
@@ -456,6 +516,7 @@ h1, h2 {
   <div id="teasyMessage" style="color:#ffaa66; font-weight:bold; margin-top: 12px; min-height: 48px;"></div>
 </div>
 
+<!-- CAKE BUILDER -->
 <div id="cakeBuilder" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🍰✨</div></div>
   <h1>🎨 Decorate Your Dream Cake 🎨</h1>
@@ -463,42 +524,44 @@ h1, h2 {
     <div id="cakeCanvas"></div>
   </div>
   <div class="control-panel">
-    <h3>📏 Layers: <span id="layerCount">2</span></h3>
+    <h3 style="color:#FFD966;">📏 Layers: <span id="layerCount">2</span></h3>
     <input type="range" id="layerSlider" min="1" max="5" value="2" style="width:100%">
-    <h3>🎨 Layer Colors</h3>
+    <h3 style="color:#FFD966;">🎨 Layer Colors</h3>
     <div id="layerColorGrid" class="color-grid"></div>
-    <h3>🍰 Frosting</h3>
+    <h3 style="color:#FFD966;">🍰 Frosting</h3>
     <div id="frostingGrid" class="color-grid"></div>
-    <h3>🕯️ Candles: <span id="candleCount">3</span></h3>
+    <h3 style="color:#FFD966;">🕯️ Candles: <span id="candleCount">3</span></h3>
     <input type="range" id="candleSlider" min="0" max="9" value="3" style="width:100%">
   </div>
   <button class="action-btn" id="lightCandlesBtn">🎂 Light the Candles! 🔥</button>
-  
+
   <div class="voice-card">
     <p style="color:#FFD966;">🎤 Record Your Birthday Wish 🎤</p>
     <button id="recordBtn" class="voice-btn">🎙️ Record Message</button>
     <button id="playRecordBtn" class="voice-btn" style="background:#3b82f6;">🔊 Play My Voice</button>
     <audio id="userAudio" controls style="width:100%; margin-top:8px; display:none;"></audio>
-    <p id="voiceStatus" style="font-size:12px; opacity:0.8;"></p>
+    <p id="voiceStatus" style="font-size:12px; opacity:0.8; color:#fff;"></p>
   </div>
-  
+
   <div class="shake-notice" id="shakeNotice">📱 SHAKE YOUR PHONE to blow out the candles! 📱</div>
   <button class="action-btn" id="finishCakeBtn" style="background: linear-gradient(135deg, #00c853, #009624); color: white;">✅ Done! See Your Gift ✅</button>
 </div>
 
+<!-- GIFT REVEAL -->
 <div id="giftReveal" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🎁💙</div></div>
   <h2>💌 A Special Gift For You 💌</h2>
-  <p style="margin: 15px;">For the most amazing 19-year-old I know...</p>
-  <div style="background: rgba(255,215,0,0.2); border-radius: 40px; padding: 18px; line-height: 1.5;">
+  <p style="margin: 15px; color:#fff;">For the most amazing 19-year-old I know...</p>
+  <div style="background: rgba(255,215,0,0.2); border-radius: 40px; padding: 18px; line-height: 1.7; color:#FFE484;">
     🌟 You are magic. Every day you make the world brighter.<br>
     💛 Never forget how incredible you are.<br>
     🎂 May this year bring you joy, adventure, and all the cake!<br>
     ✨ Love you, buddy! ✨
   </div>
-  <button id="goToRosesBtn" style="margin-top: 20px; padding:12px 28px; border-radius:60px; background:#FFD966; font-weight:bold;">Continue to Roses 💙</button>
+  <button id="goToRosesBtn" style="margin-top: 20px; padding:12px 28px; border-radius:60px; background:#FFD966; font-weight:bold; border:none; cursor:pointer;">Continue to Roses 💙</button>
 </div>
 
+<!-- ROSE SCENE -->
 <div id="roseScene" class="container" style="display:none;">
   <h1>💙 NOT EVERYONE GETS THIS 💙</h1>
   <canvas id="blueRoseCanvas" width="500" height="420" style="width:100%; max-width:500px; height:auto; margin:15px auto; display:block; border-radius:40px; background: radial-gradient(circle at 30% 20%, #0a1628, #020617); box-shadow: 0 0 30px rgba(59,130,246,0.3);"></canvas>
@@ -513,14 +576,12 @@ h1, h2 {
   <div style="position:absolute; bottom:-100px; right:-80px; width:220px; height:220px; background:#d85c7a; border-radius:60% 40% 30% 70%; opacity:0.95;"></div>
 
   <h2 style="position:relative; z-index:2; color:white; font-size:32px; font-weight:900; margin-bottom:22px; text-shadow:0 4px 12px rgba(0,0,0,0.3);">
-    Bcz she deserves best surprise ❤️
+    Bcz she deserves the best surprise ❤️
   </h2>
 
   <div style="position:relative; z-index:2; background:#f6d8e6; border-radius:35px; padding:28px 18px 38px; width:92%; margin:auto; box-shadow:0 14px 32px rgba(0,0,0,0.2); border:3px solid rgba(255,255,255,0.8);">
-
     <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); font-size:46px;">🎀</div>
     <div style="position:absolute; left:-24px; top:90px; font-size:60px; transform:rotate(-12deg);">🧸</div>
-
     <div style="color:#3d2d2d; font-size:20px; font-weight:700; line-height:1.6; margin-top:34px; margin-bottom:30px;">
       You are seen, you are<br>
       heard, and you are<br>
@@ -530,16 +591,11 @@ h1, h2 {
       that my love for you is<br>
       boundless and endless!
     </div>
-
     <div style="background:#efbfd2; border-radius:0 0 26px 26px; height:150px; position:relative; overflow:hidden; margin-top:12px;">
       <div style="position:absolute; width:100%; height:100%; background:linear-gradient(135deg,#efbfd2 50%, #e4a7c0 50%); clip-path:polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);"></div>
-
-      <!-- LEFT HEART -->
       <div style="position:absolute; left:95px; top:28px; width:80px; height:80px; background:white; clip-path:path('M40 72 C-18 38 8 -12 40 12 C72 -12 98 38 40 72 Z'); overflow:hidden; border:4px solid #f7d9e5; box-shadow:0 5px 14px rgba(0,0,0,0.22);">
         <img src="https://placehold.co/80x80/FFB6C1/white?text=💙" style="width:100%; height:100%; object-fit:cover;">
       </div>
-
-      <!-- RIGHT HEART -->
       <div style="position:absolute; right:95px; top:28px; width:80px; height:80px; background:white; clip-path:path('M40 72 C-18 38 8 -12 40 12 C72 -12 98 38 40 72 Z'); overflow:hidden; border:4px solid #f7d9e5; box-shadow:0 5px 14px rgba(0,0,0,0.22);">
         <img src="https://placehold.co/80x80/FFB6C1/white?text=✨" style="width:100%; height:100%; object-fit:cover;">
       </div>
@@ -556,56 +612,92 @@ h1, h2 {
 </div>
 
 <script>
-// ========== PASSCODE LOGIC ==========
-let fullCode = "";
-const correctCode = "19102024";
+// ========== INTERACTIVE PASSCODE ==========
+let lsCode = "";
+const CORRECT_CODE = "19102024";
 
-function refreshDots() {
-  const dotsDiv = document.getElementById("dots");
-  if(dotsDiv) {
-    let str = "";
-    for(let i=0; i<8; i++) {
-      str += (i < fullCode.length) ? "●" : "○";
-      if(i === 3) str += " ";
-    }
-    dotsDiv.innerText = str;
+function lsUpdateDots() {
+  for (let i = 0; i < 8; i++) {
+    const d = document.getElementById("d" + i);
+    if (i < lsCode.length) d.classList.add("filled");
+    else d.classList.remove("filled");
   }
 }
 
-function pressDigit(d) {
-  if(fullCode.length < 8) {
-    fullCode += d;
-    refreshDots();
-    if(fullCode.length === 8) {
-      if(fullCode === correctCode) {
+function lsRippleKey(btn) {
+  btn.classList.remove("ripple");
+  void btn.offsetWidth;
+  btn.classList.add("ripple");
+  btn.classList.add("pressed");
+  setTimeout(() => btn.classList.remove("pressed", "ripple"), 400);
+}
+
+function lsShowError() {
+  const row = document.getElementById("dotsRow");
+  const msg = document.getElementById("lsError");
+  row.classList.add("shake");
+  msg.classList.add("show");
+  msg.textContent = "Wrong passcode! Hint: DDMMYYYY";
+  setTimeout(() => {
+    row.classList.remove("shake");
+    msg.classList.remove("show");
+  }, 1400);
+}
+
+function lsPressDigit(d) {
+  if (lsCode.length >= 8) return;
+  lsCode += d;
+  lsUpdateDots();
+  document.getElementById("lsError").classList.remove("show");
+  if (lsCode.length === 8) {
+    if (lsCode === CORRECT_CODE) {
+      document.getElementById("lsSuccess").classList.add("show");
+      setTimeout(() => {
         document.getElementById("lockScreen").style.display = "none";
         document.getElementById("birthdayLayer").style.display = "block";
         resetYesNoChase();
-      } else { 
-        alert("❌ Wrong passcode! Hint: DDMMYYYY of day we first talked."); 
-        fullCode = ""; 
-        refreshDots(); 
-      }
+      }, 900);
+    } else {
+      setTimeout(() => {
+        lsShowError();
+        lsCode = "";
+        lsUpdateDots();
+      }, 120);
     }
   }
 }
-function clearFull() { fullCode = ""; refreshDots(); }
-function deleteLast() { fullCode = fullCode.slice(0,-1); refreshDots(); }
 
-function initKeypad() {
-  document.querySelectorAll('#lockScreen [data-num]').forEach(btn => {
-    btn.removeEventListener('click', numHandler);
-    btn.addEventListener('click', numHandler);
+function initLockScreen() {
+  document.querySelectorAll("#keypadGrid [data-n]").forEach(btn => {
+    btn.addEventListener("pointerdown", e => {
+      e.preventDefault();
+      lsRippleKey(btn);
+      lsPressDigit(btn.dataset.n);
+    });
   });
-  function numHandler(e) {
-    const num = e.currentTarget.getAttribute('data-num');
-    if(num !== null) pressDigit(num);
-  }
-  const delBtn = document.getElementById("delBtn");
-  const clearBtn = document.getElementById("clearBtn");
-  if(delBtn) { delBtn.removeEventListener('click', deleteLast); delBtn.addEventListener('click', deleteLast); }
-  if(clearBtn) { clearBtn.removeEventListener('click', clearFull); clearBtn.addEventListener('click', clearFull); }
+  document.getElementById("lsDelBtn").addEventListener("pointerdown", e => {
+    e.preventDefault();
+    lsRippleKey(e.currentTarget);
+    lsCode = lsCode.slice(0, -1);
+    lsUpdateDots();
+    document.getElementById("lsError").classList.remove("show");
+  });
+  document.getElementById("lsClrBtn").addEventListener("pointerdown", e => {
+    e.preventDefault();
+    lsRippleKey(e.currentTarget);
+    lsCode = "";
+    lsUpdateDots();
+    document.getElementById("lsError").classList.remove("show");
+  });
 }
+
+// Keyboard support for desktop
+document.addEventListener("keydown", e => {
+  if (document.getElementById("lockScreen").style.display === "none") return;
+  if (e.key >= "0" && e.key <= "9") lsPressDigit(e.key);
+  else if (e.key === "Backspace") { lsCode = lsCode.slice(0,-1); lsUpdateDots(); }
+  else if (e.key === "Escape") { lsCode = ""; lsUpdateDots(); }
+});
 
 // ========== CHASE NO BUTTON ==========
 let noClickCount = 0;
@@ -619,19 +711,19 @@ function resetYesNoChase() {
   noClickCount = 0;
   const yesBtn = document.getElementById("yesCakeBtn");
   const noBtn = document.getElementById("noCakeBtn");
-  if(yesBtn) { yesBtn.style.transform = "scale(1)"; yesBtn.style.fontSize = "20px"; yesBtn.style.padding = "14px 32px"; }
-  if(noBtn) { noBtn.style.transform = "scale(1)"; noBtn.style.opacity = "1"; noBtn.style.pointerEvents = "auto"; noBtn.style.left = "0px"; noBtn.style.top = "0px"; }
+  if (yesBtn) { yesBtn.style.transform = "scale(1)"; yesBtn.style.fontSize = "20px"; yesBtn.style.padding = "14px 32px"; }
+  if (noBtn) { noBtn.style.transform = "scale(1)"; noBtn.style.opacity = "1"; noBtn.style.pointerEvents = "auto"; noBtn.style.left = "0px"; noBtn.style.top = "0px"; }
   const teaserDiv = document.getElementById("teasyMessage");
-  if(teaserDiv) teaserDiv.innerText = "";
+  if (teaserDiv) teaserDiv.innerText = "";
 }
 
 function showGoodGirlMessage() {
   const popup = document.getElementById("goodGirlPopup");
-  if(popup) {
+  if (popup) {
     popup.style.visibility = "visible";
     popup.style.opacity = "1";
     const card = popup.querySelector(".good-girl-card");
-    if(card) card.style.transform = "scale(1)";
+    if (card) card.style.transform = "scale(1)";
     document.getElementById("closeGoodGirlBtn").onclick = () => {
       popup.style.visibility = "hidden";
       popup.style.opacity = "0";
@@ -650,7 +742,7 @@ function setupChaseNo() {
   const noBtn = document.getElementById("noCakeBtn");
   const yesBtn = document.getElementById("yesCakeBtn");
   const teaserDiv = document.getElementById("teasyMessage");
-  if(!noBtn || !yesBtn) return;
+  if (!noBtn || !yesBtn) return;
   const newNoBtn = noBtn.cloneNode(true);
   const newYesBtn = yesBtn.cloneNode(true);
   noBtn.parentNode.replaceChild(newNoBtn, noBtn);
@@ -663,11 +755,11 @@ function setupChaseNo() {
     teaserDiv.innerText = teaseMessages[noClickCount % teaseMessages.length];
     let scaleNo = Math.max(0.4, 1 - noClickCount * 0.09);
     finalNoBtn.style.transform = `scale(${scaleNo})`;
-    if(noClickCount >= 5) finalNoBtn.style.opacity = "0.5";
-    if(noClickCount >= 8) finalNoBtn.style.pointerEvents = "none";
+    if (noClickCount >= 5) finalNoBtn.style.opacity = "0.5";
+    if (noClickCount >= 8) finalNoBtn.style.pointerEvents = "none";
     let newScale = 1 + (noClickCount * 0.12);
     let newFont = 20 + (noClickCount * 2);
-    if(newFont > 44) newFont = 44;
+    if (newFont > 44) newFont = 44;
     finalYesBtn.style.transform = `scale(${newScale})`;
     finalYesBtn.style.fontSize = `${newFont}px`;
     finalYesBtn.style.padding = `${14 + noClickCount*2}px ${32 + noClickCount*3}px`;
@@ -677,7 +769,7 @@ function setupChaseNo() {
     finalNoBtn.style.position = "relative";
     finalNoBtn.style.left = `${randX}px`;
     finalNoBtn.style.top = `${randY}px`;
-    if(noClickCount >= 10) teaserDiv.innerText = "👑 You're stubborn! But click YES now, princess!";
+    if (noClickCount >= 10) teaserDiv.innerText = "👑 You're stubborn! But click YES now, princess!";
   });
   finalYesBtn.addEventListener("click", () => { showGoodGirlMessage(); });
 }
@@ -689,7 +781,7 @@ const playBtn = document.getElementById("playRecordBtn");
 const userAudio = document.getElementById("userAudio");
 const voiceStatus = document.getElementById("voiceStatus");
 
-if(recordBtn) {
+if (recordBtn) {
   recordBtn.onclick = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -708,7 +800,7 @@ if(recordBtn) {
       voiceStatus.innerText = "🎙️ Recording... Click 'Stop Recording' to finish.";
       recordBtn.innerText = "⏹️ Stop Recording";
       recordBtn.onclick = () => {
-        if(mediaRecorder && mediaRecorder.state === "recording") {
+        if (mediaRecorder && mediaRecorder.state === "recording") {
           mediaRecorder.stop();
           recordBtn.innerText = "🎙️ Record Message";
           recordBtn.onclick = arguments.callee;
@@ -717,8 +809,11 @@ if(recordBtn) {
     } catch(e) { alert("Microphone access needed for your voice message!"); }
   };
 }
-if(playBtn) {
-  playBtn.onclick = () => { if(userAudio.src) userAudio.play(); else voiceStatus.innerText = "No recording yet! Press record first."; };
+if (playBtn) {
+  playBtn.onclick = () => {
+    if (userAudio.src) userAudio.play();
+    else voiceStatus.innerText = "No recording yet! Press record first.";
+  };
 }
 
 // ========== CAKE BUILDER ==========
@@ -731,15 +826,15 @@ const frostingOptions = ["#fff5e0","#fff0f5","#f0e68c","#ffc0cb","#a0d6ff","#98f
 
 function renderCake() {
   const canvas = document.getElementById("cakeCanvas");
-  if(!canvas) return;
+  if (!canvas) return;
   canvas.innerHTML = "";
   const layerCount = parseInt(document.getElementById("layerSlider").value);
   const frostingDiv = document.createElement("div");
   frostingDiv.className = "frosting";
   frostingDiv.style.backgroundColor = frostingColor;
   frostingDiv.style.position = "relative";
-  if(candleNum > 0 && candlesLit) {
-    for(let i=0; i<candleNum; i++) {
+  if (candleNum > 0 && candlesLit) {
+    for (let i = 0; i < candleNum; i++) {
       const candle = document.createElement("div");
       candle.className = "candle";
       candle.style.left = `${(i+1) * (100/(candleNum+1))}%`;
@@ -748,8 +843,8 @@ function renderCake() {
       candle.appendChild(flame);
       frostingDiv.appendChild(candle);
     }
-  } else if(candleNum > 0 && !candlesLit) {
-    for(let i=0; i<candleNum; i++) {
+  } else if (candleNum > 0 && !candlesLit) {
+    for (let i = 0; i < candleNum; i++) {
       const candle = document.createElement("div");
       candle.className = "candle";
       candle.style.left = `${(i+1) * (100/(candleNum+1))}%`;
@@ -758,7 +853,7 @@ function renderCake() {
     }
   }
   canvas.appendChild(frostingDiv);
-  for(let i=layerCount-1; i>=0; i--) {
+  for (let i = layerCount-1; i >= 0; i--) {
     const layer = document.createElement("div");
     layer.className = "cake-layer";
     layer.style.backgroundColor = layerColors[i] || layerColorOptions[i % layerColorOptions.length];
@@ -769,27 +864,30 @@ function renderCake() {
 function updateLayers() {
   const count = parseInt(document.getElementById("layerSlider").value);
   document.getElementById("layerCount").innerText = count;
-  while(layerColors.length < count) layerColors.push(layerColorOptions[layerColors.length % layerColorOptions.length]);
-  while(layerColors.length > count) layerColors.pop();
+  while (layerColors.length < count) layerColors.push(layerColorOptions[layerColors.length % layerColorOptions.length]);
+  while (layerColors.length > count) layerColors.pop();
   renderColorPickers();
   renderCake();
 }
+
 function updateCandles() {
   candleNum = parseInt(document.getElementById("candleSlider").value);
   document.getElementById("candleCount").innerText = candleNum;
   renderCake();
 }
+
 function renderColorPickers() {
   const layerGrid = document.getElementById("layerColorGrid");
   const frostingGrid = document.getElementById("frostingGrid");
-  if(!layerGrid) return;
+  if (!layerGrid) return;
   const layerCt = parseInt(document.getElementById("layerSlider").value);
   layerGrid.innerHTML = "";
-  for(let i=0; i<layerCt; i++) {
+  for (let i = 0; i < layerCt; i++) {
     const label = document.createElement("div");
     label.innerText = `✨ Layer ${i+1}`;
     label.style.color = "#FFD966";
     label.style.fontSize = "13px";
+    label.style.width = "100%";
     layerGrid.appendChild(label);
     const subGrid = document.createElement("div");
     subGrid.style.display = "flex";
@@ -822,10 +920,10 @@ function initCakeBuilder() {
   frostingColor = "#fff5e0";
   candleNum = 3;
   candlesLit = false;
-  if(layerSlider) { layerSlider.value = "2"; layerSlider.oninput = () => { updateLayers(); candlesLit = false; renderCake(); }; }
-  if(candleSlider) { candleSlider.value = "3"; candleSlider.oninput = () => { updateCandles(); candlesLit = false; renderCake(); }; }
+  if (layerSlider) { layerSlider.value = "2"; layerSlider.oninput = () => { updateLayers(); candlesLit = false; renderCake(); }; }
+  if (candleSlider) { candleSlider.value = "3"; candleSlider.oninput = () => { updateCandles(); candlesLit = false; renderCake(); }; }
   updateLayers();
-  document.getElementById("lightCandlesBtn").onclick = () => { candlesLit = true; renderCake(); if(userAudio && userAudio.src) userAudio.play(); };
+  document.getElementById("lightCandlesBtn").onclick = () => { candlesLit = true; renderCake(); if (userAudio && userAudio.src) userAudio.play(); };
   document.getElementById("finishCakeBtn").onclick = () => {
     document.getElementById("cakeBuilder").style.display = "none";
     document.getElementById("giftReveal").style.display = "block";
@@ -847,31 +945,31 @@ function setupShakeToBlow() {
           candlesLit = false;
           renderCake();
           const notice = document.getElementById("shakeNotice");
-          if(notice) notice.innerText = "💨 You blew out the candles! 🕯️✨";
-          setTimeout(() => { if(notice) notice.innerText = "📱 SHAKE YOUR PHONE to blow out the candles! 📱"; }, 2000);
+          if (notice) notice.innerText = "💨 You blew out the candles! 🕯️✨";
+          setTimeout(() => { if (notice) notice.innerText = "📱 SHAKE YOUR PHONE to blow out the candles! 📱"; }, 2000);
         }
       }
     });
   } else {
     const noticeDiv = document.getElementById("shakeNotice");
-    if(noticeDiv) noticeDiv.innerText = "🎈 Blow on mic or click 'Light Candles' to test! 🎈";
+    if (noticeDiv) noticeDiv.innerText = "🎈 Click 'Light Candles' then shake or click again to test! 🎈";
   }
 }
 
-// ========== FULL BOUQUET - 50 BLUE ROSES CENTERED ==========
+// ========== BLUE ROSE BOUQUET ==========
 function drawFullBouquet() {
   const canvas = document.getElementById("blueRoseCanvas");
-  if(!canvas) return;
+  if (!canvas) return;
   const ctx = canvas.getContext("2d");
   const width = canvas.width = 500;
   const height = canvas.height = 420;
-  
+
   const grad = ctx.createLinearGradient(0, 0, 0, height);
   grad.addColorStop(0, "#0a1628");
   grad.addColorStop(1, "#020617");
   ctx.fillStyle = grad;
   ctx.fillRect(0, 0, width, height);
-  
+
   ctx.beginPath();
   ctx.moveTo(width/2 - 100, height - 55);
   ctx.quadraticCurveTo(width/2, height - 30, width/2 + 100, height - 55);
@@ -884,7 +982,7 @@ function drawFullBouquet() {
   ctx.quadraticCurveTo(width/2, height - 28, width/2 + 80, height - 48);
   ctx.fillStyle = "#0f2b44";
   ctx.fill();
-  
+
   ctx.beginPath();
   ctx.moveTo(width/2 - 25, height - 35);
   ctx.lineTo(width/2, height - 18);
@@ -901,40 +999,39 @@ function drawFullBouquet() {
   ctx.arc(width/2, height - 12, 6, 0, Math.PI*2);
   ctx.fillStyle = "#f59e0b";
   ctx.fill();
-  
+
   const centerX = width/2;
   const centerY = height/2 - 15;
   const positions = [];
-  for(let i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     let angle = -0.4 + (i / 9) * 0.8;
     let radius = 45;
     let x = centerX + Math.sin(angle) * radius * 0.7;
     let y = centerY - 70 + Math.cos(angle) * radius * 0.5;
     positions.push({x, y, size: 12});
   }
-  for(let i = 0; i < 18; i++) {
+  for (let i = 0; i < 18; i++) {
     let angle = -0.6 + (i / 17) * 1.2;
     let radius = 70;
     let x = centerX + Math.sin(angle) * radius;
     let y = centerY - 45 + Math.cos(angle) * radius * 0.6;
     positions.push({x, y, size: 13});
   }
-  for(let i = 0; i < 22; i++) {
+  for (let i = 0; i < 22; i++) {
     let angle = -0.85 + (i / 21) * 1.7;
     let radius = 95;
     let x = centerX + Math.sin(angle) * radius;
     let y = centerY - 20 + Math.cos(angle) * radius * 0.55;
     positions.push({x, y, size: 14});
   }
-  for(let p of positions) {
+  for (let p of positions) {
     p.x += (Math.random() - 0.5) * 6;
     p.y += (Math.random() - 0.5) * 5;
   }
-  
-  ctx.beginPath();
+
   ctx.lineWidth = 2.2;
   ctx.strokeStyle = "#2d6a4f";
-  for(let i = 0; i < positions.length; i++) {
+  for (let i = 0; i < positions.length; i++) {
     ctx.beginPath();
     ctx.moveTo(centerX + (Math.random() - 0.5) * 20, height - 40);
     ctx.lineTo(positions[i].x, positions[i].y);
@@ -946,14 +1043,14 @@ function drawFullBouquet() {
     ctx.ellipse(midX + (Math.random() - 0.5) * 8, midY + 3, 4.5, 2.5, 0.5, 0, Math.PI*2);
     ctx.fill();
   }
-  
-  for(let i = 0; i < positions.length; i++) {
+
+  for (let i = 0; i < positions.length; i++) {
     const x = positions[i].x;
     const y = positions[i].y;
     const size = positions[i].size + (Math.sin(i) * 1.2);
     ctx.shadowColor = "rgba(59,130,246,0.4)";
     ctx.shadowBlur = 5;
-    for(let p = 0; p < 6; p++) {
+    for (let p = 0; p < 6; p++) {
       const angle = (p * 60 + i * 25) * Math.PI/180;
       const rad = size * 0.85;
       const px = x + Math.cos(angle) * rad;
@@ -967,7 +1064,7 @@ function drawFullBouquet() {
       ctx.fillStyle = blueGrad;
       ctx.fill();
     }
-    for(let p = 0; p < 5; p++) {
+    for (let p = 0; p < 5; p++) {
       const angle = (p * 72 + i * 30) * Math.PI/180;
       const rad = size * 0.55;
       const px = x + Math.cos(angle) * rad;
@@ -986,25 +1083,26 @@ function drawFullBouquet() {
     ctx.fillStyle = "#93c5fd";
     ctx.fill();
   }
-  
+
   ctx.shadowBlur = 0;
-  for(let i = 0; i < 60; i++) {
+  for (let i = 0; i < 60; i++) {
     ctx.fillStyle = `rgba(255,255,200,${0.2 + Math.random() * 0.6})`;
     ctx.beginPath();
     ctx.arc(centerX - 100 + Math.random() * 200, centerY - 60 + Math.random() * 150, 1 + Math.random() * 2.5, 0, Math.PI*2);
     ctx.fill();
   }
-  
+
   ctx.font = "bold 16px 'Segoe UI'";
   ctx.fillStyle = "#FBBF24";
   ctx.shadowBlur = 4;
   ctx.fillText("✨ 50 Rare Blue Roses ✨", width/2-100, height-8);
+  ctx.shadowBlur = 0;
   ctx.font = "italic 12px 'Segoe UI'";
   ctx.fillStyle = "#93c5fd";
   ctx.fillText("A full bouquet of love for you", width/2-85, height+5);
 }
 
-// Navigation functions
+// ========== NAVIGATION ==========
 window.goToRoses = function() {
   document.getElementById("giftReveal").style.display = "none";
   document.getElementById("roseScene").style.display = "block";
@@ -1017,18 +1115,12 @@ function showMemoryCard() {
   document.getElementById("memoryCardScene").style.display = "block";
 }
 
-function resetAndEnd() {
-  location.reload();
-}
-
-// Event listeners
 document.getElementById("goToRosesBtn")?.addEventListener("click", () => { window.goToRoses(); });
 document.getElementById("continueToMemoryBtn")?.addEventListener("click", () => { showMemoryCard(); });
-window.showMemoryCard = showMemoryCard;
-window.resetAndEnd = resetAndEnd;
 
+// ========== INIT ==========
 document.addEventListener("DOMContentLoaded", () => {
-  initKeypad();
+  initLockScreen();
   setupChaseNo();
 });
 </script>
