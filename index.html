@@ -93,9 +93,31 @@ body {
 .voice-card { background:rgba(0,0,0,0.4); border-radius:48px; padding:16px; margin:15px 0; }
 .voice-btn { background:#f97316; padding:10px 20px; border-radius:40px; color:white; border:none; margin:6px; cursor:pointer; font-weight:bold; }
 .voice-btn-play { background:#3b82f6; }
-.letter-image-slot { margin: 15px 0; border-radius: 28px; overflow: hidden; border: 3px solid #ffb6c1; background: #fff0f5; padding: 8px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
-.letter-image-slot img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 20px; display: block; }
+.letter-image-slot { margin: 15px 0; border-radius: 28px; overflow: hidden; border: 3px solid #ffb6c1; background: #fff0f5; padding: 8px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); position: relative; }
+.letter-image-slot img { width: 100%; max-height: 250px; object-fit: cover; border-radius: 20px; display: block; }
 .letter-image-slot .placeholder { padding: 30px; text-align: center; color: #d85c7a; font-style: italic; background: #ffeef4; border-radius: 20px; }
+.floating-caption {
+  position: absolute;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  color: #FFD966;
+  padding: 6px 14px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  animation: floatCaption 3s ease-in-out infinite;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  border: 1px solid rgba(255,215,0,0.5);
+  font-family: 'Poppins', sans-serif;
+}
+@keyframes floatCaption {
+  0% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
+  50% { transform: translateY(-12px) rotate(2deg); opacity: 1; }
+  100% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
+}
 h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 #letterPage h2 { color:#d85c7a; }
 </style>
@@ -179,20 +201,24 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 <button id="resetGameBtn" style="margin-top:16px; padding:10px 24px; background:#f97316; border:none; border-radius:40px; font-weight:bold; display:none; cursor:pointer;">Try Again 🔄</button>
 <button id="gameContinueBtn" class="action-btn" style="background:#00c853; display:none;">✨ Win Prize ✨</button></div>
 
-<!-- LETTER PAGE WITH TWO IMAGE SLOTS -->
+<!-- LETTER PAGE WITH TWO IMAGE SLOTS + FLOATING CAPTIONS -->
 <div id="letterPage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">💌</div></div>
   
-  <!-- IMAGE SLOT 1 -->
-  <div class="letter-image-slot" id="letterImageSlot1">
-    <img id="letterImg1" src="" style="display:none;">
-    <div class="placeholder" id="letterPlaceholder1">🌸 Add your first special image here 🌸<br><small>(paste URL in the code)</small></div>
+  <!-- IMAGE SLOT 1 with floating captions -->
+  <div class="letter-image-slot" id="letterImageSlot1" style="position: relative;">
+    <img id="letterImg1" src="https://imgbs.com/uploads/image-png-da8bd625.png" style="display:block; width:100%; border-radius:20px;">
+    <div class="floating-caption" style="top: 10px; left: 10px;">🌸 Cuteness Meter 📈 OVERLOADED! 🌸</div>
+    <div class="floating-caption" style="bottom: 15px; right: 15px; animation-delay: 0.5s;">💖 What a STYLE! 💖</div>
+    <div class="floating-caption" style="top: 40%; left: -5px; animation-delay: 1s;">😍 How cute is that smile?! 😍</div>
   </div>
   
-  <!-- IMAGE SLOT 2 -->
-  <div class="letter-image-slot" id="letterImageSlot2">
-    <img id="letterImg2" src="" style="display:none;">
-    <div class="placeholder" id="letterPlaceholder2">💖 Add your second special image here 💖<br><small>(paste URL in the code)</small></div>
+  <!-- IMAGE SLOT 2 with floating captions -->
+  <div class="letter-image-slot" id="letterImageSlot2" style="position: relative;">
+    <img id="letterImg2" src="https://imgbs.com/uploads/image-png-123f342f.png" style="display:block; width:100%; border-radius:20px;">
+    <div class="floating-caption" style="top: 15px; right: 10px; animation-delay: 0.2s;">👑 Queen energy right here 👑</div>
+    <div class="floating-caption" style="bottom: 20px; left: 15px; animation-delay: 0.8s;">💫 Literally took my breath away 💫</div>
+    <div class="floating-caption" style="top: 60%; right: -8px; animation-delay: 1.3s;">✨ Too gorgeous to handle ✨</div>
   </div>
   
   <div style="font-family: 'Georgia', serif; color:#3d2b1a; background:#fffaf2; border-radius:48px; padding:28px 20px; text-align:left; box-shadow:0 10px 25px rgba(0,0,0,0.1); margin-top:15px;">
@@ -253,8 +279,6 @@ function setupShakeToBlow(){ if(window.DeviceMotionEvent){ let lastShake=0; wind
 const YOUR_EYES_VIDEO_URL = ""; // Paste your eyes video URL (MP4) from IMGBS or other host
 const YOUR_VOICE_EYES_URL = "";   // Paste your voice audio URL for eyes page (optional)
 const YOUR_VOICE_LETTER_URL = ""; // Paste your voice audio URL for letter page (optional)
-const LETTER_IMAGE_1_URL = "";    // Paste first image URL for letter
-const LETTER_IMAGE_2_URL = "";    // Paste second image URL for letter
 
 // Apply eyes video
 const eyesVideo = document.getElementById("eyesVideo");
@@ -266,22 +290,6 @@ if(YOUR_EYES_VIDEO_URL){
   if(eyesPlaceholder) eyesPlaceholder.style.display = "none";
 } else {
   if(eyesPlaceholder) eyesPlaceholder.innerHTML = "✨💙 Paste your video URL in the script (YOUR_EYES_VIDEO_URL) to see her eyes sparkle ✨💙";
-}
-
-// Apply letter images
-if(LETTER_IMAGE_1_URL){
-  const img1 = document.getElementById("letterImg1");
-  const placeholder1 = document.getElementById("letterPlaceholder1");
-  img1.src = LETTER_IMAGE_1_URL;
-  img1.style.display = "block";
-  if(placeholder1) placeholder1.style.display = "none";
-}
-if(LETTER_IMAGE_2_URL){
-  const img2 = document.getElementById("letterImg2");
-  const placeholder2 = document.getElementById("letterPlaceholder2");
-  img2.src = LETTER_IMAGE_2_URL;
-  img2.style.display = "block";
-  if(placeholder2) placeholder2.style.display = "none";
 }
 
 // Voice setup
