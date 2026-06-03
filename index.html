@@ -93,6 +93,9 @@ body {
 .voice-card { background:rgba(0,0,0,0.4); border-radius:48px; padding:16px; margin:15px 0; }
 .voice-btn { background:#f97316; padding:10px 20px; border-radius:40px; color:white; border:none; margin:6px; cursor:pointer; font-weight:bold; }
 .voice-btn-play { background:#3b82f6; }
+.letter-image-slot { margin: 15px 0; border-radius: 28px; overflow: hidden; border: 3px solid #ffb6c1; background: #fff0f5; padding: 8px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+.letter-image-slot img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 20px; display: block; }
+.letter-image-slot .placeholder { padding: 30px; text-align: center; color: #d85c7a; font-style: italic; background: #ffeef4; border-radius: 20px; }
 h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 #letterPage h2 { color:#d85c7a; }
 </style>
@@ -124,17 +127,15 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 <div class="shake-notice" id="shakeNotice">📱 SHAKE YOUR PHONE to blow out the candles! 📱</div>
 <button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);">✅ Done! See Next Surprise ✅</button></div>
 
-<!-- SPARKLE EYES PAGE (VIDEO + VOICE + FLIRTY TEXT) -->
+<!-- SPARKLE EYES PAGE -->
 <div id="sparkleEyesPage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">✨👁️✨</div></div>
 <h2>wanna see something that sparkles more than stars?</h2>
 <div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:16px; margin:12px 0;">
   <div id="eyesVideoSlot" style="border:3px solid gold; border-radius:28px; padding:12px; text-align:center; background:#00000066;">
-    <!-- VIDEO WILL BE ADDED HERE AFTER YOU UPLOAD -->
     <video id="eyesVideo" controls style="width:100%; max-height:300px; border-radius:20px;">
       <source src="" type="video/mp4">
-      Your browser does not support the video tag.
     </video>
-    <div id="eyesPlaceholder" style="padding:20px; color:#FFD966;">✨💙 Eyes video will appear here after you add the URL below ✨💙</div>
+    <div id="eyesPlaceholder" style="padding:20px; color:#FFD966;">✨💙 Eyes video will appear here after you add the URL ✨💙</div>
   </div>
   <div id="flirtyTextZone" style="margin-top:20px; font-size:22px; font-weight:bold; min-height:80px; color:#FFE484; font-style:italic;">💫</div>
   <div class="voice-card" id="eyesVoiceContainer">
@@ -146,7 +147,7 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 </div>
 <button id="continueToEarthBtn" class="action-btn" style="background:#3b82f6;">🌍 Continue to Your Name on Earth 🌍</button></div>
 
-<!-- NASA EARTH PAGE - IMAGE PRE-LOADED WITH YOUR URL -->
+<!-- NASA EARTH PAGE -->
 <div id="earthNamePage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🌍✨</div></div>
   <h2>🌟 NIMISHA 🌟</h2>
@@ -178,21 +179,37 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 <button id="resetGameBtn" style="margin-top:16px; padding:10px 24px; background:#f97316; border:none; border-radius:40px; font-weight:bold; display:none; cursor:pointer;">Try Again 🔄</button>
 <button id="gameContinueBtn" class="action-btn" style="background:#00c853; display:none;">✨ Win Prize ✨</button></div>
 
-<!-- LETTER PAGE -->
-<div id="letterPage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">💌</div></div>
-<div style="font-family: 'Georgia', serif; color:#3d2b1a; background:#fffaf2; border-radius:48px; padding:28px 20px; text-align:left; box-shadow:0 10px 25px rgba(0,0,0,0.1);">
-  <p style="font-size:22px; font-weight:800; text-align:center;">Happy birthday meri gorgeous ulti balti... 💖</p>
-  <p>U are 19 now... soo old... grandma... well kidding.. U are the most like the most beautiful girl i have seen... the god must have spent years making u ... just be happy keep that smile on ur face always ..let ur cheeks be chubby ... i love everything about u ... don't u ever change a single thing about u ...u rare perfect ... And ur brain ..ufff no words for it ... although km hai but veryy mature and smart u are... i have sooooo much to say but that will be boring ... summarizing it... enjoy the day ... an ur everyday with the smile kitten .. Just know i am here and i am proud of u..and i love u for who u are nimisha...Happiest birthday to u.</p>
-  <p style="margin-top:20px; text-align:center;">Thankyou for forgetting my mistakes and trusting me through all the tough times... I really really can't let u go dumbo.. Happy birthday ... 🎂💙</p>
-  <p style="margin-top:30px; text-align:right;">— Forever yours</p>
+<!-- LETTER PAGE WITH TWO IMAGE SLOTS -->
+<div id="letterPage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">💌</div></div>
+  
+  <!-- IMAGE SLOT 1 -->
+  <div class="letter-image-slot" id="letterImageSlot1">
+    <img id="letterImg1" src="" style="display:none;">
+    <div class="placeholder" id="letterPlaceholder1">🌸 Add your first special image here 🌸<br><small>(paste URL in the code)</small></div>
+  </div>
+  
+  <!-- IMAGE SLOT 2 -->
+  <div class="letter-image-slot" id="letterImageSlot2">
+    <img id="letterImg2" src="" style="display:none;">
+    <div class="placeholder" id="letterPlaceholder2">💖 Add your second special image here 💖<br><small>(paste URL in the code)</small></div>
+  </div>
+  
+  <div style="font-family: 'Georgia', serif; color:#3d2b1a; background:#fffaf2; border-radius:48px; padding:28px 20px; text-align:left; box-shadow:0 10px 25px rgba(0,0,0,0.1); margin-top:15px;">
+    <p style="font-size:22px; font-weight:800; text-align:center;">Happy birthday meri gorgeous ulti balti... 💖</p>
+    <p>U are 19 now... soo old... grandma... well kidding.. U are the most like the most beautiful girl i have seen... the god must have spent years making u ... just be happy keep that smile on ur face always ..let ur cheeks be chubby ... i love everything about u ... don't u ever change a single thing about u ...u rare perfect ... And ur brain ..ufff no words for it ... although km hai but veryy mature and smart u are... i have sooooo much to say but that will be boring ... summarizing it... enjoy the day ... an ur everyday with the smile kitten .. Just know i am here and i am proud of u..and i love u for who u are nimisha...Happiest birthday to u.</p>
+    <p style="margin-top:20px; text-align:center;">Thankyou for forgetting my mistakes and trusting me through all the tough times... I really really can't let u go dumbo.. Happy birthday ... 🎂💙</p>
+    <p style="margin-top:30px; text-align:right;">— Forever yours</p>
+  </div>
+  
+  <div class="voice-card" id="letterVoiceContainer" style="background:rgba(0,0,0,0.1); margin-top:20px;">
+    <p style="color:#d85c7a; font-weight:bold;">🎤 A personal voice note from me to you 🎤</p>
+    <button id="playLetterVoiceBtn" class="voice-btn voice-btn-play" style="display:none; background:#3b82f6;">🔊 Play Secret Voice Message</button>
+    <audio id="letterAudioPlayer" controls style="width:100%; margin-top:8px; display:none;"></audio>
+    <p id="letterVoiceStatus" style="font-size:12px;"></p>
+  </div>
+  <button onclick="location.reload()" style="margin-top:20px; background:#ff8fb1; padding:13px 34px; border:none; border-radius:60px; font-weight:bold; font-size:18px; cursor:pointer;">✨ Finish ✨</button>
 </div>
-<div class="voice-card" id="letterVoiceContainer" style="background:rgba(0,0,0,0.1); margin-top:20px;">
-  <p style="color:#d85c7a; font-weight:bold;">🎤 A personal voice note from me to you 🎤</p>
-  <button id="playLetterVoiceBtn" class="voice-btn voice-btn-play" style="display:none; background:#3b82f6;">🔊 Play Secret Voice Message</button>
-  <audio id="letterAudioPlayer" controls style="width:100%; margin-top:8px; display:none;"></audio>
-  <p id="letterVoiceStatus" style="font-size:12px;"></p>
-</div>
-<button onclick="location.reload()" style="margin-top:20px; background:#ff8fb1; padding:13px 34px; border:none; border-radius:60px; font-weight:bold; font-size:18px; cursor:pointer;">✨ Finish ✨</button></div>
 
 <script>
 // LOCK SCREEN
@@ -209,7 +226,7 @@ function resetYesNoChase(){ noClickCount=0; const yesBtn=document.getElementById
 function showGoodGirlMessage(){ const popup=document.getElementById("goodGirlPopup"); popup.style.visibility="visible"; popup.style.opacity="1"; document.getElementById("closeGoodGirlBtn").onclick=()=>{ popup.style.visibility="hidden"; popup.style.opacity="0"; document.getElementById("birthdayLayer").style.display="none"; document.getElementById("cakeBuilder").style.display="block"; initCakeBuilder(); }; }
 function setupChaseNo(){ const noBtn=document.getElementById("noCakeBtn"),yesBtn=document.getElementById("yesCakeBtn"),teaserDiv=document.getElementById("teasyMessage"); if(!noBtn)return; noBtn.addEventListener("click",()=>{ noClickCount++; teaserDiv.innerText=teaseMessages[noClickCount%teaseMessages.length]; let scaleNo=Math.max(0.4,1-noClickCount*0.09); noBtn.style.transform=`scale(${scaleNo})`; if(noClickCount>=5)noBtn.style.opacity="0.5"; if(noClickCount>=8)noBtn.style.pointerEvents="none"; let newScale=1+(noClickCount*0.12); yesBtn.style.transform=`scale(${newScale})`; yesBtn.style.fontSize=`${Math.min(44,20+(noClickCount*2))}px`; const rX=(Math.random()-0.5)*40,rY=(Math.random()-0.5)*25; noBtn.style.position="relative"; noBtn.style.left=`${rX}px`; noBtn.style.top=`${rY}px`; }); yesBtn.addEventListener("click",showGoodGirlMessage); }
 
-// CAKE RENDER (simplified but working)
+// CAKE RENDER
 let layerColors=[], frostingColor="#fff5e0", candleNum=3, candlesLit=false;
 const layerColorOptions=[{hex:"#e74c3c"},{hex:"#f1c40f"},{hex:"#2ecc71"},{hex:"#3498db"},{hex:"#9b59b6"},{hex:"#e67e22"}];
 const frostingOptions=[{hex:"#fff5e0"},{hex:"#ffc0cb"},{hex:"#f0e68c"},{hex:"#a0d6ff"}];
@@ -232,8 +249,43 @@ function renderColorPickers(){ let layerGrid=document.getElementById("layerColor
 function initCakeBuilder(){ layerColors=["#e74c3c","#f1c40f"]; frostingColor="#fff5e0"; candleNum=3; candlesLit=false; document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; updateLayers(); document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); }; document.getElementById("finishCakeBtn").onclick=()=>{ document.getElementById("cakeBuilder").style.display="none"; document.getElementById("sparkleEyesPage").style.display="block"; }; setupShakeToBlow(); }
 function setupShakeToBlow(){ if(window.DeviceMotionEvent){ let lastShake=0; window.addEventListener("devicemotion",e=>{ let acc=e.accelerationIncludingGravity; if(!acc)return; let mag=Math.abs(acc.x)+Math.abs(acc.y)+Math.abs(acc.z); if(mag>35&&Date.now()-lastShake>800){ lastShake=Date.now(); if(candlesLit){ candlesLit=false; renderCake(); document.getElementById("shakeNotice").innerText="💨 You blew out candles! 🕯️"; setTimeout(()=>{ document.getElementById("shakeNotice").innerText="📱 SHAKE YOUR PHONE to blow out the candles! 📱"; },2000); } } }); } }
 
-// VOICE HANDLER (Admin pre-load via localStorage simulation - you can set these URLs)
-function setupVoicePlay(playBtnId, audioPlayerId, statusId, audioUrl){
+// ==== CONFIGURATION: PASTE YOUR MEDIA URLs HERE ====
+const YOUR_EYES_VIDEO_URL = ""; // Paste your eyes video URL (MP4) from IMGBS or other host
+const YOUR_VOICE_EYES_URL = "";   // Paste your voice audio URL for eyes page (optional)
+const YOUR_VOICE_LETTER_URL = ""; // Paste your voice audio URL for letter page (optional)
+const LETTER_IMAGE_1_URL = "";    // Paste first image URL for letter
+const LETTER_IMAGE_2_URL = "";    // Paste second image URL for letter
+
+// Apply eyes video
+const eyesVideo = document.getElementById("eyesVideo");
+const eyesPlaceholder = document.getElementById("eyesPlaceholder");
+if(YOUR_EYES_VIDEO_URL){
+  eyesVideo.querySelector("source").src = YOUR_EYES_VIDEO_URL;
+  eyesVideo.load();
+  eyesVideo.style.display = "block";
+  if(eyesPlaceholder) eyesPlaceholder.style.display = "none";
+} else {
+  if(eyesPlaceholder) eyesPlaceholder.innerHTML = "✨💙 Paste your video URL in the script (YOUR_EYES_VIDEO_URL) to see her eyes sparkle ✨💙";
+}
+
+// Apply letter images
+if(LETTER_IMAGE_1_URL){
+  const img1 = document.getElementById("letterImg1");
+  const placeholder1 = document.getElementById("letterPlaceholder1");
+  img1.src = LETTER_IMAGE_1_URL;
+  img1.style.display = "block";
+  if(placeholder1) placeholder1.style.display = "none";
+}
+if(LETTER_IMAGE_2_URL){
+  const img2 = document.getElementById("letterImg2");
+  const placeholder2 = document.getElementById("letterPlaceholder2");
+  img2.src = LETTER_IMAGE_2_URL;
+  img2.style.display = "block";
+  if(placeholder2) placeholder2.style.display = "none";
+}
+
+// Voice setup
+function setupVoice(playBtnId, audioPlayerId, statusId, audioUrl){
   const playBtn=document.getElementById(playBtnId);
   const audioPlayer=document.getElementById(audioPlayerId);
   const status=document.getElementById(statusId);
@@ -245,26 +297,12 @@ function setupVoicePlay(playBtnId, audioPlayerId, statusId, audioUrl){
     if(status) status.innerText="✨ A secret voice message is waiting ✨";
   }
 }
-// ==== YOU CAN ADD YOUR VOICE URLs HERE (upload to IMGBS or similar and paste the direct link) ====
-// Example: setupVoicePlay("playEyesVoiceBtn","eyesAudioPlayer","eyesVoiceStatus","https://example.com/your-audio.mp3");
-// setupVoicePlay("playLetterVoiceBtn","letterAudioPlayer","letterVoiceStatus","https://example.com/your-audio.mp3");
+setupVoice("playEyesVoiceBtn","eyesAudioPlayer","eyesVoiceStatus", YOUR_VOICE_EYES_URL);
+setupVoice("playLetterVoiceBtn","letterAudioPlayer","letterVoiceStatus", YOUR_VOICE_LETTER_URL);
 
 // FLIRTY TEXT
 const flirtyTexts=["✨ Ohh look my reflection in those eyes ✨","💙 Those eyes hold galaxies...","🌟 Brighter than a thousand stars","💖 I get lost in them every time","🌙 Moonlight is jealous of your gaze"]; let txtIndex=0;
 setInterval(()=>{ let zone=document.getElementById("flirtyTextZone"); if(zone&&document.getElementById("sparkleEyesPage").style.display==="block"){ zone.innerHTML=flirtyTexts[txtIndex%flirtyTexts.length]; txtIndex++; } },2800);
-
-// ==== ADD YOUR EYES VIDEO URL HERE ====
-const eyesVideo = document.getElementById("eyesVideo");
-const eyesPlaceholder = document.getElementById("eyesPlaceholder");
-const YOUR_VIDEO_URL = ""; // <--- PASTE YOUR VIDEO URL HERE (from IMGBS or other host)
-if(YOUR_VIDEO_URL){
-  eyesVideo.querySelector("source").src = YOUR_VIDEO_URL;
-  eyesVideo.load();
-  eyesVideo.style.display = "block";
-  if(eyesPlaceholder) eyesPlaceholder.style.display = "none";
-} else {
-  if(eyesPlaceholder) eyesPlaceholder.innerHTML = "✨💙 Paste your video URL in the script (YOUR_VIDEO_URL) to see her eyes sparkle ✨💙";
-}
 
 // NAVIGATION
 document.getElementById("continueToEarthBtn")?.addEventListener("click",()=>{ document.getElementById("sparkleEyesPage").style.display="none"; document.getElementById("earthNamePage").style.display="block"; });
