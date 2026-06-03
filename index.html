@@ -88,7 +88,7 @@ body {
 .good-girl-card { background:linear-gradient(145deg,#1e1a3a,#0f0c28); border-radius:70px; padding:30px 25px; max-width:340px; text-align:center; border:2px solid #FFD966; transform:scale(0.8); transition:transform 0.2s ease; }
 .game-canvas { background:#1a1a2e; border-radius:24px; margin:12px auto; display:block; width:100%; max-width:500px; height:400px; cursor:pointer; }
 #earthNameContainer { background: rgba(10,20,40,0.8); border-radius: 32px; padding: 20px; margin: 12px 0; text-align: center; border: 2px solid #3b82f6; }
-.earth-image-card { background: #0a1628; border-radius: 28px; padding: 12px; margin: 12px 0; border: 2px solid #ffd966; transition: all 0.2s; }
+.earth-image-card { background: #0a1628; border-radius: 28px; padding: 12px; margin: 12px 0; border: 2px solid #ffd966; }
 .coords-text { font-family: monospace; background: rgba(0,0,0,0.6); padding: 10px; border-radius: 16px; margin-top: 10px; color: #88ffaa; font-size: 14px; }
 .voice-card { background:rgba(0,0,0,0.4); border-radius:48px; padding:16px; margin:15px 0; }
 .voice-btn { background:#f97316; padding:10px 20px; border-radius:40px; color:white; border:none; margin:6px; cursor:pointer; font-weight:bold; }
@@ -124,42 +124,46 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 <div class="shake-notice" id="shakeNotice">📱 SHAKE YOUR PHONE to blow out the candles! 📱</div>
 <button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);">✅ Done! See Next Surprise ✅</button></div>
 
-<!-- SPARKLE EYES PAGE -->
+<!-- SPARKLE EYES PAGE (VIDEO + VOICE + FLIRTY TEXT) -->
 <div id="sparkleEyesPage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">✨👁️✨</div></div>
 <h2>wanna see something that sparkles more than stars?</h2>
 <div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:16px; margin:12px 0;">
-  <div id="eyesVideoSlot" style="border:3px dashed gold; border-radius:28px; padding:12px; text-align:center; background:#00000066;">
-    <video id="eyesVideo" controls style="width:100%; max-height:300px; border-radius:20px; display:none;"></video>
-    <div id="eyesPlaceholder" style="padding:40px; color:#FFD966;">✨💙 Her eyes video will appear here ✨💙</div>
-    <input type="file" id="eyesVideoUpload" accept="video/*" style="display:none;">
-    <button id="uploadEyesBtn" class="action-btn" style="margin-top:12px;">🎥 Upload Eyes Video (Only Me)</button>
+  <div id="eyesVideoSlot" style="border:3px solid gold; border-radius:28px; padding:12px; text-align:center; background:#00000066;">
+    <!-- VIDEO WILL BE ADDED HERE AFTER YOU UPLOAD -->
+    <video id="eyesVideo" controls style="width:100%; max-height:300px; border-radius:20px;">
+      <source src="" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div id="eyesPlaceholder" style="padding:20px; color:#FFD966;">✨💙 Eyes video will appear here after you add the URL below ✨💙</div>
   </div>
   <div id="flirtyTextZone" style="margin-top:20px; font-size:22px; font-weight:bold; min-height:80px; color:#FFE484; font-style:italic;">💫</div>
   <div class="voice-card" id="eyesVoiceContainer">
     <p style="color:#FFD966;">🎧 A secret voice message for your eyes ✨</p>
-    <input type="file" id="eyesVoiceUpload" accept="audio/*" style="display:none;">
-    <button id="uploadEyesVoiceBtn" class="voice-btn">🎙️ Upload Voice (Only Me)</button>
     <button id="playEyesVoiceBtn" class="voice-btn voice-btn-play" style="display:none;">🔊 Hear Secret Message</button>
-    <audio id="eyesAudioPlayer" style="display:none;"></audio>
+    <audio id="eyesAudioPlayer" controls style="width:100%; margin-top:8px; display:none;"></audio>
     <p id="eyesVoiceStatus" style="font-size:12px;"></p>
   </div>
 </div>
 <button id="continueToEarthBtn" class="action-btn" style="background:#3b82f6;">🌍 Continue to Your Name on Earth 🌍</button></div>
 
-<!-- NASA EARTH PAGE WITH IMAGE UPLOAD SLOT -->
+<!-- NASA EARTH PAGE - IMAGE PRE-LOADED WITH YOUR URL -->
 <div id="earthNamePage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🌍✨</div></div>
   <h2>🌟 NIMISHA 🌟</h2>
   <div id="earthNameContainer">
-    <div class="earth-image-card" id="nasaImageSlot" style="border:3px dashed gold; border-radius:28px; padding:16px; text-align:center; background:rgba(0,0,0,0.4);">
-      <img id="nasaEarthImage" style="width:100%; max-height:320px; object-fit:cover; border-radius:20px; display:none;">
-      <div id="nasaImagePlaceholder" style="padding:50px 20px; color:#FFD966;">🌍✨ NASA Earth image will appear here ✨🌍</div>
-      <input type="file" id="nasaImageUpload" accept="image/*" style="display:none;">
-      <button id="uploadNasaImageBtn" class="action-btn" style="margin-top:12px; background:#3b82f6;">📸 Upload NASA Image (Only Me)</button>
+    <div class="earth-image-card" style="border:2px solid gold; border-radius:28px; padding:12px; text-align:center; background:rgba(0,0,0,0.4);">
+      <img src="https://imgbs.com/uploads/image-png-38bee0d6.png" alt="NASA Earth view with Nimisha's name" style="width:100%; max-height:320px; object-fit:contain; border-radius:20px;">
     </div>
-    <div class="coords-text" style="margin-top:15px;">📍 São Miguel do Araguaia, Brazil<br>12°56'44.3" S 50°29'42.0" W</div>
-    <p style="color:#FFD966; font-size:20px; font-weight:bold; margin:20px 0 10px 0;">✨ see... even this earth has ur name written on it ✨</p>
-    <p style="color:#bbddff; font-size:14px;">NASA's Landsat satellite captured this view. Your name exists on this planet, just like you exist in my heart. 🌍💙</p>
+    <div class="coords-text" style="margin-top:15px;">
+      📍 São Miguel do Araguaia, Brazil<br>
+      12°56'44.3" S 50°29'42.0" W
+    </div>
+    <p style="color:#FFD966; font-size:20px; font-weight:bold; margin:20px 0 10px 0;">
+      ✨ see... even this earth has ur name written on it ✨
+    </p>
+    <p style="color:#bbddff; font-size:14px;">
+      NASA's Landsat satellite captured this view. Your name exists on this planet, just like you exist in my heart. 🌍💙
+    </p>
   </div>
   <button id="continueToGameBtn" class="action-btn">🎮 Play: Catch My Heart 🎮</button>
 </div>
@@ -184,10 +188,8 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 </div>
 <div class="voice-card" id="letterVoiceContainer" style="background:rgba(0,0,0,0.1); margin-top:20px;">
   <p style="color:#d85c7a; font-weight:bold;">🎤 A personal voice note from me to you 🎤</p>
-  <input type="file" id="letterVoiceUpload" accept="audio/*" style="display:none;">
-  <button id="uploadLetterVoiceBtn" class="voice-btn" style="background:#d85c7a;">🎙️ Upload My Voice (Only Me)</button>
   <button id="playLetterVoiceBtn" class="voice-btn voice-btn-play" style="display:none; background:#3b82f6;">🔊 Play Secret Voice Message</button>
-  <audio id="letterAudioPlayer" style="display:none;"></audio>
+  <audio id="letterAudioPlayer" controls style="width:100%; margin-top:8px; display:none;"></audio>
   <p id="letterVoiceStatus" style="font-size:12px;"></p>
 </div>
 <button onclick="location.reload()" style="margin-top:20px; background:#ff8fb1; padding:13px 34px; border:none; border-radius:60px; font-weight:bold; font-size:18px; cursor:pointer;">✨ Finish ✨</button></div>
@@ -207,7 +209,7 @@ function resetYesNoChase(){ noClickCount=0; const yesBtn=document.getElementById
 function showGoodGirlMessage(){ const popup=document.getElementById("goodGirlPopup"); popup.style.visibility="visible"; popup.style.opacity="1"; document.getElementById("closeGoodGirlBtn").onclick=()=>{ popup.style.visibility="hidden"; popup.style.opacity="0"; document.getElementById("birthdayLayer").style.display="none"; document.getElementById("cakeBuilder").style.display="block"; initCakeBuilder(); }; }
 function setupChaseNo(){ const noBtn=document.getElementById("noCakeBtn"),yesBtn=document.getElementById("yesCakeBtn"),teaserDiv=document.getElementById("teasyMessage"); if(!noBtn)return; noBtn.addEventListener("click",()=>{ noClickCount++; teaserDiv.innerText=teaseMessages[noClickCount%teaseMessages.length]; let scaleNo=Math.max(0.4,1-noClickCount*0.09); noBtn.style.transform=`scale(${scaleNo})`; if(noClickCount>=5)noBtn.style.opacity="0.5"; if(noClickCount>=8)noBtn.style.pointerEvents="none"; let newScale=1+(noClickCount*0.12); yesBtn.style.transform=`scale(${newScale})`; yesBtn.style.fontSize=`${Math.min(44,20+(noClickCount*2))}px`; const rX=(Math.random()-0.5)*40,rY=(Math.random()-0.5)*25; noBtn.style.position="relative"; noBtn.style.left=`${rX}px`; noBtn.style.top=`${rY}px`; }); yesBtn.addEventListener("click",showGoodGirlMessage); }
 
-// CAKE RENDER
+// CAKE RENDER (simplified but working)
 let layerColors=[], frostingColor="#fff5e0", candleNum=3, candlesLit=false;
 const layerColorOptions=[{hex:"#e74c3c"},{hex:"#f1c40f"},{hex:"#2ecc71"},{hex:"#3498db"},{hex:"#9b59b6"},{hex:"#e67e22"}];
 const frostingOptions=[{hex:"#fff5e0"},{hex:"#ffc0cb"},{hex:"#f0e68c"},{hex:"#a0d6ff"}];
@@ -230,51 +232,39 @@ function renderColorPickers(){ let layerGrid=document.getElementById("layerColor
 function initCakeBuilder(){ layerColors=["#e74c3c","#f1c40f"]; frostingColor="#fff5e0"; candleNum=3; candlesLit=false; document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; updateLayers(); document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); }; document.getElementById("finishCakeBtn").onclick=()=>{ document.getElementById("cakeBuilder").style.display="none"; document.getElementById("sparkleEyesPage").style.display="block"; }; setupShakeToBlow(); }
 function setupShakeToBlow(){ if(window.DeviceMotionEvent){ let lastShake=0; window.addEventListener("devicemotion",e=>{ let acc=e.accelerationIncludingGravity; if(!acc)return; let mag=Math.abs(acc.x)+Math.abs(acc.y)+Math.abs(acc.z); if(mag>35&&Date.now()-lastShake>800){ lastShake=Date.now(); if(candlesLit){ candlesLit=false; renderCake(); document.getElementById("shakeNotice").innerText="💨 You blew out candles! 🕯️"; setTimeout(()=>{ document.getElementById("shakeNotice").innerText="📱 SHAKE YOUR PHONE to blow out the candles! 📱"; },2000); } } }); } }
 
-// VOICE HANDLER
-function setupVoiceUpload(uploadBtnId, fileInputId, audioPlayerId, playBtnId, statusId, storageKey){
-  const uploadBtn=document.getElementById(uploadBtnId);
-  const fileInput=document.getElementById(fileInputId);
-  const audioPlayer=document.getElementById(audioPlayerId);
+// VOICE HANDLER (Admin pre-load via localStorage simulation - you can set these URLs)
+function setupVoicePlay(playBtnId, audioPlayerId, statusId, audioUrl){
   const playBtn=document.getElementById(playBtnId);
+  const audioPlayer=document.getElementById(audioPlayerId);
   const status=document.getElementById(statusId);
-  if(uploadBtn) uploadBtn.addEventListener("click",()=>fileInput.click());
-  if(fileInput) fileInput.addEventListener("change",(e)=>{
-    const file=e.target.files[0]; if(!file) return;
-    const url=URL.createObjectURL(file);
-    audioPlayer.src=url;
-    localStorage.setItem(storageKey, url);
-    status.innerText="✅ Voice saved! She can hear it now.";
+  if(audioUrl && playBtn){
+    audioPlayer.src=audioUrl;
+    audioPlayer.style.display="block";
     playBtn.style.display="inline-block";
-    playBtn.onclick=()=>{ if(audioPlayer.src) audioPlayer.play(); };
-  });
-  const savedUrl=localStorage.getItem(storageKey);
-  if(savedUrl && savedUrl!="undefined" && playBtn){
-    audioPlayer.src=savedUrl;
-    playBtn.style.display="inline-block";
-    playBtn.onclick=()=>{ if(audioPlayer.src) audioPlayer.play(); };
+    playBtn.onclick=()=>{ audioPlayer.play(); };
     if(status) status.innerText="✨ A secret voice message is waiting ✨";
   }
 }
-setupVoiceUpload("uploadEyesVoiceBtn","eyesVoiceUpload","eyesAudioPlayer","playEyesVoiceBtn","eyesVoiceStatus","eyesVoice");
-setupVoiceUpload("uploadLetterVoiceBtn","letterVoiceUpload","letterAudioPlayer","playLetterVoiceBtn","letterVoiceStatus","letterVoice");
-
-// EYES VIDEO UPLOAD
-document.getElementById("uploadEyesBtn")?.addEventListener("click",()=>document.getElementById("eyesVideoUpload").click());
-document.getElementById("eyesVideoUpload")?.addEventListener("change",(e)=>{ let file=e.target.files[0]; if(file){ let url=URL.createObjectURL(file); let video=document.getElementById("eyesVideo"); video.src=url; video.style.display="block"; document.getElementById("eyesPlaceholder").style.display="none"; video.play(); } });
-
-// NASA IMAGE UPLOAD
-const nasaImageUpload = document.getElementById("nasaImageUpload");
-const uploadNasaImageBtn = document.getElementById("uploadNasaImageBtn");
-const nasaEarthImage = document.getElementById("nasaEarthImage");
-const nasaImagePlaceholder = document.getElementById("nasaImagePlaceholder");
-if(uploadNasaImageBtn) uploadNasaImageBtn.addEventListener("click",()=>nasaImageUpload.click());
-if(nasaImageUpload) nasaImageUpload.addEventListener("change",(e)=>{ let file=e.target.files[0]; if(file){ let url=URL.createObjectURL(file); nasaEarthImage.src=url; nasaEarthImage.style.display="block"; nasaImagePlaceholder.style.display="none"; localStorage.setItem("nasaImage",url); } });
-const savedNasaImage = localStorage.getItem("nasaImage");
-if(savedNasaImage){ nasaEarthImage.src=savedNasaImage; nasaEarthImage.style.display="block"; nasaImagePlaceholder.style.display="none"; }
+// ==== YOU CAN ADD YOUR VOICE URLs HERE (upload to IMGBS or similar and paste the direct link) ====
+// Example: setupVoicePlay("playEyesVoiceBtn","eyesAudioPlayer","eyesVoiceStatus","https://example.com/your-audio.mp3");
+// setupVoicePlay("playLetterVoiceBtn","letterAudioPlayer","letterVoiceStatus","https://example.com/your-audio.mp3");
 
 // FLIRTY TEXT
 const flirtyTexts=["✨ Ohh look my reflection in those eyes ✨","💙 Those eyes hold galaxies...","🌟 Brighter than a thousand stars","💖 I get lost in them every time","🌙 Moonlight is jealous of your gaze"]; let txtIndex=0;
 setInterval(()=>{ let zone=document.getElementById("flirtyTextZone"); if(zone&&document.getElementById("sparkleEyesPage").style.display==="block"){ zone.innerHTML=flirtyTexts[txtIndex%flirtyTexts.length]; txtIndex++; } },2800);
+
+// ==== ADD YOUR EYES VIDEO URL HERE ====
+const eyesVideo = document.getElementById("eyesVideo");
+const eyesPlaceholder = document.getElementById("eyesPlaceholder");
+const YOUR_VIDEO_URL = ""; // <--- PASTE YOUR VIDEO URL HERE (from IMGBS or other host)
+if(YOUR_VIDEO_URL){
+  eyesVideo.querySelector("source").src = YOUR_VIDEO_URL;
+  eyesVideo.load();
+  eyesVideo.style.display = "block";
+  if(eyesPlaceholder) eyesPlaceholder.style.display = "none";
+} else {
+  if(eyesPlaceholder) eyesPlaceholder.innerHTML = "✨💙 Paste your video URL in the script (YOUR_VIDEO_URL) to see her eyes sparkle ✨💙";
+}
 
 // NAVIGATION
 document.getElementById("continueToEarthBtn")?.addEventListener("click",()=>{ document.getElementById("sparkleEyesPage").style.display="none"; document.getElementById("earthNamePage").style.display="block"; });
