@@ -5,536 +5,410 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>🎂 Nimisha - Happy 19th Birthday! 🎂</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; user-select:none; }
 
 body {
-  font-family: 'Segoe UI', 'Poppins', 'System-ui', sans-serif;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  position: relative;
-  overflow-x: hidden;
-  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url('https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1400&auto=format&fit=crop');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  font-family:'Segoe UI','Poppins','System-ui',sans-serif;
+  min-height:100vh;
+  display:flex; justify-content:center; align-items:center;
+  padding:20px;
+  position:relative;
+  overflow-x:hidden;
+  background:linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.45)),url('https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=1400&auto=format&fit=crop');
+  background-size:cover; background-position:center; background-attachment:fixed;
 }
 
-/* animated balloons */
-.balloon {
-  position: fixed;
-  bottom: -150px;
-  width: 60px;
-  height: 80px;
-  border-radius: 50%;
-  animation: floatUp linear infinite;
-  z-index: 0;
-  pointer-events: none;
-}
-.balloon::before {
-  content: "✧";
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-  color: rgba(255,215,0,0.6);
-}
-.balloon::after {
-  content: "";
-  position: absolute;
-  bottom: -25px;
-  left: 50%;
-  width: 2px;
-  height: 20px;
-  background: linear-gradient(to bottom, gold, transparent);
-  transform: translateX(-50%);
-}
-@keyframes floatUp {
-  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(-120vh) rotate(15deg); opacity: 0.2; }
-}
-.balloon:nth-child(1) { background: radial-gradient(circle at 30% 30%, #ff6b6b, #cc3333); left: 5%; animation-duration: 8s; }
-.balloon:nth-child(2) { background: radial-gradient(circle at 30% 30%, #ffd93d, #ffaa00); left: 15%; animation-duration: 10s; animation-delay: 2s; }
-.balloon:nth-child(3) { background: radial-gradient(circle at 30% 30%, #6bcb77, #3a9e4d); left: 25%; animation-duration: 9s; animation-delay: 4s; }
-.balloon:nth-child(4) { background: radial-gradient(circle at 30% 30%, #4d96ff, #2a5fcc); left: 35%; animation-duration: 11s; animation-delay: 1s; }
-.balloon:nth-child(5) { background: radial-gradient(circle at 30% 30%, #ff6bcb, #cc2a8a); left: 45%; animation-duration: 8.5s; animation-delay: 3s; }
-.balloon:nth-child(6) { background: radial-gradient(circle at 30% 30%, #ffb347, #ff8c00); left: 55%; animation-duration: 9.5s; animation-delay: 5s; }
-.balloon:nth-child(7) { background: radial-gradient(circle at 30% 30%, #a855f7, #7c2dcc); left: 65%; animation-duration: 10.5s; animation-delay: 1.5s; }
-.balloon:nth-child(8) { background: radial-gradient(circle at 30% 30%, #38bdf8, #0284c7); left: 75%; animation-duration: 7.5s; animation-delay: 3.5s; }
-.balloon:nth-child(9) { background: radial-gradient(circle at 30% 30%, #fb7185, #e11d48); left: 85%; animation-duration: 12s; animation-delay: 0.5s; }
-.balloon:nth-child(10) { background: radial-gradient(circle at 30% 30%, #facc15, #eab308); left: 95%; animation-duration: 9s; animation-delay: 2.5s; }
-.balloon:nth-child(11) { background: radial-gradient(circle at 30% 30%, #86efac, #22c55e); left: 10%; animation-duration: 11.5s; animation-delay: 6s; }
-.balloon:nth-child(12) { background: radial-gradient(circle at 30% 30%, #c084fc, #9333ea); left: 20%; animation-duration: 8.8s; animation-delay: 7s; }
-.balloon:nth-child(13) { background: radial-gradient(circle at 30% 30%, #fdba74, #f97316); left: 30%; animation-duration: 9.8s; animation-delay: 1.8s; }
-.balloon:nth-child(14) { background: radial-gradient(circle at 30% 30%, #fde047, #ca8a04); left: 40%; animation-duration: 10.2s; animation-delay: 4.5s; }
-.balloon:nth-child(15) { background: radial-gradient(circle at 30% 30%, #bef264, #65a30d); left: 50%; animation-duration: 7.8s; animation-delay: 8s; }
-.balloon:nth-child(16) { background: radial-gradient(circle at 30% 30%, #99f6e4, #14b8a6); left: 60%; animation-duration: 13s; animation-delay: 0.8s; }
-.balloon:nth-child(17) { background: radial-gradient(circle at 30% 30%, #fbcfe8, #ec4899); left: 70%; animation-duration: 8.2s; animation-delay: 5.5s; }
-.balloon:nth-child(18) { background: radial-gradient(circle at 30% 30%, #d9f99d, #84cc16); left: 80%; animation-duration: 10.8s; animation-delay: 2.2s; }
-.balloon:nth-child(19) { background: radial-gradient(circle at 30% 30%, #bae6fd, #0ea5e9); left: 90%; animation-duration: 9.2s; animation-delay: 6.5s; }
-.balloon:nth-child(20) { background: radial-gradient(circle at 30% 30%, #ffb3ba, #ff6b6b); left: 12%; animation-duration: 8.3s; animation-delay: 3.2s; }
-.balloon:nth-child(21) { background: radial-gradient(circle at 30% 30%, #c9e4ff, #6bcb77); left: 48%; animation-duration: 9.7s; animation-delay: 1.2s; }
-.balloon:nth-child(22) { background: radial-gradient(circle at 30% 30%, #fbcfe8, #ff6bcb); left: 82%; animation-duration: 11.3s; animation-delay: 4.8s; }
+.balloon { position:fixed; bottom:-150px; width:60px; height:80px; border-radius:50%; animation:floatUp linear infinite; z-index:0; pointer-events:none; }
+.balloon::before { content:"✧"; position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); font-size:14px; color:rgba(255,215,0,0.6); }
+.balloon::after { content:""; position:absolute; bottom:-25px; left:50%; width:2px; height:20px; background:linear-gradient(to bottom,gold,transparent); transform:translateX(-50%); }
+@keyframes floatUp { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(-120vh) rotate(15deg);opacity:0.2} }
+.balloon:nth-child(1){background:radial-gradient(circle at 30% 30%,#ff6b6b,#cc3333);left:5%;animation-duration:8s}
+.balloon:nth-child(2){background:radial-gradient(circle at 30% 30%,#ffd93d,#ffaa00);left:15%;animation-duration:10s;animation-delay:2s}
+.balloon:nth-child(3){background:radial-gradient(circle at 30% 30%,#6bcb77,#3a9e4d);left:25%;animation-duration:9s;animation-delay:4s}
+.balloon:nth-child(4){background:radial-gradient(circle at 30% 30%,#4d96ff,#2a5fcc);left:35%;animation-duration:11s;animation-delay:1s}
+.balloon:nth-child(5){background:radial-gradient(circle at 30% 30%,#ff6bcb,#cc2a8a);left:45%;animation-duration:8.5s;animation-delay:3s}
+.balloon:nth-child(6){background:radial-gradient(circle at 30% 30%,#ffb347,#ff8c00);left:55%;animation-duration:9.5s;animation-delay:5s}
+.balloon:nth-child(7){background:radial-gradient(circle at 30% 30%,#a855f7,#7c2dcc);left:65%;animation-duration:10.5s;animation-delay:1.5s}
+.balloon:nth-child(8){background:radial-gradient(circle at 30% 30%,#38bdf8,#0284c7);left:75%;animation-duration:7.5s;animation-delay:3.5s}
+.balloon:nth-child(9){background:radial-gradient(circle at 30% 30%,#fb7185,#e11d48);left:85%;animation-duration:12s;animation-delay:0.5s}
+.balloon:nth-child(10){background:radial-gradient(circle at 30% 30%,#facc15,#eab308);left:95%;animation-duration:9s;animation-delay:2.5s}
+.balloon:nth-child(11){background:radial-gradient(circle at 30% 30%,#86efac,#22c55e);left:10%;animation-duration:11.5s;animation-delay:6s}
+.balloon:nth-child(12){background:radial-gradient(circle at 30% 30%,#c084fc,#9333ea);left:20%;animation-duration:8.8s;animation-delay:7s}
 
-/* glassmorphic containers */
-.container, #roseScene, #memoryCardScene {
-  position: relative;
-  z-index: 2;
-  max-width: 550px;
-  width: 92%;
-  background: rgba(12, 10, 28, 0.92);
-  backdrop-filter: blur(18px);
-  border-radius: 70px;
-  border: 1px solid rgba(255, 200, 50, 0.6);
-  box-shadow: 0 30px 50px rgba(0,0,0,0.5), 0 0 0 2px rgba(255,215,0,0.2);
-  padding: 28px 20px;
-  transition: 0.2s;
-  text-align: center;
-  max-height: 90vh;
-  overflow-y: auto;
+.container,#roseScene,#memoryCardScene {
+  position:relative; z-index:2;
+  max-width:550px; width:92%;
+  background:rgba(12,10,28,0.92);
+  backdrop-filter:blur(18px);
+  border-radius:70px;
+  border:1px solid rgba(255,200,50,0.6);
+  box-shadow:0 30px 50px rgba(0,0,0,0.5),0 0 0 2px rgba(255,215,0,0.2);
+  padding:28px 20px;
+  transition:0.2s; text-align:center;
+  max-height:90vh; overflow-y:auto;
 }
 
-/* ===== NEW INTERACTIVE LOCK SCREEN ===== */
+/* LOCK SCREEN */
 #lockScreen {
-  position: relative;
-  z-index: 2;
-  max-width: 400px;
-  width: 92%;
-  background: linear-gradient(160deg, #f3d0e8 0%, #d98ec8 40%, #9b59a8 100%);
-  border-radius: 44px;
-  border: 3px solid rgba(255,255,255,0.45);
-  padding: 28px 22px 24px;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.6);
-  text-align: center;
-  overflow: hidden;
+  position:relative; z-index:2;
+  max-width:400px; width:92%;
+  background:linear-gradient(160deg,#f3d0e8 0%,#d98ec8 40%,#9b59a8 100%);
+  border-radius:44px;
+  border:3px solid rgba(255,255,255,0.45);
+  padding:28px 22px 24px;
+  box-shadow:0 24px 48px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.6);
+  text-align:center; overflow:hidden;
 }
-#lockScreen::before {
-  content: "";
-  position: absolute;
-  top: -60px; left: -60px;
-  width: 200px; height: 200px;
-  background: rgba(255,200,240,0.15);
-  border-radius: 50%;
-  pointer-events: none;
-}
-#lockScreen::after {
-  content: "";
-  position: absolute;
-  bottom: -80px; right: -60px;
-  width: 240px; height: 240px;
-  background: rgba(200,150,220,0.1);
-  border-radius: 50%;
-  pointer-events: none;
-}
-.ls-title {
-  color: #fff;
-  font-size: 22px;
-  font-weight: 800;
-  margin-bottom: 18px;
-  text-shadow: 0 2px 8px rgba(0,0,50,0.2);
-  letter-spacing: 0.3px;
-  position: relative;
-  z-index: 1;
-}
-.photo-frame {
-  margin: 0 auto 18px;
-  width: 130px; height: 160px;
-  background: #fff;
-  border-radius: 18px;
-  transform: rotate(-3deg);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.3);
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-  border: 3px solid rgba(255,255,255,0.9);
-  z-index: 1;
-}
-.photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
-.photo-bow {
-  position: absolute; top: -10px; right: -10px;
-  font-size: 32px;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-.dots-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  margin: 0 auto 6px;
-  background: rgba(255,255,255,0.38);
-  border-radius: 24px;
-  padding: 10px 20px;
-  width: fit-content;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.12);
-  position: relative; z-index: 1;
-}
-.dot {
-  width: 15px; height: 15px;
-  border-radius: 50%;
-  border: 2px solid rgba(120,50,130,0.4);
-  background: rgba(255,255,255,0.3);
-  transition: all 0.18s cubic-bezier(0.34,1.4,0.64,1);
-  position: relative; overflow: hidden;
-}
-.dot.filled {
-  background: #7b2f8a;
-  border-color: #7b2f8a;
-  transform: scale(1.2);
-  box-shadow: 0 0 0 3px rgba(123,47,138,0.22);
-}
-.dot.filled::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.45), transparent 70%);
-  border-radius: 50%;
-}
-.dot-gap { width: 8px; }
-.ls-error {
-  color: #fff3cd;
-  font-size: 13px;
-  font-weight: 600;
-  min-height: 20px;
-  margin: 4px 0 12px;
-  opacity: 0;
-  transition: opacity 0.2s;
-  position: relative; z-index: 1;
-}
-.ls-error.show { opacity: 1; }
-.keypad-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 0 auto;
-  max-width: 290px;
-  position: relative; z-index: 1;
-}
-.key {
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.95);
-  border: none;
-  color: #1a2a3a;
-  font-size: 28px;
-  font-weight: 800;
-  cursor: pointer;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  box-shadow: 0 6px 0 rgba(0,0,0,0.18), 0 8px 16px rgba(0,0,0,0.14);
-  transition: transform 0.08s, box-shadow 0.08s, background 0.08s;
-  position: relative; overflow: hidden;
-  min-width: 72px; min-height: 72px;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-.key::after {
-  content: "";
-  position: absolute; inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.55), transparent 65%);
-  pointer-events: none;
-}
-.key .sub {
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  color: #9c6aaa;
-  margin-top: -2px;
-}
-.key.pressed {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 rgba(0,0,0,0.2), 0 3px 6px rgba(0,0,0,0.12);
-  background: rgba(235,245,255,0.98);
-}
-.key.ripple::before {
-  content: "";
-  position: absolute;
-  width: 0; height: 0;
-  background: rgba(180,80,200,0.22);
-  border-radius: 50%;
-  left: 50%; top: 50%;
-  transform: translate(-50%,-50%);
-  animation: lsRipple 0.4s ease-out forwards;
-}
-@keyframes lsRipple { to { width: 130px; height: 130px; opacity: 0; } }
-.key-del, .key-clr {
-  background: rgba(245,220,240,0.95) !important;
-  font-size: 22px !important;
-  color: #6b2080 !important;
-}
-.key-del.pressed, .key-clr.pressed {
-  background: rgba(235,200,230,0.98) !important;
-}
-.ls-hint {
-  margin-top: 16px;
-  color: rgba(255,255,255,0.92);
-  font-size: 13px; font-weight: 500;
-  background: rgba(255,255,255,0.18);
-  border-radius: 18px;
-  padding: 10px 16px;
-  line-height: 1.4;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
-  position: relative; z-index: 1;
-}
-.ls-success {
-  position: absolute; inset: 0;
-  border-radius: 44px;
-  background: linear-gradient(135deg, rgba(0,200,100,0.92), rgba(0,140,65,0.92));
-  display: flex; align-items: center; justify-content: center; flex-direction: column;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.35s;
-  z-index: 20;
-}
-.ls-success.show { opacity: 1; pointer-events: all; }
-.ls-success .stext { color: #fff; font-size: 26px; font-weight: 800; margin-top: 10px; }
+#lockScreen::before { content:""; position:absolute; top:-60px; left:-60px; width:200px; height:200px; background:rgba(255,200,240,0.15); border-radius:50%; pointer-events:none; }
+#lockScreen::after { content:""; position:absolute; bottom:-80px; right:-60px; width:240px; height:240px; background:rgba(200,150,220,0.1); border-radius:50%; pointer-events:none; }
+.ls-title { color:#fff; font-size:22px; font-weight:800; margin-bottom:18px; text-shadow:0 2px 8px rgba(0,0,50,0.2); letter-spacing:0.3px; position:relative; z-index:1; }
+.photo-frame { margin:0 auto 18px; width:130px; height:160px; background:#fff; border-radius:18px; transform:rotate(-3deg); box-shadow:0 12px 24px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; border:3px solid rgba(255,255,255,0.9); z-index:1; }
+.photo-frame img { width:100%; height:100%; object-fit:cover; border-radius:14px; }
+.photo-bow { position:absolute; top:-10px; right:-10px; font-size:32px; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+.dots-row { display:flex; justify-content:center; align-items:center; gap:7px; margin:0 auto 6px; background:rgba(255,255,255,0.38); border-radius:24px; padding:10px 20px; width:fit-content; box-shadow:inset 0 2px 6px rgba(0,0,0,0.12); position:relative; z-index:1; }
+.dot { width:15px; height:15px; border-radius:50%; border:2px solid rgba(120,50,130,0.4); background:rgba(255,255,255,0.3); transition:all 0.18s cubic-bezier(0.34,1.4,0.64,1); position:relative; overflow:hidden; }
+.dot.filled { background:#7b2f8a; border-color:#7b2f8a; transform:scale(1.2); box-shadow:0 0 0 3px rgba(123,47,138,0.22); }
+.dot.filled::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.45),transparent 70%); border-radius:50%; }
+.dot-gap { width:8px; }
+.ls-error { color:#fff3cd; font-size:13px; font-weight:600; min-height:20px; margin:4px 0 12px; opacity:0; transition:opacity 0.2s; position:relative; z-index:1; }
+.ls-error.show { opacity:1; }
+.keypad-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:0 auto; max-width:290px; position:relative; z-index:1; }
+.key { aspect-ratio:1; border-radius:50%; background:rgba(255,255,255,0.95); border:none; color:#1a2a3a; font-size:28px; font-weight:800; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; box-shadow:0 6px 0 rgba(0,0,0,0.18),0 8px 16px rgba(0,0,0,0.14); transition:transform 0.08s,box-shadow 0.08s,background 0.08s; position:relative; overflow:hidden; min-width:72px; min-height:72px; touch-action:manipulation; }
+.key::after { content:""; position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle at 35% 30%,rgba(255,255,255,0.55),transparent 65%); pointer-events:none; }
+.key .sub { font-size:9px; font-weight:600; letter-spacing:1.5px; color:#9c6aaa; margin-top:-2px; }
+.key.pressed { transform:translateY(4px); box-shadow:0 2px 0 rgba(0,0,0,0.2),0 3px 6px rgba(0,0,0,0.12); background:rgba(235,245,255,0.98); }
+.key.ripple::before { content:""; position:absolute; width:0; height:0; background:rgba(180,80,200,0.22); border-radius:50%; left:50%; top:50%; transform:translate(-50%,-50%); animation:lsRipple 0.4s ease-out forwards; }
+@keyframes lsRipple { to{width:130px;height:130px;opacity:0} }
+.key-del,.key-clr { background:rgba(245,220,240,0.95)!important; font-size:22px!important; color:#6b2080!important; }
+.ls-hint { margin-top:16px; color:rgba(255,255,255,0.92); font-size:13px; font-weight:500; background:rgba(255,255,255,0.18); border-radius:18px; padding:10px 16px; line-height:1.4; box-shadow:inset 0 1px 0 rgba(255,255,255,0.35); position:relative; z-index:1; }
+.ls-success { position:absolute; inset:0; border-radius:44px; background:linear-gradient(135deg,rgba(0,200,100,0.92),rgba(0,140,65,0.92)); display:flex; align-items:center; justify-content:center; flex-direction:column; opacity:0; pointer-events:none; transition:opacity 0.35s; z-index:20; }
+.ls-success.show { opacity:1; pointer-events:all; }
+.ls-success .stext { color:#fff; font-size:26px; font-weight:800; margin-top:10px; }
 @keyframes dotShake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
-.dots-row.shake { animation: dotShake 0.4s ease; }
-@media (max-width: 400px) {
-  #lockScreen { border-radius: 32px; padding: 20px 14px 18px; }
-  .key { min-width: 60px; min-height: 60px; font-size: 24px; }
-  .keypad-grid { gap: 9px; max-width: 240px; }
-  .photo-frame { width: 110px; height: 140px; }
-}
+.dots-row.shake { animation:dotShake 0.4s ease; }
 
-/* ===== THOUGHT BUBBLES ===== */
-.photo-zone {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  margin-bottom: 6px;
-  z-index: 3;
-}
-.thought-bubble {
-  position: absolute;
-  background: rgba(248, 168, 168, 0.82);
-  border: 1.5px solid rgba(210, 110, 110, 0.45);
-  border-radius: 20px;
-  padding: 8px 13px;
-  font-size: 12px;
-  font-weight: 600;
-  font-style: italic;
-  color: #5c1010;
-  line-height: 1.4;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(200, 80, 80, 0.15);
-  backdrop-filter: blur(6px);
-  pointer-events: none;
-  white-space: nowrap;
-  /* hidden by default, fade in one by one */
-  opacity: 0;
-}
-/* tiny dot tails */
-.thought-bubble::before,
-.thought-bubble::after {
-  content: "";
-  position: absolute;
-  background: rgba(248, 168, 168, 0.8);
-  border-radius: 50%;
-  border: 1px solid rgba(210,110,110,0.4);
-}
-/* bubble 1 — top left of photo */
-.tb1 {
-  top: 0px;
-  left: 4%;
-  animation: tbAppear1 14s ease-in-out infinite;
-}
+/* THOUGHT BUBBLES */
+.photo-zone { position:relative; width:100%; height:220px; display:flex; justify-content:center; align-items:flex-end; margin-bottom:6px; z-index:3; }
+.thought-bubble { position:absolute; background:rgba(248,168,168,0.82); border:1.5px solid rgba(210,110,110,0.45); border-radius:20px; padding:8px 13px; font-size:12px; font-weight:600; font-style:italic; color:#5c1010; line-height:1.4; text-align:center; box-shadow:0 6px 20px rgba(200,80,80,0.15); backdrop-filter:blur(6px); pointer-events:none; white-space:nowrap; opacity:0; }
+.thought-bubble::before,.thought-bubble::after { content:""; position:absolute; background:rgba(248,168,168,0.8); border-radius:50%; border:1px solid rgba(210,110,110,0.4); }
+.tb1 { top:0px; left:4%; animation:tbAppear1 14s ease-in-out infinite; }
 .tb1::before { width:9px; height:9px; bottom:-12px; right:-4px; }
-.tb1::after  { width:5px; height:5px; bottom:-22px; right:10px; }
-
-/* bubble 2 — top right of photo */
-.tb2 {
-  top: 10px;
-  right: 4%;
-  animation: tbAppear2 14s ease-in-out infinite;
-}
+.tb1::after { width:5px; height:5px; bottom:-22px; right:10px; }
+.tb2 { top:10px; right:4%; animation:tbAppear2 14s ease-in-out infinite; }
 .tb2::before { width:9px; height:9px; bottom:-12px; left:-4px; }
-.tb2::after  { width:5px; height:5px; bottom:-22px; left:10px; }
-
-/* bubble 3 — far left mid-height */
-.tb3 {
-  top: 60px;
-  left: 0%;
-  animation: tbAppear3 14s ease-in-out infinite;
-}
+.tb2::after { width:5px; height:5px; bottom:-22px; left:10px; }
+.tb3 { top:60px; left:0%; animation:tbAppear3 14s ease-in-out infinite; }
 .tb3::before { width:9px; height:9px; bottom:-12px; right:10px; }
-.tb3::after  { width:5px; height:5px; bottom:-22px; right:22px; }
-
-/* bubble 4 — far right mid-height */
-.tb4 {
-  top: 72px;
-  right: 0%;
-  animation: tbAppear4 14s ease-in-out infinite;
-}
+.tb3::after { width:5px; height:5px; bottom:-22px; right:22px; }
+.tb4 { top:72px; right:0%; animation:tbAppear4 14s ease-in-out infinite; }
 .tb4::before { width:9px; height:9px; bottom:-12px; left:10px; }
-.tb4::after  { width:5px; height:5px; bottom:-22px; left:22px; }
+.tb4::after { width:5px; height:5px; bottom:-22px; left:22px; }
+@keyframes tbAppear1 { 0%,8%{opacity:0;transform:translateY(6px) rotate(-1deg)} 14%,30%{opacity:1;transform:translateY(0px) rotate(-1deg)} 34%,36%{opacity:1;transform:translateY(-8px) rotate(1deg)} 42%,100%{opacity:0;transform:translateY(-14px) rotate(1deg)} }
+@keyframes tbAppear2 { 0%,28%{opacity:0;transform:translateY(6px) rotate(1deg)} 34%,50%{opacity:1;transform:translateY(0px) rotate(1deg)} 54%,56%{opacity:1;transform:translateY(-8px) rotate(-1deg)} 62%,100%{opacity:0;transform:translateY(-14px) rotate(-1deg)} }
+@keyframes tbAppear3 { 0%,48%{opacity:0;transform:translateY(6px) rotate(0.5deg)} 54%,68%{opacity:1;transform:translateY(0px) rotate(0.5deg)} 72%,74%{opacity:1;transform:translateY(-7px) rotate(-0.5deg)} 80%,100%{opacity:0;transform:translateY(-14px) rotate(-0.5deg)} }
+@keyframes tbAppear4 { 0%,66%{opacity:0;transform:translateY(6px) rotate(-0.8deg)} 72%,86%{opacity:1;transform:translateY(0px) rotate(-0.8deg)} 90%,92%{opacity:1;transform:translateY(-8px) rotate(0.8deg)} 98%,100%{opacity:0;transform:translateY(-14px) rotate(0.8deg)} }
 
-/* each bubble: fade in → float → fade out, staggered so they never all show at once */
-@keyframes tbAppear1 {
-  0%,8%        { opacity:0; transform: translateY(6px) rotate(-1deg); }
-  14%,30%      { opacity:1; transform: translateY(0px) rotate(-1deg); }
-  34%,36%      { opacity:1; transform: translateY(-8px) rotate(1deg); }
-  42%,100%     { opacity:0; transform: translateY(-14px) rotate(1deg); }
-}
-@keyframes tbAppear2 {
-  0%,28%       { opacity:0; transform: translateY(6px) rotate(1deg); }
-  34%,50%      { opacity:1; transform: translateY(0px) rotate(1deg); }
-  54%,56%      { opacity:1; transform: translateY(-8px) rotate(-1deg); }
-  62%,100%     { opacity:0; transform: translateY(-14px) rotate(-1deg); }
-}
-@keyframes tbAppear3 {
-  0%,48%       { opacity:0; transform: translateY(6px) rotate(0.5deg); }
-  54%,68%      { opacity:1; transform: translateY(0px) rotate(0.5deg); }
-  72%,74%      { opacity:1; transform: translateY(-7px) rotate(-0.5deg); }
-  80%,100%     { opacity:0; transform: translateY(-14px) rotate(-0.5deg); }
-}
-@keyframes tbAppear4 {
-  0%,66%       { opacity:0; transform: translateY(6px) rotate(-0.8deg); }
-  72%,86%      { opacity:1; transform: translateY(0px) rotate(-0.8deg); }
-  90%,92%      { opacity:1; transform: translateY(-8px) rotate(0.8deg); }
-  98%,100%     { opacity:0; transform: translateY(-14px) rotate(0.8deg); }
-}
+h1,h2 { font-weight:700; background:linear-gradient(135deg,#FFE6A3,#FFB347,#FFD966); -webkit-background-clip:text; background-clip:text; color:transparent; margin-bottom:12px; letter-spacing:-0.3px; }
+.sticker-container { margin:8px auto; background:rgba(0,0,0,0.5); border-radius:80px; padding:6px 20px; display:inline-block; border:1px solid gold; animation:float 2s infinite; }
+.sticker { font-size:58px; display:inline-block; animation:bounce 0.9s infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
 
-h1, h2 {
-  font-weight: 700;
-  background: linear-gradient(135deg, #FFE6A3, #FFB347, #FFD966);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-bottom: 12px;
-  letter-spacing: -0.3px;
-}
+.button-group { display:flex; justify-content:center; align-items:center; gap:30px; margin:25px 0; flex-wrap:wrap; position:relative; min-height:80px; }
+.yes-btn { background:linear-gradient(115deg,#00d26a,#00a142); padding:14px 32px; border-radius:100px; border:none; color:white; font-weight:bold; font-size:20px; cursor:pointer; transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1); box-shadow:0 10px 20px rgba(0,0,0,0.2); z-index:5; }
+.no-btn { background:linear-gradient(115deg,#e63946,#b91c1c); padding:12px 28px; border-radius:100px; border:none; color:white; font-weight:bold; font-size:18px; cursor:pointer; transition:all 0.08s linear; box-shadow:0 5px 12px rgba(0,0,0,0.3); position:relative; }
 
-.sticker-container {
-  margin: 8px auto;
-  background: rgba(0,0,0,0.5);
-  border-radius: 80px;
-  padding: 6px 20px;
-  display: inline-block;
-  border: 1px solid gold;
-  animation: float 2s infinite;
-}
-.sticker { font-size: 58px; display: inline-block; animation: bounce 0.9s infinite; }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)}}
-@keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)}}
-
-#dots {
-  font-size: 38px; letter-spacing: 12px; color: #1e2a3e;
-  background: rgba(255,255,255,0.45); display: inline-block;
-  padding: 10px 22px; border-radius: 30px; margin-bottom: 15px;
-  font-family: monospace; font-weight: bold;
-}
-
-.row {
-  display: flex; justify-content: center; gap: 18px;
-  margin: 12px 0; flex-wrap: wrap;
-}
-
-.button-group {
-  display: flex; justify-content: center; align-items: center;
-  gap: 30px; margin: 25px 0; flex-wrap: wrap;
-  position: relative; min-height: 80px;
-}
-.yes-btn {
-  background: linear-gradient(115deg, #00d26a, #00a142);
-  padding: 14px 32px; border-radius: 100px; border: none;
-  color: white; font-weight: bold; font-size: 20px; cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.34, 1.2, 0.64, 1);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.2); z-index: 5;
-}
-.no-btn {
-  background: linear-gradient(115deg, #e63946, #b91c1c);
-  padding: 12px 28px; border-radius: 100px; border: none;
-  color: white; font-weight: bold; font-size: 18px; cursor: pointer;
-  transition: all 0.08s linear;
-  box-shadow: 0 5px 12px rgba(0,0,0,0.3); position: relative;
-}
-
+/* ===== ENHANCED REALISTIC CAKE ===== */
 .cake-preview {
-  background: rgba(0,0,0,0.35); border-radius: 48px;
-  padding: 20px; margin: 15px 0;
+  background:linear-gradient(180deg, #1a0a2e 0%, #2d1654 100%);
+  border-radius:32px; padding:24px 16px; margin:15px 0;
+  border:1px solid rgba(255,200,80,0.2);
+  box-shadow:inset 0 0 40px rgba(100,0,200,0.15), 0 4px 20px rgba(0,0,0,0.4);
+  position:relative; overflow:hidden;
 }
-#cakeCanvas {
-  min-height: 280px; display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 6px; margin: 10px 0;
+.cake-preview::before {
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 110%, rgba(255,150,50,0.08) 0%, transparent 60%);
+  pointer-events:none;
 }
-.cake-layer {
-  width: 230px; height: 46px; border-radius: 24px 24px 16px 16px;
-  transition: 0.2s; box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-}
-.frosting {
-  width: 242px; height: 22px; border-radius: 32px 32px 16px 16px;
-  margin-bottom: 8px; position: relative; z-index: 2;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-.candle {
-  width: 16px; height: 40px;
-  background: linear-gradient(145deg, #ffa5a5, #dd4a4a);
-  position: absolute; bottom: 100%;
-  transform: translateX(-50%);
-  border-radius: 6px 6px 2px 2px;
-}
-.flame {
-  width: 14px; height: 20px;
-  background: radial-gradient(circle, #ffdd77, #ff7700);
-  position: absolute; top: -18px; left: 1px;
-  border-radius: 50% 50% 40% 40%;
-  animation: flicker 0.2s infinite alternate;
-}
-@keyframes flicker { 0% { opacity: 0.9; transform: scaleY(1);} 100% { opacity: 1; transform: scaleY(1.08);} }
+#cakeCanvas { min-height:300px; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:0; margin:10px 0; position:relative; }
 
-.control-panel { background: rgba(255,210,0,0.08); border-radius: 48px; padding: 15px; }
-.color-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 10px 0; }
-.color-swatch { width: 48px; height: 48px; border-radius: 50%; cursor: pointer; border: 2px solid gold; transition: 0.08s linear; }
-.action-btn {
-  background: linear-gradient(125deg, #FFD966, #FFB347);
-  border: none; padding: 12px 22px; border-radius: 60px;
-  font-weight: bold; margin: 10px 8px; cursor: pointer;
-  font-size: 16px; transition: 0.1s;
+/* Cake plate / stand */
+.cake-stand {
+  width:260px; height:16px;
+  background:linear-gradient(180deg, #c8a260 0%, #8a6030 50%, #5a3e1e 100%);
+  border-radius:0 0 40px 40px / 0 0 10px 10px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,230,150,0.4);
+  position:relative; z-index:1;
 }
-.voice-card { background: rgba(0,0,0,0.4); border-radius: 48px; padding: 16px; margin: 15px 0; }
-.voice-btn {
-  background: #f97316; padding: 10px 20px; border-radius: 40px;
-  color: white; border: none; margin: 6px; cursor: pointer; font-weight: bold;
-}
-.shake-notice {
-  background: rgba(255,200,0,0.2); padding: 10px; border-radius: 60px;
-  font-size: 14px; color: #FFE484; margin: 12px;
+.cake-stand::before {
+  content:"";
+  position:absolute; left:50%; transform:translateX(-50%);
+  top:100%; width:80px; height:8px;
+  background:linear-gradient(180deg, #8a6030, #5a3e1e);
+  border-radius:0 0 8px 8px;
+  box-shadow:0 4px 8px rgba(0,0,0,0.4);
 }
 
-.good-girl-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
-  z-index: 1000; display: flex; align-items: center; justify-content: center;
-  visibility: hidden; opacity: 0; transition: 0.2s;
+/* Realistic 3D cake layers */
+.cake-layer-3d {
+  position:relative; z-index:2;
+  display:flex; flex-direction:column; align-items:center;
 }
-.good-girl-card {
-  background: linear-gradient(145deg, #1e1a3a, #0f0c28);
-  border-radius: 70px; padding: 30px 25px; max-width: 340px; text-align: center;
-  border: 2px solid #FFD966; box-shadow: 0 25px 40px rgba(0,0,0,0.5);
-  transform: scale(0.8); transition: transform 0.2s ease;
+.cake-layer-side {
+  width:220px; height:52px;
+  border-radius:4px 4px 8px 8px;
+  position:relative; overflow:hidden;
+  box-shadow:4px 8px 16px rgba(0,0,0,0.4);
 }
-.good-girl-card p { font-size: 24px; color: #FFE484; font-weight: bold; margin: 15px 0; }
-.good-girl-card button {
-  background: #FFB347; border: none; padding: 10px 28px;
-  border-radius: 60px; font-weight: bold; margin-top: 10px;
-  font-size: 18px; cursor: pointer;
+.cake-layer-side::before {
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(90deg, rgba(0,0,0,0.25) 0%, rgba(255,255,255,0.08) 30%, rgba(255,255,255,0.12) 50%, rgba(0,0,0,0.2) 100%);
+  z-index:1; pointer-events:none;
+}
+/* texture lines on side */
+.cake-layer-side::after {
+  content:"";
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 6px, rgba(255,255,255,0.04) 6px, rgba(255,255,255,0.04) 7px);
+  z-index:2; pointer-events:none;
+}
+.cake-layer-top {
+  width:228px; height:18px;
+  border-radius:50%;
+  background:inherit;
+  filter:brightness(1.3);
+  box-shadow:0 -2px 8px rgba(255,255,255,0.1);
+  margin-bottom:-2px; position:relative; z-index:3;
 }
 
+/* Frosting drip */
+.frosting-layer {
+  width:240px; position:relative; z-index:4;
+  display:flex; flex-direction:column; align-items:center;
+}
+.frosting-top {
+  width:240px; height:18px;
+  border-radius:50%;
+  box-shadow:0 -2px 10px rgba(255,255,255,0.2);
+}
+.frosting-drips {
+  width:230px; height:32px; position:relative;
+  display:flex; justify-content:space-around; align-items:flex-start;
+  margin-top:-4px;
+}
+.drip {
+  width:14px;
+  border-radius:0 0 12px 12px;
+  animation:dripFall 0.6s ease-out forwards;
+  position:relative;
+}
+.drip::after {
+  content:"";
+  position:absolute; bottom:-6px; left:50%; transform:translateX(-50%);
+  width:14px; height:12px;
+  background:inherit; border-radius:50%;
+}
+@keyframes dripFall { from{height:0;opacity:0} to{opacity:1} }
+
+/* Candle system */
+.candle-row {
+  position:absolute; top:0; left:0; right:0;
+  display:flex; justify-content:space-around;
+  align-items:flex-end; padding:0 30px;
+  pointer-events:none;
+}
+.candle-3d {
+  display:flex; flex-direction:column; align-items:center;
+  position:relative; margin-bottom:-2px;
+}
+.candle-body {
+  width:12px; height:44px;
+  border-radius:4px 4px 2px 2px;
+  position:relative; overflow:hidden;
+  box-shadow:2px 4px 8px rgba(0,0,0,0.4);
+}
+.candle-body::before {
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(255,255,255,0.15) 40%, rgba(0,0,0,0.1) 100%);
+}
+.candle-body::after {
+  content:"";
+  position:absolute; top:0; left:10%; right:10%; height:3px;
+  background:rgba(255,255,255,0.3); border-radius:2px;
+}
+.candle-wick { width:2px; height:6px; background:linear-gradient(#1a1a1a, #444); margin-bottom:-1px; border-radius:1px; }
+.candle-flame-wrap {
+  position:relative; width:20px; height:34px;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+}
+.flame-outer {
+  width:18px; height:28px;
+  background:radial-gradient(ellipse at 50% 80%, #ff4500 0%, #ff8c00 35%, #ffcc00 65%, #fff7a0 100%);
+  border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;
+  position:absolute; bottom:0;
+  animation:flameOuter 0.15s ease-in-out infinite alternate;
+  filter:blur(0.5px);
+}
+.flame-inner {
+  width:9px; height:16px;
+  background:radial-gradient(ellipse at 50% 80%, #fff 0%, #fffde0 40%, #ffe680 100%);
+  border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;
+  position:absolute; bottom:2px;
+  animation:flameInner 0.12s ease-in-out infinite alternate;
+}
+.flame-glow {
+  position:absolute; bottom:-2px; left:50%; transform:translateX(-50%);
+  width:28px; height:28px;
+  background:radial-gradient(circle, rgba(255,180,0,0.5) 0%, transparent 70%);
+  border-radius:50%;
+  animation:glowPulse 0.2s ease-in-out infinite alternate;
+}
+.candle-glow-pool {
+  position:absolute; bottom:-8px; left:50%; transform:translateX(-50%);
+  width:40px; height:8px;
+  background:radial-gradient(ellipse, rgba(255,200,50,0.35) 0%, transparent 70%);
+  border-radius:50%;
+  animation:glowPulse 0.3s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+@keyframes flameOuter { from{transform:scaleX(1) scaleY(1) translateY(0)} to{transform:scaleX(0.88) scaleY(1.08) translateY(-1px)} }
+@keyframes flameInner { from{transform:scaleX(1) translateY(0)} to{transform:scaleX(0.85) translateY(-2px)} }
+@keyframes glowPulse { from{opacity:0.7;transform:translateX(-50%) scale(1)} to{opacity:1;transform:translateX(-50%) scale(1.15)} }
+/* Smoke */
+.smoke {
+  position:absolute; bottom:28px; left:50%; transform:translateX(-50%);
+  width:3px; height:20px;
+  background:linear-gradient(to top, rgba(200,200,200,0.6) 0%, transparent 100%);
+  border-radius:3px;
+  animation:smokeDrift 1.2s ease-out infinite;
+  opacity:0;
+}
+@keyframes smokeDrift {
+  0%{opacity:0;transform:translateX(-50%) scaleX(1) translateY(0)}
+  20%{opacity:0.6}
+  100%{opacity:0;transform:translateX(calc(-50% + 5px)) scaleX(2.5) translateY(-24px)}
+}
+
+/* Wax drips on candle */
+.wax-drip {
+  position:absolute; width:3px; background:inherit;
+  border-radius:0 0 3px 3px; opacity:0.7;
+}
+
+/* Sprinkles decoration */
+.sprinkle {
+  position:absolute; width:10px; height:4px;
+  border-radius:2px;
+  transform:rotate(var(--rot));
+  pointer-events:none;
+}
+
+/* number decoration on cake */
+.cake-number-decor {
+  position:absolute; z-index:5;
+  font-size:22px; font-weight:900;
+  color:#fff;
+  text-shadow:0 0 12px rgba(255,200,0,0.9), 0 2px 4px rgba(0,0,0,0.5);
+  pointer-events:none;
+  animation:numFloat 2s ease-in-out infinite;
+}
+@keyframes numFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+
+/* plate reflection */
+.plate-reflection {
+  width:200px; height:12px;
+  background:radial-gradient(ellipse, rgba(255,255,255,0.12) 0%, transparent 70%);
+  margin-top:4px; border-radius:50%;
+}
+
+.control-panel { background:rgba(255,210,0,0.08); border-radius:48px; padding:15px; }
+.color-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:10px 0; }
+.color-swatch { width:42px; height:42px; border-radius:50%; cursor:pointer; border:2px solid gold; transition:0.08s linear; box-shadow:0 4px 8px rgba(0,0,0,0.3); }
+.color-swatch:hover { transform:scale(1.15); }
+.color-swatch.selected { border:3px solid white; transform:scale(1.2); box-shadow:0 0 0 2px gold; }
+.action-btn { background:linear-gradient(125deg,#FFD966,#FFB347); border:none; padding:12px 22px; border-radius:60px; font-weight:bold; margin:10px 8px; cursor:pointer; font-size:16px; transition:0.1s; }
+.voice-card { background:rgba(0,0,0,0.4); border-radius:48px; padding:16px; margin:15px 0; }
+.voice-btn { background:#f97316; padding:10px 20px; border-radius:40px; color:white; border:none; margin:6px; cursor:pointer; font-weight:bold; }
+.shake-notice { background:rgba(255,200,0,0.2); padding:10px; border-radius:60px; font-size:14px; color:#FFE484; margin:12px; }
+
+.good-girl-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); z-index:1000; display:flex; align-items:center; justify-content:center; visibility:hidden; opacity:0; transition:0.2s; }
+.good-girl-card { background:linear-gradient(145deg,#1e1a3a,#0f0c28); border-radius:70px; padding:30px 25px; max-width:340px; text-align:center; border:2px solid #FFD966; box-shadow:0 25px 40px rgba(0,0,0,0.5); transform:scale(0.8); transition:transform 0.2s ease; }
+.good-girl-card p { font-size:24px; color:#FFE484; font-weight:bold; margin:15px 0; }
+.good-girl-card button { background:#FFB347; border:none; padding:10px 28px; border-radius:60px; font-weight:bold; margin-top:10px; font-size:18px; cursor:pointer; }
+
+/* ===== ENHANCED BLUE ROSE GARDEN ===== */
+#roseScene {
+  background:rgba(12,10,28,0.92);
+  backdrop-filter:blur(18px);
+}
+#blueRoseCanvas {
+  width:100%; max-width:500px; height:auto;
+  margin:15px auto; display:block;
+  border-radius:28px;
+  box-shadow:0 0 40px rgba(59,130,246,0.35), 0 0 80px rgba(59,130,246,0.15);
+  border:1px solid rgba(59,130,246,0.3);
+}
+.rose-garden-bg {
+  background:radial-gradient(ellipse at 50% 100%, #0a1628 0%, #020617 60%, #040812 100%);
+}
+
+/* ===== MEMORY CARD WITH PHOTO SLOTS ===== */
 #memoryCardScene {
-  background: #f8e7ef;
-  backdrop-filter: none;
-  border: 4px solid #ffd6e7;
-  padding: 25px 18px;
-  overflow: hidden;
+  background:#f8e7ef;
+  backdrop-filter:none;
+  border:4px solid #ffd6e7;
+  padding:25px 18px;
+  overflow:hidden;
+  max-width:520px;
+}
+
+/* Photo upload slots */
+.photo-slots-row {
+  display:flex; gap:12px; justify-content:center;
+  margin:16px 0; position:relative; z-index:2;
+  flex-wrap:wrap;
+}
+.photo-slot {
+  width:90px; height:90px;
+  border-radius:16px;
+  border:3px dashed rgba(216,92,122,0.5);
+  background:rgba(255,255,255,0.6);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  cursor:pointer; position:relative; overflow:hidden;
+  transition:all 0.2s;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+.photo-slot:hover { border-color:#d85c7a; background:rgba(255,255,255,0.85); transform:scale(1.05); }
+.photo-slot.has-photo { border-style:solid; border-color:#d85c7a; }
+.photo-slot img { width:100%; height:100%; object-fit:cover; border-radius:12px; }
+.photo-slot .slot-icon { font-size:24px; }
+.photo-slot .slot-label { font-size:10px; color:#d85c7a; font-weight:700; margin-top:3px; }
+.photo-slot input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+.photo-slot .remove-btn {
+  position:absolute; top:3px; right:3px;
+  width:20px; height:20px; border-radius:50%;
+  background:#d85c7a; color:white; border:none;
+  font-size:12px; cursor:pointer; display:none;
+  align-items:center; justify-content:center;
+  font-weight:bold; line-height:1; z-index:5;
+}
+.photo-slot.has-photo .remove-btn { display:flex; }
+.photo-slot.has-photo .slot-icon,
+.photo-slot.has-photo .slot-label { display:none; }
+
+/* heart photo frame effect */
+.photo-slot:nth-child(2) { transform:rotate(-4deg); }
+.photo-slot:nth-child(4) { transform:rotate(3deg); }
+
+@media (max-width:400px) {
+  #lockScreen { border-radius:32px; padding:20px 14px 18px; }
+  .key { min-width:60px; min-height:60px; font-size:24px; }
+  .keypad-grid { gap:9px; max-width:240px; }
+  .photo-frame { width:110px; height:140px; }
 }
 </style>
 </head>
@@ -542,59 +416,35 @@ h1, h2 {
 
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
-<div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
-<div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 <div class="balloon"></div><div class="balloon"></div>
 
 <div id="goodGirlPopup" class="good-girl-overlay">
   <div class="good-girl-card">
-    <div style="font-size: 60px;">💖👧</div>
+    <div style="font-size:60px;">💖👧</div>
     <p>That's my good girl!<br>See, you are listening to me... how cute 🥺💛</p>
     <button id="closeGoodGirlBtn">✨ Let's continue ✨</button>
   </div>
 </div>
 
-<!-- ===== INTERACTIVE LOCK SCREEN ===== -->
+<!-- LOCK SCREEN -->
 <div id="lockScreen">
   <div class="ls-title">Enter passcode</div>
-
-  <!-- Photo + thought bubbles zone -->
   <div class="photo-zone">
-
-    <!-- Bubble 1 · top-left · appears first -->
     <div class="thought-bubble tb1">omg is he up to<br>something?? 🫣💗</div>
-
-    <!-- Bubble 2 · top-right · appears second -->
     <div class="thought-bubble tb2">19?! I'm basically<br>a grandma 😭👵🏻</div>
-
-    <!-- Bubble 3 · mid-left · appears third -->
     <div class="thought-bubble tb3">why does he know<br>me so well 😩🥺</div>
-
-    <!-- Bubble 4 · mid-right · appears last -->
     <div class="thought-bubble tb4">not me already<br>blushing 🙈💕</div>
-
-    <!-- Photo frame, centered -->
-    <div class="photo-frame" style="position:relative; z-index:4; flex-shrink:0; margin:0; align-self:flex-end;">
+    <div class="photo-frame" style="position:relative;z-index:4;flex-shrink:0;margin:0;align-self:flex-end;">
       <img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" alt="Nimisha">
       <div class="photo-bow">🎀</div>
     </div>
-
   </div>
-
   <div class="dots-row" id="dotsRow" style="margin-top:4px;">
-    <div class="dot" id="d0"></div>
-    <div class="dot" id="d1"></div>
-    <div class="dot" id="d2"></div>
-    <div class="dot" id="d3"></div>
+    <div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div>
     <div class="dot-gap"></div>
-    <div class="dot" id="d4"></div>
-    <div class="dot" id="d5"></div>
-    <div class="dot" id="d6"></div>
-    <div class="dot" id="d7"></div>
+    <div class="dot" id="d4"></div><div class="dot" id="d5"></div><div class="dot" id="d6"></div><div class="dot" id="d7"></div>
   </div>
-
   <div class="ls-error" id="lsError">Wrong passcode! Hint: DDMMYYYY</div>
-
   <div class="keypad-grid" id="keypadGrid">
     <button class="key" data-n="1"><span>1</span><span class="sub"></span></button>
     <button class="key" data-n="2"><span>2</span><span class="sub">ABC</span></button>
@@ -609,9 +459,7 @@ h1, h2 {
     <button class="key" data-n="0"><span>0</span><span class="sub">+</span></button>
     <button class="key key-del" id="lsDelBtn">⌫</button>
   </div>
-
   <div class="ls-hint">💡 Hint: the day we first talked (DDMMYYYY)</div>
-
   <div class="ls-success" id="lsSuccess">
     <div style="font-size:64px">🎂</div>
     <div class="stext">Welcome! ✨</div>
@@ -623,85 +471,88 @@ h1, h2 {
   <div class="sticker-container"><div class="sticker">😜🎀</div></div>
   <div class="message-box">
     <h1>🎂 HAPPY BIRTHDAY MY QUEEN BUDDY! 🎂</h1>
-    <p style="font-size: 20px; margin: 8px 0; font-weight: bold; color: #FFB347;">You're 19 now... TOO OLD! 👵</p>
-    <p style="margin: 5px 0;">You should be in an old age home, you knoww... 🙄</p>
-    <p style="margin: 5px 0; background: rgba(255,215,0,0.1); border-radius: 40px; padding: 8px;">But anyways... you will always be my little kitten — gorgeous and cute! 💖🐱</p>
-    <p style="color:#FFD700; margin-top: 12px;">✨ Now... want to see your cake? ✨</p>
+    <p style="font-size:20px;margin:8px 0;font-weight:bold;color:#FFB347;">You're 19 now... TOO OLD! 👵</p>
+    <p style="margin:5px 0;">You should be in an old age home, you knoww... 🙄</p>
+    <p style="margin:5px 0;background:rgba(255,215,0,0.1);border-radius:40px;padding:8px;">But anyways... you will always be my little kitten — gorgeous and cute! 💖🐱</p>
+    <p style="color:#FFD700;margin-top:12px;">✨ Now... want to see your cake? ✨</p>
   </div>
   <div class="button-group" id="chaseZone">
     <button class="yes-btn" id="yesCakeBtn">YES 🎂</button>
     <button class="no-btn" id="noCakeBtn">NO 😤</button>
   </div>
-  <div id="teasyMessage" style="color:#ffaa66; font-weight:bold; margin-top: 12px; min-height: 48px;"></div>
+  <div id="teasyMessage" style="color:#ffaa66;font-weight:bold;margin-top:12px;min-height:48px;"></div>
 </div>
 
 <!-- CAKE BUILDER -->
 <div id="cakeBuilder" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🍰✨</div></div>
   <h1>🎨 Decorate Your Dream Cake 🎨</h1>
-  <div class="cake-preview">
-    <div id="cakeCanvas"></div>
+
+  <div class="cake-preview" id="cakePreviewArea">
+    <div id="cakeCanvas" style="position:relative;"></div>
   </div>
-  <div class="control-panel">
+
+  <div class="control-panel" style="margin-top:16px;">
     <h3 style="color:#FFD966;">📏 Layers: <span id="layerCount">2</span></h3>
     <input type="range" id="layerSlider" min="1" max="5" value="2" style="width:100%">
-    <h3 style="color:#FFD966;">🎨 Layer Colors</h3>
+    <h3 style="color:#FFD966;margin-top:14px;">🎨 Layer Colors</h3>
     <div id="layerColorGrid" class="color-grid"></div>
-    <h3 style="color:#FFD966;">🍰 Frosting</h3>
+    <h3 style="color:#FFD966;">🍰 Frosting Color</h3>
     <div id="frostingGrid" class="color-grid"></div>
     <h3 style="color:#FFD966;">🕯️ Candles: <span id="candleCount">3</span></h3>
     <input type="range" id="candleSlider" min="0" max="9" value="3" style="width:100%">
   </div>
+
   <button class="action-btn" id="lightCandlesBtn">🎂 Light the Candles! 🔥</button>
 
   <div class="voice-card">
     <p style="color:#FFD966;">🎤 Record Your Birthday Wish 🎤</p>
     <button id="recordBtn" class="voice-btn">🎙️ Record Message</button>
     <button id="playRecordBtn" class="voice-btn" style="background:#3b82f6;">🔊 Play My Voice</button>
-    <audio id="userAudio" controls style="width:100%; margin-top:8px; display:none;"></audio>
-    <p id="voiceStatus" style="font-size:12px; opacity:0.8; color:#fff;"></p>
+    <audio id="userAudio" controls style="width:100%;margin-top:8px;display:none;"></audio>
+    <p id="voiceStatus" style="font-size:12px;opacity:0.8;color:#fff;"></p>
   </div>
 
   <div class="shake-notice" id="shakeNotice">📱 SHAKE YOUR PHONE to blow out the candles! 📱</div>
-  <button class="action-btn" id="finishCakeBtn" style="background: linear-gradient(135deg, #00c853, #009624); color: white;">✅ Done! See Your Gift ✅</button>
+  <button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);color:white;">✅ Done! See Your Gift ✅</button>
 </div>
 
 <!-- GIFT REVEAL -->
 <div id="giftReveal" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🎁💙</div></div>
   <h2>💌 A Special Gift For You 💌</h2>
-  <p style="margin: 15px; color:#fff;">For the most amazing 19-year-old I know...</p>
-  <div style="background: rgba(255,215,0,0.2); border-radius: 40px; padding: 18px; line-height: 1.7; color:#FFE484;">
+  <p style="margin:15px;color:#fff;">For the most amazing 19-year-old I know...</p>
+  <div style="background:rgba(255,215,0,0.2);border-radius:40px;padding:18px;line-height:1.7;color:#FFE484;">
     🌟 You are magic. Every day you make the world brighter.<br>
     💛 Never forget how incredible you are.<br>
     🎂 May this year bring you joy, adventure, and all the cake!<br>
     ✨ Love you, buddy! ✨
   </div>
-  <button id="goToRosesBtn" style="margin-top: 20px; padding:12px 28px; border-radius:60px; background:#FFD966; font-weight:bold; border:none; cursor:pointer;">Continue to Roses 💙</button>
+  <button id="goToRosesBtn" style="margin-top:20px;padding:12px 28px;border-radius:60px;background:#FFD966;font-weight:bold;border:none;cursor:pointer;">Continue to Roses 💙</button>
 </div>
 
 <!-- ROSE SCENE -->
 <div id="roseScene" class="container" style="display:none;">
   <h1>💙 NOT EVERYONE GETS THIS 💙</h1>
-  <canvas id="blueRoseCanvas" width="500" height="420" style="width:100%; max-width:500px; height:auto; margin:15px auto; display:block; border-radius:40px; background: radial-gradient(circle at 30% 20%, #0a1628, #020617); box-shadow: 0 0 30px rgba(59,130,246,0.3);"></canvas>
-  <p id="roseText" style="color:#FFD966; margin:20px; font-size:16px;"></p>
-  <button id="continueToMemoryBtn" style="background:#FFB347; padding:12px 28px; border-radius:60px; border:none; font-weight:bold; cursor:pointer; margin-top:10px;">✨ Continue to Memory Card ✨</button>
+  <canvas id="blueRoseCanvas" width="500" height="520"></canvas>
+  <p id="roseText" style="color:#FFD966;margin:20px;font-size:16px;"></p>
+  <button id="continueToMemoryBtn" style="background:#FFB347;padding:12px 28px;border-radius:60px;border:none;font-weight:bold;cursor:pointer;margin-top:10px;">✨ Continue to Memory Card ✨</button>
 </div>
 
-<!-- MEMORY CARD SCENE -->
-<div id="memoryCardScene" class="container" style="display:none; max-width:520px; width:92%; margin:auto; text-align:center; background:#f8e7ef; border-radius:50px; padding:25px 18px; border:4px solid #ffd6e7; position:relative; overflow:hidden;">
+<!-- MEMORY CARD with photo slots -->
+<div id="memoryCardScene" class="container" style="display:none;max-width:520px;width:92%;margin:auto;text-align:center;background:#f8e7ef;border-radius:50px;padding:25px 18px;border:4px solid #ffd6e7;position:relative;overflow:hidden;">
 
-  <div style="position:absolute; top:-90px; left:-80px; width:220px; height:220px; background:#d85c7a; border-radius:45% 55% 70% 30%; opacity:0.95;"></div>
-  <div style="position:absolute; bottom:-100px; right:-80px; width:220px; height:220px; background:#d85c7a; border-radius:60% 40% 30% 70%; opacity:0.95;"></div>
+  <div style="position:absolute;top:-90px;left:-80px;width:220px;height:220px;background:#d85c7a;border-radius:45% 55% 70% 30%;opacity:0.95;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-100px;right:-80px;width:220px;height:220px;background:#d85c7a;border-radius:60% 40% 30% 70%;opacity:0.95;pointer-events:none;"></div>
 
-  <h2 style="position:relative; z-index:2; color:white; font-size:32px; font-weight:900; margin-bottom:22px; text-shadow:0 4px 12px rgba(0,0,0,0.3);">
+  <h2 style="position:relative;z-index:2;color:white;font-size:28px;font-weight:900;margin-bottom:16px;text-shadow:0 4px 12px rgba(0,0,0,0.3);background:none;-webkit-background-clip:unset;background-clip:unset;">
     Bcz she deserves the best surprise ❤️
   </h2>
 
-  <div style="position:relative; z-index:2; background:#f6d8e6; border-radius:35px; padding:28px 18px 38px; width:92%; margin:auto; box-shadow:0 14px 32px rgba(0,0,0,0.2); border:3px solid rgba(255,255,255,0.8);">
-    <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); font-size:46px;">🎀</div>
-    <div style="position:absolute; left:-24px; top:90px; font-size:60px; transform:rotate(-12deg);">🧸</div>
-    <div style="color:#3d2d2d; font-size:20px; font-weight:700; line-height:1.6; margin-top:34px; margin-bottom:30px;">
+  <div style="position:relative;z-index:2;background:#f6d8e6;border-radius:35px;padding:24px 18px 32px;width:92%;margin:auto;box-shadow:0 14px 32px rgba(0,0,0,0.2);border:3px solid rgba(255,255,255,0.8);">
+    <div style="position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:46px;">🎀</div>
+
+    <div style="color:#3d2d2d;font-size:18px;font-weight:700;line-height:1.6;margin-top:28px;margin-bottom:20px;">
       You are seen, you are<br>
       heard, and you are<br>
       loved, no matter what.<br>
@@ -710,535 +561,763 @@ h1, h2 {
       that my love for you is<br>
       boundless and endless!
     </div>
-    <div style="background:#efbfd2; border-radius:0 0 26px 26px; height:150px; position:relative; overflow:hidden; margin-top:12px;">
-      <div style="position:absolute; width:100%; height:100%; background:linear-gradient(135deg,#efbfd2 50%, #e4a7c0 50%); clip-path:polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);"></div>
-      <div style="position:absolute; left:95px; top:28px; width:80px; height:80px; background:white; clip-path:path('M40 72 C-18 38 8 -12 40 12 C72 -12 98 38 40 72 Z'); overflow:hidden; border:4px solid #f7d9e5; box-shadow:0 5px 14px rgba(0,0,0,0.22);">
-        <img src="https://placehold.co/80x80/FFB6C1/white?text=💙" style="width:100%; height:100%; object-fit:cover;">
+
+    <!-- PHOTO SLOTS -->
+    <div style="border-top:2px dashed rgba(216,92,122,0.3);padding-top:16px;margin-top:8px;">
+      <p style="color:#d85c7a;font-size:13px;font-weight:700;margin-bottom:10px;">📸 Add your favourite photos here!</p>
+      <div class="photo-slots-row">
+        <div class="photo-slot" id="slot0" title="Tap to add a photo">
+          <input type="file" accept="image/*" onchange="handlePhotoUpload(0, this)">
+          <div class="slot-icon">📷</div>
+          <div class="slot-label">Photo 1</div>
+          <button class="remove-btn" onclick="removePhoto(event,0)">×</button>
+        </div>
+        <div class="photo-slot" id="slot1" title="Tap to add a photo">
+          <input type="file" accept="image/*" onchange="handlePhotoUpload(1, this)">
+          <div class="slot-icon">🌸</div>
+          <div class="slot-label">Photo 2</div>
+          <button class="remove-btn" onclick="removePhoto(event,1)">×</button>
+        </div>
+        <div class="photo-slot" id="slot2" title="Tap to add a photo">
+          <input type="file" accept="image/*" onchange="handlePhotoUpload(2, this)">
+          <div class="slot-icon">💖</div>
+          <div class="slot-label">Photo 3</div>
+          <button class="remove-btn" onclick="removePhoto(event,2)">×</button>
+        </div>
+        <div class="photo-slot" id="slot3" title="Tap to add a photo">
+          <input type="file" accept="image/*" onchange="handlePhotoUpload(3, this)">
+          <div class="slot-icon">✨</div>
+          <div class="slot-label">Photo 4</div>
+          <button class="remove-btn" onclick="removePhoto(event,3)">×</button>
+        </div>
       </div>
-      <div style="position:absolute; right:95px; top:28px; width:80px; height:80px; background:white; clip-path:path('M40 72 C-18 38 8 -12 40 12 C72 -12 98 38 40 72 Z'); overflow:hidden; border:4px solid #f7d9e5; box-shadow:0 5px 14px rgba(0,0,0,0.22);">
-        <img src="https://placehold.co/80x80/FFB6C1/white?text=✨" style="width:100%; height:100%; object-fit:cover;">
+      <p style="color:rgba(216,92,122,0.7);font-size:11px;margin-top:6px;">Tap any slot to upload a pic from your gallery 🥺</p>
+    </div>
+
+    <!-- Bottom of card with heart frames -->
+    <div style="background:#efbfd2;border-radius:0 0 26px 26px;height:90px;position:relative;overflow:hidden;margin-top:12px;">
+      <div style="position:absolute;width:100%;height:100%;background:linear-gradient(135deg,#efbfd2 50%,#e4a7c0 50%);clip-path:polygon(0 0,50% 60%,100% 0,100% 100%,0 100%);"></div>
+      <div id="heartFrameL" style="position:absolute;left:80px;top:12px;width:60px;height:60px;background:white;clip-path:path('M30 54 C-14 28 6 -9 30 9 C54 -9 74 28 30 54 Z');overflow:hidden;border:3px solid #f7d9e5;box-shadow:0 4px 10px rgba(0,0,0,0.18);">
+        <img id="heartImg0" src="https://placehold.co/60x60/FFB6C1/white?text=💙" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div id="heartFrameR" style="position:absolute;right:80px;top:12px;width:60px;height:60px;background:white;clip-path:path('M30 54 C-14 28 6 -9 30 9 C54 -9 74 28 30 54 Z');overflow:hidden;border:3px solid #f7d9e5;box-shadow:0 4px 10px rgba(0,0,0,0.18);">
+        <img id="heartImg1" src="https://placehold.co/60x60/FFB6C1/white?text=✨" style="width:100%;height:100%;object-fit:cover;">
       </div>
     </div>
   </div>
 
-  <p style="position:relative; z-index:2; margin-top:24px; color:#fff; font-weight:800; background:rgba(0,0,0,0.18); display:inline-block; padding:11px 24px; border-radius:40px; backdrop-filter:blur(5px); font-size:16px;">
+  <p style="position:relative;z-index:2;margin-top:20px;color:#fff;font-weight:800;background:rgba(0,0,0,0.18);display:inline-block;padding:11px 24px;border-radius:40px;backdrop-filter:blur(5px);font-size:16px;">
     💖 Forever yours 💖
   </p>
 
-  <button onclick="location.reload()" style="margin-top:24px; background:#ff8fb1; padding:13px 34px; border:none; border-radius:60px; font-weight:bold; font-size:18px; color:white; cursor:pointer; box-shadow:0 10px 20px rgba(0,0,0,0.2);">
+  <button onclick="location.reload()" style="margin-top:20px;background:#ff8fb1;padding:13px 34px;border:none;border-radius:60px;font-weight:bold;font-size:18px;color:white;cursor:pointer;box-shadow:0 10px 20px rgba(0,0,0,0.2);">
     ✨ Finish ✨
   </button>
 </div>
 
 <script>
-// ========== INTERACTIVE PASSCODE ==========
+// ===== LOCK SCREEN =====
 let lsCode = "";
 const CORRECT_CODE = "19102024";
 
-function lsUpdateDots() {
-  for (let i = 0; i < 8; i++) {
-    const d = document.getElementById("d" + i);
-    if (i < lsCode.length) d.classList.add("filled");
+function lsUpdateDots(){
+  for(let i=0;i<8;i++){
+    const d=document.getElementById("d"+i);
+    if(i<lsCode.length)d.classList.add("filled");
     else d.classList.remove("filled");
   }
 }
-
-function lsRippleKey(btn) {
-  btn.classList.remove("ripple");
-  void btn.offsetWidth;
-  btn.classList.add("ripple");
-  btn.classList.add("pressed");
-  setTimeout(() => btn.classList.remove("pressed", "ripple"), 400);
+function lsRippleKey(btn){
+  btn.classList.remove("ripple"); void btn.offsetWidth;
+  btn.classList.add("ripple","pressed");
+  setTimeout(()=>btn.classList.remove("pressed","ripple"),400);
 }
-
-function lsShowError() {
-  const row = document.getElementById("dotsRow");
-  const msg = document.getElementById("lsError");
-  row.classList.add("shake");
-  msg.classList.add("show");
-  msg.textContent = "Wrong passcode! Hint: DDMMYYYY";
-  setTimeout(() => {
-    row.classList.remove("shake");
-    msg.classList.remove("show");
-  }, 1400);
+function lsShowError(){
+  const row=document.getElementById("dotsRow"),msg=document.getElementById("lsError");
+  row.classList.add("shake"); msg.classList.add("show");
+  msg.textContent="Wrong passcode! Hint: DDMMYYYY";
+  setTimeout(()=>{row.classList.remove("shake");msg.classList.remove("show");},1400);
 }
-
-function lsPressDigit(d) {
-  if (lsCode.length >= 8) return;
-  lsCode += d;
-  lsUpdateDots();
+function lsPressDigit(d){
+  if(lsCode.length>=8)return;
+  lsCode+=d; lsUpdateDots();
   document.getElementById("lsError").classList.remove("show");
-  if (lsCode.length === 8) {
-    if (lsCode === CORRECT_CODE) {
+  if(lsCode.length===8){
+    if(lsCode===CORRECT_CODE){
       document.getElementById("lsSuccess").classList.add("show");
-      setTimeout(() => {
-        document.getElementById("lockScreen").style.display = "none";
-        document.getElementById("birthdayLayer").style.display = "block";
+      setTimeout(()=>{
+        document.getElementById("lockScreen").style.display="none";
+        document.getElementById("birthdayLayer").style.display="block";
         resetYesNoChase();
-      }, 900);
+      },900);
     } else {
-      setTimeout(() => {
-        lsShowError();
-        lsCode = "";
-        lsUpdateDots();
-      }, 120);
+      setTimeout(()=>{lsShowError();lsCode="";lsUpdateDots();},120);
     }
   }
 }
-
-function initLockScreen() {
-  document.querySelectorAll("#keypadGrid [data-n]").forEach(btn => {
-    btn.addEventListener("pointerdown", e => {
-      e.preventDefault();
-      lsRippleKey(btn);
-      lsPressDigit(btn.dataset.n);
-    });
+function initLockScreen(){
+  document.querySelectorAll("#keypadGrid [data-n]").forEach(btn=>{
+    btn.addEventListener("pointerdown",e=>{e.preventDefault();lsRippleKey(btn);lsPressDigit(btn.dataset.n);});
   });
-  document.getElementById("lsDelBtn").addEventListener("pointerdown", e => {
-    e.preventDefault();
-    lsRippleKey(e.currentTarget);
-    lsCode = lsCode.slice(0, -1);
-    lsUpdateDots();
+  document.getElementById("lsDelBtn").addEventListener("pointerdown",e=>{
+    e.preventDefault();lsRippleKey(e.currentTarget);
+    lsCode=lsCode.slice(0,-1);lsUpdateDots();
     document.getElementById("lsError").classList.remove("show");
   });
-  document.getElementById("lsClrBtn").addEventListener("pointerdown", e => {
-    e.preventDefault();
-    lsRippleKey(e.currentTarget);
-    lsCode = "";
-    lsUpdateDots();
+  document.getElementById("lsClrBtn").addEventListener("pointerdown",e=>{
+    e.preventDefault();lsRippleKey(e.currentTarget);
+    lsCode="";lsUpdateDots();
     document.getElementById("lsError").classList.remove("show");
   });
 }
-
-// Keyboard support for desktop
-document.addEventListener("keydown", e => {
-  if (document.getElementById("lockScreen").style.display === "none") return;
-  if (e.key >= "0" && e.key <= "9") lsPressDigit(e.key);
-  else if (e.key === "Backspace") { lsCode = lsCode.slice(0,-1); lsUpdateDots(); }
-  else if (e.key === "Escape") { lsCode = ""; lsUpdateDots(); }
+document.addEventListener("keydown",e=>{
+  if(document.getElementById("lockScreen").style.display==="none")return;
+  if(e.key>="0"&&e.key<="9")lsPressDigit(e.key);
+  else if(e.key==="Backspace"){lsCode=lsCode.slice(0,-1);lsUpdateDots();}
+  else if(e.key==="Escape"){lsCode="";lsUpdateDots();}
 });
 
-// ========== CHASE NO BUTTON ==========
-let noClickCount = 0;
-const teaseMessages = [
-  "😂 You can't escape the cake!", "🤭 No means YES in birthday land!", "👵 Too old to say no, granny!",
-  "🍰 Just click YES already, lazybones!", "✨ my little kitten, be nice!", "🎂 This button is getting tired of you 😼",
-  "💛 You know you want it...", "👸 Princess Nimisha, click YES!"
-];
-
-function resetYesNoChase() {
-  noClickCount = 0;
-  const yesBtn = document.getElementById("yesCakeBtn");
-  const noBtn = document.getElementById("noCakeBtn");
-  if (yesBtn) { yesBtn.style.transform = "scale(1)"; yesBtn.style.fontSize = "20px"; yesBtn.style.padding = "14px 32px"; }
-  if (noBtn) { noBtn.style.transform = "scale(1)"; noBtn.style.opacity = "1"; noBtn.style.pointerEvents = "auto"; noBtn.style.left = "0px"; noBtn.style.top = "0px"; }
-  const teaserDiv = document.getElementById("teasyMessage");
-  if (teaserDiv) teaserDiv.innerText = "";
+// ===== CHASE NO BUTTON =====
+let noClickCount=0;
+const teaseMessages=["😂 You can't escape the cake!","🤭 No means YES in birthday land!","👵 Too old to say no, granny!","🍰 Just click YES already, lazybones!","✨ my little kitten, be nice!","🎂 This button is getting tired of you 😼","💛 You know you want it...","👸 Princess Nimisha, click YES!"];
+function resetYesNoChase(){
+  noClickCount=0;
+  const yesBtn=document.getElementById("yesCakeBtn"),noBtn=document.getElementById("noCakeBtn");
+  if(yesBtn){yesBtn.style.transform="scale(1)";yesBtn.style.fontSize="20px";yesBtn.style.padding="14px 32px";}
+  if(noBtn){noBtn.style.transform="scale(1)";noBtn.style.opacity="1";noBtn.style.pointerEvents="auto";noBtn.style.left="0px";noBtn.style.top="0px";}
+  const t=document.getElementById("teasyMessage");if(t)t.innerText="";
 }
-
-function showGoodGirlMessage() {
-  const popup = document.getElementById("goodGirlPopup");
-  if (popup) {
-    popup.style.visibility = "visible";
-    popup.style.opacity = "1";
-    const card = popup.querySelector(".good-girl-card");
-    if (card) card.style.transform = "scale(1)";
-    document.getElementById("closeGoodGirlBtn").onclick = () => {
-      popup.style.visibility = "hidden";
-      popup.style.opacity = "0";
-      document.getElementById("birthdayLayer").style.display = "none";
-      document.getElementById("cakeBuilder").style.display = "block";
+function showGoodGirlMessage(){
+  const popup=document.getElementById("goodGirlPopup");
+  if(popup){
+    popup.style.visibility="visible";popup.style.opacity="1";
+    const card=popup.querySelector(".good-girl-card");if(card)card.style.transform="scale(1)";
+    document.getElementById("closeGoodGirlBtn").onclick=()=>{
+      popup.style.visibility="hidden";popup.style.opacity="0";
+      document.getElementById("birthdayLayer").style.display="none";
+      document.getElementById("cakeBuilder").style.display="block";
       initCakeBuilder();
     };
-  } else {
-    document.getElementById("birthdayLayer").style.display = "none";
-    document.getElementById("cakeBuilder").style.display = "block";
-    initCakeBuilder();
   }
 }
-
-function setupChaseNo() {
-  const noBtn = document.getElementById("noCakeBtn");
-  const yesBtn = document.getElementById("yesCakeBtn");
-  const teaserDiv = document.getElementById("teasyMessage");
-  if (!noBtn || !yesBtn) return;
-  const newNoBtn = noBtn.cloneNode(true);
-  const newYesBtn = yesBtn.cloneNode(true);
-  noBtn.parentNode.replaceChild(newNoBtn, noBtn);
-  yesBtn.parentNode.replaceChild(newYesBtn, yesBtn);
-  const finalNoBtn = document.getElementById("noCakeBtn");
-  const finalYesBtn = document.getElementById("yesCakeBtn");
-  finalNoBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    noClickCount++;
-    teaserDiv.innerText = teaseMessages[noClickCount % teaseMessages.length];
-    let scaleNo = Math.max(0.4, 1 - noClickCount * 0.09);
-    finalNoBtn.style.transform = `scale(${scaleNo})`;
-    if (noClickCount >= 5) finalNoBtn.style.opacity = "0.5";
-    if (noClickCount >= 8) finalNoBtn.style.pointerEvents = "none";
-    let newScale = 1 + (noClickCount * 0.12);
-    let newFont = 20 + (noClickCount * 2);
-    if (newFont > 44) newFont = 44;
-    finalYesBtn.style.transform = `scale(${newScale})`;
-    finalYesBtn.style.fontSize = `${newFont}px`;
-    finalYesBtn.style.padding = `${14 + noClickCount*2}px ${32 + noClickCount*3}px`;
-    const maxX = 40, maxY = 25;
-    const randX = (Math.random() - 0.5) * maxX;
-    const randY = (Math.random() - 0.5) * maxY;
-    finalNoBtn.style.position = "relative";
-    finalNoBtn.style.left = `${randX}px`;
-    finalNoBtn.style.top = `${randY}px`;
-    if (noClickCount >= 10) teaserDiv.innerText = "👑 You're stubborn! But click YES now, princess!";
+function setupChaseNo(){
+  const noBtn=document.getElementById("noCakeBtn"),yesBtn=document.getElementById("yesCakeBtn"),teaserDiv=document.getElementById("teasyMessage");
+  if(!noBtn||!yesBtn)return;
+  const newN=noBtn.cloneNode(true),newY=yesBtn.cloneNode(true);
+  noBtn.parentNode.replaceChild(newN,noBtn);yesBtn.parentNode.replaceChild(newY,yesBtn);
+  const fN=document.getElementById("noCakeBtn"),fY=document.getElementById("yesCakeBtn");
+  fN.addEventListener("click",e=>{
+    e.preventDefault(); noClickCount++;
+    teaserDiv.innerText=teaseMessages[noClickCount%teaseMessages.length];
+    let scaleNo=Math.max(0.4,1-noClickCount*0.09);
+    fN.style.transform=`scale(${scaleNo})`;
+    if(noClickCount>=5)fN.style.opacity="0.5";
+    if(noClickCount>=8)fN.style.pointerEvents="none";
+    let newScale=1+(noClickCount*0.12),newFont=Math.min(44,20+(noClickCount*2));
+    fY.style.transform=`scale(${newScale})`;fY.style.fontSize=`${newFont}px`;fY.style.padding=`${14+noClickCount*2}px ${32+noClickCount*3}px`;
+    const rX=(Math.random()-0.5)*40,rY=(Math.random()-0.5)*25;
+    fN.style.position="relative";fN.style.left=`${rX}px`;fN.style.top=`${rY}px`;
   });
-  finalYesBtn.addEventListener("click", () => { showGoodGirlMessage(); });
+  fY.addEventListener("click",()=>showGoodGirlMessage());
 }
 
-// ========== VOICE RECORDER ==========
-let mediaRecorder, audioChunks = [];
-const recordBtn = document.getElementById("recordBtn");
-const playBtn = document.getElementById("playRecordBtn");
-const userAudio = document.getElementById("userAudio");
-const voiceStatus = document.getElementById("voiceStatus");
+// ===== REALISTIC 3D CAKE BUILDER =====
+let layerColors=[];
+let frostingColor="#fff5e0";
+let candleNum=3,candlesLit=false;
 
-if (recordBtn) {
-  recordBtn.onclick = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream);
-      audioChunks = [];
-      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-      mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-        const url = URL.createObjectURL(audioBlob);
-        userAudio.src = url;
-        userAudio.style.display = "block";
-        voiceStatus.innerText = "✅ Your voice recorded! Click 'Play My Voice' to hear it!";
-        stream.getTracks().forEach(track => track.stop());
-      };
-      mediaRecorder.start();
-      voiceStatus.innerText = "🎙️ Recording... Click 'Stop Recording' to finish.";
-      recordBtn.innerText = "⏹️ Stop Recording";
-      recordBtn.onclick = () => {
-        if (mediaRecorder && mediaRecorder.state === "recording") {
-          mediaRecorder.stop();
-          recordBtn.innerText = "🎙️ Record Message";
-          recordBtn.onclick = arguments.callee;
-        }
-      };
-    } catch(e) { alert("Microphone access needed for your voice message!"); }
-  };
+const layerColorOptions=[
+  {hex:"#e74c3c",name:"Red Velvet"},{hex:"#e67e22",name:"Orange"},
+  {hex:"#f1c40f",name:"Lemon"},{hex:"#2ecc71",name:"Mint"},
+  {hex:"#3498db",name:"Blueberry"},{hex:"#9b59b6",name:"Lavender"},
+  {hex:"#e91e8c",name:"Strawberry"},{hex:"#1abc9c",name:"Teal"},
+  {hex:"#f39c12",name:"Caramel"},{hex:"#8B4513",name:"Chocolate"},
+  {hex:"#ff69b4",name:"Rose"},{hex:"#c0392b",name:"Cherry"}
+];
+const frostingOptions=[
+  {hex:"#fff5e0",name:"Vanilla"},{hex:"#fff0f5",name:"Rose"},
+  {hex:"#f0e68c",name:"Lemon"},{hex:"#ffc0cb",name:"Pink"},
+  {hex:"#a0d6ff",name:"Blue"},{hex:"#c8f7c5",name:"Mint"},
+  {hex:"#ffb347",name:"Caramel"},{hex:"#fff",name:"Pure White"},
+  {hex:"#d4a0ff",name:"Lavender"},{hex:"#ffe4b5",name:"Champagne"}
+];
+
+function hexToRgb(hex){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return{r,g,b};
 }
-if (playBtn) {
-  playBtn.onclick = () => {
-    if (userAudio.src) userAudio.play();
-    else voiceStatus.innerText = "No recording yet! Press record first.";
-  };
+function darken(hex,amount=0.25){
+  const{r,g,b}=hexToRgb(hex);
+  return`rgb(${Math.floor(r*(1-amount))},${Math.floor(g*(1-amount))},${Math.floor(b*(1-amount))})`;
+}
+function lighten(hex,amount=0.3){
+  const{r,g,b}=hexToRgb(hex);
+  return`rgb(${Math.min(255,Math.floor(r+(255-r)*amount))},${Math.min(255,Math.floor(g+(255-g)*amount))},${Math.min(255,Math.floor(b+(255-b)*amount))})`;
 }
 
-// ========== CAKE BUILDER ==========
-let layerColors = [];
-let frostingColor = "#fff5e0";
-let candleNum = 3;
-let candlesLit = false;
-const layerColorOptions = ["#ff6b6b","#ffd93d","#6bcb77","#4d96ff","#ff6bcb","#c084fc","#fb7185","#86efac","#facc15","#a855f7"];
-const frostingOptions = ["#fff5e0","#fff0f5","#f0e68c","#ffc0cb","#a0d6ff","#98fb98","#ffb347"];
+function createCandleEl(colorHex,lit,index){
+  const wrap=document.createElement("div");
+  wrap.className="candle-3d";
 
-function renderCake() {
-  const canvas = document.getElementById("cakeCanvas");
-  if (!canvas) return;
-  canvas.innerHTML = "";
-  const layerCount = parseInt(document.getElementById("layerSlider").value);
-  const frostingDiv = document.createElement("div");
-  frostingDiv.className = "frosting";
-  frostingDiv.style.backgroundColor = frostingColor;
-  frostingDiv.style.position = "relative";
-  if (candleNum > 0 && candlesLit) {
-    for (let i = 0; i < candleNum; i++) {
-      const candle = document.createElement("div");
-      candle.className = "candle";
-      candle.style.left = `${(i+1) * (100/(candleNum+1))}%`;
-      const flame = document.createElement("div");
-      flame.className = "flame";
-      candle.appendChild(flame);
-      frostingDiv.appendChild(candle);
-    }
-  } else if (candleNum > 0 && !candlesLit) {
-    for (let i = 0; i < candleNum; i++) {
-      const candle = document.createElement("div");
-      candle.className = "candle";
-      candle.style.left = `${(i+1) * (100/(candleNum+1))}%`;
-      candle.style.backgroundColor = "#7f8c8d";
-      frostingDiv.appendChild(candle);
+  const flameWrap=document.createElement("div");
+  flameWrap.className="candle-flame-wrap";
+
+  if(lit){
+    const glow=document.createElement("div");glow.className="flame-glow";
+    const outer=document.createElement("div");outer.className="flame-outer";
+    const inner=document.createElement("div");inner.className="flame-inner";
+    // stagger animations slightly per candle
+    outer.style.animationDelay=`${index*0.05}s`;
+    inner.style.animationDelay=`${index*0.07}s`;
+    flameWrap.appendChild(glow);flameWrap.appendChild(outer);flameWrap.appendChild(inner);
+  } else {
+    // smoke wisps
+    const smoke=document.createElement("div");smoke.className="smoke";
+    flameWrap.appendChild(smoke);
+  }
+
+  const wick=document.createElement("div");wick.className="candle-wick";
+
+  const body=document.createElement("div");
+  body.className="candle-body";
+  body.style.background=`linear-gradient(135deg, ${lighten(colorHex)}, ${colorHex}, ${darken(colorHex)})`;
+
+  // random wax drip
+  if(Math.random()>0.4){
+    const wax=document.createElement("div");
+    wax.className="wax-drip";
+    wax.style.height=`${6+Math.floor(Math.random()*10)}px`;
+    wax.style.left=`${2+Math.floor(Math.random()*6)}px`;
+    wax.style.top="0";
+    wax.style.background=lighten(colorHex,0.4);
+    body.appendChild(wax);
+  }
+
+  if(lit){
+    const pool=document.createElement("div");pool.className="candle-glow-pool";
+    wrap.appendChild(pool);
+  }
+  wrap.appendChild(flameWrap);
+  wrap.appendChild(wick);
+  wrap.appendChild(body);
+  return wrap;
+}
+
+function createLayerEl(hex, layerIndex, totalLayers, isBottom){
+  const layerW = 230 - (layerIndex * 0); // slightly narrower on top
+  const wrap=document.createElement("div");
+  wrap.className="cake-layer-3d";
+
+  // top ellipse
+  const top=document.createElement("div");
+  top.className="cake-layer-top";
+  top.style.width=`${layerW+8}px`;
+  top.style.background=`radial-gradient(ellipse at 50% 50%, ${lighten(hex,0.35)} 0%, ${lighten(hex,0.15)} 50%, ${hex} 100%)`;
+
+  // side
+  const side=document.createElement("div");
+  side.className="cake-layer-side";
+  side.style.width=`${layerW}px`;
+  side.style.background=`linear-gradient(180deg, ${hex} 0%, ${darken(hex,0.15)} 100%)`;
+
+  // add sprinkles on top for decoration
+  const sprinkleColors=["#ff6b6b","#ffd93d","#6bcb77","#4d96ff","#ff6bcb","#fff","#ffb347"];
+  for(let i=0;i<8+layerIndex*2;i++){
+    const sp=document.createElement("div");
+    sp.className="sprinkle";
+    sp.style.setProperty("--rot",`${Math.random()*360}deg`);
+    sp.style.left=`${5+Math.random()*85}%`;
+    sp.style.top=`${10+Math.random()*70}%`;
+    sp.style.background=sprinkleColors[Math.floor(Math.random()*sprinkleColors.length)];
+    sp.style.position="absolute";
+    sp.style.zIndex="4";
+    top.style.position="relative";
+    top.appendChild(sp);
+  }
+
+  wrap.appendChild(top);
+  wrap.appendChild(side);
+  return wrap;
+}
+
+function createFrostingEl(hex){
+  const wrap=document.createElement("div");
+  wrap.className="frosting-layer";
+
+  const top=document.createElement("div");
+  top.className="frosting-top";
+  top.style.background=`radial-gradient(ellipse at 50% 40%, ${lighten(hex,0.5)}, ${hex})`;
+
+  const dripsWrap=document.createElement("div");
+  dripsWrap.className="frosting-drips";
+
+  const dripHeights=[18,28,14,22,32,12,26,20,16,24,30,18];
+  for(let i=0;i<12;i++){
+    const drip=document.createElement("div");
+    drip.className="drip";
+    drip.style.height=`${dripHeights[i]}px`;
+    drip.style.background=hex;
+    drip.style.animationDelay=`${i*0.04}s`;
+    dripsWrap.appendChild(drip);
+  }
+
+  wrap.appendChild(top);
+  wrap.appendChild(dripsWrap);
+  return wrap;
+}
+
+function renderCake(){
+  const canvas=document.getElementById("cakeCanvas");
+  if(!canvas)return;
+  canvas.innerHTML="";
+
+  const layerCount=parseInt(document.getElementById("layerSlider").value);
+  const containerDiv=document.createElement("div");
+  containerDiv.style.cssText="display:flex;flex-direction:column;align-items:center;position:relative;padding-bottom:8px;";
+
+  // Frosting (top)
+  const frostingEl=createFrostingEl(frostingColor);
+
+  // Candle row on top of frosting
+  const candleRow=document.createElement("div");
+  candleRow.className="candle-row";
+  if(candleNum>0){
+    const candleColors=["#ff6b6b","#ffd93d","#6bcb77","#4d96ff","#ff6bcb","#c084fc","#fb7185","#ffb347","#38bdf8"];
+    for(let i=0;i<candleNum;i++){
+      candleRow.appendChild(createCandleEl(candleColors[i%candleColors.length], candlesLit, i));
     }
   }
-  canvas.appendChild(frostingDiv);
-  for (let i = layerCount-1; i >= 0; i--) {
-    const layer = document.createElement("div");
-    layer.className = "cake-layer";
-    layer.style.backgroundColor = layerColors[i] || layerColorOptions[i % layerColorOptions.length];
-    canvas.appendChild(layer);
+  frostingEl.style.position="relative";
+  frostingEl.appendChild(candleRow);
+
+  containerDiv.appendChild(frostingEl);
+
+  // Cake layers
+  for(let i=layerCount-1;i>=0;i--){
+    containerDiv.appendChild(createLayerEl(
+      layerColors[i]||layerColorOptions[i%layerColorOptions.length].hex,
+      i, layerCount, i===0
+    ));
   }
+
+  // "19" decoration
+  const numDecor=document.createElement("div");
+  numDecor.className="cake-number-decor";
+  numDecor.textContent="🎂 19 🎂";
+  numDecor.style.cssText="position:absolute;top:-46px;left:50%;transform:translateX(-50%);font-size:18px;font-weight:900;color:#fff;text-shadow:0 0 12px rgba(255,200,0,0.9),0 2px 4px rgba(0,0,0,0.5);pointer-events:none;animation:numFloat 2s ease-in-out infinite;white-space:nowrap;";
+  containerDiv.style.position="relative";
+  containerDiv.appendChild(numDecor);
+
+  // Stand
+  const stand=document.createElement("div");
+  stand.className="cake-stand";
+
+  // Ambient glow under frosting if lit
+  if(candlesLit && candleNum>0){
+    const ambientGlow=document.createElement("div");
+    ambientGlow.style.cssText=`position:absolute;top:0;left:50%;transform:translateX(-50%);width:300px;height:60px;background:radial-gradient(ellipse, rgba(255,200,50,0.12) 0%, transparent 70%);pointer-events:none;z-index:10;animation:glowPulse 0.3s ease-in-out infinite alternate;`;
+    containerDiv.prepend(ambientGlow);
+  }
+
+  canvas.appendChild(containerDiv);
+  canvas.appendChild(stand);
+
+  const reflection=document.createElement("div");
+  reflection.className="plate-reflection";
+  canvas.appendChild(reflection);
 }
 
-function updateLayers() {
-  const count = parseInt(document.getElementById("layerSlider").value);
-  document.getElementById("layerCount").innerText = count;
-  while (layerColors.length < count) layerColors.push(layerColorOptions[layerColors.length % layerColorOptions.length]);
-  while (layerColors.length > count) layerColors.pop();
-  renderColorPickers();
+function updateLayers(){
+  const count=parseInt(document.getElementById("layerSlider").value);
+  document.getElementById("layerCount").innerText=count;
+  while(layerColors.length<count)layerColors.push(layerColorOptions[layerColors.length%layerColorOptions.length].hex);
+  while(layerColors.length>count)layerColors.pop();
+  renderColorPickers();renderCake();
+}
+function updateCandles(){
+  candleNum=parseInt(document.getElementById("candleSlider").value);
+  document.getElementById("candleCount").innerText=candleNum;
   renderCake();
 }
-
-function updateCandles() {
-  candleNum = parseInt(document.getElementById("candleSlider").value);
-  document.getElementById("candleCount").innerText = candleNum;
-  renderCake();
-}
-
-function renderColorPickers() {
-  const layerGrid = document.getElementById("layerColorGrid");
-  const frostingGrid = document.getElementById("frostingGrid");
-  if (!layerGrid) return;
-  const layerCt = parseInt(document.getElementById("layerSlider").value);
-  layerGrid.innerHTML = "";
-  for (let i = 0; i < layerCt; i++) {
-    const label = document.createElement("div");
-    label.innerText = `✨ Layer ${i+1}`;
-    label.style.color = "#FFD966";
-    label.style.fontSize = "13px";
-    label.style.width = "100%";
+function renderColorPickers(){
+  const layerGrid=document.getElementById("layerColorGrid"),frostingGrid=document.getElementById("frostingGrid");
+  if(!layerGrid)return;
+  const layerCt=parseInt(document.getElementById("layerSlider").value);
+  layerGrid.innerHTML="";
+  for(let i=0;i<layerCt;i++){
+    const label=document.createElement("div");
+    label.innerText=`✨ Layer ${i+1}`;label.style.cssText="color:#FFD966;font-size:13px;width:100%;margin-top:8px;";
     layerGrid.appendChild(label);
-    const subGrid = document.createElement("div");
-    subGrid.style.display = "flex";
-    subGrid.style.gap = "8px";
-    subGrid.style.flexWrap = "wrap";
-    subGrid.style.marginBottom = "12px";
-    layerColorOptions.forEach(col => {
-      const sw = document.createElement("div");
-      sw.className = "color-swatch";
-      sw.style.backgroundColor = col;
-      sw.addEventListener("click", () => { layerColors[i] = col; renderCake(); });
+    const subGrid=document.createElement("div");
+    subGrid.style.cssText="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;justify-content:center;";
+    layerColorOptions.forEach((col,ci)=>{
+      const sw=document.createElement("div");
+      sw.className="color-swatch"+(layerColors[i]===col.hex?" selected":"");
+      sw.style.background=`linear-gradient(135deg,${col.hex},${darken(col.hex)})`;
+      sw.title=col.name;
+      sw.addEventListener("click",()=>{
+        layerColors[i]=col.hex;
+        subGrid.querySelectorAll(".color-swatch").forEach(s=>s.classList.remove("selected"));
+        sw.classList.add("selected");
+        renderCake();
+      });
       subGrid.appendChild(sw);
     });
     layerGrid.appendChild(subGrid);
   }
-  frostingGrid.innerHTML = "";
-  frostingOptions.forEach(col => {
-    const sw = document.createElement("div");
-    sw.className = "color-swatch";
-    sw.style.backgroundColor = col;
-    sw.addEventListener("click", () => { frostingColor = col; renderCake(); });
+  frostingGrid.innerHTML="";
+  frostingOptions.forEach(col=>{
+    const sw=document.createElement("div");
+    sw.className="color-swatch"+(frostingColor===col.hex?" selected":"");
+    sw.style.background=`radial-gradient(circle at 35% 35%, ${lighten(col.hex,0.4)}, ${col.hex})`;
+    sw.title=col.name;
+    sw.addEventListener("click",()=>{
+      frostingColor=col.hex;
+      frostingGrid.querySelectorAll(".color-swatch").forEach(s=>s.classList.remove("selected"));
+      sw.classList.add("selected");
+      renderCake();
+    });
     frostingGrid.appendChild(sw);
   });
 }
 
-function initCakeBuilder() {
-  const layerSlider = document.getElementById("layerSlider");
-  const candleSlider = document.getElementById("candleSlider");
-  layerColors = ["#ff6b6b", "#ffd93d"];
-  frostingColor = "#fff5e0";
-  candleNum = 3;
-  candlesLit = false;
-  if (layerSlider) { layerSlider.value = "2"; layerSlider.oninput = () => { updateLayers(); candlesLit = false; renderCake(); }; }
-  if (candleSlider) { candleSlider.value = "3"; candleSlider.oninput = () => { updateCandles(); candlesLit = false; renderCake(); }; }
+function initCakeBuilder(){
+  const layerSlider=document.getElementById("layerSlider"),candleSlider=document.getElementById("candleSlider");
+  layerColors=["#e74c3c","#f1c40f"];frostingColor="#fff5e0";candleNum=3;candlesLit=false;
+  if(layerSlider){layerSlider.value="2";layerSlider.oninput=()=>{updateLayers();candlesLit=false;renderCake();};}
+  if(candleSlider){candleSlider.value="3";candleSlider.oninput=()=>{updateCandles();candlesLit=false;renderCake();};}
   updateLayers();
-  document.getElementById("lightCandlesBtn").onclick = () => { candlesLit = true; renderCake(); if (userAudio && userAudio.src) userAudio.play(); };
-  document.getElementById("finishCakeBtn").onclick = () => {
-    document.getElementById("cakeBuilder").style.display = "none";
-    document.getElementById("giftReveal").style.display = "block";
+  document.getElementById("lightCandlesBtn").onclick=()=>{
+    candlesLit=true;renderCake();
+    const ua=document.getElementById("userAudio");
+    if(ua&&ua.src)ua.play();
+  };
+  document.getElementById("finishCakeBtn").onclick=()=>{
+    document.getElementById("cakeBuilder").style.display="none";
+    document.getElementById("giftReveal").style.display="block";
   };
   setupShakeToBlow();
 }
 
-function setupShakeToBlow() {
-  if (window.DeviceMotionEvent) {
-    let lastShake = 0;
-    window.addEventListener('devicemotion', (e) => {
-      const acc = e.accelerationIncludingGravity;
-      if (!acc) return;
-      const magnitude = Math.abs(acc.x) + Math.abs(acc.y) + Math.abs(acc.z);
-      const now = Date.now();
-      if (magnitude > 35 && now - lastShake > 800) {
-        lastShake = now;
-        if (candlesLit) {
-          candlesLit = false;
-          renderCake();
-          const notice = document.getElementById("shakeNotice");
-          if (notice) notice.innerText = "💨 You blew out the candles! 🕯️✨";
-          setTimeout(() => { if (notice) notice.innerText = "📱 SHAKE YOUR PHONE to blow out the candles! 📱"; }, 2000);
+function setupShakeToBlow(){
+  if(window.DeviceMotionEvent){
+    let lastShake=0;
+    window.addEventListener("devicemotion",e=>{
+      const acc=e.accelerationIncludingGravity;if(!acc)return;
+      const mag=Math.abs(acc.x)+Math.abs(acc.y)+Math.abs(acc.z);
+      const now=Date.now();
+      if(mag>35&&now-lastShake>800){
+        lastShake=now;
+        if(candlesLit){
+          candlesLit=false;renderCake();
+          const notice=document.getElementById("shakeNotice");
+          if(notice){notice.innerText="💨 You blew out the candles! 🕯️✨";setTimeout(()=>{notice.innerText="📱 SHAKE YOUR PHONE to blow out the candles! 📱";},2000);}
         }
       }
     });
-  } else {
-    const noticeDiv = document.getElementById("shakeNotice");
-    if (noticeDiv) noticeDiv.innerText = "🎈 Click 'Light Candles' then shake or click again to test! 🎈";
   }
 }
 
-// ========== BLUE ROSE BOUQUET ==========
-function drawFullBouquet() {
-  const canvas = document.getElementById("blueRoseCanvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  const width = canvas.width = 500;
-  const height = canvas.height = 420;
+// ===== VOICE RECORDER =====
+let mediaRecorder,audioChunks=[];
+const recordBtn=document.getElementById("recordBtn"),playBtn=document.getElementById("playRecordBtn"),userAudio=document.getElementById("userAudio"),voiceStatus=document.getElementById("voiceStatus");
+if(recordBtn){
+  recordBtn.onclick=async()=>{
+    try{
+      const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+      mediaRecorder=new MediaRecorder(stream);audioChunks=[];
+      mediaRecorder.ondataavailable=e=>audioChunks.push(e.data);
+      mediaRecorder.onstop=()=>{
+        const blob=new Blob(audioChunks,{type:"audio/wav"});
+        const url=URL.createObjectURL(blob);
+        userAudio.src=url;userAudio.style.display="block";
+        voiceStatus.innerText="✅ Recorded! Click Play to hear it!";
+        stream.getTracks().forEach(t=>t.stop());
+      };
+      mediaRecorder.start();
+      voiceStatus.innerText="🎙️ Recording... click Stop to finish.";
+      recordBtn.innerText="⏹️ Stop Recording";
+      const origClick=recordBtn.onclick;
+      recordBtn.onclick=()=>{if(mediaRecorder&&mediaRecorder.state==="recording"){mediaRecorder.stop();recordBtn.innerText="🎙️ Record Message";recordBtn.onclick=origClick;}};
+    }catch(e){alert("Microphone access needed!");}
+  };
+}
+if(playBtn){playBtn.onclick=()=>{if(userAudio.src)userAudio.play();else voiceStatus.innerText="No recording yet!";};}
 
-  const grad = ctx.createLinearGradient(0, 0, 0, height);
-  grad.addColorStop(0, "#0a1628");
-  grad.addColorStop(1, "#020617");
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, width, height);
+// ===== BLUE ROSE GARDEN (fully illustrated canvas) =====
+function drawFullBouquet(){
+  const canvas=document.getElementById("blueRoseCanvas");
+  if(!canvas)return;
+  canvas.width=500;canvas.height=520;
+  const ctx=canvas.getContext("2d");
+  const W=500,H=520;
 
-  ctx.beginPath();
-  ctx.moveTo(width/2 - 100, height - 55);
-  ctx.quadraticCurveTo(width/2, height - 30, width/2 + 100, height - 55);
-  ctx.lineTo(width/2 + 85, height - 15);
-  ctx.quadraticCurveTo(width/2, height + 8, width/2 - 85, height - 15);
-  ctx.fillStyle = "#1e3a5f";
-  ctx.fill();
-  ctx.beginPath();
-  ctx.moveTo(width/2 - 80, height - 48);
-  ctx.quadraticCurveTo(width/2, height - 28, width/2 + 80, height - 48);
-  ctx.fillStyle = "#0f2b44";
-  ctx.fill();
+  // === SKY/NIGHT GARDEN BACKGROUND ===
+  const bgGrad=ctx.createLinearGradient(0,0,0,H);
+  bgGrad.addColorStop(0,"#020818");
+  bgGrad.addColorStop(0.4,"#0a1628");
+  bgGrad.addColorStop(0.7,"#0c1e35");
+  bgGrad.addColorStop(1,"#081020");
+  ctx.fillStyle=bgGrad;ctx.fillRect(0,0,W,H);
 
-  ctx.beginPath();
-  ctx.moveTo(width/2 - 25, height - 35);
-  ctx.lineTo(width/2, height - 18);
-  ctx.lineTo(width/2 + 25, height - 35);
-  ctx.fillStyle = "#fbbf24";
-  ctx.fill();
-  ctx.beginPath();
-  ctx.moveTo(width/2, height - 18);
-  ctx.lineTo(width/2, height - 5);
-  ctx.lineWidth = 3.5;
-  ctx.strokeStyle = "#fbbf24";
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(width/2, height - 12, 6, 0, Math.PI*2);
-  ctx.fillStyle = "#f59e0b";
-  ctx.fill();
-
-  const centerX = width/2;
-  const centerY = height/2 - 15;
-  const positions = [];
-  for (let i = 0; i < 10; i++) {
-    let angle = -0.4 + (i / 9) * 0.8;
-    let radius = 45;
-    let x = centerX + Math.sin(angle) * radius * 0.7;
-    let y = centerY - 70 + Math.cos(angle) * radius * 0.5;
-    positions.push({x, y, size: 12});
+  // Stars
+  ctx.save();
+  for(let i=0;i<90;i++){
+    const sx=Math.random()*W,sy=Math.random()*(H*0.55);
+    const sr=0.5+Math.random()*1.8;
+    const sa=0.3+Math.random()*0.7;
+    ctx.beginPath();ctx.arc(sx,sy,sr,0,Math.PI*2);
+    ctx.fillStyle=`rgba(200,220,255,${sa})`;ctx.fill();
   }
-  for (let i = 0; i < 18; i++) {
-    let angle = -0.6 + (i / 17) * 1.2;
-    let radius = 70;
-    let x = centerX + Math.sin(angle) * radius;
-    let y = centerY - 45 + Math.cos(angle) * radius * 0.6;
-    positions.push({x, y, size: 13});
-  }
-  for (let i = 0; i < 22; i++) {
-    let angle = -0.85 + (i / 21) * 1.7;
-    let radius = 95;
-    let x = centerX + Math.sin(angle) * radius;
-    let y = centerY - 20 + Math.cos(angle) * radius * 0.55;
-    positions.push({x, y, size: 14});
-  }
-  for (let p of positions) {
-    p.x += (Math.random() - 0.5) * 6;
-    p.y += (Math.random() - 0.5) * 5;
-  }
+  // Moon
+  ctx.save();
+  const moonX=W-65,moonY=48;
+  ctx.shadowColor="rgba(150,180,255,0.6)";ctx.shadowBlur=18;
+  ctx.beginPath();ctx.arc(moonX,moonY,22,0,Math.PI*2);
+  ctx.fillStyle="#c8d8f8";ctx.fill();
+  ctx.beginPath();ctx.arc(moonX+8,moonY-5,18,0,Math.PI*2);
+  ctx.fillStyle="#0a1628";ctx.fill();
+  ctx.restore();
 
-  ctx.lineWidth = 2.2;
-  ctx.strokeStyle = "#2d6a4f";
-  for (let i = 0; i < positions.length; i++) {
-    ctx.beginPath();
-    ctx.moveTo(centerX + (Math.random() - 0.5) * 20, height - 40);
-    ctx.lineTo(positions[i].x, positions[i].y);
+  // Fireflies
+  ctx.save();
+  for(let i=0;i<18;i++){
+    const fx=30+Math.random()*(W-60),fy=H*0.25+Math.random()*(H*0.45);
+    ctx.shadowColor="rgba(180,255,150,0.9)";ctx.shadowBlur=8;
+    ctx.beginPath();ctx.arc(fx,fy,1.5,0,Math.PI*2);
+    ctx.fillStyle=`rgba(180,255,${100+Math.floor(Math.random()*80)},${0.5+Math.random()*0.5})`;
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // === GROUND LAYER ===
+  const groundGrad=ctx.createLinearGradient(0,H*0.72,0,H);
+  groundGrad.addColorStop(0,"#0a1e0e");
+  groundGrad.addColorStop(0.5,"#071510");
+  groundGrad.addColorStop(1,"#040c08");
+  ctx.fillStyle=groundGrad;
+  ctx.beginPath();ctx.moveTo(0,H*0.72);ctx.lineTo(W,H*0.72);ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.fill();
+
+  // Grass blades
+  ctx.save();
+  ctx.strokeStyle="#1a4020";ctx.lineWidth=1.5;
+  for(let i=0;i<80;i++){
+    const gx=Math.random()*W,gy=H*0.72,gh=6+Math.random()*16;
+    const curve=(Math.random()-0.5)*8;
+    ctx.beginPath();ctx.moveTo(gx,gy);
+    ctx.quadraticCurveTo(gx+curve/2,gy-gh*0.5,gx+curve,gy-gh);
+    ctx.strokeStyle=`rgba(${20+Math.floor(Math.random()*30)},${55+Math.floor(Math.random()*30)},${20+Math.floor(Math.random()*15)},0.8)`;
     ctx.stroke();
-    const midX = (centerX + positions[i].x) / 2;
-    const midY = (height - 40 + positions[i].y) / 2;
-    ctx.fillStyle = "#40916c";
-    ctx.beginPath();
-    ctx.ellipse(midX + (Math.random() - 0.5) * 8, midY + 3, 4.5, 2.5, 0.5, 0, Math.PI*2);
-    ctx.fill();
   }
+  ctx.restore();
 
-  for (let i = 0; i < positions.length; i++) {
-    const x = positions[i].x;
-    const y = positions[i].y;
-    const size = positions[i].size + (Math.sin(i) * 1.2);
-    ctx.shadowColor = "rgba(59,130,246,0.4)";
-    ctx.shadowBlur = 5;
-    for (let p = 0; p < 6; p++) {
-      const angle = (p * 60 + i * 25) * Math.PI/180;
-      const rad = size * 0.85;
-      const px = x + Math.cos(angle) * rad;
-      const py = y + Math.sin(angle) * rad * 0.7;
-      ctx.beginPath();
-      ctx.ellipse(px, py, size*0.6, size*0.5, angle, 0, Math.PI*2);
-      const blueGrad = ctx.createRadialGradient(px-2, py-2, 2, px, py, size*0.7);
-      blueGrad.addColorStop(0, "#3b82f6");
-      blueGrad.addColorStop(0.5, "#2563eb");
-      blueGrad.addColorStop(1, "#1e3a8a");
-      ctx.fillStyle = blueGrad;
-      ctx.fill();
+  // === STONE PATH ===
+  ctx.save();
+  const pathGrad=ctx.createLinearGradient(0,H*0.68,0,H);
+  pathGrad.addColorStop(0,"rgba(80,90,100,0)");
+  pathGrad.addColorStop(0.3,"rgba(60,70,80,0.5)");
+  pathGrad.addColorStop(1,"rgba(50,60,70,0.8)");
+  ctx.fillStyle=pathGrad;
+  ctx.beginPath();
+  ctx.moveTo(W/2-25,H*0.72);ctx.lineTo(W/2+25,H*0.72);ctx.lineTo(W/2+55,H);ctx.lineTo(W/2-55,H);
+  ctx.fill();
+  // stones
+  for(let i=0;i<5;i++){
+    const sy=H*0.74+i*(H*0.052),sw=12+i*4;
+    ctx.fillStyle=`rgba(90,100,110,0.6)`;
+    ctx.beginPath();ctx.ellipse(W/2,sy,sw,5,0,0,Math.PI*2);ctx.fill();
+    ctx.strokeStyle="rgba(110,120,130,0.3)";ctx.lineWidth=0.5;ctx.stroke();
+  }
+  ctx.restore();
+
+  // === DRAW ROSE FUNCTION ===
+  function drawBlueRose(cx,cy,size,brightness=1,alpha=1){
+    ctx.save();ctx.globalAlpha=alpha;
+    const layers=[
+      {petals:5,radius:size*0.95,pSize:size*0.62,color:[30,80,220]},
+      {petals:6,radius:size*0.68,pSize:size*0.52,color:[40,100,240]},
+      {petals:6,radius:size*0.42,pSize:size*0.40,color:[60,130,250]},
+      {petals:5,radius:size*0.22,pSize:size*0.28,color:[80,150,255]},
+    ];
+    // outer glow
+    const glow=ctx.createRadialGradient(cx,cy,0,cx,cy,size*1.1);
+    glow.addColorStop(0,`rgba(59,130,246,${0.18*brightness})`);
+    glow.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle=glow;ctx.beginPath();ctx.arc(cx,cy,size*1.1,0,Math.PI*2);ctx.fill();
+
+    for(const layer of layers){
+      for(let p=0;p<layer.petals;p++){
+        const angle=(p/layer.petals)*Math.PI*2;
+        const px=cx+Math.cos(angle)*layer.radius;
+        const py=cy+Math.sin(angle)*layer.radius*0.72;
+        const pGrad=ctx.createRadialGradient(px,py,0,px,py,layer.pSize);
+        const[r,g,b]=layer.color;
+        const bri=brightness;
+        pGrad.addColorStop(0,`rgba(${Math.min(255,r*bri*1.4)},${Math.min(255,g*bri*1.4)},${Math.min(255,b)},0.92)`);
+        pGrad.addColorStop(0.5,`rgba(${Math.min(255,r*bri)},${Math.min(255,g*bri)},${Math.min(255,b*0.98)},0.88)`);
+        pGrad.addColorStop(1,`rgba(${Math.max(0,r*bri*0.4)},${Math.max(0,g*bri*0.4)},${Math.min(255,b*0.7)},0.6)`);
+        ctx.beginPath();
+        ctx.ellipse(px,py,layer.pSize,layer.pSize*0.62,angle,0,Math.PI*2);
+        ctx.fillStyle=pGrad;ctx.fill();
+        // petal highlight
+        ctx.beginPath();
+        ctx.ellipse(px-Math.cos(angle)*layer.pSize*0.15,py-Math.sin(angle)*layer.pSize*0.1,layer.pSize*0.25,layer.pSize*0.18,angle,0,Math.PI*2);
+        ctx.fillStyle=`rgba(150,180,255,0.18)`;ctx.fill();
+      }
     }
-    for (let p = 0; p < 5; p++) {
-      const angle = (p * 72 + i * 30) * Math.PI/180;
-      const rad = size * 0.55;
-      const px = x + Math.cos(angle) * rad;
-      const py = y + Math.sin(angle) * rad * 0.6;
-      ctx.beginPath();
-      ctx.ellipse(px, py, size*0.45, size*0.38, angle, 0, Math.PI*2);
-      ctx.fillStyle = "#60a5fa";
-      ctx.fill();
-    }
-    ctx.beginPath();
-    ctx.arc(x, y, size*0.28, 0, Math.PI*2);
-    ctx.fillStyle = "#1e40af";
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(x-1, y-1, size*0.12, 0, Math.PI*2);
-    ctx.fillStyle = "#93c5fd";
-    ctx.fill();
+    // center
+    const cGrad=ctx.createRadialGradient(cx,cy,0,cx,cy,size*0.18);
+    cGrad.addColorStop(0,"rgba(160,200,255,0.95)");
+    cGrad.addColorStop(0.5,"rgba(60,100,200,0.9)");
+    cGrad.addColorStop(1,"rgba(20,40,140,0.8)");
+    ctx.beginPath();ctx.arc(cx,cy,size*0.18,0,Math.PI*2);
+    ctx.fillStyle=cGrad;ctx.fill();
+    // center sparkle
+    ctx.beginPath();ctx.arc(cx-size*0.04,cy-size*0.05,size*0.05,0,Math.PI*2);
+    ctx.fillStyle="rgba(200,220,255,0.7)";ctx.fill();
+    ctx.restore();
   }
 
-  ctx.shadowBlur = 0;
-  for (let i = 0; i < 60; i++) {
-    ctx.fillStyle = `rgba(255,255,200,${0.2 + Math.random() * 0.6})`;
-    ctx.beginPath();
-    ctx.arc(centerX - 100 + Math.random() * 200, centerY - 60 + Math.random() * 150, 1 + Math.random() * 2.5, 0, Math.PI*2);
-    ctx.fill();
+  // === DRAW STEM FUNCTION ===
+  function drawStem(x1,y1,x2,y2,leafSide=1){
+    ctx.save();
+    ctx.strokeStyle="#2d6a4f";ctx.lineWidth=2.5;ctx.lineCap="round";
+    ctx.beginPath();ctx.moveTo(x1,y1);ctx.quadraticCurveTo(x1+leafSide*15,y1+(y2-y1)*0.5,x2,y2);ctx.stroke();
+    // leaf
+    const lx=(x1+x2)/2+leafSide*18,ly=(y1+y2)/2+5;
+    ctx.fillStyle="#40916c";ctx.beginPath();
+    ctx.ellipse(lx,ly,16,7,Math.PI*0.28*(leafSide>0?1:-1),0,Math.PI*2);ctx.fill();
+    // leaf vein
+    ctx.strokeStyle="rgba(30,90,50,0.5)";ctx.lineWidth=0.8;
+    ctx.beginPath();ctx.moveTo(lx-12,ly);ctx.lineTo(lx+12,ly);ctx.stroke();
+    ctx.restore();
   }
 
-  ctx.font = "bold 16px 'Segoe UI'";
-  ctx.fillStyle = "#FBBF24";
-  ctx.shadowBlur = 4;
-  ctx.fillText("✨ 50 Rare Blue Roses ✨", width/2-100, height-8);
-  ctx.shadowBlur = 0;
-  ctx.font = "italic 12px 'Segoe UI'";
-  ctx.fillStyle = "#93c5fd";
-  ctx.fillText("A full bouquet of love for you", width/2-85, height+5);
+  // === ROSE LAYOUT: 3 ROWS, GARDEN FEEL ===
+  const groundY=H*0.72;
+
+  // Back row (smaller, darker)
+  const backRow=[
+    {x:W*0.12,size:20,br:0.7},{x:W*0.25,size:22,br:0.65},{x:W*0.38,size:19,br:0.68},
+    {x:W*0.52,size:21,br:0.72},{x:W*0.65,size:20,br:0.66},{x:W*0.78,size:22,br:0.7},
+    {x:W*0.90,size:18,br:0.64}
+  ];
+  backRow.forEach(r=>{
+    const ry=groundY-70-Math.random()*20;
+    drawStem(r.x,groundY-4,r.x+(Math.random()-0.5)*12,ry+r.size,-1+Math.random()*2);
+    drawBlueRose(r.x,ry,r.size,r.br,0.7);
+  });
+
+  // Mid row
+  const midRow=[
+    {x:W*0.08,size:24,br:0.8},{x:W*0.22,size:26,br:0.85},{x:W*0.36,size:25,br:0.82},
+    {x:W*0.50,size:27,br:0.88},{x:W*0.64,size:25,br:0.83},{x:W*0.78,size:24,br:0.8},
+    {x:W*0.92,size:23,br:0.78}
+  ];
+  midRow.forEach(r=>{
+    const ry=groundY-40-Math.random()*15;
+    drawStem(r.x,groundY-4,r.x+(Math.random()-0.5)*10,ry+r.size,Math.random()>0.5?1:-1);
+    drawBlueRose(r.x,ry,r.size,r.br,0.88);
+  });
+
+  // Front row (larger, fully lit)
+  const frontRow=[
+    {x:W*0.10,size:29,br:1.0},{x:W*0.26,size:32,br:1.05},{x:W*0.42,size:30,br:1.0},
+    {x:W*0.58,size:33,br:1.08},{x:W*0.74,size:30,br:1.0},{x:W*0.88,size:28,br:0.95}
+  ];
+  frontRow.forEach(r=>{
+    const ry=groundY-8;
+    drawStem(r.x,groundY,r.x+(Math.random()-0.5)*6,ry-r.size*0.5,Math.random()>0.5?1:-1);
+    drawBlueRose(r.x,ry-r.size*0.4,r.size,r.br,1);
+  });
+
+  // Ground mist
+  ctx.save();
+  const mist=ctx.createLinearGradient(0,groundY-12,0,groundY+18);
+  mist.addColorStop(0,"rgba(59,130,246,0)");
+  mist.addColorStop(0.5,"rgba(59,130,246,0.06)");
+  mist.addColorStop(1,"rgba(0,0,0,0)");
+  ctx.fillStyle=mist;ctx.fillRect(0,groundY-12,W,30);
+  ctx.restore();
+
+  // Reflected light on ground under roses
+  frontRow.forEach(r=>{
+    ctx.save();
+    ctx.globalAlpha=0.15;
+    const rg=ctx.createRadialGradient(r.x,groundY+4,0,r.x,groundY+4,28);
+    rg.addColorStop(0,"rgba(59,130,246,0.6)");rg.addColorStop(1,"transparent");
+    ctx.fillStyle=rg;ctx.beginPath();ctx.ellipse(r.x,groundY+4,28,8,0,0,Math.PI*2);ctx.fill();
+    ctx.restore();
+  });
+
+  // Floating petals
+  ctx.save();
+  for(let i=0;i<12;i++){
+    const fpx=40+Math.random()*(W-80),fpy=H*0.15+Math.random()*(H*0.55);
+    const fps=2+Math.random()*5,fpr=Math.random()*Math.PI;
+    ctx.globalAlpha=0.3+Math.random()*0.4;
+    ctx.beginPath();ctx.ellipse(fpx,fpy,fps,fps*0.55,fpr,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${40+Math.floor(Math.random()*60)},${80+Math.floor(Math.random()*80)},255,0.8)`;
+    ctx.fill();
+  }
+  ctx.restore();
+
+  // Rose count label
+  ctx.save();
+  ctx.shadowColor="rgba(59,130,246,0.6)";ctx.shadowBlur=10;
+  ctx.font="bold 15px 'Segoe UI'";ctx.fillStyle="#FBBF24";ctx.textAlign="center";
+  ctx.fillText("✨ A Garden of 50 Blue Roses — Just For You ✨",W/2,H-12);
+  ctx.restore();
 }
 
-// ========== NAVIGATION ==========
-window.goToRoses = function() {
-  document.getElementById("giftReveal").style.display = "none";
-  document.getElementById("roseScene").style.display = "block";
-  document.getElementById("roseText").innerHTML = "💙 A magnificent bouquet of 50 blue roses, beautifully arranged just for you 💙<br><span style='font-size:13px;'>Each rose represents all the love, joy, and beauty you bring into this world. You are as rare and precious as these blooms. 🌹💙✨</span>";
-  setTimeout(() => { drawFullBouquet(); }, 50);
-};
+// ===== PHOTO UPLOAD IN MEMORY CARD =====
+const photoData=[null,null,null,null];
 
-function showMemoryCard() {
-  document.getElementById("roseScene").style.display = "none";
-  document.getElementById("memoryCardScene").style.display = "block";
+function handlePhotoUpload(index,input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    photoData[index]=e.target.result;
+    const slot=document.getElementById(`slot${index}`);
+    slot.classList.add("has-photo");
+    let img=slot.querySelector("img");
+    if(!img){img=document.createElement("img");slot.prepend(img);}
+    img.src=e.target.result;
+    img.style.cssText="width:100%;height:100%;object-fit:cover;border-radius:12px;position:absolute;inset:0;";
+    // also update heart frames with first two photos
+    if(index<2){
+      document.getElementById(`heartImg${index}`).src=e.target.result;
+    }
+  };
+  reader.readAsDataURL(file);
 }
 
-document.getElementById("goToRosesBtn")?.addEventListener("click", () => { window.goToRoses(); });
-document.getElementById("continueToMemoryBtn")?.addEventListener("click", () => { showMemoryCard(); });
+function removePhoto(event,index){
+  event.stopPropagation();
+  photoData[index]=null;
+  const slot=document.getElementById(`slot${index}`);
+  slot.classList.remove("has-photo");
+  const img=slot.querySelector("img.photo-img");if(img)img.remove();
+  if(index<2){
+    const defaults=["https://placehold.co/60x60/FFB6C1/white?text=💙","https://placehold.co/60x60/FFB6C1/white?text=✨"];
+    document.getElementById(`heartImg${index}`).src=defaults[index];
+  }
+}
 
-// ========== INIT ==========
-document.addEventListener("DOMContentLoaded", () => {
+// ===== NAVIGATION =====
+document.getElementById("goToRosesBtn")?.addEventListener("click",()=>{
+  document.getElementById("giftReveal").style.display="none";
+  document.getElementById("roseScene").style.display="block";
+  document.getElementById("roseText").innerHTML="💙 A magical moonlit garden of 50 rare blue roses, blooming just for you tonight 💙<br><span style='font-size:13px;'>Each rose is as rare and precious as you are. You deserve an entire garden. 🌹💙✨</span>";
+  setTimeout(()=>drawFullBouquet(),50);
+});
+document.getElementById("continueToMemoryBtn")?.addEventListener("click",()=>{
+  document.getElementById("roseScene").style.display="none";
+  document.getElementById("memoryCardScene").style.display="block";
+});
+
+// ===== INIT =====
+document.addEventListener("DOMContentLoaded",()=>{
   initLockScreen();
   setupChaseNo();
 });
