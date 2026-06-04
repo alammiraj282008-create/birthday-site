@@ -48,6 +48,7 @@ body {
 #earthNamePage { background:linear-gradient(135deg,rgba(0,20,40,0.92),rgba(0,40,60,0.92)); backdrop-filter:blur(12px); }
 #treasurePage { background:linear-gradient(135deg,rgba(30,20,40,0.92),rgba(50,20,60,0.92)); backdrop-filter:blur(12px); }
 #gamePage { background:linear-gradient(135deg,rgba(20,10,30,0.92),rgba(40,10,50,0.92)); backdrop-filter:blur(12px); }
+#quizPage { background:linear-gradient(135deg,rgba(60,20,40,0.95),rgba(80,30,60,0.95)); backdrop-filter:blur(12px); }
 #letterPage { background:linear-gradient(135deg,rgba(255,235,220,0.96),rgba(255,220,200,0.96)); backdrop-filter:none; border:4px solid #ffb6c1; }
 #wishPark { background:linear-gradient(135deg,rgba(0,50,30,0.95),rgba(0,80,50,0.95)); backdrop-filter:blur(12px); }
 .ls-title { color:#fff; font-size:22px; font-weight:800; margin-bottom:18px; }
@@ -184,6 +185,45 @@ body {
   font-size: 14px;
 }
 
+/* Quiz Styles */
+.quiz-card {
+  background: rgba(0,0,0,0.5);
+  border-radius: 40px;
+  padding: 20px;
+  margin: 15px 0;
+}
+.quiz-question {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #FFD966;
+}
+.quiz-input {
+  width: 90%;
+  padding: 12px;
+  border-radius: 50px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  margin: 10px 0;
+}
+.quiz-feedback {
+  margin: 10px 0;
+  font-size: 14px;
+  min-height: 50px;
+}
+.compliment-badge {
+  background: linear-gradient(135deg, #ff6b6b, #ff2e2e);
+  padding: 10px;
+  border-radius: 30px;
+  margin: 10px 0;
+  animation: pulse 1s infinite;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
 /* Confetti Styles */
 .confetti {
   position: fixed;
@@ -229,7 +269,6 @@ body {
   animation: floatCaption 3s ease-in-out infinite;
   box-shadow: 0 2px 10px rgba(0,0,0,0.2);
   border: 1px solid rgba(255,215,0,0.5);
-  font-family: 'Poppins', sans-serif;
 }
 @keyframes floatCaption {
   0% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
@@ -264,15 +303,40 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   0%,100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
 }
+
+/* Dance Challenge */
+.dance-challenge {
+  background: linear-gradient(135deg, #ff6b6b, #ff2e2e);
+  border-radius: 40px;
+  padding: 25px;
+  margin: 20px 0;
+  text-align: center;
+  animation: shakeWarning 0.5s infinite;
+}
+@keyframes shakeWarning {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+.dance-gif {
+  font-size: 80px;
+  margin: 15px 0;
+  animation: danceMove 1s infinite;
+}
+@keyframes danceMove {
+  0%,100% { transform: rotate(0deg); }
+  25% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+}
 </style>
 </head>
 <body>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 
-<!-- Background Music Element -->
-<audio id="blowMusic" preload="auto">
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+<!-- Secret Voice Message (Revealed after quiz) -->
+<audio id="secretVoiceMessage" preload="auto" style="display:none;">
+  <source src="YOUR_SECRET_VOICE_MESSAGE_URL.mp3" type="audio/mpeg">
 </audio>
 
 <div id="goodGirlPopup" class="good-girl-overlay"><div class="good-girl-card"><div style="font-size:60px;">💖👧</div><p>That's my good girl!<br>See, you are listening to me... how cute 🥺💛</p><button id="closeGoodGirlBtn">✨ Let's continue ✨</button></div></div>
@@ -304,10 +368,9 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 <div class="control-panel"><h3>📏 Layers: <span id="layerCount">2</span></h3><input type="range" id="layerSlider" min="1" max="4" value="2" style="width:100%">
 <h3>🎨 Layer Colors</h3><div id="layerColorGrid" class="color-grid"></div><h3>🍰 Frosting Color</h3><div id="frostingGrid" class="color-grid"></div><h3>🕯️ Candles: <span id="candleCount">3</span></h3><input type="range" id="candleSlider" min="0" max="7" value="3" style="width:100%"></div>
 <button class="action-btn" id="lightCandlesBtn">🎂 Light the Candles! 🔥</button>
-<div id="blowInstruction" style="background:rgba(255,200,0,0.3); padding:10px; border-radius:60px; font-size:14px; margin:12px; color:#FFE484;">🎤 After lighting candles, say "BLOW" to blow them out! 🎤</div>
 <button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);">✅ Done! See Next Surprise ✅</button></div>
 
-<!-- WISH PARK - Appears after blowing out candles -->
+<!-- WISH PARK - Appears after clicking Done -->
 <div id="wishPark" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🌸✨🏮</div></div>
   <h1>🌸 Welcome to Wish Park! 🌸</h1>
@@ -342,12 +405,6 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
     <div id="eyesPlaceholder" style="padding:20px; color:#FFD966; display:none;">✨💙 Eyes video will appear here ✨💙</div>
   </div>
   <div id="flirtyTextZone" style="margin-top:20px; font-size:22px; font-weight:bold; min-height:80px; color:#FFE484; font-style:italic;">💫</div>
-  <div class="voice-card" id="eyesVoiceContainer">
-    <p style="color:#FFD966;">🎧 A secret voice message for your eyes ✨</p>
-    <button id="playEyesVoiceBtn" class="voice-btn voice-btn-play" style="display:none;">🔊 Hear Secret Message</button>
-    <audio id="eyesAudioPlayer" controls style="width:100%; margin-top:8px; display:none;"></audio>
-    <p id="eyesVoiceStatus" style="font-size:12px;"></p>
-  </div>
 </div>
 <button id="continueToEarthBtn" class="action-btn" style="background:#3b82f6;">🌍 Continue to Your Name on Earth 🌍</button></div>
 
@@ -373,7 +430,7 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <button id="continueToTreasureBtn" class="action-btn">💎 View My Treasure 💎</button>
 </div>
 
-<!-- MY TREASURE PAGE (Swipeable - Supports Images & Videos) -->
+<!-- MY TREASURE PAGE -->
 <div id="treasurePage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">💎📸💕</div></div>
   <h2>💎 My Treasure 💎</h2>
@@ -381,16 +438,17 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   
   <div class="treasure-container">
     <div class="treasure-slider" id="treasureSlider">
-      <!-- Treasure items will be dynamically inserted here -->
+      <div class="treasure-item-wrapper" data-index="0"><img src="https://picsum.photos/id/20/300/300" alt="Treasure 1"></div>
+      <div class="treasure-item-wrapper" data-index="1"><img src="https://picsum.photos/id/25/300/300" alt="Treasure 2"></div>
+      <div class="treasure-item-wrapper" data-index="2"><video src="https://files.catbox.moe/142fsl.mp4" playsinline style="width:280px; height:280px; object-fit:cover;"></video><div class="play-icon-overlay">▶️</div></div>
+      <div class="treasure-item-wrapper" data-index="3"><img src="https://picsum.photos/id/26/300/300" alt="Treasure 4"></div>
+      <div class="treasure-item-wrapper" data-index="4"><img src="https://picsum.photos/id/27/300/300" alt="Treasure 5"></div>
     </div>
     <div class="treasure-nav">
       <button id="treasurePrevBtn">◀ Previous</button>
       <button id="treasureNextBtn">Next ▶</button>
     </div>
-    <div class="treasure-caption" id="treasureCaption">
-      <span id="treasureMediaCaption">💎 Treasure</span>
-      <div id="treasureUniqueComment" style="font-size:16px; margin-top:8px; color:#FFB347; font-style:italic;">✨✨</div>
-    </div>
+    <div class="treasure-caption" id="treasureCaption">💎 My Precious Memories 💎</div>
   </div>
   
   <button id="continueToGameFromTreasureBtn" class="action-btn" style="background:#8b5cf6;">🎮 Continue to Game 🎮</button>
@@ -406,9 +464,65 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 <button id="resetGameBtn" style="margin-top:16px; padding:10px 24px; background:#f97316; border:none; border-radius:40px; font-weight:bold; display:none; cursor:pointer;">Try Again 🔄</button>
 <button id="gameContinueBtn" class="action-btn" style="background:#00c853; display:none;">✨ Win Prize ✨</button></div>
 
-<!-- LETTER PAGE WITH TWO IMAGE SLOTS + FLOATING CAPTIONS -->
+<!-- QUIZ PAGE - Before Letter -->
+<div id="quizPage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">🤔💭</div></div>
+  <h2>💖 How Well Do You Know Me? 💖</h2>
+  <p style="color:#FFD966; margin-bottom:20px;">Answer these 3 questions to unlock a secret voice message! 🎤✨</p>
+  
+  <div class="quiz-card">
+    <div class="quiz-question">📝 Question 1: What's my favorite food?</div>
+    <input type="text" id="q1Answer" class="quiz-input" placeholder="Type your answer...">
+    <div id="q1Feedback" class="quiz-feedback"></div>
+  </div>
+  
+  <div class="quiz-card">
+    <div class="quiz-question">💕 Question 2: What is that ONE thing I love the most in this world?</div>
+    <input type="text" id="q2Answer" class="quiz-input" placeholder="Type your answer...">
+    <div id="q2Feedback" class="quiz-feedback"></div>
+  </div>
+  
+  <div class="quiz-card">
+    <div class="quiz-question">🎵 Question 3: What song did I sing for you for the first time?</div>
+    <input type="text" id="q3Answer" class="quiz-input" placeholder="Type your answer...">
+    <div id="q3Feedback" class="quiz-feedback"></div>
+  </div>
+  
+  <button id="submitQuizBtn" class="action-btn" style="background:#00c853; margin-top:10px;">✨ Submit Answers ✨</button>
+  <div id="quizResult" style="margin-top:20px; min-height:100px;"></div>
+</div>
+
+<!-- DANCE PUNISHMENT PAGE (Shown if any answer wrong) -->
+<div id="dancePage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">💃🕺</div></div>
+  <h1>💃 PUNISHMENT TIME! 🕺</h1>
+  
+  <div class="dance-challenge">
+    <div class="dance-gif">💃🕺💃🕺</div>
+    <p style="font-size:24px; font-weight:bold; color:white;">YOU HAVE TO DANCE FOR ME!</p>
+    <p style="font-size:16px; color:#FFD966;">You got a question wrong... now it's time to show me your best moves! 💃</p>
+    <div style="font-size:50px; margin:15px 0;">🎵 🎶 🎵</div>
+    <button id="danceCompleteBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:10px;">✅ I've Done My Dance! ✅</button>
+  </div>
+  
+  <div class="wish-card" style="background:rgba(255,255,255,0.1);">
+    <p>💃 Don't worry, you can try the quiz again after dancing! 💃</p>
+    <p style="font-size:12px;">(I'm watching you dance... 👀✨)</p>
+  </div>
+</div>
+
+<!-- LETTER PAGE (Secret Voice Message appears here if quiz passed) -->
 <div id="letterPage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">💌</div></div>
+  
+  <!-- Secret Voice Message Section (Only shows if quiz passed) -->
+  <div id="secretVoiceSection" style="display:none; background:linear-gradient(135deg,#ff9a9e,#fad0c4); border-radius:40px; padding:20px; margin-bottom:20px; text-align:center; border:3px solid gold;">
+    <div style="font-size:50px;">🎤✨💖</div>
+    <h3 style="color:#d85c7a;">🌟 A Secret Voice Message Just for You! 🌟</h3>
+    <p style="color:#8b3a5e;">You proved how well you know me... now here's something special from my heart 💕</p>
+    <button id="playSecretVoiceBtn" style="background:#ff6b6b; border:none; padding:12px 25px; border-radius:50px; font-size:18px; font-weight:bold; margin:15px 0; color:white; cursor:pointer;">🔊 PLAY SECRET VOICE MESSAGE 🔊</button>
+    <div id="voiceMessageStatus" style="font-size:12px; color:#6b3a4e;"></div>
+  </div>
   
   <!-- IMAGE SLOT 1 with floating captions -->
   <div class="letter-image-slot" id="letterImageSlot1" style="position: relative;">
@@ -433,12 +547,6 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
     <p style="margin-top:30px; text-align:right;">— Forever yours</p>
   </div>
   
-  <div class="voice-card" id="letterVoiceContainer" style="background:rgba(0,0,0,0.1); margin-top:20px;">
-    <p style="color:#d85c7a; font-weight:bold;">🎤 A personal voice note from me to you 🎤</p>
-    <button id="playLetterVoiceBtn" class="voice-btn voice-btn-play" style="display:none; background:#3b82f6;">🔊 Play Secret Voice Message</button>
-    <audio id="letterAudioPlayer" controls style="width:100%; margin-top:8px; display:none;"></audio>
-    <p id="letterVoiceStatus" style="font-size:12px;"></p>
-  </div>
   <button onclick="location.reload()" style="margin-top:20px; background:#ff8fb1; padding:13px 34px; border:none; border-radius:60px; font-weight:bold; font-size:18px; cursor:pointer;">✨ Finish ✨</button>
 </div>
 
@@ -474,129 +582,13 @@ document.body.addEventListener('click', function(e) {
 });
 
 // ============================================
-// BLOW FUNCTION WITH WISH PARK
-// ============================================
-let blowMusicPlaying = false;
-let blowMusicTimeout = null;
-let candlesBlownOut = false;
-
-function playBlowMusic() {
-  const music = document.getElementById('blowMusic');
-  if(music && !blowMusicPlaying) {
-    music.currentTime = 0;
-    music.volume = 0.5;
-    music.play();
-    blowMusicPlaying = true;
-    if(blowMusicTimeout) clearTimeout(blowMusicTimeout);
-    blowMusicTimeout = setTimeout(() => {
-      music.pause();
-      music.currentTime = 0;
-      blowMusicPlaying = false;
-    }, 10000);
-  }
-}
-
-function showWishPark() {
-  document.getElementById('cakeBuilder').style.display = 'none';
-  document.getElementById('wishPark').style.display = 'block';
-  burstConfetti();
-}
-
-function setupBlowToExtinguish() {
-  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = 'en-US';
-    
-    recognition.onresult = function(event) {
-      const text = event.results[0][0].transcript.toLowerCase();
-      if ((text.includes('blow') || text.includes('blow out') || text.includes('poof')) && candlesLit && !candlesBlownOut) {
-        candlesLit = false;
-        candlesBlownOut = true;
-        renderCake();
-        playBlowMusic();
-        const notice = document.getElementById('blowInstruction');
-        if(notice) notice.innerHTML = '💨 You blew out the candles! 🎶 Music playing for 10 seconds 🎶💨';
-        setTimeout(() => {
-          showWishPark();
-        }, 2000);
-      }
-    };
-    
-    recognition.onerror = function() {
-      const notice = document.getElementById('blowInstruction');
-      if(notice) notice.innerHTML = '🎤 Microphone not allowed. Tap candles to blow them out! 🎤';
-    };
-    
-    document.getElementById('lightCandlesBtn')?.addEventListener('click', () => {
-      candlesBlownOut = false;
-      setTimeout(() => {
-        try {
-          recognition.start();
-          const notice = document.getElementById('blowInstruction');
-          if(notice) notice.innerHTML = '🎤 Listening... Say "BLOW" to blow out candles! 🎤';
-          setTimeout(() => {
-            if(notice && notice.innerText.includes('Listening')) {
-              notice.innerHTML = '🎤 Say "BLOW" into your microphone to blow out candles! 🎤';
-            }
-          }, 5000);
-        } catch(e) {}
-      }, 500);
-    });
-  } else {
-    const notice = document.getElementById('blowInstruction');
-    if(notice) notice.innerHTML = '💨 Tap on candles to blow them out! 💨';
-    document.getElementById('cakeCanvas')?.addEventListener('click', (e) => {
-      if(candlesLit && !candlesBlownOut && e.target.closest('.candle-3d')) {
-        candlesLit = false;
-        candlesBlownOut = true;
-        renderCake();
-        playBlowMusic();
-        setTimeout(() => {
-          showWishPark();
-        }, 2000);
-      }
-    });
-  }
-}
-
-// ============================================
-// LOCK SCREEN
-// ============================================
-let lsCode = ""; const CORRECT_CODE = "19102024";
-function lsUpdateDots(){ for(let i=0;i<8;i++){ const d=document.getElementById("d"+i); if(i<lsCode.length)d.classList.add("filled"); else d.classList.remove("filled"); } }
-function lsPressDigit(d){ if(lsCode.length>=8) return; lsCode+=d; lsUpdateDots(); if(lsCode.length===8){ if(lsCode===CORRECT_CODE){ 
-  document.getElementById("lsSuccess").classList.add("show"); 
-  burstConfetti();
-  setTimeout(()=>{ 
-    document.getElementById("lockScreen").style.display="none"; 
-    document.getElementById("birthdayLayer").style.display="block"; 
-    resetYesNoChase(); 
-  },800); 
-} else { 
-  document.getElementById("lsError").classList.add("show"); 
-  setTimeout(()=>{ lsCode=""; lsUpdateDots(); document.getElementById("lsError").classList.remove("show"); },1000); 
-} } }
-document.querySelectorAll("#keypadGrid [data-n]").forEach(btn=>btn.addEventListener("click",()=>lsPressDigit(btn.dataset.n)));
-document.getElementById("lsDelBtn")?.addEventListener("click",()=>{ lsCode=lsCode.slice(0,-1); lsUpdateDots(); });
-document.getElementById("lsClrBtn")?.addEventListener("click",()=>{ lsCode=""; lsUpdateDots(); });
-
-// ============================================
-// CHASE NO BUTTON
-// ============================================
-let noClickCount=0; const teaseMessages=["😂 You can't escape the cake!","🤭 No means YES!","👵 Too old to say no!","🍰 Click YES already!","✨ my little kitten!","🎂 This button is tired!"];
-function resetYesNoChase(){ noClickCount=0; const yesBtn=document.getElementById("yesCakeBtn"),noBtn=document.getElementById("noCakeBtn"); if(yesBtn){yesBtn.style.transform="scale(1)";yesBtn.style.fontSize="20px";} if(noBtn){noBtn.style.transform="scale(1)";noBtn.style.opacity="1";noBtn.style.pointerEvents="auto";noBtn.style.left="0px";noBtn.style.top="0px";} document.getElementById("teasyMessage").innerHTML=""; }
-function showGoodGirlMessage(){ const popup=document.getElementById("goodGirlPopup"); popup.style.visibility="visible"; popup.style.opacity="1"; document.getElementById("closeGoodGirlBtn").onclick=()=>{ popup.style.visibility="hidden"; popup.style.opacity="0"; document.getElementById("birthdayLayer").style.display="none"; document.getElementById("cakeBuilder").style.display="block"; initCakeBuilder(); }; }
-function setupChaseNo(){ const noBtn=document.getElementById("noCakeBtn"),yesBtn=document.getElementById("yesCakeBtn"),teaserDiv=document.getElementById("teasyMessage"); if(!noBtn)return; noBtn.addEventListener("click",()=>{ noClickCount++; teaserDiv.innerText=teaseMessages[noClickCount%teaseMessages.length]; let scaleNo=Math.max(0.4,1-noClickCount*0.09); noBtn.style.transform=`scale(${scaleNo})`; if(noClickCount>=5)noBtn.style.opacity="0.5"; if(noClickCount>=8)noBtn.style.pointerEvents="none"; let newScale=1+(noClickCount*0.12); yesBtn.style.transform=`scale(${newScale})`; yesBtn.style.fontSize=`${Math.min(44,20+(noClickCount*2))}px`; const rX=(Math.random()-0.5)*40,rY=(Math.random()-0.5)*25; noBtn.style.position="relative"; noBtn.style.left=`${rX}px`; noBtn.style.top=`${rY}px`; }); yesBtn.addEventListener("click",showGoodGirlMessage); }
-
-// ============================================
-// CAKE RENDER
+// CAKE BUILDER - NO BLOW, JUST DONE BUTTON
 // ============================================
 let layerColors=[], frostingColor="#fff5e0", candleNum=3, candlesLit=false;
+
 const layerColorOptions=[{hex:"#e74c3c"},{hex:"#f1c40f"},{hex:"#2ecc71"},{hex:"#3498db"},{hex:"#9b59b6"},{hex:"#e67e22"}];
 const frostingOptions=[{hex:"#fff5e0"},{hex:"#ffc0cb"},{hex:"#f0e68c"},{hex:"#a0d6ff"}];
+
 function renderCake(){
   const canvas=document.getElementById("cakeCanvas"); if(!canvas) return; canvas.innerHTML="";
   const layerCount=parseInt(document.getElementById("layerSlider").value);
@@ -610,10 +602,26 @@ function renderCake(){
   let stand=document.createElement("div"); stand.className="cake-stand"; mainDiv.appendChild(stand);
   canvas.appendChild(mainDiv);
 }
+
 function updateLayers(){ let count=parseInt(document.getElementById("layerSlider").value); document.getElementById("layerCount").innerText=count; while(layerColors.length<count)layerColors.push(layerColorOptions[layerColors.length%layerColorOptions.length].hex); while(layerColors.length>count)layerColors.pop(); renderColorPickers(); renderCake(); }
 function updateCandles(){ candleNum=parseInt(document.getElementById("candleSlider").value); document.getElementById("candleCount").innerText=candleNum; renderCake(); }
 function renderColorPickers(){ let layerGrid=document.getElementById("layerColorGrid"); if(!layerGrid)return; let layerCt=parseInt(document.getElementById("layerSlider").value); layerGrid.innerHTML=""; for(let i=0;i<layerCt;i++){ let subGrid=document.createElement("div"); subGrid.style.cssText="display:flex;gap:8px;margin:6px 0;justify-content:center;"; layerColorOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(layerColors[i]===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ layerColors[i]=col.hex; renderCake(); document.querySelectorAll("#layerColorGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); subGrid.appendChild(sw); }); layerGrid.appendChild(subGrid); } let frostingGrid=document.getElementById("frostingGrid"); frostingGrid.innerHTML=""; frostingOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(frostingColor===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ frostingColor=col.hex; renderCake(); document.querySelectorAll("#frostingGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); frostingGrid.appendChild(sw); }); }
-function initCakeBuilder(){ layerColors=["#e74c3c","#f1c40f"]; frostingColor="#fff5e0"; candleNum=3; candlesLit=false; candlesBlownOut=false; document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; updateLayers(); document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; candlesBlownOut=false; renderCake(); }; document.getElementById("finishCakeBtn").onclick=()=>{ if(candlesBlownOut){ document.getElementById("cakeBuilder").style.display="none"; document.getElementById("sparkleEyesPage").style.display="block"; } else { alert("🎂 Please blow out the candles first! Say 'BLOW' or tap the candles! 🎂"); } }; setupBlowToExtinguish(); }
+
+function initCakeBuilder(){ 
+  layerColors=["#e74c3c","#f1c40f"]; 
+  frostingColor="#fff5e0"; 
+  candleNum=3; 
+  candlesLit=false; 
+  document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; 
+  document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; 
+  updateLayers(); 
+  document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); }; 
+  document.getElementById("finishCakeBtn").onclick=()=>{ 
+    document.getElementById("cakeBuilder").style.display="none"; 
+    document.getElementById("wishPark").style.display="block"; 
+    burstConfetti();
+  }; 
+}
 
 // ============================================
 // WISH PARK FUNCTION
@@ -641,194 +649,218 @@ document.getElementById('continueFromWishParkBtn')?.addEventListener('click', ()
 });
 
 // ============================================
-// MY TREASURE GALLERY WITH IMAGES, VIDEOS & UNIQUE COMMENTS
+// QUIZ FUNCTION (KNOW ME GAME)
 // ============================================
+let quizPassed = false;
 
-const treasureItems = [
-  {
-    type: "image",
-    url: "https://picsum.photos/id/20/300/300",  // Replace with your actual image URL
-    comment: "🌸 The first time I saw my ulti balti... my heart knew it was you! 🌸",
-    emoji: "💕"
-  },
-  {
-    type: "image",
-    url: "https://picsum.photos/id/25/300/300",  // Replace with your actual image URL
-    comment: "👑 Damn princess! Go easy on your servant... my heart can't handle this much beauty! 👑",
-    emoji: "✨"
-  },
-  {
-    type: "video",
-    url: "https://files.catbox.moe/142fsl.mp4",  // Replace with your actual video URL
-    comment: "😍 Damn! This smile always gets me... every single time! 😍",
-    emoji: "💖"
-  },
-  {
-    type: "image",
-    url: "https://picsum.photos/id/26/300/300",  // Replace with your actual image URL
-    comment: "🌟 You light up my world like nobody else. Keep shining, my star! 🌟",
-    emoji: "⭐"
-  },
-  {
-    type: "image",
-    url: "https://picsum.photos/id/27/300/300",  // Replace with your actual image URL
-    comment: "💫 Every moment with you is a treasure I'll never let go of! 💫",
-    emoji: "💎"
+function showCompliment(elementId, compliment) {
+  const element = document.getElementById(elementId);
+  element.innerHTML = `<div class="compliment-badge">✨ ${compliment} ✨</div>`;
+}
+
+function checkAnswers() {
+  const q1 = document.getElementById('q1Answer').value.trim().toLowerCase();
+  const q2 = document.getElementById('q2Answer').value.trim().toLowerCase();
+  const q3 = document.getElementById('q3Answer').value.trim().toLowerCase();
+  
+  // Correct answers
+  const correct1 = ['biryani', 'biriyani', 'biryani rice', 'chicken biryani'];
+  const correct2 = ['nimisha', 'nimisha', 'you', 'her', 'nimisha '];
+  const correct3 = ['jeene laga hoon', 'jeene laga hu', 'jeene laga', 'jine laga hoon'];
+  
+  let score = 0;
+  
+  // Check Q1
+  if(correct1.includes(q1)) {
+    score++;
+    showCompliment('q1Feedback', '🎉 Correct! You know my taste buds so well! 😋❤️');
+  } else {
+    document.getElementById('q1Feedback').innerHTML = '❌ Oops! The answer is "Biryani" - my absolute favorite! 🍚';
   }
-];
+  
+  // Check Q2
+  if(correct2.includes(q2)) {
+    score++;
+    showCompliment('q2Feedback', '💖 Awww... YOU are the one I love the most in this whole world! 🥺💕');
+  } else {
+    document.getElementById('q2Feedback').innerHTML = '❌ Wrong! The answer is... drum roll... YOU! (Nimisha) You are my everything! 💕';
+  }
+  
+  // Check Q3
+  if(correct3.includes(q3)) {
+    score++;
+    showCompliment('q3Feedback', '🎵 OMG! You remembered! "Jeene Laga Hoon" - the song I sang just for you! 🎤💖');
+  } else {
+    document.getElementById('q3Feedback').innerHTML = '❌ It was "Jeene Laga Hoon" - the song from my heart to yours! 🎵';
+  }
+  
+  const resultDiv = document.getElementById('quizResult');
+  
+  if(score === 3) {
+    quizPassed = true;
+    resultDiv.innerHTML = `
+      <div style="background:linear-gradient(135deg,#00c853,#009624); border-radius:30px; padding:20px; text-align:center;">
+        <div style="font-size:50px;">🎉🏆💖</div>
+        <h3 style="color:white;">PERFECT SCORE! You know me so well! 🥺💕</h3>
+        <p style="color:#FFD966;">You've unlocked a SECRET VOICE MESSAGE from my heart! ✨</p>
+      </div>
+    `;
+    burstConfetti();
+    
+    // Save that quiz is passed
+    localStorage.setItem('quizPassed', 'true');
+    
+    // Auto proceed to letter page
+    setTimeout(() => {
+      document.getElementById('quizPage').style.display = 'none';
+      document.getElementById('letterPage').style.display = 'block';
+      showSecretVoiceSection();
+    }, 2000);
+  } else {
+    quizPassed = false;
+    resultDiv.innerHTML = `
+      <div style="background:linear-gradient(135deg,#ff6b6b,#dc2626); border-radius:30px; padding:20px; text-align:center;">
+        <div style="font-size:50px;">💃🕺</div>
+        <h3 style="color:white;">You got ${score}/3 correct!</h3>
+        <p style="color:#FFD966;">Time for your PUNISHMENT... You have to DANCE for me! 💃</p>
+      </div>
+    `;
+    
+    // Show dance page
+    setTimeout(() => {
+      document.getElementById('quizPage').style.display = 'none';
+      document.getElementById('dancePage').style.display = 'block';
+    }, 1500);
+  }
+}
 
+function showSecretVoiceSection() {
+  const secretSection = document.getElementById('secretVoiceSection');
+  if(secretSection) {
+    secretSection.style.display = 'block';
+  }
+}
+
+// Secret Voice Message Player
+const secretVoice = document.getElementById('secretVoiceMessage');
+document.getElementById('playSecretVoiceBtn')?.addEventListener('click', () => {
+  const statusDiv = document.getElementById('voiceMessageStatus');
+  if(secretVoice && secretVoice.src && secretVoice.src !== 'about:blank' && secretVoice.src !== '') {
+    secretVoice.play();
+    statusDiv.innerHTML = '🎤 Playing secret voice message... 🎤💖';
+    setTimeout(() => {
+      statusDiv.innerHTML = '✨ Did you hear it? That was straight from my heart! ✨';
+    }, 5000);
+  } else {
+    statusDiv.innerHTML = '💕 Voice message coming soon! For now, just know I love you! 💕';
+  }
+});
+
+// Dance Page - Try Again
+document.getElementById('danceCompleteBtn')?.addEventListener('click', () => {
+  document.getElementById('dancePage').style.display = 'none';
+  document.getElementById('quizPage').style.display = 'block';
+  // Clear previous answers
+  document.getElementById('q1Answer').value = '';
+  document.getElementById('q2Answer').value = '';
+  document.getElementById('q3Answer').value = '';
+  document.getElementById('q1Feedback').innerHTML = '';
+  document.getElementById('q2Feedback').innerHTML = '';
+  document.getElementById('q3Feedback').innerHTML = '';
+  document.getElementById('quizResult').innerHTML = '';
+});
+
+document.getElementById('submitQuizBtn')?.addEventListener('click', checkAnswers);
+
+// ============================================
+// TREASURE GALLERY FUNCTIONS
+// ============================================
 let currentTreasureIndex = 0;
-
-function buildTreasure() {
-  const slider = document.getElementById('treasureSlider');
-  if(!slider) return;
-  
-  slider.innerHTML = '';
-  
-  treasureItems.forEach((item, index) => {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'treasure-item-wrapper';
-    wrapper.setAttribute('data-index', index);
-    
-    if(item.type === 'video') {
-      const video = document.createElement('video');
-      video.src = item.url;
-      video.playsInline = true;
-      video.preload = 'metadata';
-      video.setAttribute('playsinline', '');
-      
-      const playOverlay = document.createElement('div');
-      playOverlay.className = 'play-icon-overlay';
-      playOverlay.innerHTML = '▶️';
-      
-      video.addEventListener('click', () => {
-        if(video.paused) {
-          video.play();
-          playOverlay.style.opacity = '0';
-        } else {
-          video.pause();
-          playOverlay.style.opacity = '0.8';
-        }
-      });
-      
-      video.addEventListener('play', () => {
-        playOverlay.style.opacity = '0';
-        document.querySelectorAll('.treasure-item-wrapper video').forEach(otherVideo => {
-          if(otherVideo !== video && !otherVideo.paused) {
-            otherVideo.pause();
-          }
-        });
-      });
-      
-      video.addEventListener('pause', () => {
-        playOverlay.style.opacity = '0.8';
-      });
-      
-      wrapper.appendChild(video);
-      wrapper.appendChild(playOverlay);
-    } else {
-      const img = document.createElement('img');
-      img.src = item.url;
-      img.alt = `Treasure ${index + 1}`;
-      wrapper.appendChild(img);
-    }
-    
-    slider.appendChild(wrapper);
-  });
-}
-
-function updateTreasureCaption() {
-  const item = treasureItems[currentTreasureIndex];
-  if(!item) return;
-  
-  const mediaCaption = document.getElementById('treasureMediaCaption');
-  const uniqueCommentDiv = document.getElementById('treasureUniqueComment');
-  
-  if(mediaCaption) {
-    const mediaType = item.type === 'video' ? '🎬 VIDEO' : '📸 PHOTO';
-    mediaCaption.innerHTML = `${mediaType} ${currentTreasureIndex + 1} of ${treasureItems.length} ${item.emoji || '💎'}`;
-  }
-  
-  if(uniqueCommentDiv) {
-    uniqueCommentDiv.innerHTML = `💭 "${item.comment}" 💭`;
-  }
-}
+const treasureItemsCount = 5;
 
 function scrollToTreasureItem(index) {
   const slider = document.getElementById('treasureSlider');
   if(!slider) return;
-  
   const wrappers = slider.querySelectorAll('.treasure-item-wrapper');
   if(index >= 0 && index < wrappers.length) {
     wrappers[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     currentTreasureIndex = index;
-    updateTreasureCaption();
+    document.getElementById('treasureCaption').innerHTML = `💎 Item ${currentTreasureIndex + 1} of ${treasureItemsCount} 💎`;
     
-    document.querySelectorAll('.treasure-item-wrapper video').forEach(video => {
-      if(!video.paused) video.pause();
-    });
+    // Pause videos when scrolling
+    const videos = slider.querySelectorAll('video');
+    videos.forEach(v => { if(!v.paused) v.pause(); });
   }
 }
 
 function initTreasure() {
-  buildTreasure();
-  
-  const slider = document.getElementById('treasureSlider');
   const prevBtn = document.getElementById('treasurePrevBtn');
   const nextBtn = document.getElementById('treasureNextBtn');
   
   if(prevBtn) prevBtn.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex - 1));
   if(nextBtn) nextBtn.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex + 1));
   
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting && entry.intersectionRatio > 0.5) {
-        const index = parseInt(entry.target.getAttribute('data-index'));
-        if(!isNaN(index) && index !== currentTreasureIndex) {
-          currentTreasureIndex = index;
-          updateTreasureCaption();
-          
-          document.querySelectorAll('.treasure-item-wrapper video').forEach(video => {
-            if(!video.paused) video.pause();
-          });
-        }
+  // Add video play/pause functionality
+  const videos = document.querySelectorAll('.treasure-item-wrapper video');
+  videos.forEach(video => {
+    const wrapper = video.closest('.treasure-item-wrapper');
+    const overlay = wrapper?.querySelector('.play-icon-overlay');
+    video.addEventListener('click', () => {
+      if(video.paused) {
+        video.play();
+        if(overlay) overlay.style.opacity = '0';
+      } else {
+        video.pause();
+        if(overlay) overlay.style.opacity = '0.8';
       }
     });
-  }, { threshold: 0.5 });
+    video.addEventListener('play', () => {
+      videos.forEach(v => { if(v !== video && !v.paused) v.pause(); });
+      if(overlay) overlay.style.opacity = '0';
+    });
+    video.addEventListener('pause', () => {
+      if(overlay) overlay.style.opacity = '0.8';
+    });
+  });
   
-  const wrappers = slider.querySelectorAll('.treasure-item-wrapper');
-  wrappers.forEach(wrapper => observer.observe(wrapper));
-  
-  updateTreasureCaption();
+  document.getElementById('treasureCaption').innerHTML = `💎 Item 1 of ${treasureItemsCount} 💎`;
 }
 
 // ============================================
-// CONFIGURATION
+// LOCK SCREEN & CHASE FUNCTIONS
+// ============================================
+let lsCode = ""; const CORRECT_CODE = "19102024";
+function lsUpdateDots(){ for(let i=0;i<8;i++){ const d=document.getElementById("d"+i); if(i<lsCode.length)d.classList.add("filled"); else d.classList.remove("filled"); } }
+function lsPressDigit(d){ if(lsCode.length>=8) return; lsCode+=d; lsUpdateDots(); if(lsCode.length===8){ if(lsCode===CORRECT_CODE){ 
+  document.getElementById("lsSuccess").classList.add("show"); 
+  burstConfetti();
+  setTimeout(()=>{ 
+    document.getElementById("lockScreen").style.display="none"; 
+    document.getElementById("birthdayLayer").style.display="block"; 
+    resetYesNoChase(); 
+  },800); 
+} else { 
+  document.getElementById("lsError").classList.add("show"); 
+  setTimeout(()=>{ lsCode=""; lsUpdateDots(); document.getElementById("lsError").classList.remove("show"); },1000); 
+} } }
+document.querySelectorAll("#keypadGrid [data-n]").forEach(btn=>btn.addEventListener("click",()=>lsPressDigit(btn.dataset.n)));
+document.getElementById("lsDelBtn")?.addEventListener("click",()=>{ lsCode=lsCode.slice(0,-1); lsUpdateDots(); });
+document.getElementById("lsClrBtn")?.addEventListener("click",()=>{ lsCode=""; lsUpdateDots(); });
+
+let noClickCount=0; const teaseMessages=["😂 You can't escape the cake!","🤭 No means YES!","👵 Too old to say no!","🍰 Click YES already!","✨ my little kitten!","🎂 This button is tired!"];
+function resetYesNoChase(){ noClickCount=0; const yesBtn=document.getElementById("yesCakeBtn"),noBtn=document.getElementById("noCakeBtn"); if(yesBtn){yesBtn.style.transform="scale(1)";yesBtn.style.fontSize="20px";} if(noBtn){noBtn.style.transform="scale(1)";noBtn.style.opacity="1";noBtn.style.pointerEvents="auto";noBtn.style.left="0px";noBtn.style.top="0px";} document.getElementById("teasyMessage").innerHTML=""; }
+function showGoodGirlMessage(){ const popup=document.getElementById("goodGirlPopup"); popup.style.visibility="visible"; popup.style.opacity="1"; document.getElementById("closeGoodGirlBtn").onclick=()=>{ popup.style.visibility="hidden"; popup.style.opacity="0"; document.getElementById("birthdayLayer").style.display="none"; document.getElementById("cakeBuilder").style.display="block"; initCakeBuilder(); }; }
+function setupChaseNo(){ const noBtn=document.getElementById("noCakeBtn"),yesBtn=document.getElementById("yesCakeBtn"),teaserDiv=document.getElementById("teasyMessage"); if(!noBtn)return; noBtn.addEventListener("click",()=>{ noClickCount++; teaserDiv.innerText=teaseMessages[noClickCount%teaseMessages.length]; let scaleNo=Math.max(0.4,1-noClickCount*0.09); noBtn.style.transform=`scale(${scaleNo})`; if(noClickCount>=5)noBtn.style.opacity="0.5"; if(noClickCount>=8)noBtn.style.pointerEvents="none"; let newScale=1+(noClickCount*0.12); yesBtn.style.transform=`scale(${newScale})`; yesBtn.style.fontSize=`${Math.min(44,20+(noClickCount*2))}px`; const rX=(Math.random()-0.5)*40,rY=(Math.random()-0.5)*25; noBtn.style.position="relative"; noBtn.style.left=`${rX}px`; noBtn.style.top=`${rY}px`; }); yesBtn.addEventListener("click",showGoodGirlMessage); }
+
+// ============================================
+// CONFIGURATION & NAVIGATION
 // ============================================
 const YOUR_EYES_VIDEO_URL = "https://files.catbox.moe/142fsl.mp4";
-const YOUR_VOICE_EYES_URL = "";
-const YOUR_VOICE_LETTER_URL = "";
-
 const eyesVideo = document.getElementById("eyesVideo");
 if(YOUR_EYES_VIDEO_URL && eyesVideo){
   eyesVideo.querySelector("source").src = YOUR_EYES_VIDEO_URL;
   eyesVideo.load();
 }
-
-function setupVoice(playBtnId, audioPlayerId, statusId, audioUrl){
-  const playBtn=document.getElementById(playBtnId);
-  const audioPlayer=document.getElementById(audioPlayerId);
-  const status=document.getElementById(statusId);
-  if(audioUrl && playBtn){
-    audioPlayer.src=audioUrl;
-    audioPlayer.style.display="block";
-    playBtn.style.display="inline-block";
-    playBtn.onclick=()=>{ audioPlayer.play(); };
-    if(status) status.innerText="✨ A secret voice message is waiting ✨";
-  }
-}
-setupVoice("playEyesVoiceBtn","eyesAudioPlayer","eyesVoiceStatus", YOUR_VOICE_EYES_URL);
-setupVoice("playLetterVoiceBtn","letterAudioPlayer","letterVoiceStatus", YOUR_VOICE_LETTER_URL);
 
 // FLIRTY TEXT
 const flirtyTexts=["✨ Ohh look my reflection in those eyes ✨","💙 Those eyes hold galaxies...","🌟 Brighter than a thousand stars","💖 I get lost in them every time","🌙 Moonlight is jealous of your gaze"]; let txtIndex=0;
@@ -839,15 +871,109 @@ document.getElementById("continueToEarthBtn")?.addEventListener("click",()=>{ do
 document.getElementById("continueToTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("earthNamePage").style.display="none"; document.getElementById("treasurePage").style.display="block"; initTreasure(); });
 document.getElementById("continueToGameFromTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("treasurePage").style.display="none"; document.getElementById("gamePage").style.display="block"; initGame(); });
 
+// After Game - Go to QUIZ instead of direct letter
+document.getElementById("gameContinueBtn")?.addEventListener("click",()=>{ 
+  document.getElementById("gamePage").style.display="none"; 
+  document.getElementById("quizPage").style.display="block"; 
+});
+
 // GAME
-let gameActive=false, score=0, timeLeft=30, gameInterval, objects=[]; const gameCanvas=document.getElementById("gameCanvas"), gameCtx=gameCanvas.getContext("2d"); gameCanvas.width=500; gameCanvas.height=400;
-function initGame(){ score=0; timeLeft=30; objects=[]; gameActive=true; document.getElementById("gameScore").innerText="❤️ Score: 0"; document.getElementById("gameTimer").innerText="Time: 30s"; document.getElementById("gameResult").innerHTML=""; document.getElementById("resetGameBtn").style.display="none"; document.getElementById("gameContinueBtn").style.display="none"; if(gameInterval)clearInterval(gameInterval); gameInterval=setInterval(()=>{ if(gameActive&&timeLeft>0){ timeLeft--; document.getElementById("gameTimer").innerText=`Time: ${timeLeft}s`; if(timeLeft<=0){ endGame(false); } } },1000); for(let i=0;i<3;i++) spawnObject(); requestAnimationFrame(drawGame); }
-function spawnObject(){ if(!gameActive)return; let type=Math.random()<0.7?"heart":"bomb"; let x=Math.random()*(gameCanvas.width-40)+20; objects.push({x:x, y:0, type:type, radius:16, speed:1.2+Math.random()*1.5}); }
-function drawGame(){ if(!gameCtx)return; gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); for(let o of objects){ if(o.type==="heart"){ gameCtx.fillStyle="#ff4d6d"; gameCtx.beginPath(); gameCtx.moveTo(o.x, o.y-8); gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); gameCtx.fill(); gameCtx.fillStyle="#fff"; gameCtx.fillText("❤️",o.x-8,o.y-2); } else { gameCtx.fillStyle="#dc2626"; gameCtx.beginPath(); gameCtx.arc(o.x,o.y,12,0,Math.PI*2); gameCtx.fill(); gameCtx.fillStyle="black"; gameCtx.fillText("💣",o.x-8,o.y+4); } o.y+=o.speed; } for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); if(gameActive && objects.length<7) spawnObject(); if(gameActive) requestAnimationFrame(drawGame); }
-gameCanvas.addEventListener("click",(e)=>{ if(!gameActive)return; let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; for(let i=objects.length-1;i>=0;i--){ let o=objects[i]; if(Math.hypot(mouseX-o.x, mouseY-o.y)<o.radius+6){ if(o.type==="heart"){ score++; document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; objects.splice(i,1); } else { endGame(true); return; } break; } } });
-function endGame(bombHit){ gameActive=false; clearInterval(gameInterval); if(bombHit){ document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b; font-weight:bold;'>💥 BOOM! You caught a bomb. Game Over 💥</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } else { if(score>=15){ document.getElementById("gameResult").innerHTML="<p style='color:#FFD966; font-weight:bold;'>🎉 u won my little kitty! 🎉<br>As reward u got a one premium token... with this u can make me do one thing whatever u want i will do. 💖✨</p>"; document.getElementById("gameContinueBtn").style.display="inline-block"; } else { document.getElementById("gameResult").innerHTML="<p style='color:#ffaa66;'>⏰ Time's up! Score: "+score+" / 15 needed. Try again kitten 💔</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } } }
+let gameActive=false, score=0, timeLeft=30, gameInterval, objects=[]; 
+const gameCanvas=document.getElementById("gameCanvas"), gameCtx=gameCanvas.getContext("2d"); 
+gameCanvas.width=500; gameCanvas.height=400;
+
+function initGame(){ 
+  score=0; timeLeft=30; objects=[]; gameActive=true; 
+  document.getElementById("gameScore").innerText="❤️ Score: 0"; 
+  document.getElementById("gameTimer").innerText="Time: 30s"; 
+  document.getElementById("gameResult").innerHTML=""; 
+  document.getElementById("resetGameBtn").style.display="none"; 
+  document.getElementById("gameContinueBtn").style.display="none"; 
+  if(gameInterval)clearInterval(gameInterval); 
+  gameInterval=setInterval(()=>{ 
+    if(gameActive&&timeLeft>0){ 
+      timeLeft--; 
+      document.getElementById("gameTimer").innerText=`Time: ${timeLeft}s`; 
+      if(timeLeft<=0){ endGame(false); } 
+    } 
+  },1000); 
+  for(let i=0;i<3;i++) spawnObject(); 
+  requestAnimationFrame(drawGame); 
+}
+
+function spawnObject(){ 
+  if(!gameActive)return; 
+  let type=Math.random()<0.7?"heart":"bomb"; 
+  let x=Math.random()*(gameCanvas.width-40)+20; 
+  objects.push({x:x, y:0, type:type, radius:16, speed:1.2+Math.random()*1.5}); 
+}
+
+function drawGame(){ 
+  if(!gameCtx)return; 
+  gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); 
+  for(let o of objects){ 
+    if(o.type==="heart"){ 
+      gameCtx.fillStyle="#ff4d6d"; 
+      gameCtx.beginPath(); 
+      gameCtx.moveTo(o.x, o.y-8); 
+      gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); 
+      gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); 
+      gameCtx.fill(); 
+      gameCtx.fillStyle="#fff"; 
+      gameCtx.fillText("❤️",o.x-8,o.y-2); 
+    } else { 
+      gameCtx.fillStyle="#dc2626"; 
+      gameCtx.beginPath(); 
+      gameCtx.arc(o.x,o.y,12,0,Math.PI*2); 
+      gameCtx.fill(); 
+      gameCtx.fillStyle="black"; 
+      gameCtx.fillText("💣",o.x-8,o.y+4); 
+    } 
+    o.y+=o.speed; 
+  } 
+  for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); 
+  if(gameActive && objects.length<7) spawnObject(); 
+  if(gameActive) requestAnimationFrame(drawGame); 
+}
+
+gameCanvas.addEventListener("click",(e)=>{ 
+  if(!gameActive)return; 
+  let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; 
+  let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; 
+  for(let i=objects.length-1;i>=0;i--){ 
+    let o=objects[i]; 
+    if(Math.hypot(mouseX-o.x, mouseY-o.y)<o.radius+6){ 
+      if(o.type==="heart"){ 
+        score++; 
+        document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; 
+        objects.splice(i,1); 
+      } else { 
+        endGame(true); 
+        return; 
+      } 
+      break; 
+    } 
+  } 
+});
+
+function endGame(bombHit){ 
+  gameActive=false; 
+  clearInterval(gameInterval); 
+  if(bombHit){ 
+    document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b; font-weight:bold;'>💥 BOOM! You caught a bomb. Game Over 💥</p>"; 
+    document.getElementById("resetGameBtn").style.display="inline-block"; 
+  } else { 
+    if(score>=15){ 
+      document.getElementById("gameResult").innerHTML="<p style='color:#FFD966; font-weight:bold;'>🎉 u won my little kitty! 🎉<br>As reward u got a one premium token... with this u can make me do one thing whatever u want i will do. 💖✨</p>"; 
+      document.getElementById("gameContinueBtn").style.display="inline-block"; 
+    } else { 
+      document.getElementById("gameResult").innerHTML="<p style='color:#ffaa66;'>⏰ Time's up! Score: "+score+" / 15 needed. Try again kitten 💔</p>"; 
+      document.getElementById("resetGameBtn").style.display="inline-block"; 
+    } 
+  } 
+}
+
 document.getElementById("resetGameBtn")?.addEventListener("click",initGame);
-document.getElementById("gameContinueBtn")?.addEventListener("click",()=>{ document.getElementById("gamePage").style.display="none"; document.getElementById("letterPage").style.display="block"; });
 setupChaseNo();
 </script>
 </body>
