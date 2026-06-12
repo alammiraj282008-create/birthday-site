@@ -328,6 +328,12 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   25% { transform: rotate(10deg); }
   75% { transform: rotate(-10deg); }
 }
+/* Lyric Glow Animation */
+@keyframes lyricGlow {
+  0% { text-shadow: 0 0 2px gold; opacity: 0.9; transform: scale(1); }
+  50% { text-shadow: 0 0 20px #ffaa33, 0 0 8px orange; opacity: 1; transform: scale(1.02); }
+  100% { text-shadow: 0 0 2px gold; opacity: 0.9; transform: scale(1); }
+}
 </style>
 </head>
 <body>
@@ -393,20 +399,49 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <button id="continueFromWishParkBtn" class="action-btn" style="background:#00c853;">✨ Continue Your Journey ✨</button>
 </div>
 
-<!-- SPARKLE EYES PAGE with VIDEO -->
-<div id="sparkleEyesPage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">✨👁️✨</div></div>
-<h2>wanna see something that sparkles more than stars?</h2>
-<div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:16px; margin:12px 0;">
-  <div id="eyesVideoSlot" style="border:3px solid gold; border-radius:28px; padding:12px; text-align:center; background:#00000066;">
-    <video id="eyesVideo" controls playsinline style="width:100%; max-height:300px; border-radius:20px;">
-      <source src="https://files.catbox.moe/142fsl.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div id="eyesPlaceholder" style="padding:20px; color:#FFD966; display:none;">✨💙 Eyes video will appear here ✨💙</div>
+<!-- SPARKLE EYES PAGE with VIDEO + Maula Mere Maula Audio -->
+<div id="sparkleEyesPage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">✨👁️🎵✨</div></div>
+  <h2>wanna see something that sparkles more than stars?</h2>
+  
+  <!-- Maula Mere Maula Audio (Ankhein Teri Itni Haseen) -->
+  <audio id="maulaSong" preload="auto" style="display:none;">
+    <source src="https://files.catbox.moe/fahxg5.mp3" type="audio/mpeg">
+  </audio>
+  
+  <div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:16px; margin:12px 0;">
+    <div id="eyesVideoSlot" style="border:3px solid gold; border-radius:28px; padding:12px; text-align:center; background:#00000066;">
+      <video id="eyesVideo" controls playsinline style="width:100%; max-height:300px; border-radius:20px;">
+        <source src="https://files.catbox.moe/142fsl.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    
+    <!-- Beautiful Lyric Display for "Ankhein Teri Itni Haseen" -->
+    <div style="background:linear-gradient(135deg,rgba(255,105,180,0.4),rgba(255,20,147,0.4)); border-radius:40px; padding:20px; margin-top:15px; border:2px solid gold;">
+      <p style="color:#FFD966; font-size:13px; letter-spacing:3px;">✦ FOR YOUR EYES ONLY ✦</p>
+      
+      <!-- The Special Line -->
+      <div id="lyricDisplay">
+        <p style="color:#FFE484; font-size:26px; font-weight:bold; margin:12px 0; font-family:'Georgia',serif;">
+          "Ankhein teri itni haseen"
+        </p>
+        <p style="color:#ffb347; font-size:20px; font-style:italic; margin-bottom:8px;">
+          ✨ inke aashiq ban gaye hum ✨
+        </p>
+      </div>
+      
+      <!-- Music Control Button -->
+      <button id="playMaulaBtn" style="background:#ff6b6b; border:none; padding:10px 30px; border-radius:50px; color:white; font-weight:bold; margin-top:12px; cursor:pointer; font-size:16px; transition:0.2s;">
+        🎵 Hear "Ankhein Teri..." 🎵
+      </button>
+      <p style="color:#aaa; font-size:11px; margin-top:10px;">🎧 Click to listen... just for you 💕</p>
+    </div>
+    
+    <div id="flirtyTextZone" style="margin-top:20px; font-size:22px; font-weight:bold; min-height:80px; color:#FFE484; font-style:italic;">💫</div>
   </div>
-  <div id="flirtyTextZone" style="margin-top:20px; font-size:22px; font-weight:bold; min-height:80px; color:#FFE484; font-style:italic;">💫</div>
+  <button id="continueToEarthBtn" class="action-btn" style="background:#3b82f6;">🌍 Continue to Your Name on Earth 🌍</button>
 </div>
-<button id="continueToEarthBtn" class="action-btn" style="background:#3b82f6;">🌍 Continue to Your Name on Earth 🌍</button></div>
 
 <!-- NASA EARTH PAGE -->
 <div id="earthNamePage" class="container" style="display:none;">
@@ -580,6 +615,41 @@ document.body.addEventListener('click', function(e) {
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 2000);
 });
+
+// ============================================
+// MAULA MERE MAULA AUDIO PLAYER (Ankhein Teri Itni Haseen)
+// ============================================
+const maulaAudio = document.getElementById('maulaSong');
+const playMaulaBtn = document.getElementById('playMaulaBtn');
+const lyricDisplayDiv = document.getElementById('lyricDisplay');
+
+if(playMaulaBtn && maulaAudio) {
+  playMaulaBtn.addEventListener('click', () => {
+    // Reset and play
+    maulaAudio.currentTime = 0;
+    maulaAudio.play().catch(e => console.log('Audio play requires user interaction first:', e));
+    
+    // Add glow animation to lyric
+    if(lyricDisplayDiv) {
+      lyricDisplayDiv.style.animation = 'lyricGlow 1s infinite';
+    }
+    
+    // Change button style temporarily
+    playMaulaBtn.innerHTML = '🎵 Playing... 💕';
+    playMaulaBtn.style.background = '#00c853';
+    setTimeout(() => {
+      playMaulaBtn.innerHTML = '🎵 Hear "Ankhein Teri..." 🎵';
+      playMaulaBtn.style.background = '#ff6b6b';
+    }, 8000);
+    
+    // Stop glow animation after audio ends (approx 10 sec)
+    setTimeout(() => {
+      if(lyricDisplayDiv) {
+        lyricDisplayDiv.style.animation = '';
+      }
+    }, 10000);
+  });
+}
 
 // ============================================
 // CAKE BUILDER - NO BLOW, JUST DONE BUTTON
