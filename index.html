@@ -328,11 +328,33 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   25% { transform: rotate(10deg); }
   75% { transform: rotate(-10deg); }
 }
-/* Lyric Glow Animation */
-@keyframes lyricGlow {
-  0% { text-shadow: 0 0 2px gold; opacity: 0.9; transform: scale(1); }
-  50% { text-shadow: 0 0 20px #ffaa33, 0 0 8px orange; opacity: 1; transform: scale(1.02); }
-  100% { text-shadow: 0 0 2px gold; opacity: 0.9; transform: scale(1); }
+/* Floating lyrics animation */
+@keyframes floatLyric {
+  0% { transform: translateY(30px); opacity: 0; filter: blur(8px); }
+  20% { transform: translateY(0); opacity: 1; filter: blur(0); }
+  80% { transform: translateY(0); opacity: 1; filter: blur(0); }
+  100% { transform: translateY(-30px); opacity: 0; filter: blur(8px); }
+}
+.lyric-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #FFE484;
+  text-shadow: 0 0 10px #ff6b6b, 0 0 5px gold;
+  pointer-events: none;
+  z-index: 100;
+  white-space: nowrap;
+  animation: floatLyric 3.8s ease-out forwards;
+  font-family: 'Georgia', cursive;
+  background: linear-gradient(135deg, #FFD966, #ffb347);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -348,13 +370,26 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 <div id="goodGirlPopup" class="good-girl-overlay"><div class="good-girl-card"><div style="font-size:60px;">💖👧</div><p>That's my good girl!<br>See, you are listening to me... how cute 🥺💛</p><button id="closeGoodGirlBtn">✨ Let's continue ✨</button></div></div>
 
 <!-- LOCK SCREEN -->
-<div id="lockScreen"><div class="ls-title">Enter passcode</div>
-<div class="photo-frame"><img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" alt="Nimisha"><div style="position:absolute;top:-10px;right:-10px;font-size:32px;">🎀</div></div>
-<div class="dots-row" id="dotsRow"><div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div><div class="dot-gap"></div><div class="dot" id="d4"></div><div class="dot" id="d5"></div><div class="dot" id="d6"></div><div class="dot" id="d7"></div></div>
-<div class="ls-error" id="lsError">Wrong passcode! Hint: DDMMYYYY</div>
-<div class="keypad-grid" id="keypadGrid"><button class="key" data-n="1">1</button><button class="key" data-n="2">2</button><button class="key" data-n="3">3</button><button class="key" data-n="4">4</button><button class="key" data-n="5">5</button><button class="key" data-n="6">6</button><button class="key" data-n="7">7</button><button class="key" data-n="8">8</button><button class="key" data-n="9">9</button><button class="key" id="lsClrBtn">✕</button><button class="key" data-n="0">0</button><button class="key" id="lsDelBtn">⌫</button></div>
-<div class="ls-hint">💡 Hint: the day we first talked (DDMMYYYY)</div>
-<div class="ls-success" id="lsSuccess"><div style="font-size:64px">🎂</div><div class="stext">Welcome! ✨</div></div></div>
+<div id="lockScreen">
+  <div class="ls-title">Enter passcode</div>
+  <div class="photo-frame">
+    <img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" alt="Nimisha">
+    <div style="position:absolute;top:-10px;right:-10px;font-size:32px;">🎀</div>
+  </div>
+  <div class="dots-row" id="dotsRow">
+    <div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div><div class="dot-gap"></div>
+    <div class="dot" id="d4"></div><div class="dot" id="d5"></div><div class="dot" id="d6"></div><div class="dot" id="d7"></div>
+  </div>
+  <div class="ls-error" id="lsError">Wrong passcode! Hint: DDMMYYYY</div>
+  <div class="keypad-grid" id="keypadGrid">
+    <button class="key" data-n="1">1</button><button class="key" data-n="2">2</button><button class="key" data-n="3">3</button>
+    <button class="key" data-n="4">4</button><button class="key" data-n="5">5</button><button class="key" data-n="6">6</button>
+    <button class="key" data-n="7">7</button><button class="key" data-n="8">8</button><button class="key" data-n="9">9</button>
+    <button class="key" id="lsClrBtn">✕</button><button class="key" data-n="0">0</button><button class="key" id="lsDelBtn">⌫</button>
+  </div>
+  <div class="ls-hint">💡 Hint: the day we first talked (DDMMYYYY)</div>
+  <div class="ls-success" id="lsSuccess"><div style="font-size:64px">🎂</div><div class="stext">Welcome! ✨</div></div>
+</div>
 
 <!-- BIRTHDAY LAYER -->
 <div id="birthdayLayer" class="container" style="display:none;">
@@ -363,25 +398,37 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <p style="font-size:20px;font-weight:bold;color:#FFB347;">You're 19 now... TOO OLD! 👵</p>
   <p>You should be in an old age home, you knoww... 🙄</p>
   <p style="background:rgba(255,215,0,0.2);border-radius:40px;padding:8px;">But anyways... you will always be my little kitten — gorgeous and cute! 💖🐱</p>
-  
-  <div class="button-group" id="chaseZone"><button class="yes-btn" id="yesCakeBtn">YES 🎂</button><button class="no-btn" id="noCakeBtn">NO 😤</button></div>
+  <div class="button-group" id="chaseZone">
+    <button class="yes-btn" id="yesCakeBtn">YES 🎂</button>
+    <button class="no-btn" id="noCakeBtn">NO 😤</button>
+  </div>
   <div id="teasyMessage" style="color:#ffaa66;min-height:48px;"></div>
 </div>
 
 <!-- CAKE BUILDER -->
-<div id="cakeBuilder" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">🍰✨</div></div><h1>🎨 Decorate Your Dream Cake 🎨</h1>
-<div class="cake-preview"><div id="cakeCanvas" style="position:relative;"></div></div>
-<div class="control-panel"><h3>📏 Layers: <span id="layerCount">2</span></h3><input type="range" id="layerSlider" min="1" max="4" value="2" style="width:100%">
-<h3>🎨 Layer Colors</h3><div id="layerColorGrid" class="color-grid"></div><h3>🍰 Frosting Color</h3><div id="frostingGrid" class="color-grid"></div><h3>🕯️ Candles: <span id="candleCount">3</span></h3><input type="range" id="candleSlider" min="0" max="7" value="3" style="width:100%"></div>
-<button class="action-btn" id="lightCandlesBtn">🎂 Light the Candles! 🔥</button>
-<button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);">✅ Done! See Next Surprise ✅</button></div>
+<div id="cakeBuilder" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">🍰✨</div></div>
+  <h1>🎨 Decorate Your Dream Cake 🎨</h1>
+  <div class="cake-preview"><div id="cakeCanvas" style="position:relative;"></div></div>
+  <div class="control-panel">
+    <h3>📏 Layers: <span id="layerCount">2</span></h3>
+    <input type="range" id="layerSlider" min="1" max="4" value="2" style="width:100%">
+    <h3>🎨 Layer Colors</h3>
+    <div id="layerColorGrid" class="color-grid"></div>
+    <h3>🍰 Frosting Color</h3>
+    <div id="frostingGrid" class="color-grid"></div>
+    <h3>🕯️ Candles: <span id="candleCount">3</span></h3>
+    <input type="range" id="candleSlider" min="0" max="7" value="3" style="width:100%">
+  </div>
+  <button class="action-btn" id="lightCandlesBtn">🎂 Light the Candles! 🔥</button>
+  <button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);">✅ Done! See Next Surprise ✅</button>
+</div>
 
-<!-- WISH PARK - Appears after clicking Done -->
+<!-- WISH PARK -->
 <div id="wishPark" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🌸✨🏮</div></div>
   <h1>🌸 Welcome to Wish Park! 🌸</h1>
   <div class="wish-tree">🎋 Wishing Tree 🎋</div>
-  
   <div class="wish-card">
     <div class="wish-lantern">🏮✨🏮</div>
     <p style="font-size:22px; font-weight:bold; color:#FFD966;">Make a Birthday Wish! 💫</p>
@@ -389,55 +436,37 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
     <button id="saveWishParkBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:10px;">🌟 Send Wish to Universe 🌟</button>
     <div id="wishConfirmation" style="margin-top:15px; font-size:14px; color:#88ffaa; display:none;">✨ Your wish has been sent to the stars! ✨</div>
   </div>
-  
   <div class="wish-card" style="background:rgba(255,180,200,0.2);">
     <p>💫 Did you know? 💫</p>
     <p style="font-size:14px;">Every time you make a wish, a star twinkles brighter just for you!</p>
     <div style="font-size:30px; margin-top:10px;">⭐️⭐️⭐️</div>
   </div>
-  
   <button id="continueFromWishParkBtn" class="action-btn" style="background:#00c853;">✨ Continue Your Journey ✨</button>
 </div>
 
-<!-- SPARKLE EYES PAGE with VIDEO + Maula Mere Maula Audio -->
+<!-- SPARKLE EYES PAGE with Floating Lyrics and Song -->
 <div id="sparkleEyesPage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">✨👁️🎵✨</div></div>
   <h2>wanna see something that sparkles more than stars?</h2>
-  
-  <!-- Maula Mere Maula Audio (Ankhein Teri Itni Haseen) -->
-  <audio id="maulaSong" preload="auto" style="display:none;">
-    <source src="https://files.catbox.moe/fahxg5.mp3" type="audio/mpeg">
-  </audio>
-  
   <div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:16px; margin:12px 0;">
     <div id="eyesVideoSlot" style="border:3px solid gold; border-radius:28px; padding:12px; text-align:center; background:#00000066;">
       <video id="eyesVideo" controls playsinline style="width:100%; max-height:300px; border-radius:20px;">
         <source src="https://files.catbox.moe/142fsl.mp4" type="video/mp4">
-        Your browser does not support the video tag.
       </video>
+      <div id="youtubePlayer" style="position: relative; width: 100%;">
+        <iframe id="songFrame" width="100%" height="65" src="https://www.youtube.com/embed/pFxzF6lUx_0?autoplay=0&start=79&end=102&enablejsapi=1" frameborder="0" style="border-radius:20px; border:1px solid gold; display:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      </div>
     </div>
-    
-    <!-- Beautiful Lyric Display for "Ankhein Teri Itni Haseen" -->
+    <div id="floatingLyricsArea" style="position: relative; min-height: 140px; margin-top: 15px;"></div>
     <div style="background:linear-gradient(135deg,rgba(255,105,180,0.4),rgba(255,20,147,0.4)); border-radius:40px; padding:20px; margin-top:15px; border:2px solid gold;">
       <p style="color:#FFD966; font-size:13px; letter-spacing:3px;">✦ FOR YOUR EYES ONLY ✦</p>
-      
-      <!-- The Special Line -->
       <div id="lyricDisplay">
-        <p style="color:#FFE484; font-size:26px; font-weight:bold; margin:12px 0; font-family:'Georgia',serif;">
-          "Ankhein teri itni haseen"
-        </p>
-        <p style="color:#ffb347; font-size:20px; font-style:italic; margin-bottom:8px;">
-          ✨ inke aashiq ban gaye hum ✨
-        </p>
+        <p style="color:#FFE484; font-size:26px; font-weight:bold; margin:12px 0; font-family:'Georgia',serif;">"Ankhein teri itni haseen"</p>
+        <p style="color:#ffb347; font-size:20px; font-style:italic; margin-bottom:8px;">✨ inke aashiq ban gaye hum ✨</p>
       </div>
-      
-      <!-- Music Control Button -->
-      <button id="playMaulaBtn" style="background:#ff6b6b; border:none; padding:10px 30px; border-radius:50px; color:white; font-weight:bold; margin-top:12px; cursor:pointer; font-size:16px; transition:0.2s;">
-        🎵 Hear "Ankhein Teri..." 🎵
-      </button>
-      <p style="color:#aaa; font-size:11px; margin-top:10px;">🎧 Click to listen... just for you 💕</p>
+      <button id="playMaulaBtn" style="background:#ff6b6b; border:none; padding:12px 35px; border-radius:50px; color:white; font-weight:bold; margin-top:12px; cursor:pointer; font-size:18px; transition:0.2s;">🎵 Play "Ankhein Teri..." 🎵</button>
+      <div id="audioStatus" style="color:#FFD966; font-size:12px; margin-top:10px;">💕 Click to hear the magic words (1:19 - 1:42) 💕</div>
     </div>
-    
     <div id="flirtyTextZone" style="margin-top:20px; font-size:22px; font-weight:bold; min-height:80px; color:#FFE484; font-style:italic;">💫</div>
   </div>
   <button id="continueToEarthBtn" class="action-btn" style="background:#3b82f6;">🌍 Continue to Your Name on Earth 🌍</button>
@@ -452,15 +481,10 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
       <img src="https://imgbs.com/uploads/image-png-38bee0d6.png" alt="NASA Earth view with Nimisha's name" style="width:100%; max-height:320px; object-fit:contain; border-radius:20px;">
     </div>
     <div class="coords-text" style="margin-top:15px;">
-      📍 São Miguel do Araguaia, Brazil<br>
-      12°56'44.3" S 50°29'42.0" W
+      📍 São Miguel do Araguaia, Brazil<br>12°56'44.3" S 50°29'42.0" W
     </div>
-    <p style="color:#FFD966; font-size:20px; font-weight:bold; margin:20px 0 10px 0;">
-      ✨ see... even this earth has ur name written on it ✨
-    </p>
-    <p style="color:#bbddff; font-size:14px;">
-      NASA's Landsat satellite captured this view. Your name exists on this planet, just like you exist in my heart. 🌍💙
-    </p>
+    <p style="color:#FFD966; font-size:20px; font-weight:bold; margin:20px 0 10px 0;">✨ see... even this earth has ur name written on it ✨</p>
+    <p style="color:#bbddff; font-size:14px;">NASA's Landsat satellite captured this view. Your name exists on this planet, just like you exist in my heart. 🌍💙</p>
   </div>
   <button id="continueToTreasureBtn" class="action-btn">💎 View My Treasure 💎</button>
 </div>
@@ -470,7 +494,6 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <div class="sticker-container"><div class="sticker">💎📸💕</div></div>
   <h2>💎 My Treasure 💎</h2>
   <p style="color:#FFD966; margin-bottom:10px;">Swipe left/right to see my most precious memories ➡️</p>
-  
   <div class="treasure-container">
     <div class="treasure-slider" id="treasureSlider">
       <div class="treasure-item-wrapper" data-index="0"><img src="https://picsum.photos/id/20/300/300" alt="Treasure 1"></div>
@@ -479,78 +502,56 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
       <div class="treasure-item-wrapper" data-index="3"><img src="https://picsum.photos/id/26/300/300" alt="Treasure 4"></div>
       <div class="treasure-item-wrapper" data-index="4"><img src="https://picsum.photos/id/27/300/300" alt="Treasure 5"></div>
     </div>
-    <div class="treasure-nav">
-      <button id="treasurePrevBtn">◀ Previous</button>
-      <button id="treasureNextBtn">Next ▶</button>
-    </div>
+    <div class="treasure-nav"><button id="treasurePrevBtn">◀ Previous</button><button id="treasureNextBtn">Next ▶</button></div>
     <div class="treasure-caption" id="treasureCaption">💎 My Precious Memories 💎</div>
   </div>
-  
   <button id="continueToGameFromTreasureBtn" class="action-btn" style="background:#8b5cf6;">🎮 Continue to Game 🎮</button>
 </div>
 
 <!-- HEART CATCHER GAME -->
-<div id="gamePage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">💖💣</div></div>
-<h2>Catch my heart! ❤️ (Avoid Bombs 💣)</h2>
-<p id="gameTimer" style="font-size:24px; font-weight:bold; color:#FFD966;">Time: 30s</p>
-<p id="gameScore" style="font-size:20px; color:#FFB347;">❤️ Score: 0</p>
-<canvas id="gameCanvas" class="game-canvas" width="500" height="400"></canvas>
-<div id="gameResult"></div>
-<button id="resetGameBtn" style="margin-top:16px; padding:10px 24px; background:#f97316; border:none; border-radius:40px; font-weight:bold; display:none; cursor:pointer;">Try Again 🔄</button>
-<button id="gameContinueBtn" class="action-btn" style="background:#00c853; display:none;">✨ Win Prize ✨</button></div>
+<div id="gamePage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">💖💣</div></div>
+  <h2>Catch my heart! ❤️ (Avoid Bombs 💣)</h2>
+  <p id="gameTimer" style="font-size:24px; font-weight:bold; color:#FFD966;">Time: 30s</p>
+  <p id="gameScore" style="font-size:20px; color:#FFB347;">❤️ Score: 0</p>
+  <canvas id="gameCanvas" class="game-canvas" width="500" height="400"></canvas>
+  <div id="gameResult"></div>
+  <button id="resetGameBtn" style="margin-top:16px; padding:10px 24px; background:#f97316; border:none; border-radius:40px; font-weight:bold; display:none; cursor:pointer;">Try Again 🔄</button>
+  <button id="gameContinueBtn" class="action-btn" style="background:#00c853; display:none;">✨ Win Prize ✨</button>
+</div>
 
-<!-- QUIZ PAGE - Before Letter -->
+<!-- QUIZ PAGE -->
 <div id="quizPage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">🤔💭</div></div>
   <h2>💖 How Well Do You Know Me? 💖</h2>
   <p style="color:#FFD966; margin-bottom:20px;">Answer these 3 questions to unlock a secret voice message! 🎤✨</p>
-  
-  <div class="quiz-card">
-    <div class="quiz-question">📝 Question 1: What's my favorite food?</div>
-    <input type="text" id="q1Answer" class="quiz-input" placeholder="Type your answer...">
-    <div id="q1Feedback" class="quiz-feedback"></div>
-  </div>
-  
-  <div class="quiz-card">
-    <div class="quiz-question">💕 Question 2: What is that ONE thing I love the most in this world?</div>
-    <input type="text" id="q2Answer" class="quiz-input" placeholder="Type your answer...">
-    <div id="q2Feedback" class="quiz-feedback"></div>
-  </div>
-  
-  <div class="quiz-card">
-    <div class="quiz-question">🎵 Question 3: What song did I sing for you for the first time?</div>
-    <input type="text" id="q3Answer" class="quiz-input" placeholder="Type your answer...">
-    <div id="q3Feedback" class="quiz-feedback"></div>
-  </div>
-  
+  <div class="quiz-card"><div class="quiz-question">📝 Question 1: What's my favorite food?</div><input type="text" id="q1Answer" class="quiz-input" placeholder="Type your answer..."><div id="q1Feedback" class="quiz-feedback"></div></div>
+  <div class="quiz-card"><div class="quiz-question">💕 Question 2: What is that ONE thing I love the most in this world?</div><input type="text" id="q2Answer" class="quiz-input" placeholder="Type your answer..."><div id="q2Feedback" class="quiz-feedback"></div></div>
+  <div class="quiz-card"><div class="quiz-question">🎵 Question 3: What song did I sing for you for the first time?</div><input type="text" id="q3Answer" class="quiz-input" placeholder="Type your answer..."><div id="q3Feedback" class="quiz-feedback"></div></div>
   <button id="submitQuizBtn" class="action-btn" style="background:#00c853; margin-top:10px;">✨ Submit Answers ✨</button>
   <div id="quizResult" style="margin-top:20px; min-height:100px;"></div>
 </div>
 
-<!-- DANCE PUNISHMENT PAGE (Shown if any answer wrong) -->
+<!-- DANCE PUNISHMENT PAGE - Two Options: Send Video or Skip -->
 <div id="dancePage" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">💃🕺</div></div>
+  <div class="sticker-container"><div class="sticker">💃📹✨</div></div>
   <h1>💃 PUNISHMENT TIME! 🕺</h1>
-  
   <div class="dance-challenge">
     <div class="dance-gif">💃🕺💃🕺</div>
-    <p style="font-size:24px; font-weight:bold; color:white;">YOU HAVE TO DANCE FOR ME!</p>
-    <p style="font-size:16px; color:#FFD966;">You got a question wrong... now it's time to show me your best moves! 💃</p>
-    <div style="font-size:50px; margin:15px 0;">🎵 🎶 🎵</div>
-    <button id="danceCompleteBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:10px;">✅ I've Done My Dance! ✅</button>
+    <p style="font-size:24px; font-weight:bold; color:white;">YOU GOT A QUESTION WRONG! 💀</p>
+    <p style="font-size:18px; color:#FFD966; margin-top:10px;">Now choose your fate... 👇</p>
+    <div style="display:flex; flex-direction:column; gap:15px; margin:25px 0;">
+      <button id="sendVideoBtn" style="background:linear-gradient(135deg,#00c853,#009624); border:none; padding:15px 25px; border-radius:60px; font-weight:bold; font-size:18px; cursor:pointer; color:white;">📹 I WILL SEND A DANCE VIDEO 💃</button>
+      <button id="skipDanceBtn" style="background:linear-gradient(135deg,#ff6b6b,#dc2626); border:none; padding:15px 25px; border-radius:60px; font-weight:bold; font-size:18px; cursor:pointer; color:white;">😤 I DON'T CARE, JUST PROCEED</button>
+    </div>
+    <div style="background:rgba(0,0,0,0.5); border-radius:30px; padding:12px; margin-top:10px;"><p style="color:#FFE484; font-size:13px;">💡 Tip: Sending a video will make me super happy! But no pressure... 😊</p></div>
   </div>
-  
-  <div class="wish-card" style="background:rgba(255,255,255,0.1);">
-    <p>💃 Don't worry, you can try the quiz again after dancing! 💃</p>
-    <p style="font-size:12px;">(I'm watching you dance... 👀✨)</p>
-  </div>
+  <div class="wish-card" style="background:rgba(255,255,255,0.1); margin-top:15px;"><p>💃 Either way, you can continue your journey! 💃</p><p style="font-size:12px;">(But I'd love to see your dance moves if you're feeling brave! 👀✨)</p></div>
 </div>
 
-<!-- LETTER PAGE (Secret Voice Message appears here if quiz passed) -->
+<!-- LETTER PAGE -->
 <div id="letterPage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">💌</div></div>
-  
-  <!-- Secret Voice Message Section (Only shows if quiz passed) -->
   <div id="secretVoiceSection" style="display:none; background:linear-gradient(135deg,#ff9a9e,#fad0c4); border-radius:40px; padding:20px; margin-bottom:20px; text-align:center; border:3px solid gold;">
     <div style="font-size:50px;">🎤✨💖</div>
     <h3 style="color:#d85c7a;">🌟 A Secret Voice Message Just for You! 🌟</h3>
@@ -558,37 +559,29 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
     <button id="playSecretVoiceBtn" style="background:#ff6b6b; border:none; padding:12px 25px; border-radius:50px; font-size:18px; font-weight:bold; margin:15px 0; color:white; cursor:pointer;">🔊 PLAY SECRET VOICE MESSAGE 🔊</button>
     <div id="voiceMessageStatus" style="font-size:12px; color:#6b3a4e;"></div>
   </div>
-  
-  <!-- IMAGE SLOT 1 with floating captions -->
   <div class="letter-image-slot" id="letterImageSlot1" style="position: relative;">
     <img id="letterImg1" src="https://imgbs.com/uploads/image-png-da8bd625.png" style="display:block; width:100%; border-radius:20px;">
     <div class="floating-caption" style="top: 10px; left: 10px;">🌸 Cuteness Meter 📈 OVERLOADED! 🌸</div>
     <div class="floating-caption" style="bottom: 15px; right: 15px; animation-delay: 0.5s;">💖 What a STYLE! 💖</div>
     <div class="floating-caption" style="top: 40%; left: -5px; animation-delay: 1s;">😍 How cute is that smile?! 😍</div>
   </div>
-  
-  <!-- IMAGE SLOT 2 with floating captions -->
   <div class="letter-image-slot" id="letterImageSlot2" style="position: relative;">
     <img id="letterImg2" src="https://imgbs.com/uploads/image-png-123f342f.png" style="display:block; width:100%; border-radius:20px;">
     <div class="floating-caption" style="top: 15px; right: 10px; animation-delay: 0.2s;">👑 Queen energy right here 👑</div>
     <div class="floating-caption" style="bottom: 20px; left: 15px; animation-delay: 0.8s;">💫 Literally took my breath away 💫</div>
     <div class="floating-caption" style="top: 60%; right: -8px; animation-delay: 1.3s;">✨ Too gorgeous to handle ✨</div>
   </div>
-  
   <div style="font-family: 'Georgia', serif; color:#3d2b1a; background:#fffaf2; border-radius:48px; padding:28px 20px; text-align:left; box-shadow:0 10px 25px rgba(0,0,0,0.1); margin-top:15px;">
     <p style="font-size:22px; font-weight:800; text-align:center;">Happy birthday meri gorgeous ulti balti... 💖</p>
     <p>U are 19 now... soo old... grandma... well kidding.. U are the most like the most beautiful girl i have seen... the god must have spent years making u ... just be happy keep that smile on ur face always ..let ur cheeks be chubby ... i love everything about u ... don't u ever change a single thing about u ...u rare perfect ... And ur brain ..ufff no words for it ... although km hai but veryy mature and smart u are... i have sooooo much to say but that will be boring ... summarizing it... enjoy the day ... an ur everyday with the smile kitten .. Just know i am here and i am proud of u..and i love u for who u are nimisha...Happiest birthday to u.</p>
     <p style="margin-top:20px; text-align:center;">Thankyou for forgetting my mistakes and trusting me through all the tough times... I really really can't let u go dumbo.. Happy birthday ... 🎂💙</p>
     <p style="margin-top:30px; text-align:right;">— Forever yours</p>
   </div>
-  
   <button onclick="location.reload()" style="margin-top:20px; background:#ff8fb1; padding:13px 34px; border:none; border-radius:60px; font-weight:bold; font-size:18px; cursor:pointer;">✨ Finish ✨</button>
 </div>
 
 <script>
-// ============================================
 // CONFETTI FUNCTION
-// ============================================
 function burstConfetti() {
   for(let i=0;i<200;i++){
     let conf=document.createElement('div');
@@ -602,10 +595,7 @@ function burstConfetti() {
     setTimeout(()=>conf.remove(),3000);
   }
 }
-
-// ============================================
 // FLOATING HEARTS ON CLICK
-// ============================================
 document.body.addEventListener('click', function(e) {
   const heart = document.createElement('div');
   heart.className = 'floating-heart';
@@ -616,49 +606,84 @@ document.body.addEventListener('click', function(e) {
   setTimeout(() => heart.remove(), 2000);
 });
 
-// ============================================
-// MAULA MERE MAULA AUDIO PLAYER (Ankhein Teri Itni Haseen)
-// ============================================
-const maulaAudio = document.getElementById('maulaSong');
-const playMaulaBtn = document.getElementById('playMaulaBtn');
-const lyricDisplayDiv = document.getElementById('lyricDisplay');
-
-if(playMaulaBtn && maulaAudio) {
-  playMaulaBtn.addEventListener('click', () => {
-    // Reset and play
-    maulaAudio.currentTime = 0;
-    maulaAudio.play().catch(e => console.log('Audio play requires user interaction first:', e));
-    
-    // Add glow animation to lyric
-    if(lyricDisplayDiv) {
-      lyricDisplayDiv.style.animation = 'lyricGlow 1s infinite';
+// FLOATING LYRICS SYNCED WITH SONG
+const lyricsSequence = [
+  { time: 0, text: "✨ Ankhein teri itni haseen ✨" },
+  { time: 2.5, text: "💫 Ke inka aashiq ban gaya main 💫" },
+  { time: 5, text: "🌙 Maula mere maula mere 🌙" },
+  { time: 7.5, text: "💖 Ankhein teri itni haseen 💖" },
+  { time: 10, text: "✨ Inke aashiq ban gaye hum ✨" },
+  { time: 12.5, text: "💕 Tere liye hi main bana hoon 💕" },
+  { time: 15, text: "🌟 Ankhein teri... itni haseen 🌟" },
+  { time: 17.5, text: "🎵 Maula mere maula mere 🎵" },
+  { time: 20, text: "💖 Ankhein teri itni haseen 💖" }
+];
+let floatingInterval = null;
+let currentLyricIndex = 0;
+function showFloatingLyric(text) {
+  const area = document.getElementById('floatingLyricsArea');
+  if(!area) return;
+  const lyricDiv = document.createElement('div');
+  lyricDiv.className = 'lyric-line';
+  lyricDiv.textContent = text;
+  lyricDiv.style.top = Math.random() * 60 + 20 + '%';
+  lyricDiv.style.left = '10%';
+  lyricDiv.style.width = '80%';
+  lyricDiv.style.fontSize = (Math.random() * 10 + 22) + 'px';
+  area.appendChild(lyricDiv);
+  setTimeout(() => { if(lyricDiv && lyricDiv.remove) lyricDiv.remove(); }, 3800);
+}
+function startFloatingLyrics() {
+  if(floatingInterval) clearInterval(floatingInterval);
+  currentLyricIndex = 0;
+  floatingInterval = setInterval(() => {
+    if(currentLyricIndex < lyricsSequence.length) {
+      showFloatingLyric(lyricsSequence[currentLyricIndex].text);
+      currentLyricIndex++;
+    } else {
+      clearInterval(floatingInterval);
+      floatingInterval = null;
     }
-    
-    // Change button style temporarily
-    playMaulaBtn.innerHTML = '🎵 Playing... 💕';
-    playMaulaBtn.style.background = '#00c853';
+  }, 2500);
+}
+function stopFloatingLyrics() {
+  if(floatingInterval) { clearInterval(floatingInterval); floatingInterval = null; }
+}
+
+// YOUTUBE SONG PLAYER
+const playBtn = document.getElementById('playMaulaBtn');
+const songFrame = document.getElementById('songFrame');
+const statusDiv = document.getElementById('audioStatus');
+const lyricDisplayDiv = document.getElementById('lyricDisplay');
+let isPlaying = false;
+if(playBtn && songFrame) {
+  playBtn.addEventListener('click', () => {
+    if(isPlaying) { const currentSrc = songFrame.src; songFrame.src = currentSrc; stopFloatingLyrics(); }
+    songFrame.style.display = 'block';
+    songFrame.src = 'https://www.youtube.com/embed/pFxzF6lUx_0?autoplay=1&start=79&end=102&enablejsapi=1';
+    isPlaying = true;
+    startFloatingLyrics();
+    playBtn.innerHTML = '🎵 Playing... 💕';
+    playBtn.style.background = '#00c853';
+    if(statusDiv) { statusDiv.innerHTML = '🎵 "Ankhein teri itni haseen..." Playing now with floating lyrics! 🎵'; statusDiv.style.color = '#88ffaa'; }
+    if(lyricDisplayDiv) lyricDisplayDiv.style.animation = 'lyricGlow 1s infinite';
     setTimeout(() => {
-      playMaulaBtn.innerHTML = '🎵 Hear "Ankhein Teri..." 🎵';
-      playMaulaBtn.style.background = '#ff6b6b';
-    }, 8000);
-    
-    // Stop glow animation after audio ends (approx 10 sec)
-    setTimeout(() => {
-      if(lyricDisplayDiv) {
-        lyricDisplayDiv.style.animation = '';
-      }
-    }, 10000);
+      songFrame.style.display = 'none';
+      playBtn.innerHTML = '🎵 Play "Ankhein Teri..." 🎵';
+      playBtn.style.background = '#ff6b6b';
+      if(statusDiv) { statusDiv.innerHTML = '💕 Beautiful, wasn\'t it? Click to hear again 💕'; statusDiv.style.color = '#FFD966'; }
+      if(lyricDisplayDiv) lyricDisplayDiv.style.animation = '';
+      isPlaying = false;
+      stopFloatingLyrics();
+    }, 23000);
+    burstConfetti();
   });
 }
 
-// ============================================
-// CAKE BUILDER - NO BLOW, JUST DONE BUTTON
-// ============================================
+// CAKE BUILDER
 let layerColors=[], frostingColor="#fff5e0", candleNum=3, candlesLit=false;
-
 const layerColorOptions=[{hex:"#e74c3c"},{hex:"#f1c40f"},{hex:"#2ecc71"},{hex:"#3498db"},{hex:"#9b59b6"},{hex:"#e67e22"}];
 const frostingOptions=[{hex:"#fff5e0"},{hex:"#ffc0cb"},{hex:"#f0e68c"},{hex:"#a0d6ff"}];
-
 function renderCake(){
   const canvas=document.getElementById("cakeCanvas"); if(!canvas) return; canvas.innerHTML="";
   const layerCount=parseInt(document.getElementById("layerSlider").value);
@@ -672,182 +697,96 @@ function renderCake(){
   let stand=document.createElement("div"); stand.className="cake-stand"; mainDiv.appendChild(stand);
   canvas.appendChild(mainDiv);
 }
-
 function updateLayers(){ let count=parseInt(document.getElementById("layerSlider").value); document.getElementById("layerCount").innerText=count; while(layerColors.length<count)layerColors.push(layerColorOptions[layerColors.length%layerColorOptions.length].hex); while(layerColors.length>count)layerColors.pop(); renderColorPickers(); renderCake(); }
 function updateCandles(){ candleNum=parseInt(document.getElementById("candleSlider").value); document.getElementById("candleCount").innerText=candleNum; renderCake(); }
 function renderColorPickers(){ let layerGrid=document.getElementById("layerColorGrid"); if(!layerGrid)return; let layerCt=parseInt(document.getElementById("layerSlider").value); layerGrid.innerHTML=""; for(let i=0;i<layerCt;i++){ let subGrid=document.createElement("div"); subGrid.style.cssText="display:flex;gap:8px;margin:6px 0;justify-content:center;"; layerColorOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(layerColors[i]===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ layerColors[i]=col.hex; renderCake(); document.querySelectorAll("#layerColorGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); subGrid.appendChild(sw); }); layerGrid.appendChild(subGrid); } let frostingGrid=document.getElementById("frostingGrid"); frostingGrid.innerHTML=""; frostingOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(frostingColor===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ frostingColor=col.hex; renderCake(); document.querySelectorAll("#frostingGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); frostingGrid.appendChild(sw); }); }
+function initCakeBuilder(){ layerColors=["#e74c3c","#f1c40f"]; frostingColor="#fff5e0"; candleNum=3; candlesLit=false; document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; updateLayers(); document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); }; document.getElementById("finishCakeBtn").onclick=()=>{ document.getElementById("cakeBuilder").style.display="none"; document.getElementById("wishPark").style.display="block"; burstConfetti(); }; }
 
-function initCakeBuilder(){ 
-  layerColors=["#e74c3c","#f1c40f"]; 
-  frostingColor="#fff5e0"; 
-  candleNum=3; 
-  candlesLit=false; 
-  document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; 
-  document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; 
-  updateLayers(); 
-  document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); }; 
-  document.getElementById("finishCakeBtn").onclick=()=>{ 
-    document.getElementById("cakeBuilder").style.display="none"; 
-    document.getElementById("wishPark").style.display="block"; 
-    burstConfetti();
-  }; 
-}
-
-// ============================================
-// WISH PARK FUNCTION
-// ============================================
+// WISH PARK
 document.getElementById('saveWishParkBtn')?.addEventListener('click', () => {
   const wish = document.getElementById('wishParkWish').value;
-  if(wish.trim()) {
-    localStorage.setItem('wishParkWish', wish);
-    const confirmDiv = document.getElementById('wishConfirmation');
-    confirmDiv.style.display = 'block';
-    confirmDiv.innerHTML = '✨ Your wish has been sent to the stars! ✨<br>"' + wish.substring(0, 50) + '"';
-    setTimeout(() => {
-      confirmDiv.style.opacity = '0';
-      setTimeout(() => confirmDiv.style.display = 'none', 1000);
-    }, 3000);
-    burstConfetti();
-  } else {
-    alert('🌸 Please write your wish first! 🌸');
-  }
+  if(wish.trim()) { localStorage.setItem('wishParkWish', wish); const confirmDiv = document.getElementById('wishConfirmation'); confirmDiv.style.display = 'block'; confirmDiv.innerHTML = '✨ Your wish has been sent to the stars! ✨<br>"' + wish.substring(0, 50) + '"'; setTimeout(() => { confirmDiv.style.opacity = '0'; setTimeout(() => confirmDiv.style.display = 'none', 1000); }, 3000); burstConfetti(); } 
+  else { alert('🌸 Please write your wish first! 🌸'); }
 });
+document.getElementById('continueFromWishParkBtn')?.addEventListener('click', () => { document.getElementById('wishPark').style.display = 'none'; document.getElementById('sparkleEyesPage').style.display = 'block'; });
 
-document.getElementById('continueFromWishParkBtn')?.addEventListener('click', () => {
-  document.getElementById('wishPark').style.display = 'none';
-  document.getElementById('sparkleEyesPage').style.display = 'block';
-});
-
-// ============================================
-// QUIZ FUNCTION (KNOW ME GAME)
-// ============================================
+// QUIZ
 let quizPassed = false;
-
-function showCompliment(elementId, compliment) {
-  const element = document.getElementById(elementId);
-  element.innerHTML = `<div class="compliment-badge">✨ ${compliment} ✨</div>`;
-}
-
+function showCompliment(elementId, compliment) { const element = document.getElementById(elementId); element.innerHTML = `<div class="compliment-badge">✨ ${compliment} ✨</div>`; }
 function checkAnswers() {
   const q1 = document.getElementById('q1Answer').value.trim().toLowerCase();
   const q2 = document.getElementById('q2Answer').value.trim().toLowerCase();
   const q3 = document.getElementById('q3Answer').value.trim().toLowerCase();
-  
-  // Correct answers
-  const correct1 = ['biryani', 'biriyani', 'biryani rice', 'chicken biryani'];
-  const correct2 = ['nimisha', 'nimisha', 'you', 'her', 'nimisha '];
-  const correct3 = ['jeene laga hoon', 'jeene laga hu', 'jeene laga', 'jine laga hoon'];
-  
+  const correct1 = ['biryani', 'biriyani']; const correct2 = ['nimisha', 'you']; const correct3 = ['jeene laga hoon', 'jeene laga hu'];
   let score = 0;
-  
-  // Check Q1
-  if(correct1.includes(q1)) {
-    score++;
-    showCompliment('q1Feedback', '🎉 Correct! You know my taste buds so well! 😋❤️');
-  } else {
-    document.getElementById('q1Feedback').innerHTML = '❌ Oops! The answer is "Biryani" - my absolute favorite! 🍚';
-  }
-  
-  // Check Q2
-  if(correct2.includes(q2)) {
-    score++;
-    showCompliment('q2Feedback', '💖 Awww... YOU are the one I love the most in this whole world! 🥺💕');
-  } else {
-    document.getElementById('q2Feedback').innerHTML = '❌ Wrong! The answer is... drum roll... YOU! (Nimisha) You are my everything! 💕';
-  }
-  
-  // Check Q3
-  if(correct3.includes(q3)) {
-    score++;
-    showCompliment('q3Feedback', '🎵 OMG! You remembered! "Jeene Laga Hoon" - the song I sang just for you! 🎤💖');
-  } else {
-    document.getElementById('q3Feedback').innerHTML = '❌ It was "Jeene Laga Hoon" - the song from my heart to yours! 🎵';
-  }
-  
+  if(correct1.includes(q1)) { score++; showCompliment('q1Feedback', '🎉 Correct! Biryani lover! 😋❤️'); } else { document.getElementById('q1Feedback').innerHTML = '❌ The answer is "Biryani"!'; }
+  if(correct2.includes(q2)) { score++; showCompliment('q2Feedback', '💖 YOU are the one I love most! 🥺💕'); } else { document.getElementById('q2Feedback').innerHTML = '❌ The answer is YOU! (Nimisha)'; }
+  if(correct3.includes(q3)) { score++; showCompliment('q3Feedback', '🎵 "Jeene Laga Hoon" - the song from my heart! 🎤💖'); } else { document.getElementById('q3Feedback').innerHTML = '❌ It was "Jeene Laga Hoon"!'; }
   const resultDiv = document.getElementById('quizResult');
-  
   if(score === 3) {
     quizPassed = true;
-    resultDiv.innerHTML = `
-      <div style="background:linear-gradient(135deg,#00c853,#009624); border-radius:30px; padding:20px; text-align:center;">
-        <div style="font-size:50px;">🎉🏆💖</div>
-        <h3 style="color:white;">PERFECT SCORE! You know me so well! 🥺💕</h3>
-        <p style="color:#FFD966;">You've unlocked a SECRET VOICE MESSAGE from my heart! ✨</p>
-      </div>
-    `;
+    resultDiv.innerHTML = `<div style="background:linear-gradient(135deg,#00c853,#009624); border-radius:30px; padding:20px;"><div style="font-size:50px;">🎉🏆💖</div><h3 style="color:white;">PERFECT SCORE! You know me so well! 🥺💕</h3><p style="color:#FFD966;">You've unlocked a SECRET VOICE MESSAGE! ✨</p></div>`;
     burstConfetti();
-    
-    // Save that quiz is passed
     localStorage.setItem('quizPassed', 'true');
-    
-    // Auto proceed to letter page
-    setTimeout(() => {
-      document.getElementById('quizPage').style.display = 'none';
-      document.getElementById('letterPage').style.display = 'block';
-      showSecretVoiceSection();
-    }, 2000);
+    setTimeout(() => { document.getElementById('quizPage').style.display = 'none'; document.getElementById('letterPage').style.display = 'block'; document.getElementById('secretVoiceSection').style.display = 'block'; }, 2000);
   } else {
-    quizPassed = false;
-    resultDiv.innerHTML = `
-      <div style="background:linear-gradient(135deg,#ff6b6b,#dc2626); border-radius:30px; padding:20px; text-align:center;">
-        <div style="font-size:50px;">💃🕺</div>
-        <h3 style="color:white;">You got ${score}/3 correct!</h3>
-        <p style="color:#FFD966;">Time for your PUNISHMENT... You have to DANCE for me! 💃</p>
-      </div>
-    `;
-    
-    // Show dance page
-    setTimeout(() => {
-      document.getElementById('quizPage').style.display = 'none';
-      document.getElementById('dancePage').style.display = 'block';
-    }, 1500);
+    resultDiv.innerHTML = `<div style="background:linear-gradient(135deg,#ff6b6b,#dc2626); border-radius:30px; padding:20px;"><div style="font-size:50px;">💃🕺</div><h3 style="color:white;">You got ${score}/3 correct!</h3><p style="color:#FFD966;">Time to choose your fate! 💃</p></div>`;
+    setTimeout(() => { document.getElementById('quizPage').style.display = 'none'; document.getElementById('dancePage').style.display = 'block'; }, 1500);
   }
 }
-
-function showSecretVoiceSection() {
-  const secretSection = document.getElementById('secretVoiceSection');
-  if(secretSection) {
-    secretSection.style.display = 'block';
-  }
-}
-
-// Secret Voice Message Player
-const secretVoice = document.getElementById('secretVoiceMessage');
-document.getElementById('playSecretVoiceBtn')?.addEventListener('click', () => {
-  const statusDiv = document.getElementById('voiceMessageStatus');
-  if(secretVoice && secretVoice.src && secretVoice.src !== 'about:blank' && secretVoice.src !== '') {
-    secretVoice.play();
-    statusDiv.innerHTML = '🎤 Playing secret voice message... 🎤💖';
-    setTimeout(() => {
-      statusDiv.innerHTML = '✨ Did you hear it? That was straight from my heart! ✨';
-    }, 5000);
-  } else {
-    statusDiv.innerHTML = '💕 Voice message coming soon! For now, just know I love you! 💕';
-  }
-});
-
-// Dance Page - Try Again
-document.getElementById('danceCompleteBtn')?.addEventListener('click', () => {
-  document.getElementById('dancePage').style.display = 'none';
-  document.getElementById('quizPage').style.display = 'block';
-  // Clear previous answers
-  document.getElementById('q1Answer').value = '';
-  document.getElementById('q2Answer').value = '';
-  document.getElementById('q3Answer').value = '';
-  document.getElementById('q1Feedback').innerHTML = '';
-  document.getElementById('q2Feedback').innerHTML = '';
-  document.getElementById('q3Feedback').innerHTML = '';
-  document.getElementById('quizResult').innerHTML = '';
-});
-
 document.getElementById('submitQuizBtn')?.addEventListener('click', checkAnswers);
 
-// ============================================
-// TREASURE GALLERY FUNCTIONS
-// ============================================
-let currentTreasureIndex = 0;
-const treasureItemsCount = 5;
+// DANCE PAGE - TWO OPTIONS (Send Video or Skip)
+const sendVideoBtn = document.getElementById('sendVideoBtn');
+const skipDanceBtn = document.getElementById('skipDanceBtn');
+if(sendVideoBtn) {
+  sendVideoBtn.addEventListener('click', () => {
+    const msg = document.createElement('div');
+    msg.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:linear-gradient(135deg,#00c853,#009624); color:white; padding:20px 30px; border-radius:30px; z-index:1001; font-weight:bold; text-align:center; box-shadow:0 0 30px gold;';
+    msg.innerHTML = '📹 Yay! Can\'t wait to see your dance video! 💃<br>You can send it to me later 💕<br><span style="font-size:12px;">Continuing to quiz...</span>';
+    document.body.appendChild(msg);
+    localStorage.setItem('promisedDanceVideo', 'true');
+    setTimeout(() => {
+      msg.remove();
+      document.getElementById('dancePage').style.display = 'none';
+      document.getElementById('quizPage').style.display = 'block';
+      document.getElementById('q1Answer').value = '';
+      document.getElementById('q2Answer').value = '';
+      document.getElementById('q3Answer').value = '';
+      document.getElementById('q1Feedback').innerHTML = '';
+      document.getElementById('q2Feedback').innerHTML = '';
+      document.getElementById('q3Feedback').innerHTML = '';
+      document.getElementById('quizResult').innerHTML = '';
+      burstConfetti();
+    }, 2500);
+  });
+}
+if(skipDanceBtn) {
+  skipDanceBtn.addEventListener('click', () => {
+    const msg = document.createElement('div');
+    msg.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:linear-gradient(135deg,#ff9800,#e65100); color:white; padding:20px 30px; border-radius:30px; z-index:1001; font-weight:bold; text-align:center; box-shadow:0 0 30px orange;';
+    msg.innerHTML = '😤 Okay okay... you got lucky this time!<br>But you owe me a dance later! 💃<br><span style="font-size:12px;">Continuing to quiz...</span>';
+    document.body.appendChild(msg);
+    setTimeout(() => {
+      msg.remove();
+      document.getElementById('dancePage').style.display = 'none';
+      document.getElementById('quizPage').style.display = 'block';
+      document.getElementById('q1Answer').value = '';
+      document.getElementById('q2Answer').value = '';
+      document.getElementById('q3Answer').value = '';
+      document.getElementById('q1Feedback').innerHTML = '';
+      document.getElementById('q2Feedback').innerHTML = '';
+      document.getElementById('q3Feedback').innerHTML = '';
+      document.getElementById('quizResult').innerHTML = '';
+      burstConfetti();
+    }, 2000);
+  });
+}
 
+document.getElementById('playSecretVoiceBtn')?.addEventListener('click', () => { const statusDiv = document.getElementById('voiceMessageStatus'); statusDiv.innerHTML = '🎤 Playing secret voice message... 🎤💖'; setTimeout(() => { statusDiv.innerHTML = '✨ That was straight from my heart! ✨'; }, 5000); });
+
+// TREASURE
+let currentTreasureIndex = 0;
 function scrollToTreasureItem(index) {
   const slider = document.getElementById('treasureSlider');
   if(!slider) return;
@@ -855,195 +794,61 @@ function scrollToTreasureItem(index) {
   if(index >= 0 && index < wrappers.length) {
     wrappers[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     currentTreasureIndex = index;
-    document.getElementById('treasureCaption').innerHTML = `💎 Item ${currentTreasureIndex + 1} of ${treasureItemsCount} 💎`;
-    
-    // Pause videos when scrolling
+    document.getElementById('treasureCaption').innerHTML = `💎 Item ${currentTreasureIndex + 1} of 5 💎`;
     const videos = slider.querySelectorAll('video');
     videos.forEach(v => { if(!v.paused) v.pause(); });
   }
 }
-
 function initTreasure() {
-  const prevBtn = document.getElementById('treasurePrevBtn');
-  const nextBtn = document.getElementById('treasureNextBtn');
-  
-  if(prevBtn) prevBtn.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex - 1));
-  if(nextBtn) nextBtn.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex + 1));
-  
-  // Add video play/pause functionality
+  document.getElementById('treasurePrevBtn')?.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex - 1));
+  document.getElementById('treasureNextBtn')?.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex + 1));
   const videos = document.querySelectorAll('.treasure-item-wrapper video');
   videos.forEach(video => {
     const wrapper = video.closest('.treasure-item-wrapper');
     const overlay = wrapper?.querySelector('.play-icon-overlay');
-    video.addEventListener('click', () => {
-      if(video.paused) {
-        video.play();
-        if(overlay) overlay.style.opacity = '0';
-      } else {
-        video.pause();
-        if(overlay) overlay.style.opacity = '0.8';
-      }
-    });
-    video.addEventListener('play', () => {
-      videos.forEach(v => { if(v !== video && !v.paused) v.pause(); });
-      if(overlay) overlay.style.opacity = '0';
-    });
-    video.addEventListener('pause', () => {
-      if(overlay) overlay.style.opacity = '0.8';
-    });
+    video.addEventListener('click', () => { if(video.paused) { video.play(); if(overlay) overlay.style.opacity = '0'; } else { video.pause(); if(overlay) overlay.style.opacity = '0.8'; } });
+    video.addEventListener('play', () => { videos.forEach(v => { if(v !== video && !v.paused) v.pause(); }); if(overlay) overlay.style.opacity = '0'; });
+    video.addEventListener('pause', () => { if(overlay) overlay.style.opacity = '0.8'; });
   });
-  
-  document.getElementById('treasureCaption').innerHTML = `💎 Item 1 of ${treasureItemsCount} 💎`;
+  document.getElementById('treasureCaption').innerHTML = `💎 Item 1 of 5 💎`;
 }
 
-// ============================================
-// LOCK SCREEN & CHASE FUNCTIONS
-// ============================================
+// LOCK SCREEN
 let lsCode = ""; const CORRECT_CODE = "19102024";
 function lsUpdateDots(){ for(let i=0;i<8;i++){ const d=document.getElementById("d"+i); if(i<lsCode.length)d.classList.add("filled"); else d.classList.remove("filled"); } }
-function lsPressDigit(d){ if(lsCode.length>=8) return; lsCode+=d; lsUpdateDots(); if(lsCode.length===8){ if(lsCode===CORRECT_CODE){ 
-  document.getElementById("lsSuccess").classList.add("show"); 
-  burstConfetti();
-  setTimeout(()=>{ 
-    document.getElementById("lockScreen").style.display="none"; 
-    document.getElementById("birthdayLayer").style.display="block"; 
-    resetYesNoChase(); 
-  },800); 
-} else { 
-  document.getElementById("lsError").classList.add("show"); 
-  setTimeout(()=>{ lsCode=""; lsUpdateDots(); document.getElementById("lsError").classList.remove("show"); },1000); 
-} } }
+function lsPressDigit(d){ if(lsCode.length>=8) return; lsCode+=d; lsUpdateDots(); if(lsCode.length===8){ if(lsCode===CORRECT_CODE){ document.getElementById("lsSuccess").classList.add("show"); burstConfetti(); setTimeout(()=>{ document.getElementById("lockScreen").style.display="none"; document.getElementById("birthdayLayer").style.display="block"; resetYesNoChase(); },800); } else { document.getElementById("lsError").classList.add("show"); setTimeout(()=>{ lsCode=""; lsUpdateDots(); document.getElementById("lsError").classList.remove("show"); },1000); } } }
 document.querySelectorAll("#keypadGrid [data-n]").forEach(btn=>btn.addEventListener("click",()=>lsPressDigit(btn.dataset.n)));
 document.getElementById("lsDelBtn")?.addEventListener("click",()=>{ lsCode=lsCode.slice(0,-1); lsUpdateDots(); });
 document.getElementById("lsClrBtn")?.addEventListener("click",()=>{ lsCode=""; lsUpdateDots(); });
 
+// CHASE BUTTON
 let noClickCount=0; const teaseMessages=["😂 You can't escape the cake!","🤭 No means YES!","👵 Too old to say no!","🍰 Click YES already!","✨ my little kitten!","🎂 This button is tired!"];
 function resetYesNoChase(){ noClickCount=0; const yesBtn=document.getElementById("yesCakeBtn"),noBtn=document.getElementById("noCakeBtn"); if(yesBtn){yesBtn.style.transform="scale(1)";yesBtn.style.fontSize="20px";} if(noBtn){noBtn.style.transform="scale(1)";noBtn.style.opacity="1";noBtn.style.pointerEvents="auto";noBtn.style.left="0px";noBtn.style.top="0px";} document.getElementById("teasyMessage").innerHTML=""; }
 function showGoodGirlMessage(){ const popup=document.getElementById("goodGirlPopup"); popup.style.visibility="visible"; popup.style.opacity="1"; document.getElementById("closeGoodGirlBtn").onclick=()=>{ popup.style.visibility="hidden"; popup.style.opacity="0"; document.getElementById("birthdayLayer").style.display="none"; document.getElementById("cakeBuilder").style.display="block"; initCakeBuilder(); }; }
 function setupChaseNo(){ const noBtn=document.getElementById("noCakeBtn"),yesBtn=document.getElementById("yesCakeBtn"),teaserDiv=document.getElementById("teasyMessage"); if(!noBtn)return; noBtn.addEventListener("click",()=>{ noClickCount++; teaserDiv.innerText=teaseMessages[noClickCount%teaseMessages.length]; let scaleNo=Math.max(0.4,1-noClickCount*0.09); noBtn.style.transform=`scale(${scaleNo})`; if(noClickCount>=5)noBtn.style.opacity="0.5"; if(noClickCount>=8)noBtn.style.pointerEvents="none"; let newScale=1+(noClickCount*0.12); yesBtn.style.transform=`scale(${newScale})`; yesBtn.style.fontSize=`${Math.min(44,20+(noClickCount*2))}px`; const rX=(Math.random()-0.5)*40,rY=(Math.random()-0.5)*25; noBtn.style.position="relative"; noBtn.style.left=`${rX}px`; noBtn.style.top=`${rY}px`; }); yesBtn.addEventListener("click",showGoodGirlMessage); }
 
-// ============================================
-// CONFIGURATION & NAVIGATION
-// ============================================
-const YOUR_EYES_VIDEO_URL = "https://files.catbox.moe/142fsl.mp4";
-const eyesVideo = document.getElementById("eyesVideo");
-if(YOUR_EYES_VIDEO_URL && eyesVideo){
-  eyesVideo.querySelector("source").src = YOUR_EYES_VIDEO_URL;
-  eyesVideo.load();
-}
-
-// FLIRTY TEXT
-const flirtyTexts=["✨ Ohh look my reflection in those eyes ✨","💙 Those eyes hold galaxies...","🌟 Brighter than a thousand stars","💖 I get lost in them every time","🌙 Moonlight is jealous of your gaze"]; let txtIndex=0;
-setInterval(()=>{ let zone=document.getElementById("flirtyTextZone"); if(zone&&document.getElementById("sparkleEyesPage").style.display==="block"){ zone.innerHTML=flirtyTexts[txtIndex%flirtyTexts.length]; txtIndex++; } },2800);
-
 // NAVIGATION
 document.getElementById("continueToEarthBtn")?.addEventListener("click",()=>{ document.getElementById("sparkleEyesPage").style.display="none"; document.getElementById("earthNamePage").style.display="block"; });
 document.getElementById("continueToTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("earthNamePage").style.display="none"; document.getElementById("treasurePage").style.display="block"; initTreasure(); });
 document.getElementById("continueToGameFromTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("treasurePage").style.display="none"; document.getElementById("gamePage").style.display="block"; initGame(); });
-
-// After Game - Go to QUIZ instead of direct letter
-document.getElementById("gameContinueBtn")?.addEventListener("click",()=>{ 
-  document.getElementById("gamePage").style.display="none"; 
-  document.getElementById("quizPage").style.display="block"; 
-});
+document.getElementById("gameContinueBtn")?.addEventListener("click",()=>{ document.getElementById("gamePage").style.display="none"; document.getElementById("quizPage").style.display="block"; });
 
 // GAME
 let gameActive=false, score=0, timeLeft=30, gameInterval, objects=[]; 
 const gameCanvas=document.getElementById("gameCanvas"), gameCtx=gameCanvas.getContext("2d"); 
 gameCanvas.width=500; gameCanvas.height=400;
-
-function initGame(){ 
-  score=0; timeLeft=30; objects=[]; gameActive=true; 
-  document.getElementById("gameScore").innerText="❤️ Score: 0"; 
-  document.getElementById("gameTimer").innerText="Time: 30s"; 
-  document.getElementById("gameResult").innerHTML=""; 
-  document.getElementById("resetGameBtn").style.display="none"; 
-  document.getElementById("gameContinueBtn").style.display="none"; 
-  if(gameInterval)clearInterval(gameInterval); 
-  gameInterval=setInterval(()=>{ 
-    if(gameActive&&timeLeft>0){ 
-      timeLeft--; 
-      document.getElementById("gameTimer").innerText=`Time: ${timeLeft}s`; 
-      if(timeLeft<=0){ endGame(false); } 
-    } 
-  },1000); 
-  for(let i=0;i<3;i++) spawnObject(); 
-  requestAnimationFrame(drawGame); 
-}
-
-function spawnObject(){ 
-  if(!gameActive)return; 
-  let type=Math.random()<0.7?"heart":"bomb"; 
-  let x=Math.random()*(gameCanvas.width-40)+20; 
-  objects.push({x:x, y:0, type:type, radius:16, speed:1.2+Math.random()*1.5}); 
-}
-
-function drawGame(){ 
-  if(!gameCtx)return; 
-  gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); 
-  for(let o of objects){ 
-    if(o.type==="heart"){ 
-      gameCtx.fillStyle="#ff4d6d"; 
-      gameCtx.beginPath(); 
-      gameCtx.moveTo(o.x, o.y-8); 
-      gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); 
-      gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); 
-      gameCtx.fill(); 
-      gameCtx.fillStyle="#fff"; 
-      gameCtx.fillText("❤️",o.x-8,o.y-2); 
-    } else { 
-      gameCtx.fillStyle="#dc2626"; 
-      gameCtx.beginPath(); 
-      gameCtx.arc(o.x,o.y,12,0,Math.PI*2); 
-      gameCtx.fill(); 
-      gameCtx.fillStyle="black"; 
-      gameCtx.fillText("💣",o.x-8,o.y+4); 
-    } 
-    o.y+=o.speed; 
-  } 
-  for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); 
-  if(gameActive && objects.length<7) spawnObject(); 
-  if(gameActive) requestAnimationFrame(drawGame); 
-}
-
-gameCanvas.addEventListener("click",(e)=>{ 
-  if(!gameActive)return; 
-  let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; 
-  let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; 
-  for(let i=objects.length-1;i>=0;i--){ 
-    let o=objects[i]; 
-    if(Math.hypot(mouseX-o.x, mouseY-o.y)<o.radius+6){ 
-      if(o.type==="heart"){ 
-        score++; 
-        document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; 
-        objects.splice(i,1); 
-      } else { 
-        endGame(true); 
-        return; 
-      } 
-      break; 
-    } 
-  } 
-});
-
-function endGame(bombHit){ 
-  gameActive=false; 
-  clearInterval(gameInterval); 
-  if(bombHit){ 
-    document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b; font-weight:bold;'>💥 BOOM! You caught a bomb. Game Over 💥</p>"; 
-    document.getElementById("resetGameBtn").style.display="inline-block"; 
-  } else { 
-    if(score>=15){ 
-      document.getElementById("gameResult").innerHTML="<p style='color:#FFD966; font-weight:bold;'>🎉 u won my little kitty! 🎉<br>As reward u got a one premium token... with this u can make me do one thing whatever u want i will do. 💖✨</p>"; 
-      document.getElementById("gameContinueBtn").style.display="inline-block"; 
-    } else { 
-      document.getElementById("gameResult").innerHTML="<p style='color:#ffaa66;'>⏰ Time's up! Score: "+score+" / 15 needed. Try again kitten 💔</p>"; 
-      document.getElementById("resetGameBtn").style.display="inline-block"; 
-    } 
-  } 
-}
-
+function initGame(){ score=0; timeLeft=30; objects=[]; gameActive=true; document.getElementById("gameScore").innerText="❤️ Score: 0"; document.getElementById("gameTimer").innerText="Time: 30s"; document.getElementById("gameResult").innerHTML=""; document.getElementById("resetGameBtn").style.display="none"; document.getElementById("gameContinueBtn").style.display="none"; if(gameInterval)clearInterval(gameInterval); gameInterval=setInterval(()=>{ if(gameActive&&timeLeft>0){ timeLeft--; document.getElementById("gameTimer").innerText=`Time: ${timeLeft}s`; if(timeLeft<=0){ endGame(false); } } },1000); for(let i=0;i<3;i++) spawnObject(); requestAnimationFrame(drawGame); }
+function spawnObject(){ if(!gameActive)return; let type=Math.random()<0.7?"heart":"bomb"; let x=Math.random()*(gameCanvas.width-40)+20; objects.push({x:x, y:0, type:type, radius:16, speed:1.2+Math.random()*1.5}); }
+function drawGame(){ if(!gameCtx)return; gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); for(let o of objects){ if(o.type==="heart"){ gameCtx.fillStyle="#ff4d6d"; gameCtx.beginPath(); gameCtx.moveTo(o.x, o.y-8); gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); gameCtx.fill(); } else { gameCtx.fillStyle="#dc2626"; gameCtx.beginPath(); gameCtx.arc(o.x,o.y,12,0,Math.PI*2); gameCtx.fill(); } o.y+=o.speed; } for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); if(gameActive && objects.length<7) spawnObject(); if(gameActive) requestAnimationFrame(drawGame); }
+gameCanvas.addEventListener("click",(e)=>{ if(!gameActive)return; let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; for(let i=objects.length-1;i>=0;i--){ let o=objects[i]; if(Math.hypot(mouseX-o.x, mouseY-o.y)<o.radius+6){ if(o.type==="heart"){ score++; document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; objects.splice(i,1); } else { endGame(true); } break; } } });
+function endGame(bombHit){ gameActive=false; clearInterval(gameInterval); if(bombHit){ document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b;'>💥 BOOM! Game Over 💥</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } else { if(score>=15){ document.getElementById("gameResult").innerHTML="<p style='color:#FFD966;'>🎉 You won! Premium token earned! 💖✨</p>"; document.getElementById("gameContinueBtn").style.display="inline-block"; } else { document.getElementById("gameResult").innerHTML="<p>Time's up! Score: "+score+"/15 needed.</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } } }
 document.getElementById("resetGameBtn")?.addEventListener("click",initGame);
+
+// FLIRTY TEXT & VIDEO
+const eyesVideoElem = document.getElementById("eyesVideo");
+if(eyesVideoElem){ eyesVideoElem.querySelector("source").src = "https://files.catbox.moe/142fsl.mp4"; eyesVideoElem.load(); }
+const flirtyTexts=["✨ Ohh look my reflection in those eyes ✨","💙 Those eyes hold galaxies...","🌟 Brighter than a thousand stars","💖 I get lost in them every time","🌙 Moonlight is jealous of your gaze"]; let txtIndex=0;
+setInterval(()=>{ let zone=document.getElementById("flirtyTextZone"); if(zone&&document.getElementById("sparkleEyesPage").style.display==="block"){ zone.innerHTML=flirtyTexts[txtIndex%flirtyTexts.length]; txtIndex++; } },2800);
 setupChaseNo();
 </script>
 </body>
