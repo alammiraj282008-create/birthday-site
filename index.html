@@ -70,274 +70,42 @@ body {
 .button-group { display:flex; justify-content:center; gap:30px; margin:25px 0; flex-wrap:wrap; }
 .yes-btn { background:linear-gradient(115deg,#00d26a,#00a142); padding:14px 32px; border-radius:100px; border:none; color:white; font-weight:bold; font-size:20px; cursor:pointer; transition:all 0.2s cubic-bezier(0.34,1.2,0.64,1); box-shadow:0 10px 20px rgba(0,0,0,0.2); }
 .no-btn { background:linear-gradient(115deg,#e63946,#b91c1c); padding:12px 28px; border-radius:100px; border:none; color:white; font-weight:bold; font-size:18px; cursor:pointer; transition:all 0.08s linear; position:relative; }
-.cake-preview { background:linear-gradient(180deg, #1a0a2e 0%, #2d1654 100%); border-radius:32px; padding:24px 16px; margin:15px 0; border:1px solid rgba(255,200,80,0.2); }
-#cakeCanvas { min-height:300px; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; margin:10px 0; position:relative; }
-.cake-layer { width:220px; height:45px; border-radius:8px; margin-bottom:-3px; position:relative; box-shadow:0 6px 12px rgba(0,0,0,0.3); }
-.cake-layer-top { width:228px; height:14px; border-radius:50%; margin-bottom:-5px; }
-.frosting-layer { width:240px; background:#fff5e0; border-radius:20px 20px 12px 12px; position:relative; margin-bottom:4px; }
-.frosting-drips { display:flex; justify-content:space-around; width:100%; margin-top:-6px; }
-.drip { width:16px; border-radius:0 0 12px 12px; height:22px; background:inherit; }
-.candle-3d { display:inline-flex; flex-direction:column; align-items:center; margin:0 4px; }
-.candle-body { width:12px; height:44px; background:#ff6b6b; border-radius:3px; }
-.candle-flame { width:16px; height:24px; background:radial-gradient(#ffcc00, #ff6600); border-radius:50% 50% 40% 40%; animation:flicker 0.2s infinite alternate; margin-bottom:-4px; }
-@keyframes flicker { from{transform:scale(1);opacity:0.9;} to{transform:scale(1.1);opacity:1;} }
-.cake-stand { width:260px; height:16px; background:#c8a260; border-radius:0 0 20px 20px; margin-top:2px; }
-.control-panel { background:rgba(255,210,0,0.15); border-radius:48px; padding:15px; margin-top:16px; }
-.color-swatch { width:42px; height:42px; border-radius:50%; cursor:pointer; border:2px solid gold; display:inline-block; margin:6px; transition:0.08s linear; }
-.color-swatch.selected { border:3px solid white; transform:scale(1.15); }
+.cake-preview { background:linear-gradient(180deg, #0a0518 0%, #1f1235 100%); border-radius:48px; padding:28px 16px; margin:15px 0; border:1px solid rgba(255,200,80,0.5); box-shadow:0 20px 30px -10px black; }
+#cakeCanvas { min-height:340px; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; margin:10px 0; position:relative; }
+.control-panel { background:rgba(0,0,0,0.55); backdrop-filter:blur(8px); border-radius:48px; padding:18px; margin-top:16px; border:1px solid rgba(255,215,0,0.3); }
+.color-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:10px 0 18px; }
+.color-swatch { width:44px; height:44px; border-radius:50%; cursor:pointer; border:3px solid #ffd966; display:inline-block; margin:4px; transition:0.1s linear; box-shadow:0 0 0 2px rgba(0,0,0,0.2); }
+.color-swatch.selected { border:4px solid white; transform:scale(1.1); box-shadow:0 0 0 3px gold; }
+.layer-tab-bar { display:flex; gap:12px; justify-content:center; margin-bottom:15px; flex-wrap:wrap; }
+.layer-tab { background:#2c3e4e; padding:8px 18px; border-radius:40px; color:white; font-weight:bold; cursor:pointer; border:1px solid #ffb347; transition:0.1s; }
+.layer-tab.active { background:#ffb347; color:#1e2a36; border-color:white; box-shadow:0 0 8px gold; }
 .action-btn { background:linear-gradient(125deg,#FFD966,#FFB347); border:none; padding:12px 22px; border-radius:60px; font-weight:bold; margin:10px 8px; cursor:pointer; font-size:16px; transition:0.1s; }
 .good-girl-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); backdrop-filter:blur(8px); z-index:1000; display:flex; align-items:center; justify-content:center; visibility:hidden; opacity:0; transition:0.2s; }
 .good-girl-card { background:linear-gradient(145deg,#1e1a3a,#0f0c28); border-radius:70px; padding:30px 25px; max-width:340px; text-align:center; border:2px solid #FFD966; transform:scale(0.8); transition:transform 0.2s ease; }
 .game-canvas { background:#1a1a2e; border-radius:24px; margin:12px auto; display:block; width:100%; max-width:500px; height:400px; cursor:pointer; }
-#earthNameContainer { background: rgba(10,20,40,0.8); border-radius: 32px; padding: 20px; margin: 12px 0; text-align: center; border: 2px solid #3b82f6; }
 .earth-image-card { background: #0a1628; border-radius: 28px; padding: 12px; margin: 12px 0; border: 2px solid #ffd966; }
-.coords-text { font-family: monospace; background: rgba(0,0,0,0.6); padding: 10px; border-radius: 16px; margin-top: 10px; color: #88ffaa; font-size: 14px; }
-.voice-card { background:rgba(0,0,0,0.4); border-radius:48px; padding:16px; margin:15px 0; }
 .voice-btn { background:#f97316; padding:10px 20px; border-radius:40px; color:white; border:none; margin:6px; cursor:pointer; font-weight:bold; }
-.voice-btn-play { background:#3b82f6; }
-.letter-image-slot { margin: 15px 0; border-radius: 28px; overflow: hidden; border: 3px solid #ffb6c1; background: #fff0f5; padding: 8px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); position: relative; }
-.letter-image-slot img { width: 100%; max-height: 250px; object-fit: cover; border-radius: 20px; display: block; }
-
-/* TREASURE GALLERY STYLES */
-.treasure-container {
-  margin: 20px 0;
-  position: relative;
-}
-.treasure-slider {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 15px;
-  padding: 20px 15px;
-  margin: 10px 0;
-  border-radius: 30px;
-  background: rgba(0,0,0,0.4);
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-.treasure-slider::-webkit-scrollbar {
-  height: 5px;
-}
-.treasure-slider::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.2);
-  border-radius: 10px;
-}
-.treasure-slider::-webkit-scrollbar-thumb {
-  background: gold;
-  border-radius: 10px;
-}
-.treasure-slider video {
-  scroll-snap-align: center;
-  width: 280px;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 25px;
-  border: 3px solid gold;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-  flex-shrink: 0;
-  background: #000;
-}
-.treasure-slider video::-webkit-media-controls {
-  opacity: 0.8;
-}
-.treasure-item-wrapper {
-  scroll-snap-align: center;
-  flex-shrink: 0;
-  position: relative;
-}
-.treasure-item-wrapper img, .treasure-item-wrapper video {
-  width: 280px;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 25px;
-  border: 3px solid gold;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-.play-icon-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 48px;
-  color: white;
-  text-shadow: 0 0 10px rgba(0,0,0,0.5);
-  pointer-events: none;
-  opacity: 0.8;
-}
-.treasure-nav {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 10px;
-}
-.treasure-nav button {
-  background: rgba(255,215,0,0.8);
-  border: none;
-  padding: 8px 20px;
-  border-radius: 30px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.treasure-caption {
-  text-align: center;
-  margin-top: 10px;
-  color: #FFD966;
-  font-size: 14px;
-}
-
-/* Quiz Styles */
-.quiz-card {
-  background: rgba(0,0,0,0.5);
-  border-radius: 40px;
-  padding: 20px;
-  margin: 15px 0;
-}
-.quiz-question {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #FFD966;
-}
-.quiz-input {
-  width: 90%;
-  padding: 12px;
-  border-radius: 50px;
-  border: none;
-  text-align: center;
-  font-size: 16px;
-  margin: 10px 0;
-}
-.quiz-feedback {
-  margin: 10px 0;
-  font-size: 14px;
-  min-height: 50px;
-}
-.compliment-badge {
-  background: linear-gradient(135deg, #ff6b6b, #ff2e2e);
-  padding: 10px;
-  border-radius: 30px;
-  margin: 10px 0;
-  animation: pulse 1s infinite;
-}
-@keyframes pulse {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
-
-/* Confetti Styles */
-.confetti {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  top: -10px;
-  z-index: 1000;
-  animation: fall 3s linear forwards;
-  pointer-events: none;
-}
-@keyframes fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-/* Floating Hearts */
-.floating-heart {
-  position: fixed;
-  font-size: 24px;
-  pointer-events: none;
-  animation: floatHeart 2s ease-out forwards;
-  z-index: 999;
-}
-@keyframes floatHeart {
-  0% { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
-}
-
-.floating-caption {
-  position: absolute;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
-  color: #FFD966;
-  padding: 6px 14px;
-  border-radius: 40px;
-  font-size: 14px;
-  font-weight: bold;
-  white-space: nowrap;
-  pointer-events: none;
-  z-index: 10;
-  animation: floatCaption 3s ease-in-out infinite;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-  border: 1px solid rgba(255,215,0,0.5);
-}
-@keyframes floatCaption {
-  0% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
-  50% { transform: translateY(-12px) rotate(2deg); opacity: 1; }
-  100% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
-}
-h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
-#letterPage h2 { color:#d85c7a; }
-
-/* Wish Park Styles */
-.wish-card {
-  background: rgba(255,255,255,0.15);
-  border-radius: 40px;
-  padding: 25px;
-  margin: 20px 0;
-  border: 2px solid #FFD966;
-}
-.wish-tree {
-  font-size: 80px;
-  margin: 10px 0;
-  animation: sway 3s ease-in-out infinite;
-}
-@keyframes sway {
-  0%,100% { transform: rotate(0deg); }
-  50% { transform: rotate(5deg); }
-}
-.wish-lantern {
-  display: inline-block;
-  animation: floatLantern 2s infinite;
-}
-@keyframes floatLantern {
-  0%,100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Dance Challenge */
-.dance-challenge {
-  background: linear-gradient(135deg, #ff6b6b, #ff2e2e);
-  border-radius: 40px;
-  padding: 25px;
-  margin: 20px 0;
-  text-align: center;
-  animation: shakeWarning 0.5s infinite;
-}
-@keyframes shakeWarning {
-  0%,100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-.dance-gif {
-  font-size: 80px;
-  margin: 15px 0;
-  animation: danceMove 1s infinite;
-}
-@keyframes danceMove {
-  0%,100% { transform: rotate(0deg); }
-  25% { transform: rotate(10deg); }
-  75% { transform: rotate(-10deg); }
-}
+.treasure-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding: 20px 15px; margin: 10px 0; border-radius: 30px; background: rgba(0,0,0,0.4); scroll-behavior: smooth; }
+.treasure-slider video { scroll-snap-align: center; width: 280px; height: 280px; object-fit: cover; border-radius: 25px; border: 3px solid gold; flex-shrink: 0; }
+.quiz-card { background: rgba(0,0,0,0.5); border-radius: 40px; padding: 20px; margin: 15px 0; }
+.quiz-input { width: 90%; padding: 12px; border-radius: 50px; border: none; text-align: center; margin: 10px 0; }
+.compliment-badge { background: linear-gradient(135deg, #ff6b6b, #ff2e2e); padding: 10px; border-radius: 30px; margin: 10px 0; animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+.confetti { position: fixed; width: 10px; height: 10px; top: -10px; z-index: 1000; animation: fall 3s linear forwards; pointer-events: none; }
+@keyframes fall { to { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+.floating-heart { position: fixed; font-size: 24px; pointer-events: none; animation: floatHeart 2s ease-out forwards; z-index: 999; }
+@keyframes floatHeart { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100px) scale(0.5); opacity: 0; } }
+.floating-caption { position: absolute; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); color: #FFD966; padding: 6px 14px; border-radius: 40px; font-size: 14px; font-weight: bold; white-space: nowrap; pointer-events: none; animation: floatCaption 3s ease-in-out infinite; }
+@keyframes floatCaption { 0% { transform: translateY(0px); opacity: 0.9; } 50% { transform: translateY(-12px); opacity: 1; } 100% { transform: translateY(0px); opacity: 0.9; } }
+.wish-card { background: rgba(255,255,255,0.15); border-radius: 40px; padding: 25px; margin: 20px 0; border: 2px solid #FFD966; }
+.dance-challenge { background: linear-gradient(135deg, #ff6b6b, #ff2e2e); border-radius: 40px; padding: 25px; text-align: center; }
+.letter-image-slot { margin: 15px 0; border-radius: 28px; overflow: hidden; border: 3px solid #ffb6c1; background: #fff0f5; padding: 8px; position: relative; }
+.letter-image-slot img { width: 100%; max-height: 250px; object-fit: cover; border-radius: 20px; }
 </style>
 </head>
 <body>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
 <div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div><div class="balloon"></div>
-
-<!-- Secret Voice Message (Revealed after quiz) -->
-<audio id="secretVoiceMessage" preload="auto" style="display:none;">
-  <source src="YOUR_SECRET_VOICE_MESSAGE_URL.mp3" type="audio/mpeg">
-</audio>
 
 <div id="goodGirlPopup" class="good-girl-overlay"><div class="good-girl-card"><div style="font-size:60px;">💖👧</div><p>That's my good girl!<br>See, you are listening to me... how cute 🥺💛</p><button id="closeGoodGirlBtn">✨ Let's continue ✨</button></div></div>
 
@@ -355,626 +123,332 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <div class="sticker-container"><div class="sticker">😜🎀</div></div>
   <h1>🎂 HAPPY BIRTHDAY MY QUEEN BUDDY! 🎂</h1>
   <p style="font-size:20px;font-weight:bold;color:#FFB347;">You're 19 now... TOO OLD! 👵</p>
-  <p>You should be in an old age home, you knoww... 🙄</p>
-  <p style="background:rgba(255,215,0,0.2);border-radius:40px;padding:8px;">But anyways... you will always be my little kitten — gorgeous and cute! 💖🐱</p>
-  
   <div class="button-group" id="chaseZone"><button class="yes-btn" id="yesCakeBtn">YES 🎂</button><button class="no-btn" id="noCakeBtn">NO 😤</button></div>
   <div id="teasyMessage" style="color:#ffaa66;min-height:48px;"></div>
 </div>
 
-<!-- CAKE BUILDER -->
-<div id="cakeBuilder" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">🍰✨</div></div><h1>🎨 Decorate Your Dream Cake 🎨</h1>
-<div class="cake-preview"><div id="cakeCanvas" style="position:relative;"></div></div>
-<div class="control-panel"><h3>📏 Layers: <span id="layerCount">2</span></h3><input type="range" id="layerSlider" min="1" max="4" value="2" style="width:100%">
-<h3>🎨 Layer Colors</h3><div id="layerColorGrid" class="color-grid"></div><h3>🍰 Frosting Color</h3><div id="frostingGrid" class="color-grid"></div><h3>🕯️ Candles: <span id="candleCount">3</span></h3><input type="range" id="candleSlider" min="0" max="7" value="3" style="width:100%"></div>
-<button class="action-btn" id="lightCandlesBtn">🎂 Light the Candles! 🔥</button>
-<button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);">✅ Done! See Next Surprise ✅</button></div>
-
-<!-- WISH PARK - Appears after clicking Done -->
-<div id="wishPark" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">🌸✨🏮</div></div>
-  <h1>🌸 Welcome to Wish Park! 🌸</h1>
-  <div class="wish-tree">🎋 Wishing Tree 🎋</div>
-  
-  <div class="wish-card">
-    <div class="wish-lantern">🏮✨🏮</div>
-    <p style="font-size:22px; font-weight:bold; color:#FFD966;">Make a Birthday Wish! 💫</p>
-    <textarea id="wishParkWish" rows="3" style="width:100%; border-radius:20px; padding:12px; background:rgba(255,255,255,0.9); font-family:inherit; margin:10px 0;" placeholder="Write your heartfelt wish here..."></textarea>
-    <button id="saveWishParkBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:10px;">🌟 Send Wish to Universe 🌟</button>
-    <div id="wishConfirmation" style="margin-top:15px; font-size:14px; color:#88ffaa; display:none;">✨ Your wish has been sent to the stars! ✨</div>
+<!-- CAKE BUILDER - ENHANCED ANIMATED LAYERS + 20 COLORS + DRIPS -->
+<div id="cakeBuilder" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">🍰✨🎨</div></div>
+  <h1>✨ Decorate Your Dream Cake ✨</h1>
+  <div class="cake-preview"><div id="cakeCanvas" style="position:relative;"></div></div>
+  <div class="control-panel">
+    <h3>📏 Layers: <span id="layerCount">2</span></h3>
+    <input type="range" id="layerSlider" min="1" max="4" value="2" style="width:100%">
+    <h3>🎨 Layer Colors (click tabs to select layer)</h3>
+    <div id="layerTabs" class="layer-tab-bar"></div>
+    <div id="layerColorGrid" class="color-grid"></div>
+    <h3>🍰 Frosting & Drips Color</h3>
+    <div id="frostingGrid" class="color-grid"></div>
+    <h3>🍬 Filling (between layers)</h3>
+    <div id="fillingGrid" class="color-grid"></div>
+    <h3>🕯️ Candles: <span id="candleCount">3</span></h3>
+    <input type="range" id="candleSlider" min="0" max="9" value="3" style="width:100%">
+    <div><label><input type="checkbox" id="sprinklesToggle"> ✨ Animated Sprinkles ✨</label></div>
   </div>
-  
-  <div class="wish-card" style="background:rgba(255,180,200,0.2);">
-    <p>💫 Did you know? 💫</p>
-    <p style="font-size:14px;">Every time you make a wish, a star twinkles brighter just for you!</p>
-    <div style="font-size:30px; margin-top:10px;">⭐️⭐️⭐️</div>
-  </div>
-  
-  <button id="continueFromWishParkBtn" class="action-btn" style="background:#00c853;">✨ Continue Your Journey ✨</button>
+  <button class="action-btn" id="lightCandlesBtn">🔥 Light the Candles! 🕯️</button>
+  <button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);">✅ Done! Next Surprise ✅</button>
 </div>
 
-<!-- SPARKLE EYES PAGE with VIDEO -->
+<!-- WISH PARK -->
+<div id="wishPark" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">🌸✨🏮</div></div>
+<h1>🌸 Welcome to Wish Park! 🌸</h1>
+<div class="wish-tree">🎋 Wishing Tree 🎋</div>
+<div class="wish-card"><div class="wish-lantern">🏮✨🏮</div><p style="font-size:22px; font-weight:bold;">Make a Birthday Wish! 💫</p>
+<textarea id="wishParkWish" rows="3" style="width:100%; border-radius:20px; padding:12px; margin:10px 0;"></textarea>
+<button id="saveWishParkBtn" style="background:#FFD966; padding:12px 30px; border-radius:40px; font-weight:bold;">🌟 Send Wish to Universe 🌟</button>
+<div id="wishConfirmation" style="margin-top:15px; display:none;">✨ Your wish has been sent to the stars! ✨</div></div>
+<button id="continueFromWishParkBtn" class="action-btn">✨ Continue Your Journey ✨</button></div>
+
+<!-- SPARKLE EYES -->
 <div id="sparkleEyesPage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">✨👁️✨</div></div>
 <h2>wanna see something that sparkles more than stars?</h2>
-<div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:16px; margin:12px 0;">
-  <div id="eyesVideoSlot" style="border:3px solid gold; border-radius:28px; padding:12px; text-align:center; background:#00000066;">
-    <video id="eyesVideo" controls playsinline style="width:100%; max-height:300px; border-radius:20px;">
-      <source src="https://files.catbox.moe/142fsl.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div id="eyesPlaceholder" style="padding:20px; color:#FFD966; display:none;">✨💙 Eyes video will appear here ✨💙</div>
-  </div>
-  <div id="flirtyTextZone" style="margin-top:20px; font-size:22px; font-weight:bold; min-height:80px; color:#FFE484; font-style:italic;">💫</div>
-</div>
-<button id="continueToEarthBtn" class="action-btn" style="background:#3b82f6;">🌍 Continue to Your Name on Earth 🌍</button></div>
+<div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:16px;"><video id="eyesVideo" controls playsinline style="width:100%; max-height:300px; border-radius:20px;"><source src="https://files.catbox.moe/142fsl.mp4" type="video/mp4"></video></div>
+<button id="continueToEarthBtn" class="action-btn">🌍 Continue to Your Name on Earth 🌍</button></div>
 
-<!-- NASA EARTH PAGE -->
-<div id="earthNamePage" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">🌍✨</div></div>
-  <h2>🌟 NIMISHA 🌟</h2>
-  <div id="earthNameContainer">
-    <div class="earth-image-card" style="border:2px solid gold; border-radius:28px; padding:12px; text-align:center; background:rgba(0,0,0,0.4);">
-      <img src="https://imgbs.com/uploads/image-png-38bee0d6.png" alt="NASA Earth view with Nimisha's name" style="width:100%; max-height:320px; object-fit:contain; border-radius:20px;">
-    </div>
-    <div class="coords-text" style="margin-top:15px;">
-      📍 São Miguel do Araguaia, Brazil<br>
-      12°56'44.3" S 50°29'42.0" W
-    </div>
-    <p style="color:#FFD966; font-size:20px; font-weight:bold; margin:20px 0 10px 0;">
-      ✨ see... even this earth has ur name written on it ✨
-    </p>
-    <p style="color:#bbddff; font-size:14px;">
-      NASA's Landsat satellite captured this view. Your name exists on this planet, just like you exist in my heart. 🌍💙
-    </p>
-  </div>
-  <button id="continueToTreasureBtn" class="action-btn">💎 View My Treasure 💎</button>
-</div>
+<!-- EARTH PAGE -->
+<div id="earthNamePage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">🌍✨</div></div><h2>🌟 NIMISHA 🌟</h2>
+<div class="earth-image-card"><img src="https://imgbs.com/uploads/image-png-38bee0d6.png" style="width:100%; border-radius:20px;"></div>
+<button id="continueToTreasureBtn" class="action-btn">💎 View My Treasure 💎</button></div>
 
-<!-- MY TREASURE PAGE -->
-<div id="treasurePage" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">💎📸💕</div></div>
-  <h2>💎 My Treasure 💎</h2>
-  <p style="color:#FFD966; margin-bottom:10px;">Swipe left/right to see my most precious memories ➡️</p>
-  
-  <div class="treasure-container">
-    <div class="treasure-slider" id="treasureSlider">
-      <div class="treasure-item-wrapper" data-index="0"><img src="https://picsum.photos/id/20/300/300" alt="Treasure 1"></div>
-      <div class="treasure-item-wrapper" data-index="1"><img src="https://picsum.photos/id/25/300/300" alt="Treasure 2"></div>
-      <div class="treasure-item-wrapper" data-index="2"><video src="https://files.catbox.moe/142fsl.mp4" playsinline style="width:280px; height:280px; object-fit:cover;"></video><div class="play-icon-overlay">▶️</div></div>
-      <div class="treasure-item-wrapper" data-index="3"><img src="https://picsum.photos/id/26/300/300" alt="Treasure 4"></div>
-      <div class="treasure-item-wrapper" data-index="4"><img src="https://picsum.photos/id/27/300/300" alt="Treasure 5"></div>
-    </div>
-    <div class="treasure-nav">
-      <button id="treasurePrevBtn">◀ Previous</button>
-      <button id="treasureNextBtn">Next ▶</button>
-    </div>
-    <div class="treasure-caption" id="treasureCaption">💎 My Precious Memories 💎</div>
-  </div>
-  
-  <button id="continueToGameFromTreasureBtn" class="action-btn" style="background:#8b5cf6;">🎮 Continue to Game 🎮</button>
-</div>
+<!-- TREASURE PAGE -->
+<div id="treasurePage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">💎📸💕</div></div><h2>💎 My Treasure 💎</h2>
+<div class="treasure-slider" id="treasureSlider"><div class="treasure-item-wrapper"><img src="https://picsum.photos/id/20/300/300"></div><div class="treasure-item-wrapper"><img src="https://picsum.photos/id/25/300/300"></div><div class="treasure-item-wrapper"><video src="https://files.catbox.moe/142fsl.mp4" playsinline style="width:280px; height:280px; object-fit:cover;"></video></div><div class="treasure-item-wrapper"><img src="https://picsum.photos/id/26/300/300"></div></div>
+<div class="treasure-nav"><button id="treasurePrevBtn">◀</button><button id="treasureNextBtn">▶</button></div>
+<button id="continueToGameFromTreasureBtn" class="action-btn">🎮 Continue to Game 🎮</button></div>
 
-<!-- HEART CATCHER GAME -->
+<!-- GAME PAGE -->
 <div id="gamePage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">💖💣</div></div>
-<h2>Catch my heart! ❤️ (Avoid Bombs 💣)</h2>
-<p id="gameTimer" style="font-size:24px; font-weight:bold; color:#FFD966;">Time: 30s</p>
-<p id="gameScore" style="font-size:20px; color:#FFB347;">❤️ Score: 0</p>
-<canvas id="gameCanvas" class="game-canvas" width="500" height="400"></canvas>
-<div id="gameResult"></div>
-<button id="resetGameBtn" style="margin-top:16px; padding:10px 24px; background:#f97316; border:none; border-radius:40px; font-weight:bold; display:none; cursor:pointer;">Try Again 🔄</button>
-<button id="gameContinueBtn" class="action-btn" style="background:#00c853; display:none;">✨ Win Prize ✨</button></div>
+<h2>Catch my heart! ❤️</h2><p id="gameTimer" style="font-size:24px;">Time: 30s</p><p id="gameScore">❤️ Score: 0</p>
+<canvas id="gameCanvas" class="game-canvas" width="500" height="400"></canvas><div id="gameResult"></div>
+<button id="resetGameBtn" style="display:none;">Try Again</button><button id="gameContinueBtn" class="action-btn" style="display:none;">✨ Win Prize ✨</button></div>
 
-<!-- QUIZ PAGE - Before Letter -->
-<div id="quizPage" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">🤔💭</div></div>
-  <h2>💖 How Well Do You Know Me? 💖</h2>
-  <p style="color:#FFD966; margin-bottom:20px;">Answer these 3 questions to unlock a secret voice message! 🎤✨</p>
-  
-  <div class="quiz-card">
-    <div class="quiz-question">📝 Question 1: What's my favorite food?</div>
-    <input type="text" id="q1Answer" class="quiz-input" placeholder="Type your answer...">
-    <div id="q1Feedback" class="quiz-feedback"></div>
-  </div>
-  
-  <div class="quiz-card">
-    <div class="quiz-question">💕 Question 2: What is that ONE thing I love the most in this world?</div>
-    <input type="text" id="q2Answer" class="quiz-input" placeholder="Type your answer...">
-    <div id="q2Feedback" class="quiz-feedback"></div>
-  </div>
-  
-  <div class="quiz-card">
-    <div class="quiz-question">🎵 Question 3: What song did I sing for you for the first time?</div>
-    <input type="text" id="q3Answer" class="quiz-input" placeholder="Type your answer...">
-    <div id="q3Feedback" class="quiz-feedback"></div>
-  </div>
-  
-  <button id="submitQuizBtn" class="action-btn" style="background:#00c853; margin-top:10px;">✨ Submit Answers ✨</button>
-  <div id="quizResult" style="margin-top:20px; min-height:100px;"></div>
-</div>
+<!-- QUIZ PAGE -->
+<div id="quizPage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">🤔💭</div></div><h2>💖 How Well Do You Know Me? 💖</h2>
+<div class="quiz-card"><div class="quiz-question">📝 Question 1: What's my favorite food?</div><input type="text" id="q1Answer" class="quiz-input"><div id="q1Feedback"></div></div>
+<div class="quiz-card"><div class="quiz-question">💕 Question 2: What is that ONE thing I love the most?</div><input type="text" id="q2Answer" class="quiz-input"><div id="q2Feedback"></div></div>
+<div class="quiz-card"><div class="quiz-question">🎵 Question 3: What song did I sing for you first?</div><input type="text" id="q3Answer" class="quiz-input"><div id="q3Feedback"></div></div>
+<button id="submitQuizBtn" class="action-btn">✨ Submit Answers ✨</button><div id="quizResult"></div></div>
 
-<!-- DANCE PUNISHMENT PAGE (Shown if any answer wrong) -->
-<div id="dancePage" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">💃🕺</div></div>
-  <h1>💃 PUNISHMENT TIME! 🕺</h1>
-  
-  <div class="dance-challenge">
-    <div class="dance-gif">💃🕺💃🕺</div>
-    <p style="font-size:24px; font-weight:bold; color:white;">YOU HAVE TO DANCE FOR ME!</p>
-    <p style="font-size:16px; color:#FFD966;">You got a question wrong... now it's time to show me your best moves! 💃</p>
-    <div style="font-size:50px; margin:15px 0;">🎵 🎶 🎵</div>
-    <button id="danceCompleteBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:10px;">✅ I've Done My Dance! ✅</button>
-  </div>
-  
-  <div class="wish-card" style="background:rgba(255,255,255,0.1);">
-    <p>💃 Don't worry, you can try the quiz again after dancing! 💃</p>
-    <p style="font-size:12px;">(I'm watching you dance... 👀✨)</p>
-  </div>
-</div>
+<!-- DANCE PUNISHMENT -->
+<div id="dancePage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">💃🕺</div></div><h1>💃 PUNISHMENT TIME! 🕺</h1><div class="dance-challenge"><div class="dance-gif">💃🕺💃🕺</div><p style="font-size:24px;">DANCE FOR ME!</p><button id="danceCompleteBtn" style="background:#FFD966; padding:12px 30px;">✅ I've Danced! ✅</button></div></div>
 
-<!-- LETTER PAGE (Secret Voice Message appears here if quiz passed) -->
-<div id="letterPage" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">💌</div></div>
-  
-  <!-- Secret Voice Message Section (Only shows if quiz passed) -->
-  <div id="secretVoiceSection" style="display:none; background:linear-gradient(135deg,#ff9a9e,#fad0c4); border-radius:40px; padding:20px; margin-bottom:20px; text-align:center; border:3px solid gold;">
-    <div style="font-size:50px;">🎤✨💖</div>
-    <h3 style="color:#d85c7a;">🌟 A Secret Voice Message Just for You! 🌟</h3>
-    <p style="color:#8b3a5e;">You proved how well you know me... now here's something special from my heart 💕</p>
-    <button id="playSecretVoiceBtn" style="background:#ff6b6b; border:none; padding:12px 25px; border-radius:50px; font-size:18px; font-weight:bold; margin:15px 0; color:white; cursor:pointer;">🔊 PLAY SECRET VOICE MESSAGE 🔊</button>
-    <div id="voiceMessageStatus" style="font-size:12px; color:#6b3a4e;"></div>
-  </div>
-  
-  <!-- IMAGE SLOT 1 with floating captions -->
-  <div class="letter-image-slot" id="letterImageSlot1" style="position: relative;">
-    <img id="letterImg1" src="https://imgbs.com/uploads/image-png-da8bd625.png" style="display:block; width:100%; border-radius:20px;">
-    <div class="floating-caption" style="top: 10px; left: 10px;">🌸 Cuteness Meter 📈 OVERLOADED! 🌸</div>
-    <div class="floating-caption" style="bottom: 15px; right: 15px; animation-delay: 0.5s;">💖 What a STYLE! 💖</div>
-    <div class="floating-caption" style="top: 40%; left: -5px; animation-delay: 1s;">😍 How cute is that smile?! 😍</div>
-  </div>
-  
-  <!-- IMAGE SLOT 2 with floating captions -->
-  <div class="letter-image-slot" id="letterImageSlot2" style="position: relative;">
-    <img id="letterImg2" src="https://imgbs.com/uploads/image-png-123f342f.png" style="display:block; width:100%; border-radius:20px;">
-    <div class="floating-caption" style="top: 15px; right: 10px; animation-delay: 0.2s;">👑 Queen energy right here 👑</div>
-    <div class="floating-caption" style="bottom: 20px; left: 15px; animation-delay: 0.8s;">💫 Literally took my breath away 💫</div>
-    <div class="floating-caption" style="top: 60%; right: -8px; animation-delay: 1.3s;">✨ Too gorgeous to handle ✨</div>
-  </div>
-  
-  <div style="font-family: 'Georgia', serif; color:#3d2b1a; background:#fffaf2; border-radius:48px; padding:28px 20px; text-align:left; box-shadow:0 10px 25px rgba(0,0,0,0.1); margin-top:15px;">
-    <p style="font-size:22px; font-weight:800; text-align:center;">Happy birthday meri gorgeous ulti balti... 💖</p>
-    <p>U are 19 now... soo old... grandma... well kidding.. U are the most like the most beautiful girl i have seen... the god must have spent years making u ... just be happy keep that smile on ur face always ..let ur cheeks be chubby ... i love everything about u ... don't u ever change a single thing about u ...u rare perfect ... And ur brain ..ufff no words for it ... although km hai but veryy mature and smart u are... i have sooooo much to say but that will be boring ... summarizing it... enjoy the day ... an ur everyday with the smile kitten .. Just know i am here and i am proud of u..and i love u for who u are nimisha...Happiest birthday to u.</p>
-    <p style="margin-top:20px; text-align:center;">Thankyou for forgetting my mistakes and trusting me through all the tough times... I really really can't let u go dumbo.. Happy birthday ... 🎂💙</p>
-    <p style="margin-top:30px; text-align:right;">— Forever yours</p>
-  </div>
-  
-  <button onclick="location.reload()" style="margin-top:20px; background:#ff8fb1; padding:13px 34px; border:none; border-radius:60px; font-weight:bold; font-size:18px; cursor:pointer;">✨ Finish ✨</button>
-</div>
+<!-- LETTER PAGE -->
+<div id="letterPage" class="container" style="display:none;"><div class="sticker-container"><div class="sticker">💌</div></div><div id="secretVoiceSection" style="display:none; background:#ff9a9e; border-radius:40px; padding:20px;"><h3>🌟 Secret Voice Message 🌟</h3><button id="playSecretVoiceBtn" style="background:#ff6b6b; padding:12px;">🔊 PLAY</button></div>
+<div class="letter-image-slot"><img id="letterImg1" src="https://imgbs.com/uploads/image-png-da8bd625.png" style="width:100%;"><div class="floating-caption">🌸 Cuteness Overload!</div></div>
+<div style="background:#fffaf2; border-radius:48px; padding:28px;"><p>Happy birthday meri gorgeous... ❤️ I love you always.</p></div>
+<button onclick="location.reload()" style="background:#ff8fb1; padding:13px;">✨ Finish ✨</button></div>
 
 <script>
-// ============================================
-// CONFETTI FUNCTION
-// ============================================
-function burstConfetti() {
-  for(let i=0;i<200;i++){
-    let conf=document.createElement('div');
-    conf.className='confetti';
-    conf.style.left=Math.random()*100+'%';
-    conf.style.background=`hsl(${Math.random()*360},100%,50%)`;
-    conf.style.width=Math.random()*10+5+'px';
-    conf.style.height=Math.random()*14+6+'px';
-    conf.style.animationDelay=Math.random()*0.5+'s';
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),3000);
+// ========== ENHANCED CAKE BUILDER (20 colors, animated drips, sparkle, sprinkles) ==========
+const fullPalette = [
+  "#e74c3c","#f1c40f","#2ecc71","#3498db","#9b59b6","#e67e22","#1abc9c","#e84393","#f39c12","#16a085",
+  "#d35400","#c0392b","#27ae60","#2980b9","#8e44ad","#f1c40f","#e67e22","#7f8c8d","#2c3e50","#d2b48c"
+];
+const frostingPalette = ["#fff5e0","#ffc0cb","#f0e68c","#a0d6ff","#ffe0b5","#e0bbe4","#b5f2e8","#fde2c4","#ccf5ac","#ffb7b2"];
+const fillingPalette = ["#ffb347","#f4a261","#e9c46a","#76b5c5","#bc9ec1","#d4a373"];
+
+let layerColorsArray = ["#e74c3c","#f1c40f"];
+let frostingColor = "#fff5e0", fillingColor = "#ffb347";
+let candleNum = 3, candlesLit = false, showSprinkles = false;
+let activeLayerIndex = 0;
+
+function updateLayerTabs() {
+  const layerCount = parseInt(document.getElementById("layerSlider").value);
+  const tabsDiv = document.getElementById("layerTabs");
+  tabsDiv.innerHTML = "";
+  for(let i=0;i<layerCount;i++) {
+    const tab = document.createElement("div");
+    tab.className = "layer-tab" + (activeLayerIndex === i ? " active" : "");
+    tab.innerText = `Layer ${i+1}`;
+    tab.onclick = (() => { activeLayerIndex = i; renderColorPickers(); updateLayerTabs(); renderCake(); });
+    tabsDiv.appendChild(tab);
   }
 }
 
-// ============================================
-// FLOATING HEARTS ON CLICK
-// ============================================
-document.body.addEventListener('click', function(e) {
-  const heart = document.createElement('div');
-  heart.className = 'floating-heart';
-  heart.innerHTML = ['❤️','💖','💗','💓','💕','💘','💝'][Math.floor(Math.random()*7)];
-  heart.style.left = (e.clientX - 12) + 'px';
-  heart.style.top = (e.clientY - 12) + 'px';
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 2000);
-});
-
-// ============================================
-// CAKE BUILDER - NO BLOW, JUST DONE BUTTON
-// ============================================
-let layerColors=[], frostingColor="#fff5e0", candleNum=3, candlesLit=false;
-
-const layerColorOptions=[{hex:"#e74c3c"},{hex:"#f1c40f"},{hex:"#2ecc71"},{hex:"#3498db"},{hex:"#9b59b6"},{hex:"#e67e22"}];
-const frostingOptions=[{hex:"#fff5e0"},{hex:"#ffc0cb"},{hex:"#f0e68c"},{hex:"#a0d6ff"}];
-
-function renderCake(){
-  const canvas=document.getElementById("cakeCanvas"); if(!canvas) return; canvas.innerHTML="";
-  const layerCount=parseInt(document.getElementById("layerSlider").value);
-  const mainDiv=document.createElement("div"); mainDiv.style.cssText="display:flex;flex-direction:column;align-items:center;";
-  const frostingDiv=document.createElement("div"); frostingDiv.className="frosting-layer"; frostingDiv.style.background=frostingColor; frostingDiv.style.padding="8px 12px 4px"; frostingDiv.style.borderRadius="24px 24px 16px 16px";
-  const drips=document.createElement("div"); drips.className="frosting-drips"; for(let i=0;i<8;i++){ let drip=document.createElement("div"); drip.className="drip"; drip.style.height=14+Math.random()*16+"px"; drip.style.background=frostingColor; drips.appendChild(drip); } frostingDiv.appendChild(drips);
-  const candleRow=document.createElement("div"); candleRow.style.display="flex"; candleRow.style.justifyContent="center"; candleRow.style.gap="12px"; candleRow.style.marginBottom="6px";
-  for(let i=0;i<candleNum;i++){ let cdiv=document.createElement("div"); cdiv.className="candle-3d"; if(candlesLit){ let flame=document.createElement("div"); flame.className="candle-flame"; cdiv.appendChild(flame); } let body=document.createElement("div"); body.className="candle-body"; body.style.background=["#ff6b6b","#ffd93d","#6bcb77","#4d96ff"][i%4]; cdiv.appendChild(body); candleRow.appendChild(cdiv); }
-  frostingDiv.prepend(candleRow); mainDiv.appendChild(frostingDiv);
-  for(let i=0;i<layerCount;i++){ let layerColor=layerColors[i]||layerColorOptions[i%layerColorOptions.length].hex; let topRound=document.createElement("div"); topRound.className="cake-layer-top"; topRound.style.background=`radial-gradient(circle at 30% 30%, ${layerColor}, #00000055)`; topRound.style.width="230px"; topRound.style.height="14px"; topRound.style.borderRadius="50%"; mainDiv.appendChild(topRound); let layerDiv=document.createElement("div"); layerDiv.className="cake-layer"; layerDiv.style.background=`linear-gradient(145deg, ${layerColor}, #00000099)`; layerDiv.style.width="220px"; layerDiv.style.height="42px"; layerDiv.style.borderRadius="8px"; mainDiv.appendChild(layerDiv); }
-  let stand=document.createElement("div"); stand.className="cake-stand"; mainDiv.appendChild(stand);
-  canvas.appendChild(mainDiv);
-}
-
-function updateLayers(){ let count=parseInt(document.getElementById("layerSlider").value); document.getElementById("layerCount").innerText=count; while(layerColors.length<count)layerColors.push(layerColorOptions[layerColors.length%layerColorOptions.length].hex); while(layerColors.length>count)layerColors.pop(); renderColorPickers(); renderCake(); }
-function updateCandles(){ candleNum=parseInt(document.getElementById("candleSlider").value); document.getElementById("candleCount").innerText=candleNum; renderCake(); }
-function renderColorPickers(){ let layerGrid=document.getElementById("layerColorGrid"); if(!layerGrid)return; let layerCt=parseInt(document.getElementById("layerSlider").value); layerGrid.innerHTML=""; for(let i=0;i<layerCt;i++){ let subGrid=document.createElement("div"); subGrid.style.cssText="display:flex;gap:8px;margin:6px 0;justify-content:center;"; layerColorOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(layerColors[i]===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ layerColors[i]=col.hex; renderCake(); document.querySelectorAll("#layerColorGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); subGrid.appendChild(sw); }); layerGrid.appendChild(subGrid); } let frostingGrid=document.getElementById("frostingGrid"); frostingGrid.innerHTML=""; frostingOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(frostingColor===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ frostingColor=col.hex; renderCake(); document.querySelectorAll("#frostingGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); frostingGrid.appendChild(sw); }); }
-
-function initCakeBuilder(){ 
-  layerColors=["#e74c3c","#f1c40f"]; 
-  frostingColor="#fff5e0"; 
-  candleNum=3; 
-  candlesLit=false; 
-  document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; 
-  document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; 
-  updateLayers(); 
-  document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); }; 
-  document.getElementById("finishCakeBtn").onclick=()=>{ 
-    document.getElementById("cakeBuilder").style.display="none"; 
-    document.getElementById("wishPark").style.display="block"; 
-    burstConfetti();
-  }; 
-}
-
-// ============================================
-// WISH PARK FUNCTION
-// ============================================
-document.getElementById('saveWishParkBtn')?.addEventListener('click', () => {
-  const wish = document.getElementById('wishParkWish').value;
-  if(wish.trim()) {
-    localStorage.setItem('wishParkWish', wish);
-    const confirmDiv = document.getElementById('wishConfirmation');
-    confirmDiv.style.display = 'block';
-    confirmDiv.innerHTML = '✨ Your wish has been sent to the stars! ✨<br>"' + wish.substring(0, 50) + '"';
-    setTimeout(() => {
-      confirmDiv.style.opacity = '0';
-      setTimeout(() => confirmDiv.style.display = 'none', 1000);
-    }, 3000);
-    burstConfetti();
-  } else {
-    alert('🌸 Please write your wish first! 🌸');
-  }
-});
-
-document.getElementById('continueFromWishParkBtn')?.addEventListener('click', () => {
-  document.getElementById('wishPark').style.display = 'none';
-  document.getElementById('sparkleEyesPage').style.display = 'block';
-});
-
-// ============================================
-// QUIZ FUNCTION (KNOW ME GAME)
-// ============================================
-let quizPassed = false;
-
-function showCompliment(elementId, compliment) {
-  const element = document.getElementById(elementId);
-  element.innerHTML = `<div class="compliment-badge">✨ ${compliment} ✨</div>`;
-}
-
-function checkAnswers() {
-  const q1 = document.getElementById('q1Answer').value.trim().toLowerCase();
-  const q2 = document.getElementById('q2Answer').value.trim().toLowerCase();
-  const q3 = document.getElementById('q3Answer').value.trim().toLowerCase();
-  
-  // Correct answers
-  const correct1 = ['biryani', 'biriyani', 'biryani rice', 'chicken biryani'];
-  const correct2 = ['nimisha', 'nimisha', 'you', 'her', 'nimisha '];
-  const correct3 = ['jeene laga hoon', 'jeene laga hu', 'jeene laga', 'jine laga hoon'];
-  
-  let score = 0;
-  
-  // Check Q1
-  if(correct1.includes(q1)) {
-    score++;
-    showCompliment('q1Feedback', '🎉 Correct! You know my taste buds so well! 😋❤️');
-  } else {
-    document.getElementById('q1Feedback').innerHTML = '❌ Oops! The answer is "Biryani" - my absolute favorite! 🍚';
-  }
-  
-  // Check Q2
-  if(correct2.includes(q2)) {
-    score++;
-    showCompliment('q2Feedback', '💖 Awww... YOU are the one I love the most in this whole world! 🥺💕');
-  } else {
-    document.getElementById('q2Feedback').innerHTML = '❌ Wrong! The answer is... drum roll... YOU! (Nimisha) You are my everything! 💕';
-  }
-  
-  // Check Q3
-  if(correct3.includes(q3)) {
-    score++;
-    showCompliment('q3Feedback', '🎵 OMG! You remembered! "Jeene Laga Hoon" - the song I sang just for you! 🎤💖');
-  } else {
-    document.getElementById('q3Feedback').innerHTML = '❌ It was "Jeene Laga Hoon" - the song from my heart to yours! 🎵';
-  }
-  
-  const resultDiv = document.getElementById('quizResult');
-  
-  if(score === 3) {
-    quizPassed = true;
-    resultDiv.innerHTML = `
-      <div style="background:linear-gradient(135deg,#00c853,#009624); border-radius:30px; padding:20px; text-align:center;">
-        <div style="font-size:50px;">🎉🏆💖</div>
-        <h3 style="color:white;">PERFECT SCORE! You know me so well! 🥺💕</h3>
-        <p style="color:#FFD966;">You've unlocked a SECRET VOICE MESSAGE from my heart! ✨</p>
-      </div>
-    `;
-    burstConfetti();
-    
-    // Save that quiz is passed
-    localStorage.setItem('quizPassed', 'true');
-    
-    // Auto proceed to letter page
-    setTimeout(() => {
-      document.getElementById('quizPage').style.display = 'none';
-      document.getElementById('letterPage').style.display = 'block';
-      showSecretVoiceSection();
-    }, 2000);
-  } else {
-    quizPassed = false;
-    resultDiv.innerHTML = `
-      <div style="background:linear-gradient(135deg,#ff6b6b,#dc2626); border-radius:30px; padding:20px; text-align:center;">
-        <div style="font-size:50px;">💃🕺</div>
-        <h3 style="color:white;">You got ${score}/3 correct!</h3>
-        <p style="color:#FFD966;">Time for your PUNISHMENT... You have to DANCE for me! 💃</p>
-      </div>
-    `;
-    
-    // Show dance page
-    setTimeout(() => {
-      document.getElementById('quizPage').style.display = 'none';
-      document.getElementById('dancePage').style.display = 'block';
-    }, 1500);
-  }
-}
-
-function showSecretVoiceSection() {
-  const secretSection = document.getElementById('secretVoiceSection');
-  if(secretSection) {
-    secretSection.style.display = 'block';
-  }
-}
-
-// Secret Voice Message Player
-const secretVoice = document.getElementById('secretVoiceMessage');
-document.getElementById('playSecretVoiceBtn')?.addEventListener('click', () => {
-  const statusDiv = document.getElementById('voiceMessageStatus');
-  if(secretVoice && secretVoice.src && secretVoice.src !== 'about:blank' && secretVoice.src !== '') {
-    secretVoice.play();
-    statusDiv.innerHTML = '🎤 Playing secret voice message... 🎤💖';
-    setTimeout(() => {
-      statusDiv.innerHTML = '✨ Did you hear it? That was straight from my heart! ✨';
-    }, 5000);
-  } else {
-    statusDiv.innerHTML = '💕 Voice message coming soon! For now, just know I love you! 💕';
-  }
-});
-
-// Dance Page - Try Again
-document.getElementById('danceCompleteBtn')?.addEventListener('click', () => {
-  document.getElementById('dancePage').style.display = 'none';
-  document.getElementById('quizPage').style.display = 'block';
-  // Clear previous answers
-  document.getElementById('q1Answer').value = '';
-  document.getElementById('q2Answer').value = '';
-  document.getElementById('q3Answer').value = '';
-  document.getElementById('q1Feedback').innerHTML = '';
-  document.getElementById('q2Feedback').innerHTML = '';
-  document.getElementById('q3Feedback').innerHTML = '';
-  document.getElementById('quizResult').innerHTML = '';
-});
-
-document.getElementById('submitQuizBtn')?.addEventListener('click', checkAnswers);
-
-// ============================================
-// TREASURE GALLERY FUNCTIONS
-// ============================================
-let currentTreasureIndex = 0;
-const treasureItemsCount = 5;
-
-function scrollToTreasureItem(index) {
-  const slider = document.getElementById('treasureSlider');
-  if(!slider) return;
-  const wrappers = slider.querySelectorAll('.treasure-item-wrapper');
-  if(index >= 0 && index < wrappers.length) {
-    wrappers[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    currentTreasureIndex = index;
-    document.getElementById('treasureCaption').innerHTML = `💎 Item ${currentTreasureIndex + 1} of ${treasureItemsCount} 💎`;
-    
-    // Pause videos when scrolling
-    const videos = slider.querySelectorAll('video');
-    videos.forEach(v => { if(!v.paused) v.pause(); });
-  }
-}
-
-function initTreasure() {
-  const prevBtn = document.getElementById('treasurePrevBtn');
-  const nextBtn = document.getElementById('treasureNextBtn');
-  
-  if(prevBtn) prevBtn.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex - 1));
-  if(nextBtn) nextBtn.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex + 1));
-  
-  // Add video play/pause functionality
-  const videos = document.querySelectorAll('.treasure-item-wrapper video');
-  videos.forEach(video => {
-    const wrapper = video.closest('.treasure-item-wrapper');
-    const overlay = wrapper?.querySelector('.play-icon-overlay');
-    video.addEventListener('click', () => {
-      if(video.paused) {
-        video.play();
-        if(overlay) overlay.style.opacity = '0';
-      } else {
-        video.pause();
-        if(overlay) overlay.style.opacity = '0.8';
-      }
+function renderColorPickers() {
+  const layerGrid = document.getElementById("layerColorGrid");
+  layerGrid.innerHTML = "";
+  fullPalette.forEach(hex => {
+    const sw = document.createElement("div");
+    sw.className = "color-swatch";
+    sw.style.background = hex;
+    if(layerColorsArray[activeLayerIndex] === hex) sw.classList.add("selected");
+    sw.addEventListener("click", () => {
+      layerColorsArray[activeLayerIndex] = hex;
+      renderCake();
+      document.querySelectorAll("#layerColorGrid .color-swatch").forEach(s => s.classList.remove("selected"));
+      sw.classList.add("selected");
     });
-    video.addEventListener('play', () => {
-      videos.forEach(v => { if(v !== video && !v.paused) v.pause(); });
-      if(overlay) overlay.style.opacity = '0';
-    });
-    video.addEventListener('pause', () => {
-      if(overlay) overlay.style.opacity = '0.8';
-    });
+    layerGrid.appendChild(sw);
   });
-  
-  document.getElementById('treasureCaption').innerHTML = `💎 Item 1 of ${treasureItemsCount} 💎`;
+  const frostingGrid = document.getElementById("frostingGrid");
+  frostingGrid.innerHTML = "";
+  frostingPalette.forEach(hex => {
+    const sw = document.createElement("div");
+    sw.className = "color-swatch";
+    sw.style.background = hex;
+    if(frostingColor === hex) sw.classList.add("selected");
+    sw.addEventListener("click", () => { frostingColor = hex; renderCake(); updateSelected(); });
+    frostingGrid.appendChild(sw);
+  });
+  const fillingGrid = document.getElementById("fillingGrid");
+  fillingGrid.innerHTML = "";
+  fillingPalette.forEach(hex => {
+    const sw = document.createElement("div");
+    sw.className = "color-swatch";
+    sw.style.background = hex;
+    if(fillingColor === hex) sw.classList.add("selected");
+    sw.addEventListener("click", () => { fillingColor = hex; renderCake(); updateSelected(); });
+    fillingGrid.appendChild(sw);
+  });
+  function updateSelected() { document.querySelectorAll("#frostingGrid .color-swatch, #fillingGrid .color-swatch").forEach(s=>s.classList.remove("selected")); }
 }
 
-// ============================================
-// LOCK SCREEN & CHASE FUNCTIONS
-// ============================================
-let lsCode = ""; const CORRECT_CODE = "19102024";
+function renderCake() {
+  const canvasDiv = document.getElementById("cakeCanvas");
+  if(!canvasDiv) return;
+  canvasDiv.innerHTML = "";
+  const layerCount = parseInt(document.getElementById("layerSlider").value);
+  const mainStack = document.createElement("div"); mainStack.style.cssText = "display:flex; flex-direction:column; align-items:center; width:100%;";
+  // Dripping Frosting top with candles
+  const frostingWrap = document.createElement("div");
+  frostingWrap.style.background = frostingColor;
+  frostingWrap.style.borderRadius = "36px 36px 24px 24px";
+  frostingWrap.style.padding = "16px 12px 8px 12px";
+  frostingWrap.style.marginBottom = "2px";
+  frostingWrap.style.boxShadow = "0 12px 20px rgba(0,0,0,0.3)";
+  const dripsContainer = document.createElement("div");
+  dripsContainer.style.display = "flex";
+  dripsContainer.style.justifyContent = "space-around";
+  dripsContainer.style.marginTop = "-12px";
+  dripsContainer.style.marginBottom = "6px";
+  for(let i=0;i<12;i++) {
+    let drip = document.createElement("div");
+    drip.style.width = "14px";
+    drip.style.height = (18 + Math.sin(Date.now()/500 + i)*3) + "px";
+    drip.style.background = frostingColor;
+    drip.style.borderRadius = "0 0 12px 12px";
+    drip.style.transition = "height 0.2s";
+    dripsContainer.appendChild(drip);
+    setInterval(() => {
+      if(drip) drip.style.height = (18 + Math.sin(Date.now()/400 + i)*4) + "px";
+    }, 100);
+  }
+  const candleRow = document.createElement("div");
+  candleRow.style.display = "flex";
+  candleRow.style.justifyContent = "center";
+  candleRow.style.gap = "14px";
+  candleRow.style.marginBottom = "8px";
+  for(let i=0;i<candleNum;i++) {
+    let cGroup = document.createElement("div");
+    cGroup.style.display = "flex";
+    cGroup.style.flexDirection = "column";
+    cGroup.style.alignItems = "center";
+    if(candlesLit) {
+      let flame = document.createElement("div");
+      flame.style.width = "18px";
+      flame.style.height = "28px";
+      flame.style.background = "radial-gradient(#ffaa33, #ff5500)";
+      flame.style.borderRadius = "50% 50% 30% 30%";
+      flame.style.animation = "flicker 0.15s infinite alternate";
+      flame.style.marginBottom = "-4px";
+      cGroup.appendChild(flame);
+    }
+    let stick = document.createElement("div");
+    stick.style.width = "14px";
+    stick.style.height = "48px";
+    stick.style.background = `linear-gradient(90deg, #e6b3b3, #c0392b)`;
+    stick.style.borderRadius = "6px 6px 4px 4px";
+    cGroup.appendChild(stick);
+    candleRow.appendChild(cGroup);
+  }
+  frostingWrap.appendChild(candleRow);
+  frostingWrap.appendChild(dripsContainer);
+  mainStack.appendChild(frostingWrap);
+  // Build layers with animated cream filling
+  for(let i=0;i<layerCount;i++) {
+    let layerColor = layerColorsArray[i] || fullPalette[i%fullPalette.length];
+    let topCap = document.createElement("div");
+    topCap.style.width = "248px";
+    topCap.style.height = "16px";
+    topCap.style.background = `radial-gradient(circle at 30% 35%, ${layerColor}, #222)`;
+    topCap.style.borderRadius = "50%";
+    topCap.style.marginBottom = "-6px";
+    mainStack.appendChild(topCap);
+    let layerDiv = document.createElement("div");
+    layerDiv.style.width = "238px";
+    layerDiv.style.height = "48px";
+    layerDiv.style.background = `linear-gradient(145deg, ${layerColor}, #1a1a1a)`;
+    layerDiv.style.borderRadius = "12px";
+    layerDiv.style.marginBottom = "2px";
+    layerDiv.style.boxShadow = "inset 0 2px 5px rgba(255,255,200,0.3), 0 6px 8px rgba(0,0,0,0.4)";
+    mainStack.appendChild(layerDiv);
+    if(i !== layerCount-1) {
+      let fillingStrip = document.createElement("div");
+      fillingStrip.style.width = "252px";
+      fillingStrip.style.height = "8px";
+      fillingStrip.style.background = fillingColor;
+      fillingStrip.style.borderRadius = "30px";
+      fillingStrip.style.margin = "2px 0 4px";
+      fillingStrip.style.animation = "pulse 1s infinite";
+      mainStack.appendChild(fillingStrip);
+    }
+  }
+  if(showSprinkles) {
+    let sprinklesDiv = document.createElement("div");
+    sprinklesDiv.style.display = "flex";
+    sprinklesDiv.style.gap = "6px";
+    sprinklesDiv.style.flexWrap = "wrap";
+    sprinklesDiv.style.justifyContent = "center";
+    sprinklesDiv.style.marginTop = "8px";
+    for(let s=0;s<36;s++) {
+      let sp = document.createElement("div");
+      sp.style.width = "7px";
+      sp.style.height = "7px";
+      sp.style.background = fullPalette[s%fullPalette.length];
+      sp.style.borderRadius = "2px";
+      sp.style.transform = `rotate(${s*23}deg)`;
+      sp.style.animation = "spinSprinkle 1.2s infinite linear";
+      sprinklesDiv.appendChild(sp);
+    }
+    mainStack.appendChild(sprinklesDiv);
+  }
+  let stand = document.createElement("div");
+  stand.style.width = "280px";
+  stand.style.height = "18px";
+  stand.style.background = "#b87c4f";
+  stand.style.borderRadius = "0 0 40px 40px";
+  stand.style.marginTop = "6px";
+  mainStack.appendChild(stand);
+  canvasDiv.appendChild(mainStack);
+  const styleSprinkle = document.createElement("style");
+  styleSprinkle.textContent = `@keyframes spinSprinkle { 0%{transform:rotate(0deg)} 100%{transform:rotate(360deg)} }`;
+  if(!document.querySelector("#cakeSprinkleStyle")) { styleSprinkle.id = "cakeSprinkleStyle"; document.head.appendChild(styleSprinkle); }
+}
+
+function initCakeBuilderUI() {
+  updateLayerTabs();
+  renderColorPickers();
+  renderCake();
+  document.getElementById("layerSlider").oninput = () => {
+    let newCnt = parseInt(document.getElementById("layerSlider").value);
+    document.getElementById("layerCount").innerText = newCnt;
+    while(layerColorsArray.length < newCnt) layerColorsArray.push(fullPalette[layerColorsArray.length % fullPalette.length]);
+    while(layerColorsArray.length > newCnt) layerColorsArray.pop();
+    activeLayerIndex = Math.min(activeLayerIndex, newCnt-1);
+    updateLayerTabs();
+    renderColorPickers();
+    renderCake();
+  };
+  document.getElementById("candleSlider").oninput = () => { candleNum = parseInt(document.getElementById("candleSlider").value); document.getElementById("candleCount").innerText = candleNum; renderCake(); };
+  document.getElementById("sprinklesToggle").onchange = (e) => { showSprinkles = e.target.checked; renderCake(); };
+  document.getElementById("lightCandlesBtn").onclick = () => { candlesLit = true; renderCake(); };
+  document.getElementById("finishCakeBtn").onclick = () => {
+    document.getElementById("cakeBuilder").style.display = "none";
+    document.getElementById("wishPark").style.display = "block";
+    burstConfetti();
+  };
+}
+
+// Helper functions
+function burstConfetti() { for(let i=0;i<180;i++){ let conf=document.createElement('div'); conf.className='confetti'; conf.style.left=Math.random()*100+'%'; conf.style.background=`hsl(${Math.random()*360},100%,60%)`; conf.style.width=Math.random()*8+6+'px'; conf.style.height=Math.random()*12+6+'px'; document.body.appendChild(conf); setTimeout(()=>conf.remove(),3000); } }
+document.body.addEventListener('click', (e) => { const heart = document.createElement('div'); heart.className = 'floating-heart'; heart.innerHTML = '❤️'; heart.style.left = (e.clientX - 12)+'px'; heart.style.top = (e.clientY - 12)+'px'; document.body.appendChild(heart); setTimeout(()=>heart.remove(),2000); });
+
+// Lock screen logic
+let lsCode=""; const CORRECT_CODE="19102024";
 function lsUpdateDots(){ for(let i=0;i<8;i++){ const d=document.getElementById("d"+i); if(i<lsCode.length)d.classList.add("filled"); else d.classList.remove("filled"); } }
-function lsPressDigit(d){ if(lsCode.length>=8) return; lsCode+=d; lsUpdateDots(); if(lsCode.length===8){ if(lsCode===CORRECT_CODE){ 
-  document.getElementById("lsSuccess").classList.add("show"); 
-  burstConfetti();
-  setTimeout(()=>{ 
-    document.getElementById("lockScreen").style.display="none"; 
-    document.getElementById("birthdayLayer").style.display="block"; 
-    resetYesNoChase(); 
-  },800); 
-} else { 
-  document.getElementById("lsError").classList.add("show"); 
-  setTimeout(()=>{ lsCode=""; lsUpdateDots(); document.getElementById("lsError").classList.remove("show"); },1000); 
-} } }
+function lsPressDigit(d){ if(lsCode.length>=8) return; lsCode+=d; lsUpdateDots(); if(lsCode.length===8){ if(lsCode===CORRECT_CODE){ document.getElementById("lsSuccess").classList.add("show"); burstConfetti(); setTimeout(()=>{ document.getElementById("lockScreen").style.display="none"; document.getElementById("birthdayLayer").style.display="block"; resetYesNoChase(); },800); } else { document.getElementById("lsError").classList.add("show"); setTimeout(()=>{ lsCode=""; lsUpdateDots(); document.getElementById("lsError").classList.remove("show"); },1000); } } }
 document.querySelectorAll("#keypadGrid [data-n]").forEach(btn=>btn.addEventListener("click",()=>lsPressDigit(btn.dataset.n)));
 document.getElementById("lsDelBtn")?.addEventListener("click",()=>{ lsCode=lsCode.slice(0,-1); lsUpdateDots(); });
 document.getElementById("lsClrBtn")?.addEventListener("click",()=>{ lsCode=""; lsUpdateDots(); });
-
-let noClickCount=0; const teaseMessages=["😂 You can't escape the cake!","🤭 No means YES!","👵 Too old to say no!","🍰 Click YES already!","✨ my little kitten!","🎂 This button is tired!"];
+let noClickCount=0; const teaseMessages=["😂 You can't escape!","🤭 No means YES!","👵 Too old!","🍰 Click YES!","✨ my little kitten!","🎂 This button is tired!"];
 function resetYesNoChase(){ noClickCount=0; const yesBtn=document.getElementById("yesCakeBtn"),noBtn=document.getElementById("noCakeBtn"); if(yesBtn){yesBtn.style.transform="scale(1)";yesBtn.style.fontSize="20px";} if(noBtn){noBtn.style.transform="scale(1)";noBtn.style.opacity="1";noBtn.style.pointerEvents="auto";noBtn.style.left="0px";noBtn.style.top="0px";} document.getElementById("teasyMessage").innerHTML=""; }
-function showGoodGirlMessage(){ const popup=document.getElementById("goodGirlPopup"); popup.style.visibility="visible"; popup.style.opacity="1"; document.getElementById("closeGoodGirlBtn").onclick=()=>{ popup.style.visibility="hidden"; popup.style.opacity="0"; document.getElementById("birthdayLayer").style.display="none"; document.getElementById("cakeBuilder").style.display="block"; initCakeBuilder(); }; }
+function showGoodGirlMessage(){ const popup=document.getElementById("goodGirlPopup"); popup.style.visibility="visible"; popup.style.opacity="1"; document.getElementById("closeGoodGirlBtn").onclick=()=>{ popup.style.visibility="hidden"; popup.style.opacity="0"; document.getElementById("birthdayLayer").style.display="none"; document.getElementById("cakeBuilder").style.display="block"; initCakeBuilderUI(); }; }
 function setupChaseNo(){ const noBtn=document.getElementById("noCakeBtn"),yesBtn=document.getElementById("yesCakeBtn"),teaserDiv=document.getElementById("teasyMessage"); if(!noBtn)return; noBtn.addEventListener("click",()=>{ noClickCount++; teaserDiv.innerText=teaseMessages[noClickCount%teaseMessages.length]; let scaleNo=Math.max(0.4,1-noClickCount*0.09); noBtn.style.transform=`scale(${scaleNo})`; if(noClickCount>=5)noBtn.style.opacity="0.5"; if(noClickCount>=8)noBtn.style.pointerEvents="none"; let newScale=1+(noClickCount*0.12); yesBtn.style.transform=`scale(${newScale})`; yesBtn.style.fontSize=`${Math.min(44,20+(noClickCount*2))}px`; const rX=(Math.random()-0.5)*40,rY=(Math.random()-0.5)*25; noBtn.style.position="relative"; noBtn.style.left=`${rX}px`; noBtn.style.top=`${rY}px`; }); yesBtn.addEventListener("click",showGoodGirlMessage); }
-
-// ============================================
-// CONFIGURATION & NAVIGATION
-// ============================================
-const YOUR_EYES_VIDEO_URL = "https://files.catbox.moe/142fsl.mp4";
-const eyesVideo = document.getElementById("eyesVideo");
-if(YOUR_EYES_VIDEO_URL && eyesVideo){
-  eyesVideo.querySelector("source").src = YOUR_EYES_VIDEO_URL;
-  eyesVideo.load();
-}
-
-// FLIRTY TEXT
-const flirtyTexts=["✨ Ohh look my reflection in those eyes ✨","💙 Those eyes hold galaxies...","🌟 Brighter than a thousand stars","💖 I get lost in them every time","🌙 Moonlight is jealous of your gaze"]; let txtIndex=0;
-setInterval(()=>{ let zone=document.getElementById("flirtyTextZone"); if(zone&&document.getElementById("sparkleEyesPage").style.display==="block"){ zone.innerHTML=flirtyTexts[txtIndex%flirtyTexts.length]; txtIndex++; } },2800);
-
-// NAVIGATION
-document.getElementById("continueToEarthBtn")?.addEventListener("click",()=>{ document.getElementById("sparkleEyesPage").style.display="none"; document.getElementById("earthNamePage").style.display="block"; });
-document.getElementById("continueToTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("earthNamePage").style.display="none"; document.getElementById("treasurePage").style.display="block"; initTreasure(); });
-document.getElementById("continueToGameFromTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("treasurePage").style.display="none"; document.getElementById("gamePage").style.display="block"; initGame(); });
-
-// After Game - Go to QUIZ instead of direct letter
-document.getElementById("gameContinueBtn")?.addEventListener("click",()=>{ 
-  document.getElementById("gamePage").style.display="none"; 
-  document.getElementById("quizPage").style.display="block"; 
-});
-
-// GAME
-let gameActive=false, score=0, timeLeft=30, gameInterval, objects=[]; 
-const gameCanvas=document.getElementById("gameCanvas"), gameCtx=gameCanvas.getContext("2d"); 
-gameCanvas.width=500; gameCanvas.height=400;
-
-function initGame(){ 
-  score=0; timeLeft=30; objects=[]; gameActive=true; 
-  document.getElementById("gameScore").innerText="❤️ Score: 0"; 
-  document.getElementById("gameTimer").innerText="Time: 30s"; 
-  document.getElementById("gameResult").innerHTML=""; 
-  document.getElementById("resetGameBtn").style.display="none"; 
-  document.getElementById("gameContinueBtn").style.display="none"; 
-  if(gameInterval)clearInterval(gameInterval); 
-  gameInterval=setInterval(()=>{ 
-    if(gameActive&&timeLeft>0){ 
-      timeLeft--; 
-      document.getElementById("gameTimer").innerText=`Time: ${timeLeft}s`; 
-      if(timeLeft<=0){ endGame(false); } 
-    } 
-  },1000); 
-  for(let i=0;i<3;i++) spawnObject(); 
-  requestAnimationFrame(drawGame); 
-}
-
-function spawnObject(){ 
-  if(!gameActive)return; 
-  let type=Math.random()<0.7?"heart":"bomb"; 
-  let x=Math.random()*(gameCanvas.width-40)+20; 
-  objects.push({x:x, y:0, type:type, radius:16, speed:1.2+Math.random()*1.5}); 
-}
-
-function drawGame(){ 
-  if(!gameCtx)return; 
-  gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); 
-  for(let o of objects){ 
-    if(o.type==="heart"){ 
-      gameCtx.fillStyle="#ff4d6d"; 
-      gameCtx.beginPath(); 
-      gameCtx.moveTo(o.x, o.y-8); 
-      gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); 
-      gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); 
-      gameCtx.fill(); 
-      gameCtx.fillStyle="#fff"; 
-      gameCtx.fillText("❤️",o.x-8,o.y-2); 
-    } else { 
-      gameCtx.fillStyle="#dc2626"; 
-      gameCtx.beginPath(); 
-      gameCtx.arc(o.x,o.y,12,0,Math.PI*2); 
-      gameCtx.fill(); 
-      gameCtx.fillStyle="black"; 
-      gameCtx.fillText("💣",o.x-8,o.y+4); 
-    } 
-    o.y+=o.speed; 
-  } 
-  for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); 
-  if(gameActive && objects.length<7) spawnObject(); 
-  if(gameActive) requestAnimationFrame(drawGame); 
-}
-
-gameCanvas.addEventListener("click",(e)=>{ 
-  if(!gameActive)return; 
-  let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; 
-  let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; 
-  for(let i=objects.length-1;i>=0;i--){ 
-    let o=objects[i]; 
-    if(Math.hypot(mouseX-o.x, mouseY-o.y)<o.radius+6){ 
-      if(o.type==="heart"){ 
-        score++; 
-        document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; 
-        objects.splice(i,1); 
-      } else { 
-        endGame(true); 
-        return; 
-      } 
-      break; 
-    } 
-  } 
-});
-
-function endGame(bombHit){ 
-  gameActive=false; 
-  clearInterval(gameInterval); 
-  if(bombHit){ 
-    document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b; font-weight:bold;'>💥 BOOM! You caught a bomb. Game Over 💥</p>"; 
-    document.getElementById("resetGameBtn").style.display="inline-block"; 
-  } else { 
-    if(score>=15){ 
-      document.getElementById("gameResult").innerHTML="<p style='color:#FFD966; font-weight:bold;'>🎉 u won my little kitty! 🎉<br>As reward u got a one premium token... with this u can make me do one thing whatever u want i will do. 💖✨</p>"; 
-      document.getElementById("gameContinueBtn").style.display="inline-block"; 
-    } else { 
-      document.getElementById("gameResult").innerHTML="<p style='color:#ffaa66;'>⏰ Time's up! Score: "+score+" / 15 needed. Try again kitten 💔</p>"; 
-      document.getElementById("resetGameBtn").style.display="inline-block"; 
-    } 
-  } 
-}
-
-document.getElementById("resetGameBtn")?.addEventListener("click",initGame);
 setupChaseNo();
+
+// Navigation
+document.getElementById("continueToEarthBtn")?.addEventListener("click",()=>{ document.getElementById("sparkleEyesPage").style.display="none"; document.getElementById("earthNamePage").style.display="block"; });
+document.getElementById("continueToTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("earthNamePage").style.display="none"; document.getElementById("treasurePage").style.display="block"; });
+document.getElementById("continueToGameFromTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("treasurePage").style.display="none"; document.getElementById("gamePage").style.display="block"; initGame(); });
+document.getElementById("gameContinueBtn")?.addEventListener("click",()=>{ document.getElementById("gamePage").style.display="none"; document.getElementById("quizPage").style.display="block"; });
+document.getElementById("continueFromWishParkBtn")?.addEventListener("click",()=>{ document.getElementById("wishPark").style.display="none"; document.getElementById("sparkleEyesPage").style.display="block"; });
+document.getElementById("saveWishParkBtn")?.addEventListener("click",()=>{ const wish=document.getElementById("wishParkWish").value; if(wish.trim()){ document.getElementById("wishConfirmation").style.display="block"; burstConfetti(); } });
+
+// Game, quiz & dance logic (preserved)
+let gameActive=false, score=0, timeLeft=30, gameInterval, objects=[]; const gameCanvas=document.getElementById("gameCanvas"), gameCtx=gameCanvas?.getContext("2d"); if(gameCanvas) gameCanvas.width=500; gameCanvas.height=400;
+function initGame(){ score=0; timeLeft=30; objects=[]; gameActive=true; document.getElementById("gameScore").innerText="❤️ Score: 0"; document.getElementById("gameTimer").innerText="Time: 30s"; document.getElementById("gameResult").innerHTML=""; document.getElementById("resetGameBtn").style.display="none"; document.getElementById("gameContinueBtn").style.display="none"; if(gameInterval)clearInterval(gameInterval); gameInterval=setInterval(()=>{ if(gameActive&&timeLeft>0){ timeLeft--; document.getElementById("gameTimer").innerText=`Time: ${timeLeft}s`; if(timeLeft<=0) endGame(false); } },1000); for(let i=0;i<3;i++) spawnObject(); requestAnimationFrame(drawGame); }
+function spawnObject(){ if(!gameActive)return; let type=Math.random()<0.7?"heart":"bomb"; let x=Math.random()*(gameCanvas.width-40)+20; objects.push({x:x, y:0, type:type, radius:16, speed:1.2+Math.random()*1.5}); }
+function drawGame(){ if(!gameCtx)return; gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); for(let o of objects){ if(o.type==="heart"){ gameCtx.fillStyle="#ff4d6d"; gameCtx.beginPath(); gameCtx.moveTo(o.x, o.y-8); gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); gameCtx.fill(); } else { gameCtx.fillStyle="#dc2626"; gameCtx.beginPath(); gameCtx.arc(o.x,o.y,12,0,Math.PI*2); gameCtx.fill(); gameCtx.fillStyle="black"; gameCtx.fillText("💣",o.x-8,o.y+4); } o.y+=o.speed; } for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); if(gameActive && objects.length<7) spawnObject(); if(gameActive) requestAnimationFrame(drawGame); }
+gameCanvas?.addEventListener("click",(e)=>{ if(!gameActive)return; let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; for(let i=objects.length-1;i>=0;i--){ let o=objects[i]; if(Math.hypot(mouseX-o.x, mouseY-o.y)<o.radius+6){ if(o.type==="heart"){ score++; document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; objects.splice(i,1); } else { endGame(true); } break; } } });
+function endGame(bombHit){ gameActive=false; clearInterval(gameInterval); if(bombHit){ document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b;'>💥 BOOM! Game Over</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } else { if(score>=15){ document.getElementById("gameResult").innerHTML="<p style='color:#FFD966;'>🎉 You won! Premium token earned 🎉</p>"; document.getElementById("gameContinueBtn").style.display="inline-block"; } else { document.getElementById("gameResult").innerHTML="<p>Time's up! Score: "+score+"/15</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } } }
+document.getElementById("resetGameBtn")?.addEventListener("click",initGame);
+let quizPassed=false; function checkAnswers(){ const q1=document.getElementById("q1Answer").value.trim().toLowerCase(); const q2=document.getElementById("q2Answer").value.trim().toLowerCase(); const q3=document.getElementById("q3Answer").value.trim().toLowerCase(); let score=0; if(q1==="biryani"||q1==="biriyani") score++; if(q2==="nimisha"||q2==="you") score++; if(q3==="jeene laga hoon"||q3==="jeene laga hu") score++; if(score===3){ quizPassed=true; burstConfetti(); document.getElementById("quizResult").innerHTML="<div style='background:green; border-radius:30px; padding:20px;'>✨ Perfect! Unlocked Voice Message ✨</div>"; setTimeout(()=>{ document.getElementById("quizPage").style.display="none"; document.getElementById("letterPage").style.display="block"; document.getElementById("secretVoiceSection").style.display="block"; },1500); } else { document.getElementById("quizResult").innerHTML="<div style='background:#ff6b6b; padding:15px; border-radius:30px;'>❌ You got "+score+"/3 correct! DANCE PUNISHMENT!</div>"; setTimeout(()=>{ document.getElementById("quizPage").style.display="none"; document.getElementById("dancePage").style.display="block"; },1200); } }
+document.getElementById("submitQuizBtn")?.addEventListener("click",checkAnswers);
+document.getElementById("danceCompleteBtn")?.addEventListener("click",()=>{ document.getElementById("dancePage").style.display="none"; document.getElementById("quizPage").style.display="block"; });
+document.getElementById("playSecretVoiceBtn")?.addEventListener("click",()=>{ alert("🎤💖 Secret voice: I love you, my Nimisha! 💖🎤"); });
+initCakeBuilderUI();
 </script>
 </body>
 </html>
