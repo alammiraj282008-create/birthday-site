@@ -50,9 +50,11 @@ body {
 #gamePage { background:linear-gradient(135deg,rgba(20,10,30,0.92),rgba(40,10,50,0.92)); backdrop-filter:blur(12px); }
 #quizPage { background:linear-gradient(135deg,rgba(60,20,40,0.95),rgba(80,30,60,0.95)); backdrop-filter:blur(12px); }
 #letterPage { background:linear-gradient(135deg,rgba(255,235,220,0.96),rgba(255,220,200,0.96)); backdrop-filter:none; border:4px solid #ffb6c1; }
+#secretVoicePage { background:linear-gradient(135deg,rgba(255,200,220,0.96),rgba(255,182,193,0.96)); backdrop-filter:blur(12px); border:4px solid gold; }
+#picturesPage { background:linear-gradient(135deg,rgba(200,220,255,0.96),rgba(220,240,255,0.96)); backdrop-filter:blur(12px); border:4px solid #ff6b9d; }
 #wishPark { background:linear-gradient(135deg,rgba(0,50,30,0.95),rgba(0,80,50,0.95)); backdrop-filter:blur(12px); }
 .ls-title { color:#fff; font-size:22px; font-weight:800; margin-bottom:18px; }
-.photo-frame { margin:0 auto 18px; width:130px; height:160px; background:#fff; border-radius:18px; transform:rotate(-3deg); box-shadow:0 12px 24px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; border:3px solid rgba(255,255,255,0.9); }
+.photo-frame { margin:0 auto 18px; width:130px; height:160px; background:#fff; border-radius:18px; transform:rotate(-3deg); box-shadow:0 12px 24px rgba(0,0,0,0.3); display:flex; align-items:center; justify-content:center; position:relative; overflow:visible; border:3px solid rgba(255,255,255,0.9); }
 .photo-frame img { width:100%; height:100%; object-fit:cover; border-radius:14px; }
 .dots-row { display:flex; justify-content:center; align-items:center; gap:7px; margin:0 auto 6px; background:rgba(255,255,255,0.38); border-radius:24px; padding:10px 20px; width:fit-content; }
 .dot { width:15px; height:15px; border-radius:50%; border:2px solid rgba(120,50,130,0.4); background:rgba(255,255,255,0.3); transition:all 0.18s cubic-bezier(0.34,1.4,0.64,1); }
@@ -72,11 +74,29 @@ body {
 .no-btn { background:linear-gradient(115deg,#e63946,#b91c1c); padding:12px 28px; border-radius:100px; border:none; color:white; font-weight:bold; font-size:18px; cursor:pointer; transition:all 0.08s linear; position:relative; }
 .cake-preview { background:linear-gradient(180deg, #1a0a2e 0%, #2d1654 100%); border-radius:32px; padding:24px 16px; margin:15px 0; border:1px solid rgba(255,200,80,0.2); }
 #cakeCanvas { min-height:300px; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; margin:10px 0; position:relative; }
-.cake-layer { width:220px; height:45px; border-radius:8px; margin-bottom:-3px; position:relative; box-shadow:0 6px 12px rgba(0,0,0,0.3); }
+.cake-layer { width:220px; height:45px; border-radius:8px; margin-bottom:-3px; position:relative; box-shadow:0 6px 12px rgba(0,0,0,0.3); animation: layerGlow 2.5s ease-in-out infinite; transition: all 0.3s ease; }
 .cake-layer-top { width:228px; height:14px; border-radius:50%; margin-bottom:-5px; }
-.frosting-layer { width:240px; background:#fff5e0; border-radius:20px 20px 12px 12px; position:relative; margin-bottom:4px; }
+.frosting-layer { width:240px; background:#fff5e0; border-radius:20px 20px 12px 12px; position:relative; margin-bottom:4px; animation: frostingPulse 2s ease-in-out infinite; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 .frosting-drips { display:flex; justify-content:space-around; width:100%; margin-top:-6px; }
-.drip { width:16px; border-radius:0 0 12px 12px; height:22px; background:inherit; }
+.drip { width:16px; border-radius:0 0 12px 12px; height:22px; background:inherit; animation: dripWiggle 1.5s ease-in-out infinite; }
+@keyframes dripWiggle { 
+  0% { transform: translateY(0px) scaleY(1); }
+  50% { transform: translateY(3px) scaleY(0.9); }
+  100% { transform: translateY(0px) scaleY(1); }
+}
+@keyframes frostingPulse {
+  0%, 100% { box-shadow: 0 4px 15px rgba(0,0,0,0.2); transform: translateY(0px); }
+  50% { box-shadow: 0 6px 20px rgba(0,0,0,0.3); transform: translateY(-2px); }
+}
+@keyframes layerGlow {
+  0%, 100% { box-shadow: 0 6px 12px rgba(0,0,0,0.3); transform: scaleY(1); }
+  50% { box-shadow: 0 8px 18px rgba(0,0,0,0.4); transform: scaleY(1.02); }
+}
+#cakeCanvas { min-height:300px; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; margin:10px 0; position:relative; animation: cakeBounce 1.5s ease-in-out infinite; }
+@keyframes cakeBounce {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(0.5deg); }
+}
 .candle-3d { display:inline-flex; flex-direction:column; align-items:center; margin:0 4px; }
 .candle-body { width:12px; height:44px; background:#ff6b6b; border-radius:3px; }
 .candle-flame { width:16px; height:24px; background:radial-gradient(#ffcc00, #ff6600); border-radius:50% 50% 40% 40%; animation:flicker 0.2s infinite alternate; margin-bottom:-4px; }
@@ -144,6 +164,8 @@ body {
   scroll-snap-align: center;
   flex-shrink: 0;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 .treasure-item-wrapper img, .treasure-item-wrapper video {
   width: 280px;
@@ -271,40 +293,17 @@ body {
   border: 1px solid rgba(255,215,0,0.5);
 }
 @keyframes floatCaption {
-  0% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
-  50% { transform: translateY(-12px) rotate(2deg); opacity: 1; }
-  100% { transform: translateY(0px) rotate(0deg); opacity: 0.9; }
+  0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+  15% { transform: translateY(-8px) rotate(2deg); opacity: 1; }
+  50% { transform: translateY(-15px) rotate(2deg); opacity: 1; }
+  70% { transform: translateY(-8px) rotate(0deg); opacity: 0.7; }
+  85% { transform: translateY(0px) rotate(-2deg); opacity: 0; }
+  100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
 }
 h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 #letterPage h2 { color:#d85c7a; }
 
-/* Wish Park Styles */
-.wish-card {
-  background: rgba(255,255,255,0.15);
-  border-radius: 40px;
-  padding: 25px;
-  margin: 20px 0;
-  border: 2px solid #FFD966;
-}
-.wish-tree {
-  font-size: 80px;
-  margin: 10px 0;
-  animation: sway 3s ease-in-out infinite;
-}
-@keyframes sway {
-  0%,100% { transform: rotate(0deg); }
-  50% { transform: rotate(5deg); }
-}
-.wish-lantern {
-  display: inline-block;
-  animation: floatLantern 2s infinite;
-}
-@keyframes floatLantern {
-  0%,100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Dance Challenge */
+/* Confetti Styles */
 .dance-challenge {
   background: linear-gradient(135deg, #ff6b6b, #ff2e2e);
   border-radius: 40px;
@@ -375,6 +374,10 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <div class="photo-frame">
     <img src="https://raw.githubusercontent.com/alammiraj282008-create/birthday-site/main/image.png" alt="Nimisha">
     <div style="position:absolute;top:-10px;right:-10px;font-size:32px;">🎀</div>
+    <div class="floating-caption" style="top: -45px; left: 50%; transform: translateX(-50%); animation-delay: 0s;">💅 Too cute to handle! 💅</div>
+    <div class="floating-caption" style="bottom: -50px; right: -20px; animation-delay: 1.5s;">😍 That smile! 😍</div>
+    <div class="floating-caption" style="top: 30%; left: -110px; animation-delay: 0.8s;">✨ Angel alert! 👼✨</div>
+    <div class="floating-caption" style="bottom: 20%; left: -110px; animation-delay: 2.2s;">🔥 So gorgeous! 🔥</div>
   </div>
   <div class="dots-row" id="dotsRow">
     <div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div><div class="dot-gap"></div>
@@ -424,24 +427,15 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <button class="action-btn" id="finishCakeBtn" style="background:linear-gradient(135deg,#00c853,#009624);">✅ Done! See Next Surprise ✅</button>
 </div>
 
-<!-- WISH PARK -->
-<div id="wishPark" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">🌸✨🏮</div></div>
-  <h1>🌸 Welcome to Wish Park! 🌸</h1>
-  <div class="wish-tree">🎋 Wishing Tree 🎋</div>
-  <div class="wish-card">
-    <div class="wish-lantern">🏮✨🏮</div>
-    <p style="font-size:22px; font-weight:bold; color:#FFD966;">Make a Birthday Wish! 💫</p>
-    <textarea id="wishParkWish" rows="3" style="width:100%; border-radius:20px; padding:12px; background:rgba(255,255,255,0.9); font-family:inherit; margin:10px 0;" placeholder="Write your heartfelt wish here..."></textarea>
-    <button id="saveWishParkBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:10px;">🌟 Send Wish to Universe 🌟</button>
-    <div id="wishConfirmation" style="margin-top:15px; font-size:14px; color:#88ffaa; display:none;">✨ Your wish has been sent to the stars! ✨</div>
+<!-- WISH MODAL -->
+<div id="wishModal" class="good-girl-overlay" style="visibility:hidden; opacity:0;">
+  <div class="good-girl-card" style="background:linear-gradient(145deg,#1e1a3a,#0f0c28); max-width:380px;">
+    <div style="font-size:60px;">🕯️✨💫</div>
+    <h3 style="color:#FFD966; font-size:24px; margin:15px 0;">Make Your Birthday Wish! 🎂💖</h3>
+    <p style="color:#ffb347; font-size:14px; margin-bottom:15px;">Close your eyes, make a wish, and let the universe hear it! ✨</p>
+    <textarea id="birthdayWish" rows="4" style="width:90%; border-radius:20px; padding:12px; background:rgba(255,255,255,0.9); font-family:inherit; margin:10px auto; display:block; border:2px solid gold;" placeholder="Write your heartfelt wish here..."></textarea>
+    <button id="submitWishBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:15px 0; color:#1a2a3a; cursor:pointer; font-size:16px;">🌟 My Wish is Made! 🌟</button>
   </div>
-  <div class="wish-card" style="background:rgba(255,180,200,0.2);">
-    <p>💫 Did you know? 💫</p>
-    <p style="font-size:14px;">Every time you make a wish, a star twinkles brighter just for you!</p>
-    <div style="font-size:30px; margin-top:10px;">⭐️⭐️⭐️</div>
-  </div>
-  <button id="continueFromWishParkBtn" class="action-btn" style="background:#00c853;">✨ Continue Your Journey ✨</button>
 </div>
 
 <!-- SPARKLE EYES PAGE with Floating Lyrics and Song -->
@@ -450,22 +444,22 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <h2>wanna see something that sparkles more than stars?</h2>
   <div style="background:rgba(0,0,0,0.5); border-radius:32px; padding:16px; margin:12px 0;">
     <div id="eyesVideoSlot" style="border:3px solid gold; border-radius:28px; padding:12px; text-align:center; background:#00000066;">
-      <video id="eyesVideo" controls playsinline style="width:100%; max-height:300px; border-radius:20px;">
+      <video id="eyesVideo" playsinline autoplay loop muted style="width:100%; max-height:300px; border-radius:20px;">
         <source src="https://files.catbox.moe/142fsl.mp4" type="video/mp4">
       </video>
-      <div id="youtubePlayer" style="position: relative; width: 100%;">
-        <iframe id="songFrame" width="100%" height="65" src="https://www.youtube.com/embed/pFxzF6lUx_0?autoplay=0&start=79&end=102&enablejsapi=1" frameborder="0" style="border-radius:20px; border:1px solid gold; display:none;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+      <div id="youtubePlayer" style="position: relative; width: 100%; margin-top: 15px;">
+        <iframe id="songFrame" width="100%" height="65" src="https://www.youtube.com/embed/pFxzF6lUx_0?autoplay=0&start=79&end=102&enablejsapi=1" frameborder="0" style="border-radius:20px; border:1px solid gold;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
       </div>
     </div>
-    <div id="floatingLyricsArea" style="position: relative; min-height: 140px; margin-top: 15px;"></div>
+    <div id="floatingLyricsArea" style="position: relative; min-height: 200px; margin-top: 15px; text-align: center; display: flex; align-items: center; justify-content: center;"></div>
     <div style="background:linear-gradient(135deg,rgba(255,105,180,0.4),rgba(255,20,147,0.4)); border-radius:40px; padding:20px; margin-top:15px; border:2px solid gold;">
       <p style="color:#FFD966; font-size:13px; letter-spacing:3px;">✦ FOR YOUR EYES ONLY ✦</p>
       <div id="lyricDisplay">
         <p style="color:#FFE484; font-size:26px; font-weight:bold; margin:12px 0; font-family:'Georgia',serif;">"Ankhein teri itni haseen"</p>
         <p style="color:#ffb347; font-size:20px; font-style:italic; margin-bottom:8px;">✨ inke aashiq ban gaye hum ✨</p>
       </div>
-      <button id="playMaulaBtn" style="background:#ff6b6b; border:none; padding:12px 35px; border-radius:50px; color:white; font-weight:bold; margin-top:12px; cursor:pointer; font-size:18px; transition:0.2s;">🎵 Play "Ankhein Teri..." 🎵</button>
-      <div id="audioStatus" style="color:#FFD966; font-size:12px; margin-top:10px;">💕 Click to hear the magic words (1:19 - 1:42) 💕</div>
+      <button id="playMaulaBtn" style="background:#ff6b6b; border:none; padding:12px 35px; border-radius:50px; color:white; font-weight:bold; margin-top:12px; cursor:pointer; font-size:18px; transition:0.2s;">🎵 Playing... 💕</button>
+      <div id="audioStatus" style="color:#FFD966; font-size:12px; margin-top:10px;">💕 "Ankhein teri itni haseen..." Playing now! 💕</div>
     </div>
     <div id="flirtyTextZone" style="margin-top:20px; font-size:22px; font-weight:bold; min-height:80px; color:#FFE484; font-style:italic;">💫</div>
   </div>
@@ -480,8 +474,11 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
     <div class="earth-image-card" style="border:2px solid gold; border-radius:28px; padding:12px; text-align:center; background:rgba(0,0,0,0.4);">
       <img src="https://imgbs.com/uploads/image-png-38bee0d6.png" alt="NASA Earth view with Nimisha's name" style="width:100%; max-height:320px; object-fit:contain; border-radius:20px;">
     </div>
-    <div class="coords-text" style="margin-top:15px;">
-      📍 São Miguel do Araguaia, Brazil<br>12°56'44.3" S 50°29'42.0" W
+    <div id="coordsGuessSection" style="margin-top:20px;">
+      <p style="color:#FFE484; font-size:18px; font-weight:bold; margin-bottom:15px;">🤔 Guess where this location is... what do you think the coordinates are? 💭</p>
+      <input type="text" id="coordsGuessInput" placeholder="Type your guess here..." style="width:90%; border-radius:20px; padding:12px; background:rgba(255,255,255,0.9); font-family:inherit; border:2px solid gold; text-align:center; font-size:14px; margin:10px auto; display:block;">
+      <button id="submitCoordsBtn" style="background:#FFD966; border:none; padding:10px 30px; border-radius:40px; font-weight:bold; margin:10px 0; color:#1a2a3a; cursor:pointer; font-size:16px;">Submit Guess 🎯</button>
+      <div id="coordsResult" style="margin-top:15px; min-height:60px;"></div>
     </div>
     <p style="color:#FFD966; font-size:20px; font-weight:bold; margin:20px 0 10px 0;">✨ see... even this earth has ur name written on it ✨</p>
     <p style="color:#bbddff; font-size:14px;">NASA's Landsat satellite captured this view. Your name exists on this planet, just like you exist in my heart. 🌍💙</p>
@@ -496,14 +493,54 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <p style="color:#FFD966; margin-bottom:10px;">Swipe left/right to see my most precious memories ➡️</p>
   <div class="treasure-container">
     <div class="treasure-slider" id="treasureSlider">
-      <div class="treasure-item-wrapper" data-index="0"><img src="https://picsum.photos/id/20/300/300" alt="Treasure 1"></div>
-      <div class="treasure-item-wrapper" data-index="1"><img src="https://picsum.photos/id/25/300/300" alt="Treasure 2"></div>
-      <div class="treasure-item-wrapper" data-index="2"><video src="https://files.catbox.moe/142fsl.mp4" playsinline style="width:280px; height:280px; object-fit:cover;"></video><div class="play-icon-overlay">▶️</div></div>
-      <div class="treasure-item-wrapper" data-index="3"><img src="https://picsum.photos/id/26/300/300" alt="Treasure 4"></div>
-      <div class="treasure-item-wrapper" data-index="4"><img src="https://picsum.photos/id/27/300/300" alt="Treasure 5"></div>
+      <div class="treasure-item-wrapper" data-index="0" style="flex-direction:column; align-items:center;">
+        <div style="color:#FFD966; font-weight:bold; font-size:16px; margin-bottom:10px;">😍 These smiles will totally KILL me! 💘</div>
+        <video id="treasureVid0" src="https://files.catbox.moe/osf6tz.mp4" muted playsinline style="width:280px; height:280px; object-fit:cover; border-radius:15px;"></video>
+        <div style="margin-top:12px; display:flex; gap:10px;">
+          <button class="treasure-play-btn" onclick="document.getElementById('treasureVid0').play()" style="background:#00c853; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">▶ PLAY</button>
+          <button class="treasure-stop-btn" onclick="document.getElementById('treasureVid0').pause(); document.getElementById('treasureVid0').currentTime=0;" style="background:#ff6b6b; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">⏹ STOP</button>
+        </div>
+        <div style="color:#FFB347; font-style:italic; font-size:13px; margin-top:8px;">You are absolutely breathtaking! 💫</div>
+      </div>
+      <div class="treasure-item-wrapper" data-index="1" style="flex-direction:column; align-items:center;">
+        <div style="color:#FFD966; font-weight:bold; font-size:16px; margin-bottom:10px;">✨ That expression is EVERYTHING! 😭✨</div>
+        <video id="treasureVid1" src="https://files.catbox.moe/h1mqdw.mp4" muted playsinline style="width:280px; height:280px; object-fit:cover; border-radius:15px;"></video>
+        <div style="margin-top:12px; display:flex; gap:10px;">
+          <button class="treasure-play-btn" onclick="document.getElementById('treasureVid1').play()" style="background:#00c853; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">▶ PLAY</button>
+          <button class="treasure-stop-btn" onclick="document.getElementById('treasureVid1').pause(); document.getElementById('treasureVid1').currentTime=0;" style="background:#ff6b6b; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">⏹ STOP</button>
+        </div>
+        <div style="color:#FFB347; font-style:italic; font-size:13px; margin-top:8px;">Your beauty is unreal! 🥺💖</div>
+      </div>
+      <div class="treasure-item-wrapper" data-index="2" style="flex-direction:column; align-items:center;">
+        <div style="color:#FFD966; font-weight:bold; font-size:16px; margin-bottom:10px;">💕 How are you THIS cute?? 💕</div>
+        <video id="treasureVid2" src="https://files.catbox.moe/75wqnd.mp4" muted playsinline style="width:280px; height:280px; object-fit:cover; border-radius:15px;"></video>
+        <div style="margin-top:12px; display:flex; gap:10px;">
+          <button class="treasure-play-btn" onclick="document.getElementById('treasureVid2').play()" style="background:#00c853; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">▶ PLAY</button>
+          <button class="treasure-stop-btn" onclick="document.getElementById('treasureVid2').pause(); document.getElementById('treasureVid2').currentTime=0;" style="background:#ff6b6b; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">⏹ STOP</button>
+        </div>
+        <div style="color:#FFB347; font-style:italic; font-size:13px; margin-top:8px;">My heart can't handle this! 💘</div>
+      </div>
+      <div class="treasure-item-wrapper" data-index="3" style="flex-direction:column; align-items:center;">
+        <div style="color:#FFD966; font-weight:bold; font-size:16px; margin-bottom:10px;">🔥 Literally took my BREATH AWAY! 🔥</div>
+        <video id="treasureVid3" src="https://files.catbox.moe/1if57o.mp4" muted playsinline style="width:280px; height:280px; object-fit:cover; border-radius:15px;"></video>
+        <div style="margin-top:12px; display:flex; gap:10px;">
+          <button class="treasure-play-btn" onclick="document.getElementById('treasureVid3').play()" style="background:#00c853; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">▶ PLAY</button>
+          <button class="treasure-stop-btn" onclick="document.getElementById('treasureVid3').pause(); document.getElementById('treasureVid3').currentTime=0;" style="background:#ff6b6b; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">⏹ STOP</button>
+        </div>
+        <div style="color:#FFB347; font-style:italic; font-size:13px; margin-top:8px;">You are simply STUNNING! 😍✨</div>
+      </div>
+      <div class="treasure-item-wrapper" data-index="4" style="flex-direction:column; align-items:center;">
+        <div style="color:#FFD966; font-weight:bold; font-size:16px; margin-bottom:10px;">👑 Queen energy! I am OBSESSED! 👑</div>
+        <video id="treasureVid4" src="https://files.catbox.moe/tvh65w.mp4" muted playsinline style="width:280px; height:280px; object-fit:cover; border-radius:15px;"></video>
+        <div style="margin-top:12px; display:flex; gap:10px;">
+          <button class="treasure-play-btn" onclick="document.getElementById('treasureVid4').play()" style="background:#00c853; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">▶ PLAY</button>
+          <button class="treasure-stop-btn" onclick="document.getElementById('treasureVid4').pause(); document.getElementById('treasureVid4').currentTime=0;" style="background:#ff6b6b; padding:8px 16px; border:none; border-radius:20px; color:white; font-weight:bold; cursor:pointer;">⏹ STOP</button>
+        </div>
+        <div style="color:#FFB347; font-style:italic; font-size:13px; margin-top:8px;">Your charisma is OUT OF THIS WORLD! 💫</div>
+      </div>
     </div>
     <div class="treasure-nav"><button id="treasurePrevBtn">◀ Previous</button><button id="treasureNextBtn">Next ▶</button></div>
-    <div class="treasure-caption" id="treasureCaption">💎 My Precious Memories 💎</div>
+    <div class="treasure-caption" id="treasureCaption">💎 Item 1 of 5 💎</div>
   </div>
   <button id="continueToGameFromTreasureBtn" class="action-btn" style="background:#8b5cf6;">🎮 Continue to Game 🎮</button>
 </div>
@@ -518,6 +555,7 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <div id="gameResult"></div>
   <button id="resetGameBtn" style="margin-top:16px; padding:10px 24px; background:#f97316; border:none; border-radius:40px; font-weight:bold; display:none; cursor:pointer;">Try Again 🔄</button>
   <button id="gameContinueBtn" class="action-btn" style="background:#00c853; display:none;">✨ Win Prize ✨</button>
+  <button id="skipGameCheatBtn" style="margin-top:10px; padding:6px 12px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,215,0,0.3); border-radius:20px; font-size:12px; color:#FFD966; font-weight:bold; cursor:pointer; opacity:0.6;">🤫 Skip (Or press S)</button>
 </div>
 
 <!-- QUIZ PAGE -->
@@ -525,11 +563,42 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <div class="sticker-container"><div class="sticker">🤔💭</div></div>
   <h2>💖 How Well Do You Know Me? 💖</h2>
   <p style="color:#FFD966; margin-bottom:20px;">Answer these 3 questions to unlock a secret voice message! 🎤✨</p>
-  <div class="quiz-card"><div class="quiz-question">📝 Question 1: What's my favorite food?</div><input type="text" id="q1Answer" class="quiz-input" placeholder="Type your answer..."><div id="q1Feedback" class="quiz-feedback"></div></div>
-  <div class="quiz-card"><div class="quiz-question">💕 Question 2: What is that ONE thing I love the most in this world?</div><input type="text" id="q2Answer" class="quiz-input" placeholder="Type your answer..."><div id="q2Feedback" class="quiz-feedback"></div></div>
-  <div class="quiz-card"><div class="quiz-question">🎵 Question 3: What song did I sing for you for the first time?</div><input type="text" id="q3Answer" class="quiz-input" placeholder="Type your answer..."><div id="q3Feedback" class="quiz-feedback"></div></div>
+  <div class="quiz-card"><div class="quiz-question">📝 Question 1: On what day did I see you smiling for the first time?</div><input type="text" id="q1Answer" class="quiz-input" placeholder="Type your answer..."><div id="q1Feedback" class="quiz-feedback"></div></div>
+  <div class="quiz-card"><div class="quiz-question">💕 Question 2: How many moles do I have on my neck?</div><input type="text" id="q2Answer" class="quiz-input" placeholder="Type your answer..."><div id="q2Feedback" class="quiz-feedback"></div></div>
+  <div class="quiz-card"><div class="quiz-question">🌟 Question 3: What is that thing I never want to lose?</div><input type="text" id="q3Answer" class="quiz-input" placeholder="Type your answer..."><div id="q3Feedback" class="quiz-feedback"></div></div>
   <button id="submitQuizBtn" class="action-btn" style="background:#00c853; margin-top:10px;">✨ Submit Answers ✨</button>
   <div id="quizResult" style="margin-top:20px; min-height:100px;"></div>
+</div>
+
+<!-- QUIZ FAILED PAGE - PUNISHMENT -->
+<div id="quizFailPage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">🥔😤</div></div>
+  <h2 style="color:#ff6b6b; font-size:32px;">U FAILED IN MY QUIZ U POTATO 🥔</h2>
+  <div style="background:linear-gradient(135deg,rgba(255,107,107,0.2),rgba(220,38,38,0.2)); border-radius:30px; padding:25px; margin:20px 0; border:2px solid #ff6b6b;">
+    <p style="font-size:18px; color:#FFD966; font-weight:bold; margin-bottom:15px;">😔 Here are the correct answers:</p>
+    <div style="background:rgba(0,0,0,0.3); border-radius:20px; padding:15px; text-align:left; margin-bottom:15px;">
+      <p style="color:#FFD966; margin:8px 0;"><strong>Q1: On what day did I see you smiling for the first time?</strong></p>
+      <p style="color:#90EE90; font-style:italic;">Answer: 28 September (Or your birthday related ❤️)</p>
+    </div>
+    <div style="background:rgba(0,0,0,0.3); border-radius:20px; padding:15px; text-align:left; margin-bottom:15px;">
+      <p style="color:#FFD966; margin:8px 0;"><strong>Q2: How many moles do I have on my neck?</strong></p>
+      <p style="color:#90EE90; font-style:italic;">Answer: 2</p>
+    </div>
+    <div style="background:rgba(0,0,0,0.3); border-radius:20px; padding:15px; text-align:left;">
+      <p style="color:#FFD966; margin:8px 0;"><strong>Q3: What is that thing I never want to lose?</strong></p>
+      <p style="color:#90EE90; font-style:italic;">Answer: Nimisha, You, Me, Her, or anything related to you 💕</p>
+    </div>
+  </div>
+  <div style="background:linear-gradient(135deg,#FFD966,#ffb347); border-radius:40px; padding:25px; margin:20px 0; color:#1a2a3a;">
+    <h3 style="font-size:24px; margin-bottom:15px;">SO AS A PUNISHMENT 💪</h3>
+    <p style="font-size:18px; font-weight:bold; line-height:1.8;">
+      Now you will EAT THREE TIMES A DAY 🍽️<br><br>
+      SLEEP WELL 😴<br><br>
+      And TAKE VERY GOOD CARE OF MY FAVOURITE PERSON 💝<br><br>
+      <span style="font-style:italic;">(That's you, by the way! 💖)</span>
+    </p>
+  </div>
+  <button id="continuePunishmentBtn" class="action-btn" style="background:#00c853; margin-top:15px; font-size:18px;">✨ I Promise! Let's Continue ✨</button>
 </div>
 
 <!-- DANCE PUNISHMENT PAGE - Two Options: Send Video or Skip -->
@@ -549,28 +618,43 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <div class="wish-card" style="background:rgba(255,255,255,0.1); margin-top:15px;"><p>💃 Either way, you can continue your journey! 💃</p><p style="font-size:12px;">(But I'd love to see your dance moves if you're feeling brave! 👀✨)</p></div>
 </div>
 
-<!-- LETTER PAGE -->
-<div id="letterPage" class="container" style="display:none;">
-  <div class="sticker-container"><div class="sticker">💌</div></div>
-  <div id="secretVoiceSection" style="display:none; background:linear-gradient(135deg,#ff9a9e,#fad0c4); border-radius:40px; padding:20px; margin-bottom:20px; text-align:center; border:3px solid gold;">
-    <div style="font-size:50px;">🎤✨💖</div>
-    <h3 style="color:#d85c7a;">🌟 A Secret Voice Message Just for You! 🌟</h3>
-    <p style="color:#8b3a5e;">You proved how well you know me... now here's something special from my heart 💕</p>
+<!-- SECRET VOICE MESSAGE PAGE -->
+<div id="secretVoicePage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">🎤✨💖</div></div>
+  <h2 style="color:#d85c7a;">🌟 A Secret Voice Message Just for You! 🌟</h2>
+  <p style="color:#FFD966; margin-bottom:20px;">You proved how well you know me... now here's something special from my heart 💕</p>
+  <div style="background:linear-gradient(135deg,#ff9a9e,#fad0c4); border-radius:40px; padding:25px; text-align:center; border:3px solid gold;">
+    <div style="font-size:50px; margin-bottom:15px;">🎤✨💖</div>
     <button id="playSecretVoiceBtn" style="background:#ff6b6b; border:none; padding:12px 25px; border-radius:50px; font-size:18px; font-weight:bold; margin:15px 0; color:white; cursor:pointer;">🔊 PLAY SECRET VOICE MESSAGE 🔊</button>
-    <div id="voiceMessageStatus" style="font-size:12px; color:#6b3a4e;"></div>
+    <div id="voiceMessageStatus" style="font-size:12px; color:#6b3a4e; margin-top:10px;"></div>
   </div>
+  <button id="continueToImagesBtn" class="action-btn" style="background:#ff6b6b; margin-top:20px;">💫 Continue to Photos 💫</button>
+</div>
+
+<!-- PICTURES PAGE -->
+<div id="picturesPage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">📸💕</div></div>
+  <h2 style="color:#FFD966;">💎 My Precious Memories 💎</h2>
+  <p style="color:#FFB347; margin-bottom:20px;">These are the moments I'll cherish forever... 💖</p>
   <div class="letter-image-slot" id="letterImageSlot1" style="position: relative;">
     <img id="letterImg1" src="https://imgbs.com/uploads/image-png-da8bd625.png" style="display:block; width:100%; border-radius:20px;">
     <div class="floating-caption" style="top: 10px; left: 10px;">🌸 Cuteness Meter 📈 OVERLOADED! 🌸</div>
     <div class="floating-caption" style="bottom: 15px; right: 15px; animation-delay: 0.5s;">💖 What a STYLE! 💖</div>
     <div class="floating-caption" style="top: 40%; left: -5px; animation-delay: 1s;">😍 How cute is that smile?! 😍</div>
   </div>
-  <div class="letter-image-slot" id="letterImageSlot2" style="position: relative;">
+  <div class="letter-image-slot" id="letterImageSlot2" style="position: relative; margin-top:20px;">
     <img id="letterImg2" src="https://imgbs.com/uploads/image-png-123f342f.png" style="display:block; width:100%; border-radius:20px;">
     <div class="floating-caption" style="top: 15px; right: 10px; animation-delay: 0.2s;">👑 Queen energy right here 👑</div>
     <div class="floating-caption" style="bottom: 20px; left: 15px; animation-delay: 0.8s;">💫 Literally took my breath away 💫</div>
     <div class="floating-caption" style="top: 60%; right: -8px; animation-delay: 1.3s;">✨ Too gorgeous to handle ✨</div>
   </div>
+  <button id="continueToLetterBtn" class="action-btn" style="background:#8b5cf6; margin-top:20px;">💌 Read My Final Message 💌</button>
+</div>
+
+<!-- LETTER PAGE - FINAL MESSAGE -->
+<div id="letterPage" class="container" style="display:none;">
+  <div class="sticker-container"><div class="sticker">💌</div></div>
+  <h2 style="color:#FFD966;">💖 A Message From My Heart 💖</h2>
   <div style="font-family: 'Georgia', serif; color:#3d2b1a; background:#fffaf2; border-radius:48px; padding:28px 20px; text-align:left; box-shadow:0 10px 25px rgba(0,0,0,0.1); margin-top:15px;">
     <p style="font-size:22px; font-weight:800; text-align:center;">Happy birthday meri gorgeous ulti balti... 💖</p>
     <p>U are 19 now... soo old... grandma... well kidding.. U are the most like the most beautiful girl i have seen... the god must have spent years making u ... just be happy keep that smile on ur face always ..let ur cheeks be chubby ... i love everything about u ... don't u ever change a single thing about u ...u rare perfect ... And ur brain ..ufff no words for it ... although km hai but veryy mature and smart u are... i have sooooo much to say but that will be boring ... summarizing it... enjoy the day ... an ur everyday with the smile kitten .. Just know i am here and i am proud of u..and i love u for who u are nimisha...Happiest birthday to u.</p>
@@ -626,9 +710,7 @@ function showFloatingLyric(text) {
   const lyricDiv = document.createElement('div');
   lyricDiv.className = 'lyric-line';
   lyricDiv.textContent = text;
-  lyricDiv.style.top = Math.random() * 60 + 20 + '%';
-  lyricDiv.style.left = '10%';
-  lyricDiv.style.width = '80%';
+  lyricDiv.style.position = 'relative';
   lyricDiv.style.fontSize = (Math.random() * 10 + 22) + 'px';
   area.appendChild(lyricDiv);
   setTimeout(() => { if(lyricDiv && lyricDiv.remove) lyricDiv.remove(); }, 3800);
@@ -655,29 +737,34 @@ const playBtn = document.getElementById('playMaulaBtn');
 const songFrame = document.getElementById('songFrame');
 const statusDiv = document.getElementById('audioStatus');
 const lyricDisplayDiv = document.getElementById('lyricDisplay');
+const eyesVideo = document.getElementById('eyesVideo');
 let isPlaying = false;
-if(playBtn && songFrame) {
-  playBtn.addEventListener('click', () => {
-    if(isPlaying) { const currentSrc = songFrame.src; songFrame.src = currentSrc; stopFloatingLyrics(); }
-    songFrame.style.display = 'block';
-    songFrame.src = 'https://www.youtube.com/embed/pFxzF6lUx_0?autoplay=1&start=79&end=102&enablejsapi=1';
-    isPlaying = true;
-    startFloatingLyrics();
+
+function startEyesPageSong() {
+  songFrame.src = 'https://www.youtube.com/embed/pFxzF6lUx_0?autoplay=1&start=79&end=102&enablejsapi=1';
+  if(eyesVideo) {
+    eyesVideo.play().catch(err => console.log('Video play failed:', err));
+  }
+  isPlaying = true;
+  startFloatingLyrics();
+  playBtn.innerHTML = '🎵 Playing... 💕';
+  playBtn.style.background = '#00c853';
+  if(statusDiv) { statusDiv.innerHTML = '🎵 "Ankhein teri itni haseen..." Playing now with floating lyrics! 🎵'; statusDiv.style.color = '#88ffaa'; }
+  if(lyricDisplayDiv) lyricDisplayDiv.style.animation = 'lyricGlow 1s infinite';
+  setTimeout(() => {
     playBtn.innerHTML = '🎵 Playing... 💕';
-    playBtn.style.background = '#00c853';
-    if(statusDiv) { statusDiv.innerHTML = '🎵 "Ankhein teri itni haseen..." Playing now with floating lyrics! 🎵'; statusDiv.style.color = '#88ffaa'; }
-    if(lyricDisplayDiv) lyricDisplayDiv.style.animation = 'lyricGlow 1s infinite';
-    setTimeout(() => {
-      songFrame.style.display = 'none';
-      playBtn.innerHTML = '🎵 Play "Ankhein Teri..." 🎵';
-      playBtn.style.background = '#ff6b6b';
-      if(statusDiv) { statusDiv.innerHTML = '💕 Beautiful, wasn\'t it? Click to hear again 💕'; statusDiv.style.color = '#FFD966'; }
-      if(lyricDisplayDiv) lyricDisplayDiv.style.animation = '';
-      isPlaying = false;
-      stopFloatingLyrics();
-    }, 23000);
-    burstConfetti();
-  });
+    playBtn.style.background = '#ff6b6b';
+    if(statusDiv) { statusDiv.innerHTML = '💕 Beautiful, wasn\'t it? 💕'; statusDiv.style.color = '#FFD966'; }
+    if(lyricDisplayDiv) lyricDisplayDiv.style.animation = '';
+    if(eyesVideo) eyesVideo.pause();
+    isPlaying = false;
+    stopFloatingLyrics();
+  }, 23000);
+  burstConfetti();
+}
+
+if(playBtn) {
+  playBtn.addEventListener('click', startEyesPageSong);
 }
 
 // CAKE BUILDER
@@ -689,26 +776,28 @@ function renderCake(){
   const layerCount=parseInt(document.getElementById("layerSlider").value);
   const mainDiv=document.createElement("div"); mainDiv.style.cssText="display:flex;flex-direction:column;align-items:center;";
   const frostingDiv=document.createElement("div"); frostingDiv.className="frosting-layer"; frostingDiv.style.background=frostingColor; frostingDiv.style.padding="8px 12px 4px"; frostingDiv.style.borderRadius="24px 24px 16px 16px";
-  const drips=document.createElement("div"); drips.className="frosting-drips"; for(let i=0;i<8;i++){ let drip=document.createElement("div"); drip.className="drip"; drip.style.height=14+Math.random()*16+"px"; drip.style.background=frostingColor; drips.appendChild(drip); } frostingDiv.appendChild(drips);
+  const drips=document.createElement("div"); drips.className="frosting-drips"; for(let i=0;i<8;i++){ let drip=document.createElement("div"); drip.className="drip"; drip.style.height=14+Math.random()*16+"px"; drip.style.background=frostingColor; drip.style.animationDelay=(i*0.1)+"s"; drips.appendChild(drip); } frostingDiv.appendChild(drips);
   const candleRow=document.createElement("div"); candleRow.style.display="flex"; candleRow.style.justifyContent="center"; candleRow.style.gap="12px"; candleRow.style.marginBottom="6px";
   for(let i=0;i<candleNum;i++){ let cdiv=document.createElement("div"); cdiv.className="candle-3d"; if(candlesLit){ let flame=document.createElement("div"); flame.className="candle-flame"; cdiv.appendChild(flame); } let body=document.createElement("div"); body.className="candle-body"; body.style.background=["#ff6b6b","#ffd93d","#6bcb77","#4d96ff"][i%4]; cdiv.appendChild(body); candleRow.appendChild(cdiv); }
   frostingDiv.prepend(candleRow); mainDiv.appendChild(frostingDiv);
-  for(let i=0;i<layerCount;i++){ let layerColor=layerColors[i]||layerColorOptions[i%layerColorOptions.length].hex; let topRound=document.createElement("div"); topRound.className="cake-layer-top"; topRound.style.background=`radial-gradient(circle at 30% 30%, ${layerColor}, #00000055)`; topRound.style.width="230px"; topRound.style.height="14px"; topRound.style.borderRadius="50%"; mainDiv.appendChild(topRound); let layerDiv=document.createElement("div"); layerDiv.className="cake-layer"; layerDiv.style.background=`linear-gradient(145deg, ${layerColor}, #00000099)`; layerDiv.style.width="220px"; layerDiv.style.height="42px"; layerDiv.style.borderRadius="8px"; mainDiv.appendChild(layerDiv); }
+  for(let i=0;i<layerCount;i++){ 
+    let layerColor=layerColors[i]||layerColorOptions[i%layerColorOptions.length].hex; 
+    const sizeRatio = 1 - ((layerCount - 1 - i) * 0.12);
+    const layerWidth = Math.max(140, 220 * sizeRatio);
+    const layerHeight = Math.max(25, 42 * sizeRatio);
+    const topWidth = Math.max(148, 228 * sizeRatio);
+    
+    let topRound=document.createElement("div"); topRound.className="cake-layer-top"; topRound.style.background=`radial-gradient(circle at 30% 30%, ${layerColor}, #00000055)`; topRound.style.width=topWidth+"px"; topRound.style.height=(layerHeight*0.33)+"px"; topRound.style.borderRadius="50%"; mainDiv.appendChild(topRound); 
+    
+    let layerDiv=document.createElement("div"); layerDiv.className="cake-layer"; layerDiv.style.background=`linear-gradient(145deg, ${layerColor}, #00000099)`; layerDiv.style.width=layerWidth+"px"; layerDiv.style.height=layerHeight+"px"; layerDiv.style.borderRadius="8px"; layerDiv.style.animationDelay=(i*0.1)+"s"; mainDiv.appendChild(layerDiv); 
+  }
   let stand=document.createElement("div"); stand.className="cake-stand"; mainDiv.appendChild(stand);
   canvas.appendChild(mainDiv);
 }
 function updateLayers(){ let count=parseInt(document.getElementById("layerSlider").value); document.getElementById("layerCount").innerText=count; while(layerColors.length<count)layerColors.push(layerColorOptions[layerColors.length%layerColorOptions.length].hex); while(layerColors.length>count)layerColors.pop(); renderColorPickers(); renderCake(); }
 function updateCandles(){ candleNum=parseInt(document.getElementById("candleSlider").value); document.getElementById("candleCount").innerText=candleNum; renderCake(); }
 function renderColorPickers(){ let layerGrid=document.getElementById("layerColorGrid"); if(!layerGrid)return; let layerCt=parseInt(document.getElementById("layerSlider").value); layerGrid.innerHTML=""; for(let i=0;i<layerCt;i++){ let subGrid=document.createElement("div"); subGrid.style.cssText="display:flex;gap:8px;margin:6px 0;justify-content:center;"; layerColorOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(layerColors[i]===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ layerColors[i]=col.hex; renderCake(); document.querySelectorAll("#layerColorGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); subGrid.appendChild(sw); }); layerGrid.appendChild(subGrid); } let frostingGrid=document.getElementById("frostingGrid"); frostingGrid.innerHTML=""; frostingOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(frostingColor===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ frostingColor=col.hex; renderCake(); document.querySelectorAll("#frostingGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); frostingGrid.appendChild(sw); }); }
-function initCakeBuilder(){ layerColors=["#e74c3c","#f1c40f"]; frostingColor="#fff5e0"; candleNum=3; candlesLit=false; document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; updateLayers(); document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); }; document.getElementById("finishCakeBtn").onclick=()=>{ document.getElementById("cakeBuilder").style.display="none"; document.getElementById("wishPark").style.display="block"; burstConfetti(); }; }
-
-// WISH PARK
-document.getElementById('saveWishParkBtn')?.addEventListener('click', () => {
-  const wish = document.getElementById('wishParkWish').value;
-  if(wish.trim()) { localStorage.setItem('wishParkWish', wish); const confirmDiv = document.getElementById('wishConfirmation'); confirmDiv.style.display = 'block'; confirmDiv.innerHTML = '✨ Your wish has been sent to the stars! ✨<br>"' + wish.substring(0, 50) + '"'; setTimeout(() => { confirmDiv.style.opacity = '0'; setTimeout(() => confirmDiv.style.display = 'none', 1000); }, 3000); burstConfetti(); } 
-  else { alert('🌸 Please write your wish first! 🌸'); }
-});
-document.getElementById('continueFromWishParkBtn')?.addEventListener('click', () => { document.getElementById('wishPark').style.display = 'none'; document.getElementById('sparkleEyesPage').style.display = 'block'; });
+function initCakeBuilder(){ layerColors=["#e74c3c","#f1c40f"]; frostingColor="#fff5e0"; candleNum=3; candlesLit=false; document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; updateLayers(); document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); const wishModal=document.getElementById("wishModal"); wishModal.style.visibility="visible"; wishModal.style.opacity="1"; }; document.getElementById("finishCakeBtn").onclick=()=>{ document.getElementById("cakeBuilder").style.display="none"; document.getElementById("sparkleEyesPage").style.display="block"; setTimeout(() => startEyesPageSong(), 500); burstConfetti(); }; }
 
 // QUIZ
 let quizPassed = false;
@@ -717,24 +806,27 @@ function checkAnswers() {
   const q1 = document.getElementById('q1Answer').value.trim().toLowerCase();
   const q2 = document.getElementById('q2Answer').value.trim().toLowerCase();
   const q3 = document.getElementById('q3Answer').value.trim().toLowerCase();
-  const correct1 = ['biryani', 'biriyani']; const correct2 = ['nimisha', 'you']; const correct3 = ['jeene laga hoon', 'jeene laga hu'];
+  const correct1 = ['28 september', '28september', '28 sept', '28sept'];
+  const correct2 = ['2', 'two'];
+  const correct3 = ['nimisha', 'you', 'me', 'her', 'yourself', 'myself'];
   let score = 0;
-  if(correct1.includes(q1)) { score++; showCompliment('q1Feedback', '🎉 Correct! Biryani lover! 😋❤️'); } else { document.getElementById('q1Feedback').innerHTML = '❌ The answer is "Biryani"!'; }
-  if(correct2.includes(q2)) { score++; showCompliment('q2Feedback', '💖 YOU are the one I love most! 🥺💕'); } else { document.getElementById('q2Feedback').innerHTML = '❌ The answer is YOU! (Nimisha)'; }
-  if(correct3.includes(q3)) { score++; showCompliment('q3Feedback', '🎵 "Jeene Laga Hoon" - the song from my heart! 🎤💖'); } else { document.getElementById('q3Feedback').innerHTML = '❌ It was "Jeene Laga Hoon"!'; }
+  if(correct1.includes(q1)) { score++; showCompliment('q1Feedback', '🎉 Correct! That day was so special! 💕'); } else { document.getElementById('q1Feedback').innerHTML = '❌ The answer is "28 September"!'; }
+  if(correct2.includes(q2)) { score++; showCompliment('q2Feedback', '💕 Yes! Exactly 2! 🥺'); } else { document.getElementById('q2Feedback').innerHTML = '❌ The answer is "2"!'; }
+  if(correct3.includes(q3)) { score++; showCompliment('q3Feedback', '🌟 NIMISHA! Always! You are my everything! 💖'); } else { document.getElementById('q3Feedback').innerHTML = '❌ The answer is YOU! (Nimisha, You, Me, Her) 💕'; }
   const resultDiv = document.getElementById('quizResult');
   if(score === 3) {
     quizPassed = true;
-    resultDiv.innerHTML = `<div style="background:linear-gradient(135deg,#00c853,#009624); border-radius:30px; padding:20px;"><div style="font-size:50px;">🎉🏆💖</div><h3 style="color:white;">PERFECT SCORE! You know me so well! 🥺💕</h3><p style="color:#FFD966;">You've unlocked a SECRET VOICE MESSAGE! ✨</p></div>`;
+    resultDiv.innerHTML = `<div style="background:linear-gradient(135deg,#00c853,#009624); border-radius:30px; padding:20px;"><div style="font-size:50px;">🎉🏆💖</div><h3 style="color:white;">PERFECT SCORE! You know me SO WELL! 🥺💕</h3><p style="color:#FFD966;">You've unlocked a SECRET VOICE MESSAGE! ✨</p></div>`;
     burstConfetti();
     localStorage.setItem('quizPassed', 'true');
-    setTimeout(() => { document.getElementById('quizPage').style.display = 'none'; document.getElementById('letterPage').style.display = 'block'; document.getElementById('secretVoiceSection').style.display = 'block'; }, 2000);
+    setTimeout(() => { document.getElementById('quizPage').style.display = 'none'; document.getElementById('secretVoicePage').style.display = 'block'; }, 2000);
   } else {
-    resultDiv.innerHTML = `<div style="background:linear-gradient(135deg,#ff6b6b,#dc2626); border-radius:30px; padding:20px;"><div style="font-size:50px;">💃🕺</div><h3 style="color:white;">You got ${score}/3 correct!</h3><p style="color:#FFD966;">Time to choose your fate! 💃</p></div>`;
-    setTimeout(() => { document.getElementById('quizPage').style.display = 'none'; document.getElementById('dancePage').style.display = 'block'; }, 1500);
+    resultDiv.innerHTML = `<div style="background:linear-gradient(135deg,#ff6b6b,#dc2626); border-radius:30px; padding:20px;"><div style="font-size:50px;">💔😭</div><h3 style="color:white;">You got ${score}/3 correct...</h3><p style="color:#FFD966;">Some answers were wrong! Check your results... 😔</p></div>`;
+    setTimeout(() => { document.getElementById('quizPage').style.display = 'none'; document.getElementById('quizFailPage').style.display = 'block'; }, 1500);
   }
 }
 document.getElementById('submitQuizBtn')?.addEventListener('click', checkAnswers);
+document.getElementById('continuePunishmentBtn')?.addEventListener('click', () => { document.getElementById('quizFailPage').style.display = 'none'; document.getElementById('picturesPage').style.display = 'block'; });
 
 // DANCE PAGE - TWO OPTIONS (Send Video or Skip)
 const sendVideoBtn = document.getElementById('sendVideoBtn');
@@ -785,6 +877,10 @@ if(skipDanceBtn) {
 
 document.getElementById('playSecretVoiceBtn')?.addEventListener('click', () => { const statusDiv = document.getElementById('voiceMessageStatus'); statusDiv.innerHTML = '🎤 Playing secret voice message... 🎤💖'; setTimeout(() => { statusDiv.innerHTML = '✨ That was straight from my heart! ✨'; }, 5000); });
 
+document.getElementById('continueToImagesBtn')?.addEventListener('click', () => { document.getElementById('secretVoicePage').style.display = 'none'; document.getElementById('picturesPage').style.display = 'block'; });
+
+document.getElementById('continueToLetterBtn')?.addEventListener('click', () => { document.getElementById('picturesPage').style.display = 'none'; document.getElementById('letterPage').style.display = 'block'; });
+
 // TREASURE
 let currentTreasureIndex = 0;
 function scrollToTreasureItem(index) {
@@ -794,7 +890,7 @@ function scrollToTreasureItem(index) {
   if(index >= 0 && index < wrappers.length) {
     wrappers[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     currentTreasureIndex = index;
-    document.getElementById('treasureCaption').innerHTML = `💎 Item ${currentTreasureIndex + 1} of 5 💎`;
+    document.getElementById('treasureCaption').innerHTML = `💎 Video ${currentTreasureIndex + 1} of 5 💎`;
     const videos = slider.querySelectorAll('video');
     videos.forEach(v => { if(!v.paused) v.pause(); });
   }
@@ -802,15 +898,11 @@ function scrollToTreasureItem(index) {
 function initTreasure() {
   document.getElementById('treasurePrevBtn')?.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex - 1));
   document.getElementById('treasureNextBtn')?.addEventListener('click', () => scrollToTreasureItem(currentTreasureIndex + 1));
-  const videos = document.querySelectorAll('.treasure-item-wrapper video');
-  videos.forEach(video => {
-    const wrapper = video.closest('.treasure-item-wrapper');
-    const overlay = wrapper?.querySelector('.play-icon-overlay');
-    video.addEventListener('click', () => { if(video.paused) { video.play(); if(overlay) overlay.style.opacity = '0'; } else { video.pause(); if(overlay) overlay.style.opacity = '0.8'; } });
-    video.addEventListener('play', () => { videos.forEach(v => { if(v !== video && !v.paused) v.pause(); }); if(overlay) overlay.style.opacity = '0'; });
-    video.addEventListener('pause', () => { if(overlay) overlay.style.opacity = '0.8'; });
+  const videos = document.querySelectorAll('#treasureSlider video');
+  videos.forEach((video, idx) => {
+    video.addEventListener('play', () => { videos.forEach(v => { if(v !== video && !v.paused) v.pause(); }); });
   });
-  document.getElementById('treasureCaption').innerHTML = `💎 Item 1 of 5 💎`;
+  document.getElementById('treasureCaption').innerHTML = `💎 Video 1 of 5 💎`;
 }
 
 // LOCK SCREEN
@@ -828,10 +920,20 @@ function showGoodGirlMessage(){ const popup=document.getElementById("goodGirlPop
 function setupChaseNo(){ const noBtn=document.getElementById("noCakeBtn"),yesBtn=document.getElementById("yesCakeBtn"),teaserDiv=document.getElementById("teasyMessage"); if(!noBtn)return; noBtn.addEventListener("click",()=>{ noClickCount++; teaserDiv.innerText=teaseMessages[noClickCount%teaseMessages.length]; let scaleNo=Math.max(0.4,1-noClickCount*0.09); noBtn.style.transform=`scale(${scaleNo})`; if(noClickCount>=5)noBtn.style.opacity="0.5"; if(noClickCount>=8)noBtn.style.pointerEvents="none"; let newScale=1+(noClickCount*0.12); yesBtn.style.transform=`scale(${newScale})`; yesBtn.style.fontSize=`${Math.min(44,20+(noClickCount*2))}px`; const rX=(Math.random()-0.5)*40,rY=(Math.random()-0.5)*25; noBtn.style.position="relative"; noBtn.style.left=`${rX}px`; noBtn.style.top=`${rY}px`; }); yesBtn.addEventListener("click",showGoodGirlMessage); }
 
 // NAVIGATION
-document.getElementById("continueToEarthBtn")?.addEventListener("click",()=>{ document.getElementById("sparkleEyesPage").style.display="none"; document.getElementById("earthNamePage").style.display="block"; });
+document.getElementById("continueToEarthBtn")?.addEventListener("click",()=>{ stopFloatingLyrics(); document.getElementById("sparkleEyesPage").style.display="none"; document.getElementById("earthNamePage").style.display="block"; });
+
+// COORDINATES GUESS
+document.getElementById("submitCoordsBtn")?.addEventListener("click",()=>{ const guess=document.getElementById("coordsGuessInput").value; if(guess.trim()){ const resultDiv=document.getElementById("coordsResult"); resultDiv.innerHTML='<div style="background:linear-gradient(135deg,#ff6b6b,#dc2626); border-radius:30px; padding:15px; color:white; font-weight:bold; margin-bottom:15px;"><p style="font-size:18px;">❌ Nope! That\'s wrong, dumbo! 🤭</p></div><div style="background:linear-gradient(135deg,#FFD966,#ffb347); border-radius:30px; padding:20px; color:#1a2a3a; font-weight:bold; text-align:center;"><p style="font-size:22px; margin:10px 0;">💖 The real coordinates are... 💖</p><p style="font-size:18px; margin:5px 0; font-style:italic;">📍 In my heart, dumbo! 💕</p><p style="font-size:16px; margin-top:15px;">You\'ll always be there, forever! 🥺✨</p></div>'; document.getElementById("coordsGuessInput").style.display="none"; document.getElementById("submitCoordsBtn").style.display="none"; burstConfetti(); } else { alert("🤔 Guess something first! 😊"); } });
+
 document.getElementById("continueToTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("earthNamePage").style.display="none"; document.getElementById("treasurePage").style.display="block"; initTreasure(); });
 document.getElementById("continueToGameFromTreasureBtn")?.addEventListener("click",()=>{ document.getElementById("treasurePage").style.display="none"; document.getElementById("gamePage").style.display="block"; initGame(); });
 document.getElementById("gameContinueBtn")?.addEventListener("click",()=>{ document.getElementById("gamePage").style.display="none"; document.getElementById("quizPage").style.display="block"; });
+
+// Auto-start song and lyrics when sparkle eyes page is shown
+const originalShowSparkleEyes = () => {
+  document.getElementById("sparkleEyesPage").style.display = "block";
+  setTimeout(() => startEyesPageSong(), 500);
+};
 
 // GAME
 let gameActive=false, score=0, timeLeft=30, gameInterval, objects=[]; 
@@ -839,16 +941,36 @@ const gameCanvas=document.getElementById("gameCanvas"), gameCtx=gameCanvas.getCo
 gameCanvas.width=500; gameCanvas.height=400;
 function initGame(){ score=0; timeLeft=30; objects=[]; gameActive=true; document.getElementById("gameScore").innerText="❤️ Score: 0"; document.getElementById("gameTimer").innerText="Time: 30s"; document.getElementById("gameResult").innerHTML=""; document.getElementById("resetGameBtn").style.display="none"; document.getElementById("gameContinueBtn").style.display="none"; if(gameInterval)clearInterval(gameInterval); gameInterval=setInterval(()=>{ if(gameActive&&timeLeft>0){ timeLeft--; document.getElementById("gameTimer").innerText=`Time: ${timeLeft}s`; if(timeLeft<=0){ endGame(false); } } },1000); for(let i=0;i<3;i++) spawnObject(); requestAnimationFrame(drawGame); }
 function spawnObject(){ if(!gameActive)return; let type=Math.random()<0.7?"heart":"bomb"; let x=Math.random()*(gameCanvas.width-40)+20; objects.push({x:x, y:0, type:type, radius:16, speed:1.2+Math.random()*1.5}); }
-function drawGame(){ if(!gameCtx)return; gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); for(let o of objects){ if(o.type==="heart"){ gameCtx.fillStyle="#ff4d6d"; gameCtx.beginPath(); gameCtx.moveTo(o.x, o.y-8); gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); gameCtx.fill(); } else { gameCtx.fillStyle="#dc2626"; gameCtx.beginPath(); gameCtx.arc(o.x,o.y,12,0,Math.PI*2); gameCtx.fill(); } o.y+=o.speed; } for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); if(gameActive && objects.length<7) spawnObject(); if(gameActive) requestAnimationFrame(drawGame); }
-gameCanvas.addEventListener("click",(e)=>{ if(!gameActive)return; let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; for(let i=objects.length-1;i>=0;i--){ let o=objects[i]; if(Math.hypot(mouseX-o.x, mouseY-o.y)<o.radius+6){ if(o.type==="heart"){ score++; document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; objects.splice(i,1); } else { endGame(true); } break; } } });
+function drawGame(){ if(!gameCtx)return; gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); for(let o of objects){ if(o.type==="heart"){ gameCtx.fillStyle="#ff4d6d"; gameCtx.beginPath(); gameCtx.moveTo(o.x, o.y-8); gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); gameCtx.fill(); gameCtx.strokeStyle="#ff1744"; gameCtx.lineWidth=1.5; gameCtx.stroke(); } else { gameCtx.fillStyle="#000000"; gameCtx.beginPath(); gameCtx.arc(o.x,o.y,11,0,Math.PI*2); gameCtx.fill(); gameCtx.fillStyle="#1a1a1a"; gameCtx.beginPath(); gameCtx.arc(o.x-1,o.y-1,11,0,Math.PI*2); gameCtx.fill(); gameCtx.fillStyle="#333333"; gameCtx.beginPath(); gameCtx.arc(o.x,o.y,9.5,0,Math.PI*2); gameCtx.fill(); gameCtx.fillStyle="#FFD700"; gameCtx.beginPath(); gameCtx.arc(o.x+4,o.y-4,3,0,Math.PI*2); gameCtx.fill(); gameCtx.strokeStyle="#1a1a1a"; gameCtx.lineWidth=2; gameCtx.beginPath(); gameCtx.arc(o.x,o.y-11,2,0,Math.PI*2); gameCtx.stroke(); gameCtx.strokeStyle="#ff6b35"; gameCtx.lineWidth=1.5; gameCtx.beginPath(); gameCtx.moveTo(o.x,o.y-11); gameCtx.lineTo(o.x,o.y-15); gameCtx.stroke(); } o.y+=o.speed; } for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); if(gameActive && objects.length<7) spawnObject(); if(gameActive) requestAnimationFrame(drawGame); }
+gameCanvas.addEventListener("click",(e)=>{ if(!gameActive)return; let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; let hitObject=null; for(let i=0;i<objects.length;i++){ let o=objects[i]; let distance=Math.hypot(mouseX-o.x, mouseY-o.y); if(distance<o.radius+8){ hitObject=i; break; } } if(hitObject!==null){ let o=objects[hitObject]; if(o.type==="heart"){ if(!o.clicked){ o.clicked=true; score++; document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; let particles=[]; for(let p=0;p<5;p++){ particles.push({x:o.x, y:o.y, vx:(Math.random()-0.5)*4, vy:(Math.random()-0.5)*4-1, life:0.8}); } o.particles=particles; setTimeout(()=>objects.splice(objects.indexOf(o),1),100); } } else { endGame(true); } } });
 function endGame(bombHit){ gameActive=false; clearInterval(gameInterval); if(bombHit){ document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b;'>💥 BOOM! Game Over 💥</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } else { if(score>=15){ document.getElementById("gameResult").innerHTML="<p style='color:#FFD966;'>🎉 You won! Premium token earned! 💖✨</p>"; document.getElementById("gameContinueBtn").style.display="inline-block"; } else { document.getElementById("gameResult").innerHTML="<p>Time's up! Score: "+score+"/15 needed.</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } } }
 document.getElementById("resetGameBtn")?.addEventListener("click",initGame);
+document.getElementById("skipGameCheatBtn")?.addEventListener("click",()=>{ document.getElementById("gamePage").style.display="none"; document.getElementById("quizPage").style.display="block"; });
+window.addEventListener('keydown',(e)=>{ if((e.key==='s'||e.key==='S')&&document.getElementById('gamePage').style.display!=="none"){document.getElementById('gamePage').style.display='none'; document.getElementById('quizPage').style.display='block';} });
 
 // FLIRTY TEXT & VIDEO
 const eyesVideoElem = document.getElementById("eyesVideo");
 if(eyesVideoElem){ eyesVideoElem.querySelector("source").src = "https://files.catbox.moe/142fsl.mp4"; eyesVideoElem.load(); }
 const flirtyTexts=["✨ Ohh look my reflection in those eyes ✨","💙 Those eyes hold galaxies...","🌟 Brighter than a thousand stars","💖 I get lost in them every time","🌙 Moonlight is jealous of your gaze"]; let txtIndex=0;
 setInterval(()=>{ let zone=document.getElementById("flirtyTextZone"); if(zone&&document.getElementById("sparkleEyesPage").style.display==="block"){ zone.innerHTML=flirtyTexts[txtIndex%flirtyTexts.length]; txtIndex++; } },2800);
+
+// WISH MODAL
+document.getElementById('submitWishBtn')?.addEventListener('click', () => {
+  const wish = document.getElementById('birthdayWish').value;
+  if(wish.trim()) {
+    localStorage.setItem('birthdayWish', wish);
+    const wishModal = document.getElementById('wishModal');
+    wishModal.style.visibility = 'hidden';
+    wishModal.style.opacity = '0';
+    document.getElementById('cakeBuilder').style.display = 'none';
+    document.getElementById('sparkleEyesPage').style.display = 'block';
+    setTimeout(() => startEyesPageSong(), 500);
+    burstConfetti();
+  } else {
+    alert('💫 Please write your wish first! 💫');
+  }
+});
+
 setupChaseNo();
 </script>
 </body>
