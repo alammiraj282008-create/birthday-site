@@ -444,18 +444,11 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <div class="good-girl-card" style="background:linear-gradient(145deg,#1e1a3a,#0f0c28); max-width:420px;">
     <div style="font-size:60px;">🕯️✨💫</div>
     <h3 style="color:#FFD966; font-size:24px; margin:15px 0;">Make Your Birthday Wish! 🎂💖</h3>
-    <p style="color:#ffb347; font-size:14px; margin-bottom:15px;">Write a wish here and it will appear for everyone who opens this page! ✨</p>
+    <p style="color:#ffb347; font-size:14px; margin-bottom:15px;">Write your wish in the box below ✨</p>
     <textarea id="birthdayWish" rows="4" style="width:90%; border-radius:20px; padding:12px; background:rgba(255,255,255,0.9); font-family:inherit; margin:10px auto; display:block; border:2px solid gold;" placeholder="Write your heartfelt wish here..."></textarea>
-    <button id="submitWishBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:15px 0; color:#1a2a3a; cursor:pointer; font-size:16px;">🌟 My Wish is Made! 🌟</button>
+    <button id="submitWishBtn" style="background:#FFD966; border:none; padding:12px 30px; border-radius:40px; font-weight:bold; margin:15px 0; color:#1a2a3a; cursor:pointer; font-size:16px;">🌟 Save My Wish 🌟</button>
     <div id="wishStatus" style="color:#ffe484; min-height:20px; font-size:13px; margin-top:6px;"></div>
   </div>
-</div>
-
-<div id="sharedWishBoard" class="container" style="display:none; margin-top:20px;">
-  <div class="sticker-container"><div class="sticker">💖📝</div></div>
-  <h2 style="color:#FFD966;">🌟 Shared Birthday Wishes 🌟</h2>
-  <p style="color:#ffb347; font-size:14px; margin-bottom:12px;">Every wish written from any device will appear here instantly 💫</p>
-  <div id="wishBoardList" style="text-align:left; display:flex; flex-direction:column; gap:10px; margin-top:12px;"></div>
 </div>
 
 <!-- SPARKLE EYES PAGE with Floating Lyrics and Song -->
@@ -842,7 +835,7 @@ function renderCake(){
 function updateLayers(){ let count=parseInt(document.getElementById("layerSlider").value); document.getElementById("layerCount").innerText=count; while(layerColors.length<count)layerColors.push(layerColorOptions[layerColors.length%layerColorOptions.length].hex); while(layerColors.length>count)layerColors.pop(); renderColorPickers(); renderCake(); }
 function updateCandles(){ candleNum=parseInt(document.getElementById("candleSlider").value); document.getElementById("candleCount").innerText=candleNum; renderCake(); }
 function renderColorPickers(){ let layerGrid=document.getElementById("layerColorGrid"); if(!layerGrid)return; let layerCt=parseInt(document.getElementById("layerSlider").value); layerGrid.innerHTML=""; for(let i=0;i<layerCt;i++){ let subGrid=document.createElement("div"); subGrid.style.cssText="display:flex;gap:8px;margin:6px 0;justify-content:center;"; layerColorOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(layerColors[i]===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ layerColors[i]=col.hex; renderCake(); document.querySelectorAll("#layerColorGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); subGrid.appendChild(sw); }); layerGrid.appendChild(subGrid); } let frostingGrid=document.getElementById("frostingGrid"); frostingGrid.innerHTML=""; frostingOptions.forEach(col=>{ let sw=document.createElement("div"); sw.className="color-swatch"; sw.style.background=col.hex; if(frostingColor===col.hex)sw.classList.add("selected"); sw.addEventListener("click",()=>{ frostingColor=col.hex; renderCake(); document.querySelectorAll("#frostingGrid .color-swatch").forEach(s=>s.classList.remove("selected")); sw.classList.add("selected"); }); frostingGrid.appendChild(sw); }); }
-function initCakeBuilder(){ layerColors=["#e74c3c","#f1c40f"]; frostingColor="#fff5e0"; candleNum=3; candlesLit=false; document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; updateLayers(); document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); const wishModal=document.getElementById("wishModal"); wishModal.style.visibility="visible"; wishModal.style.opacity="1"; }; document.getElementById("finishCakeBtn").onclick=()=>{ document.getElementById("cakeBuilder").style.display="none"; document.getElementById("sharedWishBoard").style.display="block"; document.getElementById("sparkleEyesPage").style.display="block"; setTimeout(() => startEyesPageSong(), 500); burstConfetti(); }; }
+function initCakeBuilder(){ layerColors=["#e74c3c","#f1c40f"]; frostingColor="#fff5e0"; candleNum=3; candlesLit=false; document.getElementById("layerSlider").oninput=()=>{ updateLayers(); candlesLit=false; renderCake(); }; document.getElementById("candleSlider").oninput=()=>{ updateCandles(); candlesLit=false; renderCake(); }; updateLayers(); document.getElementById("lightCandlesBtn").onclick=()=>{ candlesLit=true; renderCake(); const wishModal=document.getElementById("wishModal"); wishModal.style.visibility="visible"; wishModal.style.opacity="1"; }; document.getElementById("finishCakeBtn").onclick=()=>{ document.getElementById("cakeBuilder").style.display="none"; document.getElementById("sparkleEyesPage").style.display="block"; setTimeout(() => startEyesPageSong(), 500); burstConfetti(); }; }
 
 // QUIZ
 let quizPassed = false;
@@ -1038,64 +1031,26 @@ if(eyesVideoElem){ eyesVideoElem.querySelector("source").src = "https://files.ca
 const flirtyTexts=["✨ Ohh look my reflection in those eyes ✨","💙 Those eyes hold galaxies...","🌟 Brighter than a thousand stars","💖 I get lost in them every time","🌙 Moonlight is jealous of your gaze"]; let txtIndex=0;
 setInterval(()=>{ let zone=document.getElementById("flirtyTextZone"); if(zone&&document.getElementById("sparkleEyesPage").style.display==="block"){ zone.innerHTML=flirtyTexts[txtIndex%flirtyTexts.length]; txtIndex++; } },2800);
 
-// SHARED WISH BOARD
-async function loadSharedWishes() {
-  const list = document.getElementById('wishBoardList');
-  if(!list) return;
-  try {
-    const response = await fetch('/api/wishes');
-    const data = await response.json();
-    const wishes = Array.isArray(data.wishes) ? data.wishes : [];
-    if(!wishes.length) {
-      list.innerHTML = '<div style="padding:12px 14px; border-radius:18px; background:rgba(255,255,255,0.12); color:#ffe484;">No wishes yet — be the first to write one ✨</div>';
-      return;
-    }
-    list.innerHTML = wishes.map((item, index) => `
-      <div style="padding:12px 14px; border-radius:18px; background:rgba(255,255,255,0.14); border:1px solid rgba(255,215,0,0.35);">
-        <div style="font-size:12px; color:#ffd966; margin-bottom:6px;">💖 Wish ${index + 1}</div>
-        <div style="color:white; line-height:1.6;">${item.text}</div>
-      </div>
-    `).join('');
-  } catch (error) {
-    list.innerHTML = '<div style="padding:12px 14px; border-radius:18px; background:rgba(255,255,255,0.12); color:#ffe484;">Unable to load wishes right now.</div>';
-  }
-}
-
-async function submitSharedWish() {
-  const wish = document.getElementById('birthdayWish').value;
+// SIMPLE WISH BOX
+function saveWishLocally() {
+  const wish = document.getElementById('birthdayWish').value.trim();
   const statusDiv = document.getElementById('wishStatus');
-  if(!wish.trim()) {
+  if(!wish) {
     statusDiv.innerHTML = '💫 Please write your wish first! 💫';
     return;
   }
 
-  statusDiv.innerHTML = '✨ Sending your wish...';
-  try {
-    const response = await fetch('/api/wishes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: wish.trim() })
-    });
-    const data = await response.json();
-    if(data.success) {
-      document.getElementById('birthdayWish').value = '';
-      const wishModal = document.getElementById('wishModal');
-      wishModal.style.visibility = 'hidden';
-      wishModal.style.opacity = '0';
-      await loadSharedWishes();
-      statusDiv.innerHTML = '💖 Your wish has been shared!';
-      burstConfetti();
-    } else {
-      statusDiv.innerHTML = '⚠️ Could not send your wish right now.';
-    }
-  } catch (error) {
-    statusDiv.innerHTML = '⚠️ Could not send your wish right now.';
-  }
+  const key = 'birthday-wish-note';
+  localStorage.setItem(key, wish);
+  document.getElementById('birthdayWish').value = '';
+  const wishModal = document.getElementById('wishModal');
+  wishModal.style.visibility = 'hidden';
+  wishModal.style.opacity = '0';
+  statusDiv.innerHTML = '💖 Your wish is saved!';
+  burstConfetti();
 }
 
-document.getElementById('submitWishBtn')?.addEventListener('click', submitSharedWish);
-window.addEventListener('load', loadSharedWishes);
-setInterval(loadSharedWishes, 5000);
+document.getElementById('submitWishBtn')?.addEventListener('click', saveWishLocally);
 
 setupChaseNo();
 </script>
