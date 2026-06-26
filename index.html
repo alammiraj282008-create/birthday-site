@@ -919,9 +919,6 @@ document.getElementById('playSecretVoiceBtn')?.addEventListener('click', () => {
   'https://files.catbox.moe/dgw6vz.mp3'
 ];
 
-clearTimeout(window.secretVoiceTimer1);
-clearTimeout(window.secretVoiceTimer2);
-
 let playIndex = 0;
 const playNextVoice = () => {
   if(playIndex >= voiceLinks.length) {
@@ -933,20 +930,14 @@ const playNextVoice = () => {
   audio.currentTime = 0;
   audio.src = voiceLinks[playIndex];
   audio.load();
+
+  audio.onended = () => {
+    playIndex += 1;
+    playNextVoice();
+  };
+
+  statusDiv.innerHTML = `🎤 Playing message ${playIndex + 1} of ${voiceLinks.length}... 💖`;
   audio.play().catch(() => { statusDiv.innerHTML = '🔊 Click again if the audio needs to load.'; });
-
-  const nextDelay = playIndex === 0 ? 2000 : 3000;
-  const nextIndex = playIndex + 1;
-  if(nextIndex < voiceLinks.length) {
-    const timerId = setTimeout(() => {
-      playIndex = nextIndex;
-      playNextVoice();
-    }, nextDelay);
-    if(playIndex === 0) window.secretVoiceTimer1 = timerId;
-    else window.secretVoiceTimer2 = timerId;
-  }
-
-  playIndex = nextIndex;
 };
 
 statusDiv.innerHTML = '🎤 Playing secret voice message... 🎤💖';
@@ -1051,6 +1042,20 @@ function saveWishLocally() {
 }
 
 document.getElementById('submitWishBtn')?.addEventListener('click', saveWishLocally);
+
+const giftBox = document.getElementById('giftBox');
+const giftBoxModal = document.getElementById('giftBoxModal');
+const closeGiftBoxBtn = document.getElementById('closeGiftBoxBtn');
+if(giftBox && giftBoxModal){
+  giftBox.addEventListener('click', () => {
+    giftBoxModal.style.display = 'flex';
+  });
+}
+if(closeGiftBoxBtn && giftBoxModal){
+  closeGiftBoxBtn.addEventListener('click', () => {
+    giftBoxModal.style.display = 'none';
+  });
+}
 
 setupChaseNo();
 </script>
