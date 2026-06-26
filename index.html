@@ -118,6 +118,34 @@ body {
 .letter-image-slot { margin: 15px 0; border-radius: 28px; overflow: hidden; border: 3px solid #ffb6c1; background: #fff0f5; padding: 8px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); position: relative; }
 .letter-image-slot img { width: 100%; max-height: 250px; object-fit: cover; border-radius: 20px; display: block; }
 
+.blue-rose-bouquet { position: relative; width: 250px; height: 240px; margin: 6px auto 16px; opacity: 0; transform: translateY(20px) scale(0.9); transition: all 0.9s ease; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.18)); }
+.blue-rose-bouquet.show { opacity: 1; transform: translateY(0) scale(1); }
+.bouquet-wrap { position: relative; width: 100%; height: 100%; }
+.bouquet-stem { position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); width: 7px; height: 140px; background: linear-gradient(180deg, #2f7a3f, #184d24); border-radius: 20px; }
+.bouquet-leaf { position: absolute; bottom: 90px; width: 56px; height: 86px; background: linear-gradient(135deg, #3f9b57, #1e6d37); border-radius: 100% 0 100% 0; transform-origin: bottom center; }
+.bouquet-leaf.left { left: 64px; transform: rotate(-28deg); }
+.bouquet-leaf.right { right: 64px; transform: rotate(28deg) scaleX(-1); }
+.rose { position: absolute; width: 72px; height: 72px; animation: bloomRise 1s ease both; }
+.rose.one { left: 20px; top: 24px; }
+.rose.two { left: 96px; top: 8px; transform: scale(0.95); }
+.rose.three { right: 18px; top: 38px; transform: scale(0.9); }
+.rose .petal { position: absolute; width: 22px; height: 28px; background: linear-gradient(135deg, #6ec5ff, #2d5dd1); border-radius: 70% 20% 70% 20%; box-shadow: inset 0 0 8px rgba(255,255,255,0.35); }
+.rose .petal:nth-child(1) { top: 4px; left: 24px; transform: rotate(-20deg); }
+.rose .petal:nth-child(2) { top: 10px; left: 8px; transform: rotate(-60deg); }
+.rose .petal:nth-child(3) { top: 28px; left: 2px; transform: rotate(-100deg); }
+.rose .petal:nth-child(4) { top: 40px; left: 14px; transform: rotate(-140deg); }
+.rose .petal:nth-child(5) { top: 42px; left: 34px; transform: rotate(140deg); }
+.rose .petal:nth-child(6) { top: 28px; left: 44px; transform: rotate(100deg); }
+.rose .petal:nth-child(7) { top: 10px; left: 44px; transform: rotate(60deg); }
+.rose .petal:nth-child(8) { top: 4px; left: 28px; transform: rotate(20deg); }
+.rose .core { position: absolute; width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle, #fbe2ff 0%, #caa7ff 45%, #7b5cff 100%); left: 25px; top: 24px; box-shadow: 0 0 10px rgba(255,255,255,0.45); }
+.bouquet-ribbon { position: absolute; left: 50%; top: 20px; transform: translateX(-50%); width: 70px; height: 20px; background: linear-gradient(90deg, #f7b7ff, #80d7ff); border-radius: 999px; box-shadow: 0 3px 8px rgba(0,0,0,0.12); }
+@keyframes bloomRise {
+  0% { opacity: 0; transform: scale(0.4) translateY(14px); }
+  70% { opacity: 1; transform: scale(1.05) translateY(-4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 /* TREASURE GALLERY STYLES */
 .treasure-container {
   margin: 20px 0;
@@ -693,6 +721,27 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 <div id="letterPage" class="container" style="display:none;">
   <div class="sticker-container"><div class="sticker">💌</div></div>
   <h2 style="color:#FFD966;">💖 A Message From My Heart 💖</h2>
+  <div id="blueRoseBouquet" class="blue-rose-bouquet" aria-hidden="true">
+    <div class="bouquet-wrap">
+      <div class="bouquet-stem"></div>
+      <div class="bouquet-leaf left"></div>
+      <div class="bouquet-leaf right"></div>
+      <div class="bouquet-ribbon"></div>
+      <div class="rose one">
+        <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+        <span class="core"></span>
+      </div>
+      <div class="rose two">
+        <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+        <span class="core"></span>
+      </div>
+      <div class="rose three">
+        <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+        <span class="core"></span>
+      </div>
+    </div>
+  </div>
+  <p style="color:#7c4dff; font-weight:700; margin:-4px 0 12px; font-size:16px;">A blue rose bouquet just for you 🌷💙</p>
   <div style="font-family: 'Georgia', serif; color:#3d2b1a; background:#fffaf2; border-radius:48px; padding:28px 20px; text-align:left; box-shadow:0 10px 25px rgba(0,0,0,0.1); margin-top:15px;">
     <p style="font-size:22px; font-weight:800; text-align:center;">Happy birthday meri gorgeous ulti balti... 💖</p>
     <p>U are 19 now... soo old... grandma... well kidding.. U are the most like the most beautiful girl i have seen... the god must have spent years making u ... just be happy keep that smile on ur face always ..let ur cheeks be chubby ... i love everything about u ... don't u ever change a single thing about u ...u rare perfect ... And ur brain ..ufff no words for it ... although km hai but veryy mature and smart u are... i have sooooo much to say but that will be boring ... summarizing it... enjoy the day ... an ur everyday with the smile kitten .. Just know i am here and i am proud of u..and i love u for who u are nimisha...Happiest birthday to u.</p>
@@ -947,7 +996,7 @@ playNextVoice();
 
 document.getElementById('continueToImagesBtn')?.addEventListener('click', () => { document.getElementById('secretVoicePage').style.display = 'none'; document.getElementById('picturesPage').style.display = 'block'; });
 
-document.getElementById('continueToLetterBtn')?.addEventListener('click', () => { document.getElementById('picturesPage').style.display = 'none'; document.getElementById('letterPage').style.display = 'block'; });
+document.getElementById('continueToLetterBtn')?.addEventListener('click', () => { document.getElementById('picturesPage').style.display = 'none'; const letterPage = document.getElementById('letterPage'); const bouquet = document.getElementById('blueRoseBouquet'); letterPage.style.display = 'block'; setTimeout(() => { bouquet?.classList.add('show'); }, 250); });
 
 // TREASURE
 let currentTreasureIndex = 0;
