@@ -334,6 +334,18 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   80% { transform: translateY(0); opacity: 1; filter: blur(0); }
   100% { transform: translateY(-30px); opacity: 0; filter: blur(8px); }
 }
+@keyframes bounceGift {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+@keyframes shimmer {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 15px gold); }
+  50% { filter: brightness(1.2) drop-shadow(0 0 25px #FFD966); }
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
 .lyric-line {
   position: absolute;
   left: 0;
@@ -363,7 +375,7 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
 
 <!-- Secret Voice Message (Revealed after quiz) -->
 <audio id="secretVoiceMessage" preload="auto" style="display:none;">
-  <source src="YOUR_SECRET_VOICE_MESSAGE_URL.mp3" type="audio/mpeg">
+  <source src="https://files.catbox.moe/n57m8v.mp3" type="audio/mpeg">
 </audio>
 
 <div id="goodGirlPopup" class="good-girl-overlay"><div class="good-girl-card"><div style="font-size:60px;">💖👧</div><p>That's my good girl!<br>See, you are listening to me... how cute 🥺💛</p><button id="closeGoodGirlBtn">✨ Let's continue ✨</button></div></div>
@@ -556,6 +568,31 @@ h1,h2 { color:#FFD966; text-shadow:0 2px 5px rgba(0,0,0,0.3); }
   <button id="resetGameBtn" style="margin-top:16px; padding:10px 24px; background:#f97316; border:none; border-radius:40px; font-weight:bold; display:none; cursor:pointer;">Try Again 🔄</button>
   <button id="gameContinueBtn" class="action-btn" style="background:#00c853; display:none;">✨ Win Prize ✨</button>
   <button id="skipGameCheatBtn" style="margin-top:10px; padding:6px 12px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,215,0,0.3); border-radius:20px; font-size:12px; color:#FFD966; font-weight:bold; cursor:pointer; opacity:0.6;">🤫 Skip (Or press S)</button>
+  <div id="giftBoxContainer" style="display:none; text-align:center; margin-top:20px;">
+    <div style="font-size:14px; color:#FFD966; font-weight:bold; margin-bottom:10px;">🎁 Surprise gift card unlocked! Click the box! 🎁</div>
+    <div id="giftBox" style="width:120px; height:120px; margin:0 auto; background:linear-gradient(135deg,#FF1493,#FF69B4); border-radius:15px; display:flex; align-items:center; justify-content:center; font-size:70px; cursor:pointer; animation: bounceGift 2s infinite; filter: drop-shadow(0 0 10px gold); border:4px solid gold; transition:all 0.3s; position:relative;">
+      🎁
+      <div style="position:absolute; width:120px; height:15px; background:gold; top:-5px; left:0; border-radius:10px;"></div>
+      <div style="position:absolute; width:15px; height:120px; background:gold; left:52px; top:0; border-radius:10px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- GIFT BOX MESSAGE MODAL -->
+<div id="giftBoxModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:linear-gradient(135deg,#FFB6C1,#FFD966); border-radius:50px; padding:40px 30px; max-width:500px; width:90%; text-align:center; border:4px solid gold; box-shadow:0 0 40px rgba(255,215,0,0.6); animation: fadeInScale 0.5s ease;">
+    <div style="font-size:60px; margin-bottom:20px;">🎁✨💖</div>
+    <h2 style="color:#d85c7a; font-size:28px; margin:15px 0;">SURPRISE GIFT CARD 🎉</h2>
+    <div style="background:rgba(0,0,0,0.1); border-radius:30px; padding:20px; margin:20px 0;">
+      <p style="color:#3d2b1a; font-size:18px; font-weight:bold; line-height:1.8;">
+        U managed to beat the game... 💕<br><br>
+        Now u get one token to make me do anything... anything 😳✨<br><br>
+        <span style="background:linear-gradient(135deg,#FF1493,#FFD966); padding:10px 15px; border-radius:20px; display:inline-block; color:white; font-weight:bold;">Use it wisely, my love 💫</span>
+      </p>
+    </div>
+    <p style="color:#8b3a5e; font-size:14px; margin-top:15px;">Now let's continue to the final surprise... 💝</p>
+    <button id="closeGiftBoxBtn" style="margin-top:20px; background:#ff6b6b; border:none; padding:12px 30px; border-radius:50px; font-weight:bold; font-size:16px; color:white; cursor:pointer; transition:all 0.3s;">Let's Go! 💫</button>
+  </div>
 </div>
 
 <!-- QUIZ PAGE -->
@@ -875,7 +912,46 @@ if(skipDanceBtn) {
   });
 }
 
-document.getElementById('playSecretVoiceBtn')?.addEventListener('click', () => { const statusDiv = document.getElementById('voiceMessageStatus'); statusDiv.innerHTML = '🎤 Playing secret voice message... 🎤💖'; setTimeout(() => { statusDiv.innerHTML = '✨ That was straight from my heart! ✨'; }, 5000); });
+document.getElementById('playSecretVoiceBtn')?.addEventListener('click', () => { const statusDiv = document.getElementById('voiceMessageStatus'); const audio = document.getElementById('secretVoiceMessage'); if(!audio) return; const voiceLinks = [
+  'https://files.catbox.moe/n57m8v.mp3',
+  'https://files.catbox.moe/al3bnq.mp3',
+  'https://files.catbox.moe/dgw6vz.mp3'
+];
+
+clearTimeout(window.secretVoiceTimer1);
+clearTimeout(window.secretVoiceTimer2);
+
+let playIndex = 0;
+const playNextVoice = () => {
+  if(playIndex >= voiceLinks.length) {
+    statusDiv.innerHTML = '✨ That was straight from my heart! ✨';
+    return;
+  }
+
+  audio.pause();
+  audio.currentTime = 0;
+  audio.src = voiceLinks[playIndex];
+  audio.load();
+  audio.play().catch(() => { statusDiv.innerHTML = '🔊 Click again if the audio needs to load.'; });
+
+  const nextDelay = playIndex === 0 ? 2000 : 3000;
+  const nextIndex = playIndex + 1;
+  if(nextIndex < voiceLinks.length) {
+    const timerId = setTimeout(() => {
+      playIndex = nextIndex;
+      playNextVoice();
+    }, nextDelay);
+    if(playIndex === 0) window.secretVoiceTimer1 = timerId;
+    else window.secretVoiceTimer2 = timerId;
+  }
+
+  playIndex = nextIndex;
+};
+
+statusDiv.innerHTML = '🎤 Playing secret voice message... 🎤💖';
+playIndex = 0;
+playNextVoice();
+});
 
 document.getElementById('continueToImagesBtn')?.addEventListener('click', () => { document.getElementById('secretVoicePage').style.display = 'none'; document.getElementById('picturesPage').style.display = 'block'; });
 
@@ -943,7 +1019,7 @@ function initGame(){ score=0; timeLeft=30; objects=[]; gameActive=true; document
 function spawnObject(){ if(!gameActive)return; let type=Math.random()<0.7?"heart":"bomb"; let x=Math.random()*(gameCanvas.width-40)+20; objects.push({x:x, y:0, type:type, radius:16, speed:1.2+Math.random()*1.5}); }
 function drawGame(){ if(!gameCtx)return; gameCtx.clearRect(0,0,gameCanvas.width,gameCanvas.height); for(let o of objects){ if(o.type==="heart"){ gameCtx.fillStyle="#ff4d6d"; gameCtx.beginPath(); gameCtx.moveTo(o.x, o.y-8); gameCtx.bezierCurveTo(o.x-8,o.y-18,o.x-16,o.y-4,o.x,o.y+8); gameCtx.bezierCurveTo(o.x+16,o.y-4,o.x+8,o.y-18,o.x,o.y-8); gameCtx.fill(); gameCtx.strokeStyle="#ff1744"; gameCtx.lineWidth=1.5; gameCtx.stroke(); } else { gameCtx.fillStyle="#000000"; gameCtx.beginPath(); gameCtx.arc(o.x,o.y,11,0,Math.PI*2); gameCtx.fill(); gameCtx.fillStyle="#1a1a1a"; gameCtx.beginPath(); gameCtx.arc(o.x-1,o.y-1,11,0,Math.PI*2); gameCtx.fill(); gameCtx.fillStyle="#333333"; gameCtx.beginPath(); gameCtx.arc(o.x,o.y,9.5,0,Math.PI*2); gameCtx.fill(); gameCtx.fillStyle="#FFD700"; gameCtx.beginPath(); gameCtx.arc(o.x+4,o.y-4,3,0,Math.PI*2); gameCtx.fill(); gameCtx.strokeStyle="#1a1a1a"; gameCtx.lineWidth=2; gameCtx.beginPath(); gameCtx.arc(o.x,o.y-11,2,0,Math.PI*2); gameCtx.stroke(); gameCtx.strokeStyle="#ff6b35"; gameCtx.lineWidth=1.5; gameCtx.beginPath(); gameCtx.moveTo(o.x,o.y-11); gameCtx.lineTo(o.x,o.y-15); gameCtx.stroke(); } o.y+=o.speed; } for(let i=objects.length-1;i>=0;i--) if(objects[i].y>gameCanvas.height+30) objects.splice(i,1); if(gameActive && objects.length<7) spawnObject(); if(gameActive) requestAnimationFrame(drawGame); }
 gameCanvas.addEventListener("click",(e)=>{ if(!gameActive)return; let rect=gameCanvas.getBoundingClientRect(), scaleX=gameCanvas.width/rect.width, scaleY=gameCanvas.height/rect.height; let mouseX=(e.clientX-rect.left)*scaleX, mouseY=(e.clientY-rect.top)*scaleY; let hitObject=null; for(let i=0;i<objects.length;i++){ let o=objects[i]; let distance=Math.hypot(mouseX-o.x, mouseY-o.y); if(distance<o.radius+8){ hitObject=i; break; } } if(hitObject!==null){ let o=objects[hitObject]; if(o.type==="heart"){ if(!o.clicked){ o.clicked=true; score++; document.getElementById("gameScore").innerText=`❤️ Score: ${score}`; let particles=[]; for(let p=0;p<5;p++){ particles.push({x:o.x, y:o.y, vx:(Math.random()-0.5)*4, vy:(Math.random()-0.5)*4-1, life:0.8}); } o.particles=particles; setTimeout(()=>objects.splice(objects.indexOf(o),1),100); } } else { endGame(true); } } });
-function endGame(bombHit){ gameActive=false; clearInterval(gameInterval); if(bombHit){ document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b;'>💥 BOOM! Game Over 💥</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } else { if(score>=15){ document.getElementById("gameResult").innerHTML="<p style='color:#FFD966;'>🎉 You won! Premium token earned! 💖✨</p>"; document.getElementById("gameContinueBtn").style.display="inline-block"; } else { document.getElementById("gameResult").innerHTML="<p>Time's up! Score: "+score+"/15 needed.</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } } }
+function endGame(bombHit){ gameActive=false; clearInterval(gameInterval); if(bombHit){ document.getElementById("gameResult").innerHTML="<p style='color:#ff6b6b;'>💥 BOOM! Game Over 💥</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } else { if(score>=15){ document.getElementById("gameResult").innerHTML="<p style='color:#FFD966;'>🎉 YOU WON THE GAME! 🎉</p>"; document.getElementById("giftBoxContainer").style.display="block"; } else { document.getElementById("gameResult").innerHTML="<p>Time's up! Score: "+score+"/15 needed.</p>"; document.getElementById("resetGameBtn").style.display="inline-block"; } } }
 document.getElementById("resetGameBtn")?.addEventListener("click",initGame);
 document.getElementById("skipGameCheatBtn")?.addEventListener("click",()=>{ document.getElementById("gamePage").style.display="none"; document.getElementById("quizPage").style.display="block"; });
 window.addEventListener('keydown',(e)=>{ if((e.key==='s'||e.key==='S')&&document.getElementById('gamePage').style.display!=="none"){document.getElementById('gamePage').style.display='none'; document.getElementById('quizPage').style.display='block';} });
